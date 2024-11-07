@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import "./page.css"
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {

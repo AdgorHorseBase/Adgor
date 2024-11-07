@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    font-family: Montserrat, sans-serif;
+    margin:0;
+    padding: 0;
+}
+
+
+h1{
+margin-left: 10vw;
+margin-bottom: 13vh;
+}
+
+#pageTitle{
+    margin-top: 2vh;
+margin-bottom: 2vh;
+text-align: center;
+font-size: 8vh;
+}
+
+#pageText{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+margin-left: 10vw;
+width: 80vw;
+}
+
+#pageOneImg{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 10vw;
+    width: 80vw;
+}
+
+.pageTwoImg{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 10vw;
+}
+
+#pageTwoImgFirst{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 38vw;
+
+}
+
+#pageTwoImgSecond{
+    margin-top: 2vh;
+margin-bottom: 2vh;
+width: 38vw;
+margin-left: 4vw;
+
+}
+
+.pageFourImg{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 10vw;
+}
+
+#pageFourImgFirst{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 38vw;
+}
+
+#pageFourImgSecond{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 38vw;
+    margin-left: 4vw;
+    
+}
+
+#pageFourImgThird{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 38vw;
+}
+
+#pageFourImgFourth{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 38vw;
+    margin-left: 4vw;
+}
+
+#pageVideo{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 80vw;
+    margin-left: 10vw;
+    height: auto;
+}
+
+#pageYouTube {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 80vw;
+    height: calc(80vw * 0.5625); /* Maintain aspect ratio */
+    margin-left: 10vw;
+  }
+  
+
+  
+
+#pageLine{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 80vw;
+    height: 0.3vh;
+    background-color: black;
+    margin-left: 10vw;
+}
+
+
+#pageFormated{
+    margin-left: 10vw;
+    width: 80vw;
+}
+
+.pageHtml{
+    margin-left:10vw;
+    width: 80vw;
+}

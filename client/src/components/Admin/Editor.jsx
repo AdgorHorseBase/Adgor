@@ -227,23 +227,22 @@ function Editor({ structure }) {
         let htmlContent = ``;
         schema.forEach(element => {
             if (element.type === "title") {
-                htmlContent += `<h2>${element.content}</h2>`;
+                htmlContent += `<h2 id="pageTitle">${element.content}</h2>`;
             } else if (element.type === "text") {
-                htmlContent += `<p>${element.content}</p>`;
+                htmlContent += `<p id="pageText">${element.content}</p>`;
             } else if (element.type === "html") {
-                htmlContent += decodeHTML(element.content);
-                htmlContent += "<br />";
+                htmlContent += `<div class="pageHtml">${decodeHTML(element.content)}</div><br />`
             } else if (element.type === "image") {
-                htmlContent += `<img class="one_image" src="${element.content}" alt="image" />`;
+                htmlContent += `<img id="pageOneImg" src="${element.content}" alt="image" />`;
             } else if (element.type === "two_images") {
-                htmlContent += `<div class="two_images"><img src="${element.content[0]}" alt="image" /><img src="${element.content[1]}" alt="image" /></div>`
+                htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="${element.content[0]}" alt="image" /><img id="pageTwoImgSecond" src="${element.content[1]}" alt="image" /></div>`
             } else if (element.type === "four_images") {
-                htmlContent += `<div class="four_images"><img src="${element.content[0]}" alt="image" /><img src="${element.content[1]}" alt="image" /><img src="${element.content[2]}" alt="image" /><img src="${element.content[3]}" alt="image" /></div>`
+                htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="${element.content[3]}" alt="image" /></div>`
             } else if (element.type === "video") {
-                htmlContent += `<video src="${element.content}" controls></video>`;
+                htmlContent += `<video id="pageVideo" src="${element.content}" controls></video>`;
             } else if (element.type === "menu") {
                 if (element.content.length > 0) {
-                    htmlContent += `<select onchange="location.href=this.value;">`;
+                    htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;
                     htmlContent += `<option value="">${element.selectedDirectory.slice(1)}</option>`
                     element.content.forEach(page => {
                         htmlContent += `<option value="/page${element.selectedDirectory}/${page}">${page}</option>`;
@@ -251,11 +250,11 @@ function Editor({ structure }) {
                     htmlContent += `</select>`;
                 }
             } else if (element.type === "formated") {
-                htmlContent += element.content;
+                htmlContent += `<div id="pageFormated">${element.content}</div>`;
             } else if (element.type === "youtube") {
-                htmlContent += `<iframe width="420" height="250" src=${element.content.url} ${element.content.allowFullscreen ? "allowfullscreen" : ""} ></iframe><br />`
+                htmlContent += `<iframe id="pageYouTube" src=${element.content.url} ${element.content.allowFullscreen ? "allowfullscreen" : ""} ></iframe><br />`
             } else if (element.type === "separation") {
-                htmlContent += "<div class='line'></div>";
+                htmlContent += "<div id='pageLine' ></div>";
             }
         });
 

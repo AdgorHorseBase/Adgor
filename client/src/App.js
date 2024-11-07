@@ -4,6 +4,7 @@ import {Page} from './components/Page.jsx';
 import Products from './components/Products';
 import Success from './components/Success.jsx';
 import Vouchers from './components/Vouchers.jsx';
+import WelcomePage from './components/WelcomePage.jsx';
 
 const isAuthenticated = () => {
   return true;
@@ -17,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Page />} />
+        <Route path="/" element={<WelcomePage />} />
 
         <Route path="/page/*" element={<Page />} />
 

@@ -37,7 +37,7 @@ const MenuSections = () => {
             ))}
           </select>
         ) :
-        structure[dir].type === 'file' && dir !== "\\index" && (
+        structure[dir].type === 'file' && (
           <button key={dir} onClick={() => { document.location.href = `/page${dir}` }}>
             {dir.slice(1)}
           </button>

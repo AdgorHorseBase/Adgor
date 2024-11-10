@@ -86,7 +86,7 @@ function GetStructure() {
 
 // Serve static HTML pages based on path
 app.get("/page-get", (req, res) => {
-    const pagePath = req.query.pagePath;
+    const pagePath = req.query.pagePath.replace(/%20/g, " ").replace(/%2F/g, "/").replace(/%5C/g, "\\");
     const htmlFilePath = path.join(UPLOADS_DIR, pagePath, "index.html");
     const schemaFilePath = path.join(UPLOADS_DIR, pagePath, "schema.json");
 
@@ -130,20 +130,9 @@ app.get("/structure", (req, res) => {
     res.status(200).json(structure);
 });
 
-// POST request to create/save a new page
-const CreatePage = require("./routes/CreatePage");
-app.use("/page", (req, res, next) => {
-    req.UPLOADS_DIR = UPLOADS_DIR;
-    next();
-}, CreatePage, (req, res) => {
-    structure = GetStructure();
-    res.status(200).json(res.data);
-});
-
 // POST request to edit an existing page
 const EditPage = require("./routes/EditPage");
 app.use("/page/edit", (req, res, next) => {
-    console.log("hello")
     req.UPLOADS_DIR = UPLOADS_DIR;
     next();
 }, EditPage, (req, res) => {
@@ -155,9 +144,18 @@ app.use("/page/edit", (req, res, next) => {
 const RenamePage = require("./routes/RenamePage");
 app.use("/page/rename", (req, res, next) => {
     req.UPLOADS_DIR = UPLOADS_DIR;
-    console.log("hello")
     next();
 }, RenamePage, (req, res) => {
+    structure = GetStructure();
+    res.status(200).json(res.data);
+});
+
+// POST request to create/save a new page
+const CreatePage = require("./routes/CreatePage");
+app.use("/page", (req, res, next) => {
+    req.UPLOADS_DIR = UPLOADS_DIR;
+    next();
+}, CreatePage, (req, res) => {
     structure = GetStructure();
     res.status(200).json(res.data);
 });

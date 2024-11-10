@@ -4,12 +4,16 @@ const path = require("path");
 const fs = require("fs");
 
 router.put("/", (req, res, next) => {
-    const { oldPagePath, newPagePath } = req.body;
+    let { oldPagePath, newPagePath } = req.body;
 
     // Validate inputs
     if (!oldPagePath || !newPagePath) {
         return res.status(400).json({ error: "Missing old page path or new page path." });
     }
+
+    // Remove leading slashes from paths if present
+    oldPagePath = oldPagePath.startsWith("/") ? oldPagePath.slice(1) : oldPagePath;
+    newPagePath = newPagePath.startsWith("/") ? newPagePath.slice(1) : newPagePath;
 
     // Create full paths
     const oldFullPath = path.join(req.UPLOADS_DIR, oldPagePath);
@@ -25,15 +29,15 @@ router.put("/", (req, res, next) => {
         return res.status(400).json({ error: "New page path already exists." });
     }
 
-    // Rename directory or file asynchronously
-    fs.rename(oldFullPath, newFullPath, (error) => {
-        if (error) {
-            console.error("Error renaming page:", error);
-            return res.status(500).json({ error: "An error occurred while renaming the page." });
-        }
+    try {
+        // Rename directory or file asynchronously
+        fs.renameSync(oldFullPath, newFullPath);
+
         res.data = { message: "Page renamed successfully." };
         next();
-    });
+    } catch (error) {
+        return res.status(500).json({ error: "Error renaming page." });
+    }
 });
 
 module.exports = router;

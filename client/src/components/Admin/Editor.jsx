@@ -93,6 +93,15 @@ function Editor({ structure }) {
                 content: [], // Will hold the directory's page names
                 selectedDirectory: "", // Stores the selected directory
             };
+        } else if(type === "image_text") {
+            newElement = {
+                id: uuidv4(),
+                type,
+                content: {
+                    text: "Enter your text",
+                    url: "Image URL"
+                }
+            }
         } else if (type === "two_images") {
             newElement = {
                 id: uuidv4(),
@@ -111,7 +120,8 @@ function Editor({ structure }) {
                 type,
                 content: {
                     url: "",
-                    allowFullscreen: false
+                    allowFullscreen: false,
+                    autoplay: false
                 }
             }
         } else if (type === "separation") {
@@ -176,9 +186,28 @@ function Editor({ structure }) {
                     schema.map(el => el.id === id && console.log(el));
                     setSchema(schema.map(el => el.id === id ? { ...el, content: {...el.content, url: `https://www.youtube.com/embed/${videoId}`} } : el));
                 } else {
-                    setSchema(schema.map(el => el.id === id ? { ...el, content: {...el.content, allowFullscreen: newContent.allowFullscreen} } : el));
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: {...el.content, allowFullscreen: newContent.allowFullscreen, autoplay: newContent.autoplay} } : el));
                 }
             break;
+            case "image_text":
+                if(newContent?.url) {
+                    formData.append("image", newContent.url);
+
+                    axios.post(URL + "/image", formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    })
+                    .then(response => {
+                        const image = response.data.image;
+                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { text: el.content.text, url: URL + "/image?name=" + image } } : el));
+                    })
+                    .catch(error => {
+                        return console.error("Error uploading image:", error);
+                    });
+                } else {
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: { text: newContent.text, url: el.content.url } } : el));
+                }
             default:
                 if(type === "two_images" || type === "four_images") {
                     formData.append("image", newContent.file);
@@ -252,9 +281,11 @@ function Editor({ structure }) {
             } else if (element.type === "formated") {
                 htmlContent += `<div id="pageFormated">${element.content}</div>`;
             } else if (element.type === "youtube") {
-                htmlContent += `<iframe id="pageYouTube" src=${element.content.url} ${element.content.allowFullscreen ? "allowfullscreen" : ""} ></iframe><br />`
+                htmlContent += `<iframe id="pageYouTube" src="${element.content.url}${element.content.autoplay ? "?autoplay=1" : ""}" ${element.content.allowFullscreen ? "allowfullscreen" : ""}></iframe><br />`
             } else if (element.type === "separation") {
                 htmlContent += "<div id='pageLine' ></div>";
+            } else if (element.type === "image_text") {
+                htmlContent += `<div id="pageImageText"><img src="${element.content.url}" alt="image" /><p>${element.content.text}</p></div>`;
             }
         });
 
@@ -313,6 +344,7 @@ function Editor({ structure }) {
                 <button onClick={() => addElement("formated")}>Add Formated Text</button>
                 <button onClick={() => addElement("youtube")}>YouTube video</button>
                 <button onClick={() => addElement("menu")}>Add Menu</button>
+                <button onClick={() => addElement("image_text")}>Add Image with Text</button>
                 </div>
                 <button id="Save_button" onClick={savePage}>Save Page</button>
                 <button id="home_button" onClick={() => { document.location.href = "/admin" }}>Home</button>
@@ -465,6 +497,27 @@ function Editor({ structure }) {
                                 />
                             </div>
                         )}
+                        {element.type === "image_text" && (
+                            <div id="Added_Image_Text">
+                                <div id="Added_One_Image">
+                                    <img id="Added_One_Image_img" src={element.content.url} alt="image" />
+                                    <br></br>
+                                    <input
+                                        id=""
+                                        type="file"
+                                        onChange={(e) => updateElement(element.id, {url: e.target.files[0]}, "image_text")}
+                                        placeholder="Choose Image"
+                                    />
+                                </div>
+                                <ContentEditable
+                                    id="Added_Text"
+                                    html={element.content.text}
+                                    tagName="p"
+                                    onChange={(e) => updateElement(element.id, {text: e.target.value, url: element.content.url}, "image_text")}
+                                    placeholder="Enter your text"
+                                />
+                            </div>
+                        )}
                         {element.type === "youtube" && (
                             <div id="Added_YouTube">
                                 {element.content?.url && (
@@ -494,6 +547,17 @@ function Editor({ structure }) {
                                         }}
                                     />
                                     Allow Fullscreen
+                                </label>
+                                <label>
+                                    <input
+                                        id="Added_YouTube_allow"
+                                        type="checkbox"
+                                        checked={element.content.autoplay}
+                                        onChange={(e) => {
+                                            updateElement(element.id, { autoplay: e.target.checked }, "youtube");
+                                        }}
+                                    />
+                                    Autoplay
                                 </label>
                             </div>
                         )}

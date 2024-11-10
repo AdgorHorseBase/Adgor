@@ -25,17 +25,15 @@ function AdminPanel() {
 
     // Function to rename a file or directory
     const handleRename = async (oldPath) => {
-        const newName = prompt("Enter the new name for the file or directory:");
+        const newName = prompt("Enter the new name for the file or directory:", oldPath);
         if (!newName) {
             return; // If no name is entered, do nothing
         }
 
-        const newPath = oldPath.substring(0, oldPath.lastIndexOf("/") + 1) + newName;
-
         try {
             await axios.put(`${URL}/page/rename`, {
                 oldPagePath: oldPath,
-                newPagePath: newPath,
+                newPagePath: newName,
             });
             alert("Renamed successfully!");
             // Fetch the updated structure after renaming

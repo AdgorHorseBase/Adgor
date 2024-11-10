@@ -10,6 +10,8 @@ router.delete("/", (req, res, next) => {
         return res.status(400).json({ error: "Missing page path." });
     }
 
+    // pagePath = pagePath.replace(/%20/g, " ");
+
     const fullPath = path.join(req.UPLOADS_DIR, pagePath);
     
     if (fs.existsSync(fullPath)) {

@@ -1,0 +1,9 @@
+.Everything{
+    width: 100%;
+    height: 1000vh;
+    background-color: rgb(123, 62, 30);
+}
+
+#thisthing{
+    color: blue;
+}

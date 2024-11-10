@@ -1,0 +1,29 @@
+name: Node.js File Persistence
+
+on:
+  push:
+    branches: [ "main" ]
+    # Trigger only if files in ./files/ are updated
+    paths:
+      - 'files/images/**'
+      - 'files/videos/**'
+      - 'files/products.json'
+      - 'files/vouchers.json'
+
+jobs:
+  commit-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Configure Git to commit changes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add files/images files/videos files/products.json files/vouchers.json
+          git commit -m "Update generated files" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

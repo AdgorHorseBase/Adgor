@@ -13,7 +13,7 @@ Make sure you have the following installed on your machine:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/VencislavManoilov/blog-builder-react.git
+git clone https://github.com/AdgorHorseBase/Adgor.git
 ```
 
 #### 2. Running the Frontend (Client)

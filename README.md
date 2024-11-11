@@ -15,26 +15,9 @@ Make sure you have the following installed on your machine:
 ```bash
 git clone https://github.com/VencislavManoilov/blog-builder-react.git
 ```
-#### 2. Running the Backend (Server)
-  1. **Navigate to the `server` directory**:
-```bash
-cd server
-```
-  2. **Install the required dependencies**:
-```bash
-npm install
-```
-  3. **Start the server**:
-```bash
-npm start
-```
-The backend should now be running on `http://localhost:8080`
 
-#### 3. Running the Frontend (Client)
-  1. **Navigate to the `client` directory**:
-```bash
-cd client
-```
+#### 2. Running the Frontend (Client)
+  1. **Open a terminal in the root directory**:
   2. **Install the required dependencies**:
 ```bash
 npm install
@@ -44,6 +27,27 @@ npm install
 npm start
 ```
 The frontend should now be running on `http://localhost:3000`
+
+#### 3. Running the Backend (Server) for Editing
+  1. **Navigate to the `public/server` directory**:
+```bash
+cd public/server
+```
+  2. **Install the required dependencies**:
+```bash
+npm install
+```
+  3. **Start the server**:
+```bash
+npm start
+```
+The backend (admin panel) should now be running on `http://localhost:8080`
+
+### Explanation for a 6-Year-Old
+
+- **Frontend (Client)**: This is the part of the website that everyone can see and use. You don't need the backend to see the website. Just open a terminal in the root directory, type `npm install` to get everything ready, and then type `npm start` to see the website at `http://localhost:3000`.
+
+- **Backend (Server) for Editing**: This is the part where you can make changes to the website. To edit the website, you need to run the backend. Go to the `public/server` directory, type `npm install` to get everything ready, and then type `npm start` to open the admin panel at `http://localhost:8080`.
 
 ## Contributing
 We welcome contributions to this project! To contribute, follow these steps:

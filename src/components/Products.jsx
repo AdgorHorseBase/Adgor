@@ -11,7 +11,7 @@ const Products = () => {
 
     useEffect(() => {
         const GetProducts = async () => {
-            const response = await axios.get(URL + "/products");
+            const response = await axios.get("/server/files/products.json");
             setProducts(response.data);
         };
         

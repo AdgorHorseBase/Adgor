@@ -51,6 +51,7 @@ const WelcomePage = () => {
                 <p id="TNKTEXT">Тренировки <br></br>На Коне</p>  
         </div>
     </a>
+    <MenuSections />
 
         <div class="PNS">
             <a href="">

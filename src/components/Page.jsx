@@ -10,7 +10,8 @@ const MenuSections = () => {
   useEffect(() => {
     const getStruct = async () => {
       try {
-        const schema = await axios.get(`${URL}/structure`);
+        const schema = await axios.get(`/server/files/structure.json`);
+        console.log(schema)
         setStruct(schema.data);
       } catch(err) {
         console.log("Error:", err);
@@ -57,17 +58,15 @@ function Page() {
       try {
         // Extracting the dynamic part of the path after "/page/"
         const pagePath = location.pathname.replace('/page/', '');
-        
-        const path = pagePath == "/" ? "index" : pagePath;
 
-        // Make a GET request to your backend with the pagePath
-        const content = await axios.get(`${URL}/page-get`, {
-          params: { pagePath: path }
-        });
+        const response = await axios.get(`/server/uploads/${pagePath}/index.html`);
+        const content = response.data;
+
+        const title = await axios.get(`/server/uploads/${pagePath}/schema.json`);
 
         // Set the response data (HTML) to state
-        setPageContent(content.data.content);
-        setTitle(content.data.title);
+        setPageContent(content);
+        setTitle(title.data.title);
       } catch (error) {
         console.error('Error fetching page content:', error);
         setPageContent('<p>Failed to load page content.</p>');

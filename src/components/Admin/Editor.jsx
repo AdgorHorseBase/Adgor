@@ -99,20 +99,20 @@ function Editor({ structure }) {
                 type,
                 content: {
                     text: "Enter your text",
-                    url: "Image URL"
+                    url: ""
                 }
             }
         } else if (type === "two_images") {
             newElement = {
                 id: uuidv4(),
                 type,
-                content: ["Image URL 1", "Image URL 2"],
+                content: ["", ""],
             };
         } else if (type === "four_images") {
             newElement = {
                 id: uuidv4(),
                 type,
-                content: ["Image URL 1", "Image URL 2", "Image URL 3", "Image URL 4"],
+                content: ["", "", "", ""],
             };
         } else if (type === "youtube") {
             newElement = {
@@ -133,7 +133,7 @@ function Editor({ structure }) {
             newElement = {
                 id: uuidv4(),
                 type,
-                content: type === "title" ? "Enter Title" : type === "text" ? "Enter your text" : type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : "",
+                content: type === "title" ? "Enter Title" : type === "text" ? "Enter your text" : type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : type === "video" ? "" : "",
             };
         }
         
@@ -154,7 +154,8 @@ function Editor({ structure }) {
                 })
                 .then(response => {
                     const image = response.data.image;
-                    setSchema(schema.map(el => el.id === id ? { ...el, content: URL + "/image?name=" + image } : el));
+                    console.log(image);
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: image } : el));
                 })
                 .catch(error => {
                     console.error("Error uploading image:", error);
@@ -170,7 +171,7 @@ function Editor({ structure }) {
                 })
                 .then(response => {
                     const video = response.data.video;
-                    setSchema(schema.map(el => el.id === id ? { ...el, content: URL + "/video?name=" + video } : el));
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: video } : el));
                 })
                 .catch(error => {
                     console.error("Error uploading image:", error);
@@ -200,7 +201,7 @@ function Editor({ structure }) {
                     })
                     .then(response => {
                         const image = response.data.image;
-                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { text: el.content.text, url: URL + "/image?name=" + image } } : el));
+                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { text: el.content.text, url: image } } : el));
                     })
                     .catch(error => {
                         return console.error("Error uploading image:", error);
@@ -219,7 +220,7 @@ function Editor({ structure }) {
                     })
                     .then(response => {
                         const image = response.data.image;
-                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { ...el.content, [newContent.id]: URL + "/image?name=" + image } } : el));
+                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { ...el.content, [newContent.id]: image } } : el));
                     })
                     .catch(error => {
                         return console.error("Error uploading image:", error);
@@ -262,13 +263,13 @@ function Editor({ structure }) {
             } else if (element.type === "html") {
                 htmlContent += `<div class="pageHtml">${decodeHTML(element.content)}</div><br />`
             } else if (element.type === "image") {
-                htmlContent += `<img id="pageOneImg" src="${element.content}" alt="image" />`;
+                htmlContent += `<img id="pageOneImg" src="/server/files/images/${element.content}" alt="image" />`;
             } else if (element.type === "two_images") {
-                htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="${element.content[0]}" alt="image" /><img id="pageTwoImgSecond" src="${element.content[1]}" alt="image" /></div>`
+                htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageTwoImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /></div>`
             } else if (element.type === "four_images") {
-                htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="${element.content[3]}" alt="image" /></div>`
+                htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`
             } else if (element.type === "video") {
-                htmlContent += `<video id="pageVideo" src="${element.content}" controls></video>`;
+                htmlContent += `<video id="pageVideo" src="/server/files/videos/${element.content}" controls></video>`;
             } else if (element.type === "menu") {
                 if (element.content.length > 0) {
                     htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;
@@ -382,7 +383,7 @@ function Editor({ structure }) {
                         {element.type === "image" && (
                             <div id="Added_One_Image">
 
-                                <img id="Added_One_Image_img" src={element.content} alt="image"  />
+                                <img id="Added_One_Image_img" src={URL + "/image?name=" + element.content} alt="image"  />
                                 <br></br>
                                 <input
                                     id="Added_One_Image_file"
@@ -395,8 +396,8 @@ function Editor({ structure }) {
                         )}
                         {element.type === "two_images" && (
                             <div id="Added_Two_Images">
-                                <img id="Added_Two_Images_img_one" src={element.content[0]} alt="Image 1"/>
-                                <img id="Added_Two_Images_img_two" src={element.content[1]} alt="Image 2"/>
+                                <img id="Added_Two_Images_img_one" src={URL + "/image?name=" + element.content[0]} alt="Image 1"/>
+                                <img id="Added_Two_Images_img_two" src={URL + "/image?name=" + element.content[1]} alt="Image 2"/>
 
                                 <br></br>
 
@@ -417,11 +418,11 @@ function Editor({ structure }) {
                         )}
                         {element.type === "four_images" && (
                             <div id="Added_Four_Images">
-                                <img id="Added_Four_Images_img_one" src={element.content[0]} alt="Image 1"/>
-                                <img id="Added_Four_Images_img_two" src={element.content[1]} alt="Image 2"/>
+                                <img id="Added_Four_Images_img_one" src={URL + "/image?name=" + element.content[0]} alt="Image 1"/>
+                                <img id="Added_Four_Images_img_two" src={URL + "/image?name=" + element.content[1]} alt="Image 2"/>
                                 <br></br>
-                                <img id="Added_Four_Images_img_three" src={element.content[2]} alt="Image 3"/>
-                                <img id="Added_Four_Images_img_four" src={element.content[3]} alt="Image 4"/>
+                                <img id="Added_Four_Images_img_three" src={URL + "/image?name=" + element.content[2]} alt="Image 3"/>
+                                <img id="Added_Four_Images_img_four" src={URL + "/image?name=" + element.content[3]} alt="Image 4"/>
                                 <br></br>
                                 <input 
                                     type="file"
@@ -452,7 +453,7 @@ function Editor({ structure }) {
                         )}
                         {element.type === "video" && (
                             <div id="Added_Video">
-                                <video id="Added_Video_vid" src={element.content} controls />
+                                <video id="Added_Video_vid" src={URL + "/video?name=" + element.content} controls />
                                 <br></br>
                                 <input
                                     id="Added_Video_file"
@@ -500,7 +501,7 @@ function Editor({ structure }) {
                         {element.type === "image_text" && (
                             <div id="Added_Image_Text">
                                 <div id="Added_One_Image">
-                                    <img id="Added_One_Image_img" src={element.content.url} alt="image" />
+                                    <img id="Added_One_Image_img" src={URL + "/image?name=" + element.content.url} alt="image" />
                                     <br></br>
                                     <input
                                         id=""

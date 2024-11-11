@@ -13,12 +13,12 @@ const Vouchers = () => {
 
     useEffect(() => {
         const GetVouchers = async () => {
-            const response = await axios.get(URL + "/vouchers");
+            const response = await axios.get("/server/files/vouchers.json");
             setVouchers(response.data);
         };
 
         const GetProducts = async () => {
-            const response = await axios.get(URL + "/products");
+            const response = await axios.get("/server/files/products.json");
             setProducts(response.data);
         };
         

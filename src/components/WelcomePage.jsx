@@ -6,6 +6,8 @@ import Logo from './images/AdgorLogo.jpeg';
 import TrenirovkiNaKone from './images/TrenirovkiNaKoneIMG.jpeg';
 import Pansion from './images/PansionIMG.jpeg';
 import Ezda from './images/EzdaIMG.jpeg';
+import Fondaziq from './images/fondaziq.jpeg';
+import NakusanRub from './images/Vector1.jpg';
 
 const WelcomePage = () => {
     return (
@@ -84,6 +86,14 @@ const WelcomePage = () => {
         </div>
     </div>
 
+
+<div className="parent-container">
+    <div className="Zentranlni">
+        <img id='FondaziqIMG' src={Fondaziq}></img>
+        <p id='FondaziqTitle'>Фондация<br></br>"Адгор за конете"</p>
+        <a id='FondaziqOshte' href=''>Още</a>
+    </div>
+</div>
 
 
 

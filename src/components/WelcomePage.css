@@ -246,3 +246,48 @@ p{
     margin-top: 40px;
     font-size: 25px;
 }
+
+
+.parent-container {
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 150vh; /* Ensure the parent container takes up the full height */
+}
+  
+.Zentranlni {
+    width: 80vw;
+    height: 400vh;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    margin: 0 auto; /* Center horizontally */
+    margin-top: 250px;
+}
+  
+#FondaziqIMG {
+    width: 100%;
+    height: auto;
+    filter: brightness(0.8);
+}
+  
+.Zentranlni p, .Zentranlni a {
+margin-left: 100px;
+color: white;
+
+}
+
+#FondaziqTitle{
+    position: relative;
+    top: 0%; /* Adjust to position the text vertically */ 
+    left: 43%; 
+    transform: translate(-50%, -320%);
+    z-index: 60;
+    font-size: 82px;
+    font-weight: 900;
+}
+  

@@ -1,9 +1,248 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+
+p{
+    font-family: "Source Serif 4", serif;
+}
+
 .Everything{
     width: 100%;
     height: 1000vh;
-    background-color: rgb(123, 62, 30);
+    top: 0;
+    background-color: #e2d9c6;
+    margin: 0;
 }
 
-#thisthing{
-    color: blue;
+.land{
+    height: 110vh;
+    width: 100%;
+}
+
+#HeadIMG{
+    width: 100%;
+    height: auto;
+    margin-top: -14vh;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#HeadLogo{
+    position: absolute; 
+    width: 20vw;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+}
+
+#Title1{
+    position: absolute; 
+    color: #e2d9c6;
+    font-size: 48px;
+    font-weight: 500;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25;
+}
+
+#TItle2{
+    position: absolute; 
+    color: #e2d9c6;
+    font-size: 150px;
+    font-weight: 600;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25;
+}
+
+#Title3{
+    position: absolute; 
+    color: #e2d9c6;
+    font-size: 25px;
+    font-weight: 400;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25;
+}
+
+.socials{
+    width: 100%;
+    height: 40vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+#SocialsEmail{
+    color: #1F1B1A;
+    font-size: 25px;
+}
+
+#SocialsNumber{
+    color: #1F1B1A;
+    font-size: 25px;
+}
+
+#FacebookSVG{
+    width: 40px;
+    height: 40px;
+}
+
+#InstagramSVG{
+    width: 40px;
+    height: 40px;
+}
+
+#TikTokSVG{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+
+.Trite{
+    margin-top: -30px;
+}
+
+
+
+.TNK{
+    width: 50.2vw; 
+    position: absolute; 
+    overflow: hidden;
+    margin-top: -205px;
+    clip-path: inset(120px 0 -200px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
+
+}
+
+
+#TNKIMG{
+    width: 100%; 
+    height: auto; 
+    clip-path: inset(120px 0 120px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
+    z-index: 50;
+    filter:brightness(0.6)
+
+}
+
+#TNKTEXT{
+    position: absolute; 
+    font-size: 40px;
+    top: 50%; /* Adjust to position the text vertically */ 
+    left: 50%; /* Adjust to position the text horizontally */ 
+    transform: translate(-50%, -100%); /* Center the text */ 
+    color: white; /* Change text color for better visibility */ 
+    text-align: center;
+}
+
+.PNS{
+    width: 50.2vw; 
+    position: absolute; 
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+#PNSIMG{
+    width: 100%; 
+    height: auto; 
+    clip-path: inset(120px 0 120px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
+    z-index: 50;
+    filter:brightness(0.8)
+}
+
+#PNSTEXT{
+    position: absolute; 
+    font-size: 40px;
+    top: 50%; /* Adjust to position the text vertically */ 
+    left: 50%; /* Adjust to position the text horizontally */ 
+    transform: translate(-50%, -130%); /* Center the text */ 
+    color: white; /* Change text color for better visibility */ 
+    text-align: center;
+}
+
+
+
+
+.EZD{
+    width: 48.8vw; 
+    position: absolute; 
+    overflow: hidden;
+    margin-top: -85px;
+    right: 0;
+}
+
+#EZDIMG{
+    width: 100%;
+
+     /* Top 100px, Right 0, Bottom 100px, Left 0 */
+    z-index: 50;
+    filter:brightness(0.8)
+}
+
+#EZDTEXT{
+    position: absolute; 
+    font-size: 40px;
+    top: 50%; /* Adjust to position the text vertically */ 
+    left: 50%; /* Adjust to position the text horizontally */ 
+    transform: translate(-50%, -100%); /* Center the text */ 
+    color: white; /* Change text color for better visibility */ 
+    text-align: center;
+}
+
+
+
+
+#Idz {
+    width: 100vw;
+    color: #4a3931;
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 520px;
+    text-align: center;
+    display: inline-block; /* To ensure the border is the same width as the text */
+    position: relative; /* To position the pseudo-element correctly */
+    padding-bottom: 10px; /* Add some space between text and pseudo-element border */
+}
+
+#Idz::after {
+    content: '';
+    position: absolute;
+    left: 50%; /* Center the border */
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 15vw; /* Set the width of the bottom border */
+    height: 2px; /* Set the height (thickness) of the bottom border */
+    background-color: black; /* Set the color of the bottom border */
+}
+
+.Stupki{
+    display: flex;
+    gap: 150px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.Stupki p{
+    text-align: center;
+    color:#e2d9c6;
+}
+
+.Stupka1, .Stupka2, .Stupka3{
+    background-color: #4a3931;
+    width: 12vw;
+    height: 12vw;
+    border-radius: 50%;
+    border: 4px solid black;
+}
+
+#Stupka1Title, #Stupka2TItle, #Stupka3Title{
+    margin-top: 40px;
+    font-size: 25px;
 }

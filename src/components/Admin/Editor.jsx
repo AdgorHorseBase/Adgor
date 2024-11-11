@@ -254,7 +254,7 @@ function Editor({ structure }) {
         }
 
         // Create HTML string
-        let htmlContent = ``;
+        let htmlContent = "{data:`";
         schema.forEach(element => {
             if (element.type === "title") {
                 htmlContent += `<h2 id="pageTitle">${element.content}</h2>`;
@@ -286,9 +286,11 @@ function Editor({ structure }) {
             } else if (element.type === "separation") {
                 htmlContent += "<div id='pageLine' ></div>";
             } else if (element.type === "image_text") {
-                htmlContent += `<div id="pageImageText"><img src="${element.content.url}" alt="image" /><p>${element.content.text}</p></div>`;
+                htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p>${element.content.text}</p></div>`;
             }
         });
+
+        htmlContent += "`}";
 
         const schemaContent = { title, schema };
 
@@ -424,41 +426,42 @@ function Editor({ structure }) {
                                 <img id="Added_Four_Images_img_three" src={URL + "/image?name=" + element.content[2]} alt="Image 3"/>
                                 <img id="Added_Four_Images_img_four" src={URL + "/image?name=" + element.content[3]} alt="Image 4"/>
                                 <br></br>
-                                <input 
-                                    type="file"
-                                    onChange={(e) => updateElement(element.id, {id: 0, file: e.target.files[0]}, "four_images")}
-                                    placeholder="Choose Image 1"
-                                    id="Added_Four_Images_file_one"
-                                />
-                                <input
-                                    type="file"
-                                    onChange={(e) => updateElement(element.id, {id: 1, file: e.target.files[0]}, "four_images")}
-                                    placeholder="Choose Image 2"
-                                    id="Added_Four_Images_file_two"
-                                />
-                                <input
-                                    type="file"
-                                    onChange={(e) => updateElement(element.id, {id: 2, file: e.target.files[0]}, "four_images")}
-                                    placeholder="Choose Image 3"
-                                    id="Added_Four_Images_file_three"
-                                />
-                                <input
-                                    type="file"
-                                    onChange={(e) => updateElement(element.id, {id: 3, file: e.target.files[0]}, "four_images")}
-                                    placeholder="Choose Image 4"
-                                    id="Added_Four_Images_file_four"
-                                />
-                                
+                                <form onSubmit={(e) => e.preventDefault()}>
+                                    <input 
+                                        type="file"
+                                        onChange={(e) => updateElement(element.id, {id: 0, file: e.target.files[0]}, "four_images")}
+                                        placeholder="Choose Image 1"
+                                        id="Added_Four_Images_file_one"
+                                    />
+                                    <input
+                                        type="file"
+                                        onChange={(e) => updateElement(element.id, {id: 1, file: e.target.files[0]}, "four_images")}
+                                        placeholder="Choose Image 2"
+                                        id="Added_Four_Images_file_two"
+                                    />
+                                    <input
+                                        type="file"
+                                        onChange={(e) => updateElement(element.id, {id: 2, file: e.target.files[0]}, "four_images")}
+                                        placeholder="Choose Image 3"
+                                        id="Added_Four_Images_file_three"
+                                    />
+                                    <input
+                                        type="file"
+                                        onChange={(e) => updateElement(element.id, {id: 3, file: e.target.files[0]}, "four_images")}
+                                        placeholder="Choose Image 4"
+                                        id="Added_Four_Images_file_four"
+                                    />
+                                </form>
                             </div>
                         )}
                         {element.type === "video" && (
                             <div id="Added_Video">
-                                <video id="Added_Video_vid" src={URL + "/video?name=" + element.content} controls />
+                                {element.content && <video id="Added_Video_vid" src={URL + "/video?name=" + element.content} controls />}
                                 <br></br>
                                 <input
                                     id="Added_Video_file"
                                     type="file"
-                                    onChange={(e) => updateElement(element.id, e.target.files[0], element.type)}
+                                    onChange={(e) => updateElement(element.id, e.target.files[0], "video")}
                                     placeholder="Choose Video"
                                 />
                                 

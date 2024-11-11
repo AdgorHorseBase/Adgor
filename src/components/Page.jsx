@@ -11,7 +11,6 @@ const MenuSections = () => {
     const getStruct = async () => {
       try {
         const schema = await axios.get(`/server/files/structure.json`);
-        console.log(schema)
         setStruct(schema.data);
       } catch(err) {
         console.log("Error:", err);
@@ -59,10 +58,10 @@ function Page() {
         // Extracting the dynamic part of the path after "/page/"
         const pagePath = location.pathname.replace('/page/', '');
 
-        const response = await axios.get(`/server/uploads/${pagePath}/index.html`);
+        const response = await axios.get("/server/uploads/"+pagePath+"/page.json");
         const content = response.data;
 
-        const title = await axios.get(`/server/uploads/${pagePath}/schema.json`);
+        const title = await axios.get("/server/uploads/"+pagePath+"/schema.json");
 
         // Set the response data (HTML) to state
         setPageContent(content);

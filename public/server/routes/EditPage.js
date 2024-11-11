@@ -11,7 +11,7 @@ router.post("/", (req, res, next) => {
     }
 
     const fullPath = path.join(req.UPLOADS_DIR, pagePath);
-    const htmlFilePath = path.join(fullPath, "index.html");
+    const htmlFilePath = path.join(fullPath, "page.json");
     const schemaFilePath = path.join(fullPath, "schema.json");
 
     if (!fs.existsSync(htmlFilePath) || !fs.existsSync(schemaFilePath)) {

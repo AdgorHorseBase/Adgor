@@ -49,7 +49,8 @@ const MenuSections = () => {
 
 function Page() {
   const [pageContent, setPageContent] = useState('Loading...');
-  const [title, setTitle] = useState("Blog");
+  const [titleBg, setTitleBg] = useState("Blog");
+  const [titleEn, setTitleEn] = useState("Blog");
   const location = useLocation(); // To get the current path
 
   useEffect(() => {
@@ -65,7 +66,8 @@ function Page() {
 
         // Set the response data (HTML) to state
         setPageContent(content);
-        setTitle(title.data.title);
+        setTitleBg(title.data.titleBg);
+        setTitleEn(title.data.titleEn);
       } catch (error) {
         console.error('Error fetching page content:', error);
         setPageContent('<p>Failed to load page content.</p>');
@@ -75,6 +77,29 @@ function Page() {
     fetchPageContent();
   }, [location]);
 
+  const [lang, setLang] = useState('bg');
+
+  useEffect(() => {
+    if (localStorage.getItem('lang')) {
+      setLang(localStorage.getItem('lang'));
+    }
+  }, [localStorage.getItem('lang')]);
+
+  useEffect(() => {
+    const elementsBg = document.querySelectorAll('.bg');
+    const elementsEn = document.querySelectorAll('.en');
+
+    console.log(elementsBg, elementsEn);
+
+    if (lang === 'en') {
+      elementsBg.forEach(el => el.style.display = 'none');
+      elementsEn.forEach(el => el.style.display = 'block');
+    } else if (lang === 'bg') {
+      elementsBg.forEach(el => el.style.display = 'block');
+      elementsEn.forEach(el => el.style.display = 'none');
+    }
+  }, [lang, pageContent]);
+
   return (
     <div>
       <MenuSections />
@@ -83,7 +108,8 @@ function Page() {
       <button onClick={() => { document.location.href = "/products" }}>Products</button>
       <button onClick={() => { document.location.href = "/vouchers" }}>Vouchers</button>
 
-      <h1>{title}</h1>
+      <h1 className='bg'>{titleBg}</h1>
+      <h1 className='en'>{titleEn}</h1>
 
       <div dangerouslySetInnerHTML={{ __html: pageContent }} />
     </div>

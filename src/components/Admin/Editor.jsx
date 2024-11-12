@@ -56,7 +56,8 @@ function Editor({ structure }) {
     const { '*': editPath } = useParams();
 
     const [schema, setSchema] = useState([]);
-    const [title, setTitle] = useState("Untitled Page");
+    const [titleBg, setTitleBg] = useState("Неименувана Страница");
+    const [titleEn, setTitleEn] = useState("Untitled Page");
     const [path, setPath] = useState("");
 
     useEffect(() => {
@@ -65,7 +66,8 @@ function Editor({ structure }) {
                 try {
                     const response = await axios.get(`${URL}/page-get-schema?pagePath=${editPath}`);
                     setSchema(response.data.schema.schema);
-                    setTitle(response.data.schema.title);
+                    setTitleBg(response.data.schema.titleBg);
+                    setTitleEn(response.data.schema.titleEn);
                 } catch (error) {
                     console.error("Error fetching page content:", error);
                 }
@@ -98,7 +100,8 @@ function Editor({ structure }) {
                 id: uuidv4(),
                 type,
                 content: {
-                    text: "Enter your text",
+                    textBg: "Въведи текст на български",
+                    textEn: "Enter your text",
                     url: ""
                 }
             }
@@ -129,11 +132,20 @@ function Editor({ structure }) {
                 id: uuidv4(),
                 type
             }
+        } else if (type === "text" || type === "title") {
+            newElement = {
+                id: uuidv4(),
+                type,
+                content: {
+                    textBg: "Въведи текст на български",
+                    textEn: "Enter your text"
+                }
+            };
         } else {
             newElement = {
                 id: uuidv4(),
                 type,
-                content: type === "title" ? "Enter Title" : type === "text" ? "Enter your text" : type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : type === "video" ? "" : "",
+                content: type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : type === "video" ? "" : "",
             };
         }
         
@@ -201,13 +213,13 @@ function Editor({ structure }) {
                     })
                     .then(response => {
                         const image = response.data.image;
-                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { text: el.content.text, url: image } } : el));
+                        return setSchema(schema.map(el => el.id === id ? { ...el, content: { textBg: el.content.textBg, textEn: el.content.textEn, url: image } } : el));
                     })
                     .catch(error => {
                         return console.error("Error uploading image:", error);
                     });
                 } else {
-                    setSchema(schema.map(el => el.id === id ? { ...el, content: { text: newContent.text, url: el.content.url } } : el));
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: { textBg: newContent.textBg, textEn: newContent.textEn, url: el.content.url } } : el));
                 }
             default:
                 if(type === "two_images" || type === "four_images") {
@@ -254,12 +266,14 @@ function Editor({ structure }) {
         }
 
         // Create HTML string
-        let htmlContent = "{data:`";
+        let htmlContent = "";
         schema.forEach(element => {
             if (element.type === "title") {
-                htmlContent += `<h2 id="pageTitle">${element.content}</h2>`;
+                htmlContent += `<h2 id="pageTitle" class="bg">${element.content.textBg}</h2>`;
+                htmlContent += `<h2 id="pageTitle" class="en">${element.content.textEn}</h2>`;
             } else if (element.type === "text") {
-                htmlContent += `<p id="pageText">${element.content}</p>`;
+                htmlContent += `<p id="pageText" class="bg">${element.content.textBg}</p>`;
+                htmlContent += `<p id="pageText" class="en">${element.content.textEn}</p>`;
             } else if (element.type === "html") {
                 htmlContent += `<div class="pageHtml">${decodeHTML(element.content)}</div><br />`
             } else if (element.type === "image") {
@@ -286,13 +300,11 @@ function Editor({ structure }) {
             } else if (element.type === "separation") {
                 htmlContent += "<div id='pageLine' ></div>";
             } else if (element.type === "image_text") {
-                htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p>${element.content.text}</p></div>`;
+                htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
             }
         });
 
-        htmlContent += "`}";
-
-        const schemaContent = { title, schema };
+        const schemaContent = { titleBg, titleEn, schema };
 
         // Send request to the backend to save the page
         try {
@@ -303,7 +315,8 @@ function Editor({ structure }) {
                 schema: schemaContent
             });
             alert("Page saved successfully!");
-            setTitle("Untitled Page"); // Reset title
+            setTitleBg("Неименувана Страница") // Reset title;
+            setTitleEn("Untitled Page") // Reset title
             setSchema([]); // Reset schema
             setPath(""); // Reset path
         } catch (error) {
@@ -322,8 +335,16 @@ function Editor({ structure }) {
                 <input
                     id="Page_Title"
                     type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={titleBg}
+                    onChange={(e) => setTitleBg(e.target.value)}
+                    placeholder="Page Title"
+                    style={{ display: "block" }}
+                />
+                <input
+                    id="Page_Title"
+                    type="text"
+                    value={titleEn}
+                    onChange={(e) => setTitleEn(e.target.value)}
                     placeholder="Page Title"
                     style={{ display: "block" }}
                 />
@@ -359,20 +380,36 @@ function Editor({ structure }) {
                 {schema.map((element) => (
                     <div key={element.id}>
                         {element.type === "title" && (
-                            <ContentEditable
-                                html={element.content}
-                                onChange={(e) => updateElement(element.id, e.target.value)}
-                                tagName="h2"
-                                id="Added_Title"
-                            />
+                            <div>
+                                <ContentEditable
+                                    html={element.content.textBg}
+                                    onChange={(e) => updateElement(element.id, {textBg: e.target.value, textEn: element.content.textEn})}
+                                    tagName="h2"
+                                    id="Added_Title"
+                                />
+                                <ContentEditable
+                                    html={element.content.textEn}
+                                    onChange={(e) => updateElement(element.id, {textBg: element.content.textBg, textEn: e.target.value})}
+                                    tagName="h2"
+                                    id="Added_Title"
+                                />
+                            </div>
                         )}
                         {element.type === "text" && (
-                            <ContentEditable
-                                html={element.content}
-                                onChange={(e) => updateElement(element.id, e.target.value)}
-                                tagName="p"
-                                id="Added_Text"
-                            />
+                            <div>
+                                <ContentEditable
+                                    html={element.content.textBg}
+                                    onChange={(e) => updateElement(element.id, {textBg: e.target.value, textEn: element.content.textEn})}
+                                    tagName="p"
+                                    id="Added_Text"
+                                />
+                                <ContentEditable
+                                    html={element.content.textEn}
+                                    onChange={(e) => updateElement(element.id, {textBg: element.content.textBg, textEn: e.target.value})}
+                                    tagName="p"
+                                    id="Added_Text"
+                                />
+                            </div>
                         )}
                         {element.type === "html" && (
                             <ContentEditable
@@ -515,9 +552,16 @@ function Editor({ structure }) {
                                 </div>
                                 <ContentEditable
                                     id="Added_Text"
-                                    html={element.content.text}
+                                    html={element.content.textBg}
                                     tagName="p"
-                                    onChange={(e) => updateElement(element.id, {text: e.target.value, url: element.content.url}, "image_text")}
+                                    onChange={(e) => updateElement(element.id, {textBg: e.target.value, textEn: element.content.textEn, url: element.content.url}, "image_text")}
+                                    placeholder="Enter your text"
+                                />
+                                <ContentEditable
+                                    id="Added_Text"
+                                    html={element.content.textEn}
+                                    tagName="p"
+                                    onChange={(e) => updateElement(element.id, {textBg: element.content.textBg, textEn: e.target.value, url: element.content.url}, "image_text")}
                                     placeholder="Enter your text"
                                 />
                             </div>

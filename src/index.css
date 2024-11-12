@@ -85,7 +85,7 @@ button:hover{
 }
 
 .Setting_buttons{
-    margin-top: 10vh;
+    margin-top: 20px;
 
 }
 
@@ -94,7 +94,7 @@ button:hover{
     color: #293241;
     font-size: 6vh;
     margin-top: 5vh;
-    margin-bottom: 3vh;
+    margin-bottom: 10px;
 }
 
 
@@ -102,7 +102,7 @@ button:hover{
 
 
 #Page_Title{
-    margin-top: -4.6vh;
+    margin-top: 5px;
     color: #3d5a80;
     margin-left: 13vw;
     font-weight: 500;

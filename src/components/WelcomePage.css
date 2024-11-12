@@ -599,8 +599,13 @@ p {
     }
 
     #Title2{
-        margin-top: -200px;
-        
+
+        font-size: 20px;
+        top: 7%;
+    }
+
+    #Title3{
+        font-size: 20px;
     }
 
     .socials {

@@ -2,7 +2,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+.Menu {
+    background-color: #2e1a11; /* Dark background color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    font-family: 'Georgia', serif; /* Change to match your preferred font */
+    font-size: 16px;
+    color: #e5d5c0; /* Light text color */
+    letter-spacing: 2px;
+}
+  
+.Menu button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0;
+    transition: none;
+    border: none;
+}
 
+.Menu button:hover {
+    border: none;
+}
+  
+.Menu button + button::before {
+    content: "•";
+    color: #e5d5c0; /* Dot color */
+    padding-right: 15px;
+    padding-left: 15px;
+}
 
 .line {
     width: 74vw;

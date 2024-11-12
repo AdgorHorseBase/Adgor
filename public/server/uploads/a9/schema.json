@@ -1,0 +1,14 @@
+{
+  "titleBg": "Начало",
+  "titleEn": "Start",
+  "schema": [
+    {
+      "id": "acd476c2-933c-4ce7-9140-0439571eee4b",
+      "type": "text",
+      "content": {
+        "textBg": "Въведи текст на български",
+        "textEn": "Enter your text"
+      }
+    }
+  ]
+}

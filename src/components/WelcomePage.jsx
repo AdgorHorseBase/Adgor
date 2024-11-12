@@ -8,6 +8,13 @@ import Pansion from './images/PansionIMG.jpeg';
 import Ezda from './images/EzdaIMG.jpeg';
 import Fondaziq from './images/fondaziq.jpeg';
 import NakusanRub from './images/Vector1.jpg';
+import Pole from './images/pole.jpeg';
+import Guy from './images/guyonhorse.jpeg'
+import Hora from './images/horanakone.jpeg';
+import Momiche from './images/momichenakon.jpeg'
+import Skachasht from './images/skacha.jpeg';
+import Shapka from './images/Group.png'
+import Usluga from './images/usluga.jpeg';
 
 const WelcomePage = () => {
     return (
@@ -51,7 +58,7 @@ const WelcomePage = () => {
                 <p id="TNKTEXT">Тренировки <br></br>На Коне</p>  
         </div>
     </a>
-    <MenuSections />
+
 
         <div className="PNS">
             <a href="">
@@ -93,8 +100,80 @@ const WelcomePage = () => {
         <img id='FondaziqIMG' src={Fondaziq}></img>
         <p id='FondaziqTitle'>Фондация<br></br>"Адгор за конете"</p>
         <a id='FondaziqOshte' href=''>Още</a>
+
+        <img id='PoleIMG' src={Pole}></img>
+
+        <div className="kdvadrati">
+            <div className="WesternEzda">
+                <img id='GuyPic' src={Guy}></img>
+                <br></br>
+                <p>Уестърн <br></br>Езда</p>
+            </div>
+            <div className="NaturalHorsmanship">
+        <img id='GuyPic' src={Guy}></img>
+        <br></br>
+        <p>Natural <br></br>Horsmanship</p>
+        </div>
+        <div className="Falabela">
+        <img id='GuyPic' src={Guy}></img>
+        <p>Фалабела</p>
+        </div>
+        </div>
+
+        <img id='Hora' src={Hora}></img>
+
+        <p id='Postijeniq'>Нашите Постижения</p>
+        <p id='Paragraph'>Adgor riding complex offers riding, groundwork, horse and people training. It is up to you to make up your mind about what exactly you would like to achieve, feel or learn.</p>
+        <a id="vtoriOshte" href=''>Още</a>
+
+
+        <img id="MomicheIMG" src={Momiche}></img>
+        <img id="SkachashtIMG" src={Skachasht}></img>
+
+        
     </div>
 </div>
+<div className="posledni">
+        <img id="Shapka" src={Shapka}></img>
+        <br></br>
+        <div className="uslugi">
+            <div className="purviTri">
+                <div className="uslugaedno">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshteEdno" href=''>Още</a>
+                </div>
+                <div className="uslugadve">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshteDve" href=''>Още</a>
+                </div>
+                <div className="uslugatri">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshteTri" href=''>Още</a>
+                </div>
+            </div>
+            <div className="vtoriTri">
+                <div className="uslugachetiri">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshteChetiri" href=''>Още</a>
+                </div>
+                <div className="uslugapet">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshtePet" href=''>Още</a>
+                </div>
+                <div className="uslugashest">
+                    <img className='UslugaIMG' src={Usluga} alt="" />
+                    <p>Описание на услуга</p>
+                    <a id="OshteShest" href=''>Още</a>
+                </div>
+            </div>
+        </div>
+</div>
+
 
 
 

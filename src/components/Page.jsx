@@ -74,7 +74,7 @@ const MenuSections = () => {
               <ul className="page-list">
                 {structure[dir].contents.map((page, index) => (
                   <li key={`${dir}-${index}`}>
-                    <a href={`${dir}-${index}`}>
+                    <a href={`/page${dir}/${page.page}`}>
                       {lang === 'bg' ? page.titleBg : page.titleEn}
                     </a>
                   </li>

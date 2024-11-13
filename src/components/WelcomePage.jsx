@@ -27,7 +27,10 @@ const WelcomePage = () => {
           <button id="moreButton">Още</button>
         </div>
       </div>
-      <MenuSections />
+      <div id="StickyMenu">
+        <MenuSections />
+      </div>
+
       <div className="socials">
         <p id="SocialsEmail">adgor@abv.bg</p>
         <a href="https://www.facebook.com/groups/adgor/">

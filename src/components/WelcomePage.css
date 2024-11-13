@@ -64,6 +64,12 @@ p {
   border-radius: 18px;
 }
 
+#StickyMenu {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 /* socials */
 .socials {
   width: 100%;

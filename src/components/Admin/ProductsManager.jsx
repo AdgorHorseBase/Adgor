@@ -9,7 +9,8 @@ const ProductsManager = () => {
     const [newProduct, setNewProduct] = useState({
         id: '',
         imagePath: '',
-        name: '',
+        nameBg: '',
+        nameEn: '',
         price: ''
     });
     const [selectedFile, setSelectedFile] = useState(null);
@@ -68,7 +69,7 @@ const ProductsManager = () => {
                 // Update the image path immediately after successful upload
                 newProduct.imagePath = response.data.image;
                 setProducts([...products, newProduct]); // Add new product to state
-                setNewProduct({ id: '', imagePath: '', name: '', price: '' });
+                setNewProduct({ id: '', imagePath: '', nameBg: '', nameEn: '', price: '' });
                 setSelectedFile(null); // Clear the file input after adding
             } else {
                 alert("No file selected for upload.");
@@ -124,7 +125,7 @@ const ProductsManager = () => {
             {products.length > 0 ? products.map((item, index) => (
                 <div key={index}>
                     {item.imagePath && (
-                        <img alt={item.name} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
+                        <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
                     )}
                     <br />
                     <label>
@@ -137,11 +138,21 @@ const ProductsManager = () => {
                     </label>
                     <br />
                     <label>
-                        Name:
+                        Name (BG):
                         <input
                             type="text"
-                            name="name"
-                            value={item.name}
+                            name="nameBg"
+                            value={item.nameBg}
+                            onChange={(e) => handleEditProductChange(index, e)}
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Name (EN):
+                        <input
+                            type="text"
+                            name="nameEn"
+                            value={item.nameEn}
                             onChange={(e) => handleEditProductChange(index, e)}
                         />
                     </label>
@@ -173,11 +184,21 @@ const ProductsManager = () => {
                     </label>
                     <br />
                     <label>
-                        Name:
+                        Name (BG):
                         <input
                             type="text"
-                            name="name"
-                            value={newProduct.name}
+                            name="nameBg"
+                            value={newProduct.nameBg}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Name (EN):
+                        <input
+                            type="text"
+                            name="nameEn"
+                            value={newProduct.nameEn}
                             onChange={handleInputChange}
                         />
                     </label>

@@ -49,8 +49,6 @@ const MenuSections = () => {
         }
       }
 
-      console.log(updatedStructure);
-
       setStruct(updatedStructure);
     };
 

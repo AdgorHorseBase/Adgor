@@ -8,6 +8,7 @@ const Products = () => {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState({});
     const [showForm, setShowForm] = useState(false);
+    const [lang, setLang] = useState('bg');
 
     useEffect(() => {
         const GetProducts = async () => {
@@ -46,18 +47,24 @@ const Products = () => {
         setShowForm(true);
     };
 
+    useEffect(() => {
+        if (localStorage.getItem('lang')) {
+            setLang(localStorage.getItem('lang'));
+        }
+    }, [localStorage.getItem('lang')]);
+
     return (
         <div>
             <MenuSections />
-            <h1 id='title'>Products</h1>
+            <h1 id='title'>{lang === "bg" ? "Продукти" : "Products"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
                     <div key={item.id} className='item' style={{ width: '300px', textAlign: 'center' }}>
                         {item.imagePath && (
                             <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
                         )}
-                        {item.name && (
-                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{item.name}</h2>
+                        {(item.nameBg || item.nameEn) && (
+                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? item.nameBg : item.nameEn}</h2>
                         )}
                         {item.price && (
                             <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
@@ -74,7 +81,7 @@ const Products = () => {
                             </div>
                         ) : (
                             <button onClick={() => addProduct(item)} style={{ margin: '0' }}>
-                                Add
+                                {lang === "bg" ? "Добави" : "Add"}
                             </button>
                         )}
                     </div>
@@ -82,7 +89,7 @@ const Products = () => {
             </div>
 
             <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px', marginLeft: "10%", marginBottom: "24px" }}>
-                Continue
+                {lang === "bg" ? "Продължи" : "Continue"}
             </button>
 
             {showForm && (

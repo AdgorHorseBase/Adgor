@@ -5,6 +5,9 @@ import Logo from "./images/AdgorLogo.png";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.jpeg";
 import Pansion from "./images/PansionIMG.jpeg";
 import Ezda from "./images/EzdaIMG.jpeg";
+import Steps from "./images/Steps.png";
+import StepsSmall from "./images/StepsSmall.png";
+import LineHores from "./images/LineHores.png";
 import Fondaziq from "./images/fondaziq.jpeg";
 import Pole from "./images/pole.jpeg";
 import Guy from "./images/guyonhorse.jpeg";
@@ -23,7 +26,7 @@ const WelcomePage = () => {
         <div id="Titles">
           <p id="Title1">Конна База</p>
           <p id="TItle2">АДГОР</p>
-          <p id="Title3">1# в Българияц по Western и NH</p>
+          <p id="Title3">1# в България по Western и NH</p>
           <button id="moreButton">Още</button>
         </div>
       </div>
@@ -182,35 +185,48 @@ const WelcomePage = () => {
 
         <a id="OneImageNextToTheTwo" href="" className="threeLinkText">
           <div
-                      className="threeImages"
-                      id="OneImageNextToTwoTheImage"
-            style={{ backgroundImage: `url(${Ezda})`}}
+            className="threeImages"
+            id="OneImageNextToTwoTheImage"
+            style={{ backgroundImage: `url(${Ezda})` }}
           >
             <p className="threeTexts">Езда</p>
           </div>
         </a>
       </div>
 
-      <div className="alignCenter">
-        <p id="Idz">Искате да яздите?</p>
-      </div>
+      {window.innerWidth > 800 ? (
+        <img src={Steps} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+      ) : (
+        <>
+          {window.innerWidth > 500 ? (
+            <img
+              src={StepsSmall}
+              alt=""
+              width={"100%"}
+              style={{ margin: "25px 0px" }}
+            />
+          ) : (
+            <div>
+              <div className="alignCenter">
+                <p id="WantToRide">Искате да яздите?</p>
+              </div>
 
-      {/* <div className="Stupki">
-        <div className="Stupka1">
-          <p id="Stupka1Title">Стъпка 1</p>
-          <p id="Stupka1Text">Обадете се</p>
-        </div>
-        <div className="Stupka2">
-          <p id="Stupka2TItle">Стъпка 2</p>
-          <p id="Stupka2Text">Запазете час</p>
-        </div>
-        <div className="Stupka3">
-          <p id="Stupka3Title">Стъпка 3</p>
-          <p id="Stupka3Text">
-            Насладете се <br></br> на ездата
-          </p>
-        </div>
-      </div> */}
+              <div style={{ display: "flex", justifyContent: "center", fontSize: "6vw" }}>
+                <ul>
+                  <li>Обадете се</li>
+                  <li>Запазете час</li>
+                  <li>Насладете се на ездата</li>
+                </ul>
+              </div>
+              <img
+                src={LineHores}
+                alt=""
+                width={"100%"}
+              />
+            </div>
+          )}
+        </>
+      )}
 
       {/* <div className="parent-container">
         <div className="Zentranlni">

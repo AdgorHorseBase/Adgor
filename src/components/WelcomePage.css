@@ -3,54 +3,53 @@
 p {
   font-family: "Source Serif 4", serif;
   letter-spacing: 2px;
+  margin: 0px;
 }
 
-#HeadIMG {
-  width: 100%;
-  height: auto;
-}
-
+/* header */
 #HeadLogo {
-  position: absolute;
-  width: 20vw;
-  top: 12%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 300px;
+}
+
+@media (min-width: 600px) {
+  #HeadLogo {
+    max-width: 100%;
+    width: 30%;
+  }
+}
+
+#Header {
+  min-height: 600px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #Title1 {
-  position: absolute;
   color: #e2d9c6;
   font-size: 48px;
   font-weight: 500;
-  top: 37%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
 }
 
 #TItle2 {
-  position: absolute;
   color: #e2d9c6;
   font-size: 150px;
   font-weight: 600;
-  top: 37%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
 }
 
 #Title3 {
-  position: absolute;
   color: #e2d9c6;
   font-size: 25px;
   font-weight: 400;
-  top: 68%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
 }
 
+/* socials */
 .socials {
   width: 100%;
   height: 40vh;
@@ -455,32 +454,6 @@ p {
 }
 
 @media (max-width: 600px) {
-  #HeadIMG {
-    width: 100%;
-    height: auto;
-    margin-top: 0;
-  }
-
-  #HeadLogo {
-    width: 30%;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -80%);
-  }
-
-  #Title1 {
-    margin-top: -200px;
-    font-size: 17px;
-  }
-
-  #Title2 {
-    font-size: 20px;
-    top: 7%;
-  }
-
-  #Title3 {
-    font-size: 20px;
-  }
 
   .socials {
     flex-direction: column;
@@ -647,5 +620,5 @@ p {
 }
 
 .alignCenter {
-    display: flex;
+  display: flex;
 }

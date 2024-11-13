@@ -89,7 +89,7 @@ const MenuSections = () => {
           )}
         </React.Fragment>
       ))}
-      <button onClick={() => { document.location.href = "/products" }}>{lang === "bg" ? "Продукти" : "Products"}</button>
+      <button className="dot" onClick={() => { document.location.href = "/products" }}>{lang === "bg" ? "Продукти" : "Products"}</button>
       <button onClick={() => { document.location.href = "/vouchers" }}>{lang === "bg" ? "Ваучери" : "Vouchers"}</button>
       {lang === "bg" ? (
         <button onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>Switch to english</button>

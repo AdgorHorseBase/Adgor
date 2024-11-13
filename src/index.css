@@ -1,18 +1,61 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+.directory-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.directory-name {
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    color: #e5d5c0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0;
+    font-weight: bold;
+}
+  
+.page-list {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+.page-list li {
+    padding: 8px 16px;
+}
+  
+.page-list li a {
+    text-decoration: none;
+    color: black;
+}
+  
+.page-list li a:hover {
+    background-color: #ddd;
+}
+  
+.directory-menu:hover .page-list {
+    display: block;
+}
 
 .Menu {
-    background-color: #2e1a11; /* Dark background color */
+    background-color: #2e1a11;
     padding: 10px 0;
     display: flex;
     justify-content: center;
-    font-family: 'Georgia', serif; /* Change to match your preferred font */
+    flex-wrap: wrap; /* Allows wrapping */
+    font-family: 'Georgia', serif;
     font-size: 16px;
-    color: #e5d5c0; /* Light text color */
+    color: #e5d5c0;
     letter-spacing: 2px;
 }
-  
+
 .Menu button {
     background: none;
     border: none;
@@ -23,18 +66,19 @@
     padding: 0 2px;
     margin: 0;
     transition: none;
-    border: none;
 }
 
 .Menu button:hover {
     border: none;
 }
-  
-.Menu button + button::before {
+
+.Menu button + button::before,
+.Menu button + .directory-menu p::before,
+.directory-menu p + .directory-menu p::before {
     content: "•";
-    color: #e5d5c0; /* Dot color */
-    padding-right: 15px;
-    padding-left: 15px;
+    color: #e5d5c0;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .line {

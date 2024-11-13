@@ -1,0 +1,14 @@
+{
+  "titleBg": "Неименувана Страница",
+  "titleEn": "Untitled Page",
+  "schema": [
+    {
+      "id": "2b989283-d3c8-4c26-839c-cc2a3f9b9c0d",
+      "type": "text",
+      "content": {
+        "textBg": "Въведи текст на български",
+        "textEn": "Enter your text"
+      }
+    }
+  ]
+}

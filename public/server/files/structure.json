@@ -25,5 +25,12 @@
   },
   "\\a9": {
     "type": "file"
+  },
+  "\\Directory": {
+    "type": "directory",
+    "contents": [
+      "Page",
+      "Page2"
+    ]
   }
 }

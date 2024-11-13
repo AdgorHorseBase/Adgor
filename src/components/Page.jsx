@@ -13,7 +13,6 @@ const MenuSections = () => {
     const getStruct = async () => {
       try {
         const schema = await axios.get(`/server/files/structure.json`);
-        console.log(schema.data);
         setStruct(schema.data);
       } catch(err) {
         console.log("Error:", err);
@@ -67,25 +66,28 @@ const MenuSections = () => {
   return (
     <div className='Menu'>
       <button onClick={() => { document.location.href = "/" }}>{lang === 'bg' ? 'Начало' : 'Home'}</button>
-      {Object.keys(structure).map((dir) => (
-        structure[dir].type === 'directory' ? structure[dir].contents && (
-          <select
-            key={dir} // Ensures each <select> element has a unique key
-            onChange={(e) => { window.location.href = e.target.value; }}
-          >
-          <option value="">{lang === 'bg' ? structure[dir].titleBg : structure[dir].titleEn}</option>
-          {structure[dir].contents.map((page, index) => (
-            <option key={`${dir}-${page}-${index}`} value={`/page${dir}/${page.page}`}>
-              {lang === 'bg' ? page.titleBg : page.titleEn}
-            </option>
-        ))}
-          </select>
-        ) :
-        structure[dir].type === 'file' && (
-          <button key={dir} onClick={() => { document.location.href = `/page${dir}` }}>
-            {lang === 'bg' ? structure[dir].titleBg : structure[dir].titleEn}
-          </button>
-        )
+      {titlesFetched.current && Object.keys(structure).map((dir, index) => (
+        <React.Fragment key={dir}>
+          {structure[dir].type === 'directory' ? structure[dir].contents && (
+            <div className="directory-menu">
+              <p className="directory-name">{dir.slice(1, dir.length)}</p>
+              <ul className="page-list">
+                {structure[dir].contents.map((page, index) => (
+                  <li key={`${dir}-${index}`}>
+                    <a href={`${dir}-${index}`}>
+                      {lang === 'bg' ? page.titleBg : page.titleEn}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) :
+          structure[dir].type === 'file' && (
+            <button onClick={() => { document.location.href = `/page${dir}` }}>
+              {lang === 'bg' ? structure[dir].titleBg : structure[dir].titleEn}
+            </button>
+          )}
+        </React.Fragment>
       ))}
     </div>
   )

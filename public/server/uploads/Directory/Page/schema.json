@@ -1,0 +1,14 @@
+{
+  "titleBg": "Страница",
+  "titleEn": "Page",
+  "schema": [
+    {
+      "id": "f9da9033-0133-4c1f-92f8-36b97cb77152",
+      "type": "text",
+      "content": {
+        "textBg": "Въведи текст на български",
+        "textEn": "Enter your text"
+      }
+    }
+  ]
+}

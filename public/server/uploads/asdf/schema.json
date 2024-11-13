@@ -1,9 +1,10 @@
 {
   "titleBg": "Неименувана Страница",
   "titleEn": "Untitled Page",
+  "directoryBg": "",
   "schema": [
     {
-      "id": "2b989283-d3c8-4c26-839c-cc2a3f9b9c0d",
+      "id": "3209a493-96a8-462e-9d04-dc0f54293ab0",
       "type": "text",
       "content": {
         "textBg": "Въведи текст на български",

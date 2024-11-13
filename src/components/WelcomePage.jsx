@@ -18,8 +18,7 @@ import { MenuSections } from "./Page";
 const WelcomePage = () => {
   return (
     <div className="Everything">
-      <div className="land">
-        <img id="HeadIMG" alt="" src={HeaderSnimka}></img>
+      <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
         <img id="HeadLogo" alt="" src={Logo}></img>
         <p id="Title1">Конна База</p>
         <p id="TItle2">АДГОР</p>

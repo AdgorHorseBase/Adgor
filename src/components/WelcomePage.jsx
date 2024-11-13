@@ -13,6 +13,7 @@ import Momiche from "./images/momichenakon.jpeg";
 import Skachasht from "./images/skacha.jpeg";
 import Shapka from "./images/Group.png";
 import Usluga from "./images/usluga.jpeg";
+import { MenuSections } from "./Page";
 
 const WelcomePage = () => {
   return (
@@ -24,7 +25,7 @@ const WelcomePage = () => {
         <p id="TItle2">АДГОР</p>
         <p id="Title3">1# в Българияц по Western и NH</p>
       </div>
-
+      <MenuSections />
       <div className="socials">
         <p id="SocialsEmail">adgor@abv.bg</p>
         <a href="https://www.facebook.com/groups/adgor/">
@@ -115,7 +116,9 @@ const WelcomePage = () => {
         </div>
       </div>
 
-      <p id="Idz">Искате да яздите?</p>
+      <div className="alignCenter">
+        <p id="Idz">Искате да яздите?</p>
+      </div>
 
       <div className="Stupki">
         <div className="Stupka1">

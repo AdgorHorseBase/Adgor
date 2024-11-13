@@ -72,41 +72,40 @@ p {
 
 /* socials */
 .socials {
-  width: 100%;
-  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
+  font-size: 25px;
+}
+
+#contactsSmall {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 23px;
 }
 
 #SocialsEmail {
   color: #1f1b1a;
-  font-size: 25px;
+  font-weight: 600;
 }
 
 #SocialsNumber {
   color: #1f1b1a;
-  font-size: 25px;
 }
 
 #FacebookSVG {
   width: 40px;
-  height: 40px;
 }
 
 #InstagramSVG {
   width: 40px;
-  height: 40px;
 }
 
 #TikTokSVG {
   width: 40px;
-  height: 40px;
-}
-
-.Trite {
-  margin-top: -30px;
 }
 
 .TNK {
@@ -475,23 +474,6 @@ p {
 }
 
 @media (max-width: 600px) {
-  .socials {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  #SocialsEmail,
-  #SocialsNumber {
-    font-size: 18px;
-  }
-
-  #FacebookSVG,
-  #InstagramSVG,
-  #TikTokSVG {
-    width: 30px;
-    height: 30px;
-  }
-
   .Trite {
     margin-top: 0;
     flex-direction: column;

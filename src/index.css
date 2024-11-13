@@ -74,7 +74,8 @@
 
 .Menu button + button::before,
 .Menu button + .directory-menu p::before,
-.directory-menu p + .directory-menu p::before {
+.Menu .directory-menu p + button::before,
+.Menu .directory-menu + button::before {
     content: "•";
     color: #e5d5c0;
     padding-right: 10px;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./WelcomePage.css";
 import HeaderSnimka from "./images/HeaderSnimka.jpeg";
-import Logo from "./images/AdgorLogo.jpeg";
+import Logo from "./images/AdgorLogo.png";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.jpeg";
 import Pansion from "./images/PansionIMG.jpeg";
 import Ezda from "./images/EzdaIMG.jpeg";
@@ -17,12 +17,15 @@ import { MenuSections } from "./Page";
 
 const WelcomePage = () => {
   return (
-    <div className="Everything">
+    <div>
       <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
         <img id="HeadLogo" alt="" src={Logo}></img>
-        <p id="Title1">Конна База</p>
-        <p id="TItle2">АДГОР</p>
-        <p id="Title3">1# в Българияц по Western и NH</p>
+        <div id="Titles">
+          <p id="Title1">Конна База</p>
+          <p id="TItle2">АДГОР</p>
+          <p id="Title3">1# в Българияц по Western и NH</p>
+          <button id="moreButton">Още</button>
+        </div>
       </div>
       <MenuSections />
       <div className="socials">

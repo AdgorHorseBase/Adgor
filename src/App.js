@@ -15,6 +15,10 @@ const PrivateRoute = ({ children }) => {
 };
 
 function App() {
+  if (!localStorage.getItem('lang')) {
+    localStorage.setItem('lang', 'bg');
+  }
+
   return (
     <BrowserRouter>
       <Routes>

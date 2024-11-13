@@ -1,0 +1,15 @@
+{
+  "titleBg": "Неименувана Страница",
+  "titleEn": "Untitled Page",
+  "directoryBg": "Тест",
+  "schema": [
+    {
+      "id": "6fda57f2-b9c4-4a8e-8fe0-65840cd1d360",
+      "type": "text",
+      "content": {
+        "textBg": "Въведи текст на български",
+        "textEn": "Enter your text"
+      }
+    }
+  ]
+}

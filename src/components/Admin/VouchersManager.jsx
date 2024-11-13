@@ -9,7 +9,9 @@ const VouchersManager = () => {
     const [newVoucher, setNewVoucher] = useState({
         id: '',
         code: '',
-        discount: ''
+        discount: '',
+        nameBg: '',
+        nameEn: ''
     });
     const [selectedFile, setSelectedFile] = useState(null);
     const [editFiles, setEditFiles] = useState({}); // To track file changes for edited vouchers
@@ -65,9 +67,9 @@ const VouchersManager = () => {
                 });
     
                 // Update the image path immediately after successful upload
-                newVoucher.imagePath = URL + "/image?name=" + response.data.image;
+                newVoucher.imagePath = response.data.image;
                 setVouchers([...vouchers, newVoucher]); // Add new product to state
-                setNewVoucher({ id: '', imagePath: '', name: '', price: '' });
+                setNewVoucher({ id: '', imagePath: '', nameBg: '', nameEn: '', price: '' });
                 setSelectedFile(null); // Clear the file input after adding
             } else {
                 alert("No file selected for upload.");
@@ -94,7 +96,7 @@ const VouchersManager = () => {
                     });
     
                     // Update the image path immediately after successful upload
-                    updatedVouchers[index].imagePath = URL + "/image?name=" + response.data.image;
+                    updatedVouchers[index].imagePath = response.data.image;
                 }
             }
     
@@ -122,7 +124,7 @@ const VouchersManager = () => {
             {vouchers.length > 0 ? vouchers.map((item, index) => (
                 <div key={index}>
                     {item.imagePath && (
-                        <img alt={item.name} src={item.imagePath} style={{ width: "100px" }} />
+                        <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
                     )}
                     <br />
                     <label>
@@ -135,11 +137,21 @@ const VouchersManager = () => {
                     </label>
                     <br />
                     <label>
-                        Name:
+                        Name (BG):
                         <input
                             type="text"
-                            name="name"
-                            value={item.name}
+                            name="nameBg"
+                            value={item.nameBg}
+                            onChange={(e) => handleEditVoucherChange(index, e)}
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Name (EN):
+                        <input
+                            type="text"
+                            name="nameEn"
+                            value={item.nameEn}
                             onChange={(e) => handleEditVoucherChange(index, e)}
                         />
                     </label>
@@ -171,11 +183,21 @@ const VouchersManager = () => {
                     </label>
                     <br />
                     <label>
-                        Name:
+                        Name (BG):
                         <input
                             type="text"
-                            name="name"
-                            value={newVoucher.name}
+                            name="nameBg"
+                            value={newVoucher.nameBg}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Name (EN):
+                        <input
+                            type="text"
+                            name="nameEn"
+                            value={newVoucher.nameEn}
                             onChange={handleInputChange}
                         />
                     </label>

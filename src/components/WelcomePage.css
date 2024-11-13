@@ -1,293 +1,644 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
-
-p{
-    font-family: "Source Serif 4", serif;
+p {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 2px;
+  margin: 0px;
 }
 
-.Everything{
-    width: 100%;
-    height: 1000vh;
-    top: 0;
-    background-color: #e2d9c6;
-    margin: 0;
+/* header */
+#HeadLogo {
+  width: 80%;
+  height: auto;
+  max-width: 300px;
 }
 
-.land{
-    height: 110vh;
-    width: 100%;
+#Header {
+  min-height: 700px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#HeadIMG{
-    width: 100%;
-    height: auto;
-    margin-top: -14vh;
-    overflow: hidden;
-    z-index: 10;
+#Title1 {
+  color: #e2d9c6;
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 500;
+  height: clamp(10px, 1vw, 180px);
 }
 
-#HeadLogo{
-    position: absolute; 
-    width: 20vw;
-    top: 12%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
+#TItle2 {
+  color: #e2d9c6;
+  font-size: clamp(100px, 15vw, 150px);
+  font-weight: 600;
+  height: clamp(120px, 20vw, 180px);
 }
 
-#Title1{
-    position: absolute; 
-    color: #e2d9c6;
-    font-size: 48px;
-    font-weight: 500;
-    top: 37%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 25;
+#Title3 {
+  color: #e2d9c6;
+  font-size: clamp(15px, 2.4vw, 80px);
+  font-weight: 400;
+  min-height: 10px;
 }
 
-#TItle2{
-    position: absolute; 
-    color: #e2d9c6;
-    font-size: 150px;
-    font-weight: 600;
-    top: 37%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 25;
+#Titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 120px;
 }
 
-#Title3{
-    position: absolute; 
-    color: #e2d9c6;
-    font-size: 25px;
-    font-weight: 400;
-    top: 68%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 25;
+#moreButton {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 2px;
+  background-color: #e2d9c6;
+  border: none;
+  color: #2e1a11;
+  padding: 5px 25px;
+  border-radius: 18px;
 }
 
-.socials{
-    width: 100%;
-    height: 40vh;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
+#StickyMenu {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-#SocialsEmail{
-    color: #1F1B1A;
-    font-size: 25px;
+/* socials */
+.socials {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
-#SocialsNumber{
-    color: #1F1B1A;
-    font-size: 25px;
+#SocialsEmail {
+  color: #1f1b1a;
+  font-size: 25px;
 }
 
-#FacebookSVG{
-    width: 40px;
-    height: 40px;
+#SocialsNumber {
+  color: #1f1b1a;
+  font-size: 25px;
 }
 
-#InstagramSVG{
-    width: 40px;
-    height: 40px;
+#FacebookSVG {
+  width: 40px;
+  height: 40px;
 }
 
-#TikTokSVG{
-    width: 40px;
-    height: 40px;
+#InstagramSVG {
+  width: 40px;
+  height: 40px;
 }
 
-
-
-
-
-
-.Trite{
-    margin-top: -30px;
+#TikTokSVG {
+  width: 40px;
+  height: 40px;
 }
 
-
-
-.TNK{
-    width: 50.2vw; 
-    position: absolute; 
-    overflow: hidden;
-    margin-top: -205px;
-    clip-path: inset(120px 0 -200px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
-
+.Trite {
+  margin-top: -30px;
 }
 
-
-#TNKIMG{
-    width: 100%; 
-    height: auto; 
-    clip-path: inset(120px 0 120px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
-    z-index: 50;
-    filter:brightness(0.6)
-
+.TNK {
+  width: 50.2vw;
+  position: absolute;
+  overflow: hidden;
+  margin-top: -205px;
+  clip-path: inset(120px 0 -200px 0);
 }
 
-#TNKTEXT{
-    position: absolute; 
-    font-size: 40px;
-    top: 50%; /* Adjust to position the text vertically */ 
-    left: 50%; /* Adjust to position the text horizontally */ 
-    transform: translate(-50%, -100%); /* Center the text */ 
-    color: white; /* Change text color for better visibility */ 
-    text-align: center;
+#TNKIMG {
+  width: 100%;
+  height: auto;
+  clip-path: inset(120px 0 120px 0);
+  z-index: 50;
+  filter: brightness(0.6);
 }
 
-.PNS{
-    width: 50.2vw; 
-    position: absolute; 
-    overflow: hidden;
-    margin-top: 50px;
+#TNKTEXT {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  color: white;
+  text-align: center;
 }
 
-#PNSIMG{
-    width: 100%; 
-    height: auto; 
-    clip-path: inset(120px 0 120px 0); /* Top 100px, Right 0, Bottom 100px, Left 0 */
-    z-index: 50;
-    filter:brightness(0.8)
+.PNS {
+  width: 50.2vw;
+  position: absolute;
+  overflow: hidden;
+  margin-top: 50px;
 }
 
-#PNSTEXT{
-    position: absolute; 
-    font-size: 40px;
-    top: 50%; /* Adjust to position the text vertically */ 
-    left: 50%; /* Adjust to position the text horizontally */ 
-    transform: translate(-50%, -130%); /* Center the text */ 
-    color: white; /* Change text color for better visibility */ 
-    text-align: center;
+#PNSIMG {
+  width: 100%;
+  height: auto;
+  clip-path: inset(120px 0 120px 0);
+  z-index: 50;
+  filter: brightness(0.8);
 }
 
-
-
-
-.EZD{
-    width: 48.8vw; 
-    position: absolute; 
-    overflow: hidden;
-    margin-top: -85px;
-    right: 0;
+#PNSTEXT {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -130%);
+  color: white;
+  text-align: center;
 }
 
-#EZDIMG{
-    width: 100%;
-
-     /* Top 100px, Right 0, Bottom 100px, Left 0 */
-    z-index: 50;
-    filter:brightness(0.8)
+.EZD {
+  width: 48.8vw;
+  position: absolute;
+  overflow: hidden;
+  margin-top: -85px;
+  right: 0;
 }
 
-#EZDTEXT{
-    position: absolute; 
-    font-size: 40px;
-    top: 50%; /* Adjust to position the text vertically */ 
-    left: 50%; /* Adjust to position the text horizontally */ 
-    transform: translate(-50%, -100%); /* Center the text */ 
-    color: white; /* Change text color for better visibility */ 
-    text-align: center;
+#EZDIMG {
+  width: 100%;
+  z-index: 50;
+  filter: brightness(0.8);
 }
 
-
-
+#EZDTEXT {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  color: white;
+  text-align: center;
+}
 
 #Idz {
-    width: 100vw;
-    color: #4a3931;
-    font-size: 25px;
-    font-weight: 500;
-    margin-top: 520px;
-    text-align: center;
-    display: inline-block; /* To ensure the border is the same width as the text */
-    position: relative; /* To position the pseudo-element correctly */
-    padding-bottom: 10px; /* Add some space between text and pseudo-element border */
+  width: 100vw;
+  color: #4a3931;
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 520px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 10px;
 }
 
 #Idz::after {
-    content: '';
-    position: absolute;
-    left: 50%; /* Center the border */
-    transform: translateX(-50%);
-    bottom: 0;
-    width: 15vw; /* Set the width of the bottom border */
-    height: 2px; /* Set the height (thickness) of the bottom border */
-    background-color: black; /* Set the color of the bottom border */
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 15vw;
+  height: 2px;
+  background-color: black;
 }
 
-.Stupki{
-    display: flex;
-    gap: 150px;
-    justify-content: center;
-    margin-top: 50px;
+.Stupki {
+  display: flex;
+  gap: 150px;
+  justify-content: center;
+  margin-top: 50px;
 }
 
-.Stupki p{
-    text-align: center;
-    color:#e2d9c6;
+.Stupki p {
+  text-align: center;
+  color: #e2d9c6;
 }
 
-.Stupka1, .Stupka2, .Stupka3{
-    background-color: #4a3931;
-    width: 12vw;
-    height: 12vw;
-    border-radius: 50%;
-    border: 4px solid black;
+.Stupka1,
+.Stupka2,
+.Stupka3 {
+  background-color: #4a3931;
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  border: 4px solid black;
 }
 
-#Stupka1Title, #Stupka2TItle, #Stupka3Title{
-    margin-top: 40px;
-    font-size: 25px;
+#Stupka1Title,
+#Stupka2TItle,
+#Stupka3Title {
+  margin-top: 40px;
+  font-size: 25px;
 }
-
 
 .parent-container {
-    top: 0;
+  top: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 150vh; /* Ensure the parent container takes up the full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: 300vh;
 }
-  
+
 .Zentranlni {
-    width: 80vw;
-    height: 400vh;
-    display: flex;
-    flex-direction: column;
+  width: 80vw;
+  height: 400vh;
+  display: flex;
+  flex-direction: column;
 
-    justify-content: center;
-    margin: 0 auto; /* Center horizontally */
-    margin-top: 250px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 250px;
 }
-  
+
 #FondaziqIMG {
+  width: 100%;
+  height: auto;
+  filter: brightness(0.8);
+  margin-top: 50px;
+}
+
+.Zentranlni p,
+.Zentranlni a {
+  margin-left: 100px;
+  color: white;
+}
+
+#FondaziqTitle {
+  position: relative;
+  top: 0%;
+  left: 43%;
+  transform: translate(-50%, -320%);
+  z-index: 60;
+  font-size: 82px;
+  font-weight: 900;
+}
+
+#FondaziqOshte {
+  margin-left: 70px;
+  margin-top: -770px;
+  text-decoration: none;
+  z-index: 75;
+  font-size: 20px;
+  width: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  background-color: #e2d9c6;
+  color: #1f1b1a;
+}
+
+#PoleIMG {
+  width: 100%;
+  height: auto;
+  margin-top: 380px;
+}
+
+#GuyPic {
+  margin-top: -90px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+}
+
+.kdvadrati {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  text-align: center;
+  margin-top: -630px;
+}
+
+.WesternEzda,
+.NaturalHorsmanship,
+.Falabela {
+  width: 300px;
+  height: 350px;
+  background-color: #29160f;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kdvadrati p {
+  position: absolute;
+  margin-top: 200px;
+  font-size: 30px;
+  margin-left: 0;
+  padding-top: 35px;
+  color: #e4d9c7;
+}
+
+#Hora {
+  width: 100%;
+  height: auto;
+  margin-top: 340px;
+  filter: brightness(0.5);
+  clip-path: inset(0px 0px 80px 0px);
+}
+
+#Postijeniq {
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -660px;
+  font-size: 45px;
+  font-weight: 800;
+  z-index: 80;
+}
+
+#Paragraph {
+  width: 440px;
+  margin-top: 70px;
+  font-size: 25px;
+  z-index: 85;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#vtoriOshte {
+  z-index: 90;
+  text-decoration: none;
+  margin: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  width: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  background-color: #e2d9c6;
+  color: #1f1b1a;
+}
+
+#MomicheIMG {
+  width: 50%;
+  height: auto;
+  clip-path: inset(0px 140px 0px 150px);
+  transform: rotate(-6deg);
+  margin-top: -600px;
+  margin-left: -150px;
+}
+
+#SkachashtIMG {
+  margin-left: 750px;
+  margin-top: 200px;
+  width: 37%;
+  clip-path: inset(10px 0px 10px 0px);
+  transform: rotate(7deg);
+}
+
+.posledni {
+  margin-top: 108px;
+  width: 100%;
+  height: 2000px;
+  background-color: #29160f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#Shapka {
+  margin-top: -1400px;
+  margin-left: 240px;
+
+  width: 50%;
+}
+
+.uslugi {
+  margin-top: -200px;
+  margin-left: -1200px;
+}
+
+.uslugaedno,
+.uslugadve,
+.uslugatri,
+.uslugachetiri,
+.uslugapet,
+.uslugashest {
+  width: 250px;
+  height: 350px;
+
+  border-radius: 15px;
+
+  display: inline-flex;
+  margin-top: 80px;
+  margin-left: 250px;
+}
+
+.UslugaIMG {
+  width: 250px;
+  height: 200px;
+
+  border-radius: 20px;
+}
+
+.uslugi a {
+  text-decoration: none;
+  z-index: 115;
+  font-size: 20px;
+  width: 50px;
+
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 22px;
+  border-radius: 20px;
+  background-color: #e2d9c6;
+  color: #1f1b1a;
+  margin-left: -170px;
+  margin-top: 300px;
+}
+
+.uslugi p {
+  color: #e2d9c6;
+  margin-left: -220px;
+  margin-top: 220px;
+}
+
+@media (max-width: 600px) {
+  .socials {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #SocialsEmail,
+  #SocialsNumber {
+    font-size: 18px;
+  }
+
+  #FacebookSVG,
+  #InstagramSVG,
+  #TikTokSVG {
+    width: 30px;
+    height: 30px;
+  }
+
+  .Trite {
+    margin-top: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .TNK,
+  .PNS,
+  .EZD {
+    width: 90%;
+    margin-top: 20px;
+    position: static;
+  }
+
+  #TNKIMG,
+  #PNSIMG,
+  #EZDIMG {
+    width: 100%;
+    clip-path: none;
+  }
+
+  #TNKTEXT,
+  #PNSTEXT,
+  #EZDTEXT {
+    font-size: 30px;
+    position: static;
+    text-align: center;
+  }
+
+  #Idz {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 30px;
+  }
+
+  #Idz::after {
+    width: 50%;
+  }
+
+  .Stupki {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .Stupka1,
+  .Stupka2,
+  .Stupka3 {
+    width: 80%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .parent-container {
+    height: auto;
+    padding: 20px;
+  }
+
+  .Zentranlni {
     width: 100%;
     height: auto;
-    filter: brightness(0.8);
-}
-  
-.Zentranlni p, .Zentranlni a {
-margin-left: 100px;
-color: white;
+    margin-top: 50px;
+    padding: 20px;
+  }
 
+  #FondaziqIMG,
+  #PoleIMG,
+  #Hora {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .kdvadrati {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .WesternEzda,
+  .NaturalHorsmanship,
+  .Falabela {
+    width: 90%;
+    height: auto;
+  }
+
+  #Postijeniq,
+  #Paragraph,
+  #vtoriOshte {
+    width: 90%;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #MomicheIMG,
+  #SkachashtIMG {
+    width: 100%;
+    height: auto;
+    clip-path: none;
+    margin-top: 20px;
+  }
+
+  .posledni {
+    height: auto;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  #Shapka {
+    width: 80%;
+    margin-top: 20px;
+  }
+
+  .uslugi {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .uslugaedno,
+  .uslugadve,
+  .uslugatri,
+  .uslugachetiri,
+  .uslugapet,
+  .uslugashest {
+    width: 90%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .UslugaIMG {
+    width: 100%;
+    height: auto;
+  }
+
+  .uslugi a {
+    margin-top: 10px;
+    width: auto;
+    padding: 10px 20px;
+  }
+
+  .uslugi p {
+    margin-top: 10px;
+    text-align: center;
+  }
 }
 
-#FondaziqTitle{
-    position: relative;
-    top: 0%; /* Adjust to position the text vertically */ 
-    left: 43%; 
-    transform: translate(-50%, -320%);
-    z-index: 60;
-    font-size: 82px;
-    font-weight: 900;
+.alignCenter {
+  display: flex;
 }
-  

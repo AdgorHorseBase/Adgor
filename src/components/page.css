@@ -1,25 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body{
-    font-family: Montserrat, sans-serif;
+    font-family: Source Serif Pro;
+    ;
     margin:0;
     padding: 0;
 }
 
 
 h1{
+    font-family: Source Serif Pro;
+
 margin-left: 10vw;
 margin-bottom: 13vh;
 font-size: 2.5em;
+text-align:center;
+color: #29160F;
+
+
 }
 
 #pageTitle{
+    font-family: Source Serif Pro;
     margin-top: 2vh;
 margin-bottom: 2vh;
 text-align: left;
 font-size: 2em;
 margin-left: 10vw;
 /* font-size: 2vh; */
+text-align:center;
+color: #29160F;
+
 }
 
 #pageText{
@@ -27,6 +38,8 @@ margin-left: 10vw;
     margin-bottom: 2vh;
 margin-left: 10vw;
 width: 80vw;
+text-align:center;
+
 }
 
 #pageOneImg{
@@ -34,18 +47,27 @@ width: 80vw;
     margin-bottom: 2vh;
     margin-left: 10vw;
     width: 80vw;
+    width: 38vw;
+    border-radius: 10px;
+/* border: 3px solid #ffffff; */
+/* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
 }
 
 .pageTwoImg{
     margin-top: 2vh;
     margin-bottom: 2vh;
     margin-left: 10vw;
+    
 }
 
 #pageTwoImgFirst{
     margin-top: 2vh;
     margin-bottom: 2vh;
     width: 38vw;
+    width: 38vw;
+    /* border: 3px solid #ffffff; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  
+    
 
 }
 
@@ -54,6 +76,10 @@ width: 80vw;
 margin-bottom: 2vh;
 width: 38vw;
 margin-left: 4vw;
+width: 38vw;
+border: 3px solid #ffffff;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
 
 }
 
@@ -67,6 +93,10 @@ margin-left: 4vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
     width: 38vw;
+    width: 38vw;
+border: 3px solid #ffffff;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
 }
 
 #pageFourImgSecond{
@@ -74,6 +104,9 @@ margin-left: 4vw;
     margin-bottom: 2vh;
     width: 38vw;
     margin-left: 4vw;
+    width: 38vw;
+border: 3px solid #ffffff;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     
 }
 
@@ -81,6 +114,9 @@ margin-left: 4vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
     width: 38vw;
+    width: 38vw;
+border: 3px solid #ffffff;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 #pageFourImgFourth{
@@ -88,6 +124,9 @@ margin-left: 4vw;
     margin-bottom: 2vh;
     width: 38vw;
     margin-left: 4vw;
+    width: 38vw;
+border: 3px solid #ffffff;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 #pageVideo{
@@ -117,6 +156,8 @@ margin-left: 4vw;
 }
 
 #pageImageText p {
+    font-family: Source Serif Pro;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -134,7 +175,7 @@ margin-left: 4vw;
     margin-bottom: 2vh;
     width: 80vw;
     height: 0.3vh;
-    background-color: black;
+    background-color: #29160F;
     margin-left: 10vw;
 }
 

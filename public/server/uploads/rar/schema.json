@@ -1,0 +1,72 @@
+{
+  "title": "??????",
+  "schema": [
+    {
+      "id": "d1063b63-6e1e-4d28-902b-8531f8c050cf",
+      "type": "title",
+      "content": "ABOUT US"
+    },
+    {
+      "id": "37082e74-7274-494f-8b39-f5565c3f25a6",
+      "type": "text",
+      "content": "<span style=\"color: rgb(19, 16, 14); font-family: Halant, serif; font-size: 20px; background-color: rgb(255, 255, 255);\">Adgor is the name of the Year of the Horse in the ancient Bulgarian calendar. The horse is a symbol of the celestial principle and the sun, and of the freedom-loving and steadfast spirit of the Bulgarians. That is why we named the riding complex after the Year of the Horse. Our forefathers considered the horse to be a sacred animal, symbol of the sky (which was worshipped as the god Tangra). The strong attachment of the Bulgarians to the horse can be observed from the ancient times.</span><br style=\"margin: 0px; padding: 0px; -webkit-font-smoothing: antialiased; color: rgb(19, 16, 14); font-family: Halant, serif; font-size: 20px; background-color: rgb(255, 255, 255);\">"
+    },
+    {
+      "id": "04b7f0b1-6dbf-46ff-b029-85f3942a038c",
+      "type": "separation"
+    },
+    {
+      "id": "e292a3dc-f557-4055-94e7-463061de997d",
+      "type": "two_images",
+      "content": {
+        "0": "image-1731441681437.png",
+        "1": "image-1731441688354.jpg"
+      }
+    },
+    {
+      "id": "6736d7bb-273f-4418-819a-1a92ca6944c2",
+      "type": "image",
+      "content": "image-1731441709892.png"
+    },
+    {
+      "id": "9d90872a-18de-4c09-958d-620c7cbacf21",
+      "type": "four_images",
+      "content": {
+        "0": "image-1731441714047.png",
+        "1": "image-1731441728123.png",
+        "2": "image-1731441741453.png",
+        "3": "image-1731441733342.png"
+      }
+    },
+    {
+      "id": "03d91bb3-a002-49d8-8969-d5724f4bf9fc",
+      "type": "video",
+      "content": "video-1731441745223.png"
+    },
+    {
+      "id": "72f7dbcd-9405-46c0-849c-f3e5f361efa1",
+      "type": "formated",
+      "content": "<p>Type hhjbhjhjbhjbhjbjere</p>"
+    },
+    {
+      "id": "71dd7bce-d773-4192-a822-b9c1d800b24b",
+      "type": "menu",
+      "content": [],
+      "selectedDirectory": ""
+    },
+    {
+      "id": "f2412d77-bf63-428e-8e9f-bb34333f6e89",
+      "type": "image_text",
+      "content": {
+        "text": "Enter your tmnkkkkkkkkkkkkkkkkkkkkext",
+        "url": "image-1731441751269.png"
+      }
+    },
+    {
+      "id": "a6d2240f-df78-4462-b03e-a0aaf2d8896e",
+      "type": "menu",
+      "content": [],
+      "selectedDirectory": ""
+    }
+  ]
+}

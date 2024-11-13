@@ -7,7 +7,7 @@
 .line {
     width: 74vw;
     height: 0.3vh;
-    background-color: black;
+    background-color: #29160F;
     margin-top: 2vh;
     margin-left: 13vw; 
     margin-bottom: 2vh;
@@ -26,12 +26,15 @@
     display: flex;
     flex-wrap: wrap;  /* Ensures that images move to the next line if there isn't enough space */
     gap: 10px; /* Optional: Adds space between the images */
-    justify-content: center; /* Centers the images horizontally */
+    justify-content: center; 
+    /* Centers the images horizontally */
+    border-radius: 30px !important ;  /* Rounded corners (optional) */
 }
 
 .two_images img {
     width: 250px;
     height: fit-content;
+    border-radius: 30px !important   /* Rounded corners (optional) */
 }
 
 /* Flexbox container for four images */
@@ -49,26 +52,30 @@
 
 .ql-align-center {
     text-align: center;
+    font-family: Source Serif Pro;
+
 }
 
 .ql-align-right {
     text-align: end;
+    font-family: Source Serif Pro;
+
 }
 
 
 body{
-    background-color: #d0dbff;
-    font-family: Montserrat, Arial;
+    background-color: #E4D9C7;
+    font-family: Source Serif Pro;
 
 }
 
 button{
-    font-family: Montserrat, Arial;
-    color: #3d5a80;
+    font-family: Source Serif Pro;
+    color: #29160F;
     font-weight: 600;
     background-color:#fefefe;
     border: 0.25vh solid #fefefe;
-    border-radius: 1vh;
+    border-radius: 30px;
     padding-left: 1vw;
     padding-right: 1vw;
     padding-top: 0.2vh;
@@ -81,7 +88,9 @@ button{
 }
 
 button:hover{
-    border: 0.25vh solid #3d5a80;
+    background-color: #29160F; /* New background color on hover */
+    color: #fefefe;            /* New text color on hover */
+    border-color: #29160F
 }
 
 .Setting_buttons{
@@ -90,8 +99,10 @@ button:hover{
 }
 
 #title{
+    font-family: Source Serif Pro;
+
     margin-left: 13vw;
-    color: #293241;
+    color: #29160F;
     font-size: 6vh;
     margin-top: 5vh;
     margin-bottom: 3vh;
@@ -103,7 +114,8 @@ button:hover{
 
 #Page_Title{
     margin-top: -4.6vh;
-    color: #3d5a80;
+    font-style: Source Serif Pro ;
+    color: #29160F;
     margin-left: 13vw;
     font-weight: 500;
     background-color:#fefefe;
@@ -118,13 +130,13 @@ button:hover{
 }
 
 #Page_Title:hover{
-    border: 0.3vh solid #3d5a80;
+    border: 0.3vh solid #29160F;
 }
 
 
 #Path_Input{
     margin-top: 2vh;
-    color: #3d5a80;
+    color: #29160F;
     margin-left: 13vw;
     font-weight: 500;
     background-color:#fefefe;
@@ -139,7 +151,7 @@ button:hover{
 }
 
 #Path_Input:hover{
-    border: 0.3vh solid #3d5a80;
+    border: 0.3vh solid #29160F;
 
 }
 
@@ -202,7 +214,7 @@ button:hover{
 }
 
 input[type="file"]{
-    color: #3d5a80;
+    color: #29160F;
     font-weight: 500;
     background-color:#fefefe;
     border: 0.25vh solid #fefefe;
@@ -217,7 +229,7 @@ input[type="file"]{
 }
 
 input[type="file"]:hover{
-    border: 0.25vh solid #3d5a80;
+    border: 0.25vh solid #29160F;
 }
 
 #Added_menu{
@@ -225,7 +237,7 @@ input[type="file"]:hover{
 }
 
 #Added_menu_select{
-    color: #3d5a80;
+    color: #29160F;
     font-weight: 600;
     background-color:#fefefe;
     border: 0.25vh solid #fefefe;
@@ -241,7 +253,7 @@ input[type="file"]:hover{
 }
 
 #Added_menu_select:hover{
-    border: 0.25vh solid #3d5a80;
+    border: 0.25vh solid #29160F;
 }
 
 #Added_One_Image{
@@ -257,6 +269,7 @@ width: 20vw;
 
 #Added_Two_Images{
     margin-left: 13vw;
+    border-radius: 50px;
 }
 
 #Added_Two_Images_img_one{
@@ -266,6 +279,7 @@ width: 20vw;
 #Added_Two_Images_img_two{
     width: 20vw;
     margin-left: 5vw;
+    border-radius: 50px;
 }
 
 #Added_Two_Images_file_two{
@@ -334,7 +348,7 @@ margin-left: 11.3vw;
 .ql-editor {
     border: none;
     outline: none; 
-    font-family: 'Montserrat', sans-serif; 
+    font-family: Source Serif Pro; 
     font-size: 2vh; 
     color: #293241; 
     font-weight: 400;
@@ -377,7 +391,7 @@ border:none;
 
 
 #Added_YouTube_link{
-    font-family: Montserrat, Arial;
+    font-family: Source Serif Pro;
     color: #3d5a80;
     font-weight: 500;
     background-color:#fefefe;
@@ -421,11 +435,13 @@ border:none;
 
     #Added_Two_Images_img_one{
         width: 35vw;
+        border-radius: 50px;
     }
     
     #Added_Two_Images_img_two{
         width: 35vw; 
         margin-left: 2vw;
+        border-radius: 100px;
     }
 
     #Added_Four_Images_img_one{

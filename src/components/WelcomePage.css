@@ -4,23 +4,18 @@ p {
   font-family: "Source Serif 4", serif;
   letter-spacing: 2px;
   margin: 0px;
+  color:#29160f
 }
 
 /* header */
 #HeadLogo {
   width: 80%;
+  height: auto;
   max-width: 300px;
 }
 
-@media (min-width: 600px) {
-  #HeadLogo {
-    max-width: 100%;
-    width: 30%;
-  }
-}
-
 #Header {
-  min-height: 600px;
+  min-height: 700px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -28,25 +23,52 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 #Title1 {
   color: #e2d9c6;
-  font-size: 48px;
+  font-size: clamp(40px, 4vw, 60px);
   font-weight: 500;
+  height: clamp(10px, 1vw, 180px);
 }
 
 #TItle2 {
   color: #e2d9c6;
-  font-size: 150px;
+  font-size: clamp(100px, 15vw, 150px);
   font-weight: 600;
+  height: clamp(120px, 20vw, 180px);
 }
 
 #Title3 {
   color: #e2d9c6;
-  font-size: 25px;
+  font-size: clamp(15px, 2.4vw, 80px);
   font-weight: 400;
+  min-height: 10px;
+}
+
+#Titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 120px;
+}
+
+#moreButton {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 2px;
+  background-color: #e2d9c6;
+  border: none;
+  color: #2e1a11;
+  padding: 5px 25px;
+  border-radius: 18px;
+}
+
+#StickyMenu {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* socials */
@@ -454,7 +476,6 @@ p {
 }
 
 @media (max-width: 600px) {
-
   .socials {
     flex-direction: column;
     gap: 10px;

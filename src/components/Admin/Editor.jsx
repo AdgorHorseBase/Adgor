@@ -58,7 +58,9 @@ function Editor({ structure }) {
     const [schema, setSchema] = useState([]);
     const [titleBg, setTitleBg] = useState("Неименувана Страница");
     const [titleEn, setTitleEn] = useState("Untitled Page");
-    const [path, setPath] = useState("");
+    const [directory, setDirectory] = useState("");
+    const [directoryBg, setDirectoryBg] = useState("");
+    const [page, setPage] = useState("");
 
     useEffect(() => {
         if (editPath && editPath !== "create") {
@@ -68,13 +70,20 @@ function Editor({ structure }) {
                     setSchema(response.data.schema.schema);
                     setTitleBg(response.data.schema.titleBg);
                     setTitleEn(response.data.schema.titleEn);
+                    if(response.data.schema.directoryBg)
+                    setDirectoryBg(response?.data?.schema?.directoryBg);
                 } catch (error) {
                     console.error("Error fetching page content:", error);
                 }
             };
 
             fetchPage();
-            setPath(editPath);
+
+            if(editPath.search("/") !== -1) {
+                const [directory, page] = editPath.split("/");
+                setDirectory(directory);
+                setPage(page);
+            }
         }
     }, [editPath]);
 
@@ -257,7 +266,7 @@ function Editor({ structure }) {
 
     // Generates static HTML file and saves the schema for future editing
     const savePage = async () => {
-        if(!path) {
+        if(!page) {
             return alert("You need to specify path");
         }
 
@@ -304,11 +313,17 @@ function Editor({ structure }) {
             }
         });
 
-        const schemaContent = { titleBg, titleEn, schema };
+        const schemaContent = { titleBg, titleEn, directoryBg, schema };
 
         // Send request to the backend to save the page
         try {
             const editUrl = (editPath === "create") ? `${URL}/page` : `${URL}/page/edit`;
+            let path = `/${directory}/${page}`;
+            if(directory) {
+                path = `/${directory}/${page}`;
+            } else {
+                path = `${page}`;
+            }
             await axios.post(editUrl, {
                 pagePath: path,
                 htmlContent,
@@ -318,7 +333,9 @@ function Editor({ structure }) {
             setTitleBg("Неименувана Страница") // Reset title;
             setTitleEn("Untitled Page") // Reset title
             setSchema([]); // Reset schema
-            setPath(""); // Reset path
+            setDirectory(""); // Reset path
+            setDirectoryBg(""); // Reset path
+            setPage(""); // Reset path
         } catch (error) {
             console.error("Error saving page:", error);
             alert("Failed to save page.");
@@ -351,9 +368,25 @@ function Editor({ structure }) {
                 <input
                     id="Path_Input"
                     type="text"
-                    value={path}
-                    onChange={(e) => setPath(e.target.value)}
-                    placeholder="Path (e.g., pateta or about-us/our-team)"
+                    value={directory}
+                    onChange={(e) => setDirectory(e.target.value)}
+                    placeholder="Set Directory"
+                    style={{display: "block" }}
+                />
+                <input
+                    id="Path_Input"
+                    type="text"
+                    value={directoryBg}
+                    onChange={(e) => setDirectoryBg(e.target.value)}
+                    placeholder="Сложи директория"
+                    style={{display: "block" }}
+                />
+                <input
+                    id="Path_Input"
+                    type="text"
+                    value={page}
+                    onChange={(e) => setPage(e.target.value)}
+                    placeholder="Set Page"
                     style={{display: "block" }}
                 />
                 <div className="Add_buttons">

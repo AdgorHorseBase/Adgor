@@ -17,11 +17,13 @@
   "\\a6": {
     "type": "file"
   },
-  "\\Directory": {
+  "\\asdf": {
+    "type": "file"
+  },
+  "\\Test": {
     "type": "directory",
     "contents": [
-      "Page",
-      "Page2"
+      "page"
     ]
   }
 }

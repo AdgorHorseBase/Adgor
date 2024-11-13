@@ -31,8 +31,9 @@ const MenuSections = () => {
           for (const page of updatedStructure[dir].contents) {
             try {
               const titleResponse = await axios.get(`/server/uploads${dir}/${page}/schema.json`);
+              updatedStructure[dir].directoryBg = titleResponse.data.directoryBg ?? "";
               updatedStructure[dir].contents = updatedStructure[dir].contents.map(p => 
-                p === page ? { page, titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn } : p
+                p === page ? { page, titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn, directoryBg: titleResponse.data.directoryBg ?? "Directory" } : p
               );
             } catch (err) {
               console.log(`Error fetching title for ${dir}/${page}:`, err);
@@ -47,6 +48,8 @@ const MenuSections = () => {
           }
         }
       }
+
+      console.log(updatedStructure);
 
       setStruct(updatedStructure);
     };
@@ -70,7 +73,7 @@ const MenuSections = () => {
         <React.Fragment key={dir}>
           {structure[dir].type === 'directory' ? structure[dir].contents && (
             <div className="directory-menu">
-              <p className="directory-name">{dir.slice(1, dir.length)}</p>
+              <p className="directory-name">{lang === "bg" ? structure[dir].directoryBg : dir.slice(1, dir.length)}</p>
               <ul className="page-list">
                 {structure[dir].contents.map((page, index) => (
                   <li key={`${dir}-${index}`}>
@@ -154,10 +157,6 @@ function Page() {
   return (
     <div>
       <MenuSections />
-      <br />
-      <br />
-      <button onClick={() => { document.location.href = "/products" }}>Products</button>
-      <button onClick={() => { document.location.href = "/vouchers" }}>Vouchers</button>
 
       <h1 className='bg'>{titleBg}</h1>
       <h1 className='en'>{titleEn}</h1>

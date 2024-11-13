@@ -65,7 +65,7 @@ const VouchersManager = () => {
                 });
     
                 // Update the image path immediately after successful upload
-                newVoucher.imagePath = URL + "/image?name=" + response.data.image;
+                newVoucher.imagePath = response.data.image;
                 setVouchers([...vouchers, newVoucher]); // Add new product to state
                 setNewVoucher({ id: '', imagePath: '', name: '', price: '' });
                 setSelectedFile(null); // Clear the file input after adding
@@ -94,7 +94,7 @@ const VouchersManager = () => {
                     });
     
                     // Update the image path immediately after successful upload
-                    updatedVouchers[index].imagePath = URL + "/image?name=" + response.data.image;
+                    updatedVouchers[index].imagePath = response.data.image;
                 }
             }
     
@@ -122,7 +122,7 @@ const VouchersManager = () => {
             {vouchers.length > 0 ? vouchers.map((item, index) => (
                 <div key={index}>
                     {item.imagePath && (
-                        <img alt={item.name} src={item.imagePath} style={{ width: "100px" }} />
+                        <img alt={item.name} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
                     )}
                     <br />
                     <label>

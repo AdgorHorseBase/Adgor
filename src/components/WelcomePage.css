@@ -4,7 +4,7 @@ p {
   font-family: "Source Serif 4", serif;
   letter-spacing: 2px;
   margin: 0px;
-  color:#29160f
+  color: #29160f;
 }
 
 /* header */
@@ -78,6 +78,8 @@ p {
   align-items: center;
   gap: 20px;
   font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #contactsSmall {
@@ -109,79 +111,55 @@ p {
   width: 40px;
 }
 
-.TNK {
-  width: 50.2vw;
-  position: absolute;
-  overflow: hidden;
-  margin-top: -205px;
-  clip-path: inset(120px 0 -200px 0);
+/* three */
+.threeLinkText {
+  text-decoration: none;
+  color: inherit;
 }
 
-#TNKIMG {
-  width: 100%;
-  height: auto;
-  clip-path: inset(120px 0 120px 0);
-  z-index: 50;
-  filter: brightness(0.6);
-}
-
-#TNKTEXT {
-  position: absolute;
-  font-size: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  color: white;
+.threeTexts {
   text-align: center;
-}
-
-.PNS {
-  width: 50.2vw;
-  position: absolute;
-  overflow: hidden;
-  margin-top: 50px;
-}
-
-#PNSIMG {
-  width: 100%;
-  height: auto;
-  clip-path: inset(120px 0 120px 0);
-  z-index: 50;
-  filter: brightness(0.8);
-}
-
-#PNSTEXT {
-  position: absolute;
-  font-size: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -130%);
   color: white;
-  text-align: center;
 }
 
-.EZD {
-  width: 48.8vw;
-  position: absolute;
-  overflow: hidden;
-  margin-top: -85px;
-  right: 0;
+.threeImages {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 200px;
 }
 
-#EZDIMG {
-  width: 100%;
-  z-index: 50;
-  filter: brightness(0.8);
+#TwoImagesOnTopOfEachOther {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 50%;
 }
 
-#EZDTEXT {
-  position: absolute;
-  font-size: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  color: white;
-  text-align: center;
+#OneImageNextToTwoAlignment {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+#OneImageNextToTheTwo {
+  width: 50%;
+}
+
+#OneImageNextToTwoTheImage {
+  height: 400px;
+}
+
+@media (min-width: 1200px) {
+  .threeImages {
+    height: 350px !important;
+  }
+  #OneImageNextToTwoTheImage {
+    height: 700px !important;
+  }
 }
 
 #Idz {

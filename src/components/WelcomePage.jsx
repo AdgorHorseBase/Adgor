@@ -155,30 +155,41 @@ const WelcomePage = () => {
         </div>
       )}
 
-      {/* <div className="Trite">
-        <a id="TNKA" href="">
-          <div className="TNK">
-            <img id="TNKIMG" alt="" src={TrenirovkiNaKone} />
-            <p id="TNKTEXT">
-              Тренировки <br></br>На Коне
-            </p>
+      <div id="OneImageNextToTwoAlignment">
+        <div id="TwoImagesOnTopOfEachOther">
+          <a href="" className="threeLinkText">
+            <div
+              className="threeImages"
+              style={{ backgroundImage: `url(${TrenirovkiNaKone})` }}
+            >
+              <p className="threeTexts">
+                Тренировки
+                <br />
+                На Коне
+              </p>
+            </div>
+          </a>
+
+          <a href="" className="threeLinkText">
+            <div
+              className="threeImages"
+              style={{ backgroundImage: `url(${Pansion})` }}
+            >
+              <p className="threeTexts">Пансион</p>
+            </div>
+          </a>
+        </div>
+
+        <a id="OneImageNextToTheTwo" href="" className="threeLinkText">
+          <div
+                      className="threeImages"
+                      id="OneImageNextToTwoTheImage"
+            style={{ backgroundImage: `url(${Ezda})`}}
+          >
+            <p className="threeTexts">Езда</p>
           </div>
         </a>
-
-        <div className="PNS">
-          <a href="">
-            <img id="PNSIMG" alt="" src={Pansion} />
-            <p id="PNSTEXT">Пансион</p>
-          </a>
-        </div>
-
-        <div className="EZD">
-          <a href="">
-            <img id="EZDIMG" alt="" src={Ezda} />
-            <p id="EZDTEXT">Езда</p>
-          </a>
-        </div>
-      </div> */}
+      </div>
 
       <div className="alignCenter">
         <p id="Idz">Искате да яздите?</p>

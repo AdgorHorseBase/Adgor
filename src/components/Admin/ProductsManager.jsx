@@ -66,7 +66,7 @@ const ProductsManager = () => {
                 });
     
                 // Update the image path immediately after successful upload
-                newProduct.imagePath = URL + "/image?name=" + response.data.image;
+                newProduct.imagePath = response.data.image;
                 setProducts([...products, newProduct]); // Add new product to state
                 setNewProduct({ id: '', imagePath: '', name: '', price: '' });
                 setSelectedFile(null); // Clear the file input after adding
@@ -95,7 +95,7 @@ const ProductsManager = () => {
                     });
     
                     // Update the image path immediately after successful upload
-                    updatedProducts[index].imagePath = URL + "/image?name=" + response.data.image;
+                    updatedProducts[index].imagePath = response.data.image;
                 }
             }
     
@@ -124,7 +124,7 @@ const ProductsManager = () => {
             {products.length > 0 ? products.map((item, index) => (
                 <div key={index}>
                     {item.imagePath && (
-                        <img alt={item.name} src={item.imagePath} style={{ width: "100px" }} />
+                        <img alt={item.name} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
                     )}
                     <br />
                     <label>

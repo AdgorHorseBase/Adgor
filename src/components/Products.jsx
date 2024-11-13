@@ -28,6 +28,20 @@ const Products = () => {
         });
     };
 
+    const removeProduct = (product) => {
+        setSelectedProducts(prev => {
+            const newQuantity = (prev[product.id]?.quantity || 0) - 1;
+            if (newQuantity <= 0) {
+                const { [product.id]: _, ...rest } = prev;
+                return rest;
+            }
+            return {
+                ...prev,
+                [product.id]: { ...product, quantity: newQuantity }
+            };
+        });
+    };
+
     const handleContinue = () => {
         setShowForm(true);
     };
@@ -36,25 +50,38 @@ const Products = () => {
         <div>
             <MenuSections />
             <h1 id='title'>Products</h1>
-            {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
-                <div key={item.id} style={{ marginBottom: "20px", border: "1px solid #ccc", padding: "10px" }}>
-                    {item.imagePath && (
-                        <img alt="" src={item.imagePath} width="250px"></img>
-                    )}
-                    {item.name && (
-                        <h2>{item.name}</h2>
-                    )}
-                    {item.price && (
-                        <h3>{item.price}</h3>
-                    )}
-                    <button onClick={() => addProduct(item)}>
-                        Add
-                    </button>
-                    {selectedProducts[item.id]?.quantity > 0 && <p>Quantity: {selectedProducts[item.id]?.quantity}</p>}
-                </div>
-            ))}
+            <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
+                {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
+                    <div key={item.id} className='item' style={{ width: '300px', textAlign: 'center' }}>
+                        {item.imagePath && (
+                            <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
+                        )}
+                        {item.name && (
+                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{item.name}</h2>
+                        )}
+                        {item.price && (
+                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
+                        )}
+                        {selectedProducts[item.id]?.quantity > 0 ? (
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                <button onClick={() => removeProduct(item)} style={{ margin: '0' }}>
+                                    -
+                                </button>
+                                <p style={{ margin: "0" }}>{selectedProducts[item.id]?.quantity}</p>
+                                <button onClick={() => addProduct(item)} style={{ margin: '0' }}>
+                                    +
+                                </button>
+                            </div>
+                        ) : (
+                            <button onClick={() => addProduct(item)} style={{ margin: '0' }}>
+                                Add
+                            </button>
+                        )}
+                    </div>
+                ))}
+            </div>
 
-            <button onClick={handleContinue} style={{ marginTop: "20px", padding: "10px", fontSize: "16px" }}>
+            <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px', marginLeft: "10%", marginBottom: "24px" }}>
                 Continue
             </button>
 

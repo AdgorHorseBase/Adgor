@@ -92,7 +92,7 @@ const Vouchers = () => {
                             <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{item.name}</h2>
                         )}
                         {item.price && (
-                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} lv</h3>
+                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
                         )}
                         {selectedVouchers[item.id]?.quantity > 0 ? (
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
@@ -188,29 +188,32 @@ const Vouchers = () => {
             )}
 
             <h2 style={{width: "80%", margin: "auto"}}>You will also like</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto", marginBottom: "24px" }}>
                 {products.map((product) => (
-                    <div key={product.id} style={{ border: "1px solid #ccc", padding: "10px", width: "200px", textAlign: 'center' }}>
+                    <div key={product.id} className='item' style={{ width: '200px', textAlign: 'center' }}>
                         {product.imagePath && (
-                            <img alt="" src={product.imagePath} width="100%" />
+                            <img alt="" style={{width: "200px", height: "300px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
                         )}
                         {product.name && (
-                            <h3>{product.name}</h3>
+                            <h2 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{product.name}</h2>
                         )}
                         {product.price && (
-                            <p>{product.price}</p>
+                            <h3 style={{margin: "0", textAlign: "left", fontSize: "16px"}}>{product.price} лв</h3>
                         )}
-
-                        <button onClick={() => addProduct(product)} style={{ margin: '10px 0' }}>
-                            Add
-                        </button>
-                        {selectedProducts[product.id]?.quantity > 0 && (
-                            <>
-                                <p>Quantity: {selectedProducts[product.id]?.quantity}</p>
-                                <button onClick={() => removeProduct(product)} style={{ margin: '10px 0' }}>
-                                    Remove
+                        {selectedProducts[product.id]?.quantity > 0 ? (
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                <button onClick={() => removeProduct(product)} style={{ margin: '0' }}>
+                                    -
                                 </button>
-                            </>
+                                <p style={{ margin: "0" }}>{selectedProducts[product.id]?.quantity}</p>
+                                <button onClick={() => addProduct(product)} style={{ margin: '0' }}>
+                                    +
+                                </button>
+                            </div>
+                        ) : (
+                            <button onClick={() => addProduct(product)} style={{ margin: '0' }}>
+                                Add
+                            </button>
                         )}
                     </div>
                 ))}

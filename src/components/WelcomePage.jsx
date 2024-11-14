@@ -8,7 +8,9 @@ import Ezda from "./images/EzdaIMG.jpeg";
 import Steps from "./images/Steps.png";
 import StepsSmall from "./images/StepsSmall.png";
 import LineHores from "./images/LineHores.png";
-import Fondaziq from "./images/fondaziq.jpeg";
+import Foundation from "./images/Foundation.png";
+import FoundationCutUp from "./images/FoundationCutUp.png";
+import FoundationCutDown from "./images/FoundatonCutDown.png";
 import Pole from "./images/pole.jpeg";
 import Guy from "./images/guyonhorse.jpeg";
 import Hora from "./images/horanakone.jpeg";
@@ -211,22 +213,35 @@ const WelcomePage = () => {
                 <p id="WantToRide">Искате да яздите?</p>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "center", fontSize: "6vw" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "6vw",
+                }}
+              >
                 <ul>
                   <li>Обадете се</li>
                   <li>Запазете час</li>
                   <li>Насладете се на ездата</li>
                 </ul>
               </div>
-              <img
-                src={LineHores}
-                alt=""
-                width={"100%"}
-              />
+              <img src={LineHores} alt="" width={"100%"} />
             </div>
           )}
         </>
       )}
+
+      <div id="alignFoundationCenter">
+        <div style={{ backgroundImage: `url(${Foundation})` }} id="Foundation">
+          <img src={FoundationCutUp} alt="" width={"100%"} />
+          <div id="FoundationText">
+            Фондация <br /> “Адгор за конете” <br />
+            <button id="AboutFoundationButon">Още</button>
+          </div>
+          <img src={FoundationCutDown} alt="" width={"100%"} />
+        </div>
+      </div>
 
       {/* <div className="parent-container">
         <div className="Zentranlni">

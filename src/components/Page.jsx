@@ -66,7 +66,7 @@ const MenuSections = () => {
     }
   }, [localStorage.getItem('lang')]);
 
-  return (
+  return (window.innerWidth > 750 ? (
     <div className='Menu'>
       <button id="menuButton" onClick={() => { document.location.href = "/" }}>{lang === 'bg' ? 'Начало' : 'Home'}</button>
       {titlesFetched.current && Object.keys(structure).map((dir, index) => (
@@ -100,8 +100,78 @@ const MenuSections = () => {
         <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>Смени на български</button>
       )}
     </div>
-  )
+  ) : (
+    <MenuMobile lang={lang} structure={structure} titlesFetched={titlesFetched} />
+  ))
 }
+
+const MenuMobile = ({ lang, structure, titlesFetched }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <div className="MenuMobile">
+      <button id="menuButton" onClick={() => { document.location.href = "/" }}>
+        {lang === 'bg' ? 'Начало' : 'Home'}
+      </button>
+      
+      {/* Button to toggle menu visibility on smaller screens */}
+      <button id="toggleMenuButton" onClick={toggleMenu}>
+        {isMenuOpen ? 'Close Menu' : 'Open Menu'}
+      </button>
+
+      {/* Conditionally render menu items based on screen size and toggle state */}
+      <div className={`menu-itemsMobile ${isMenuOpen ? 'open' : ''}`}>
+        {titlesFetched.current && Object.keys(structure).map((dir) => (
+          <React.Fragment key={dir}>
+            {structure[dir].type === 'directory' ? (
+              structure[dir].contents && (
+                <div className="directory-menu">
+                  <p id="menuButton" className="directory-name">
+                    {lang === "bg" ? structure[dir].directoryBg : dir.slice(1)}
+                  </p>
+                  <ul className="page-list">
+                    {structure[dir].contents.map((page, index) => (
+                      <li key={`${dir}-${index}`}>
+                        <a href={`/page${dir}/${page.page}`}>
+                          {lang === 'bg' ? page.titleBg : page.titleEn}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            ) : (
+              structure[dir].type === 'file' && (
+                <button onClick={() => { document.location.href = `/page${dir}` }}>
+                  {lang === 'bg' ? structure[dir].titleBg : structure[dir].titleEn}
+                </button>
+              )
+            )}
+          </React.Fragment>
+        ))}
+        <button id="menuButton" onClick={() => { document.location.href = "/products" }}>
+          {lang === "bg" ? "Продукти" : "Products"}
+        </button>
+        <button id="menuButton" onClick={() => { document.location.href = "/vouchers" }}>
+          {lang === "bg" ? "Ваучери" : "Vouchers"}
+        </button>
+        {lang === "bg" ? (
+          <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>
+            Switch to English
+          </button>
+        ) : (
+          <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>
+            Смени на български
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 function Page() {
   const [pageContent, setPageContent] = useState('Loading...');

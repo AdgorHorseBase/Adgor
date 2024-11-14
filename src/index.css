@@ -1,6 +1,37 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+.MenuMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+  
+.menu-itemsMobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+  
+#toggleMenuButton {
+    display: none;
+}
+  
+@media (max-width: 750px) {
+    .menu-itemsMobile {
+        display: none;
+        flex-direction: column;
+    }
+  
+    #toggleMenuButton {
+        display: block;
+    }
+  
+    .menu-itemsMobile.open {
+        display: flex;
+    }
+}  
+
 #menuButton, Menu button {
     font-size: 22px;
     margin: 4px 0;

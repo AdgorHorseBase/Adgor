@@ -207,12 +207,6 @@ p {
   #Foundation {
     width: 95%;
     min-height: 65vw;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
 }
 
@@ -222,16 +216,16 @@ p {
 }
 
 #FoundationText {
-    color: white;
-    z-index: 1;
-    flex-grow: 1;
-    font-weight: 900;
-    font-size: 5.5vw;
-    margin: 2.5vw;
+  color: white;
+  z-index: 1;
+  flex-grow: 1;
+  font-weight: 900;
+  font-size: 5.5vw;
+  margin: 2.5vw;
 }
 
 #AboutFoundationButon {
-    font-family: "Source Serif 4", serif;
+  font-family: "Source Serif 4", serif;
   letter-spacing: 2px;
   background-color: #e2d9c6;
   border: none;
@@ -239,4 +233,65 @@ p {
   padding: 5px 30px;
   border-radius: 108px;
   font-size: clamp(15px, 2.4vw, 40px);
+}
+
+#TypeseOfRiding {
+  width: 70%;
+  min-height: 39vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 1000px) {
+  #TypeseOfRiding {
+    width: 95%;
+  }
+}
+
+#ThreeStyles {
+  display: flex;
+  justify-content: space-around;
+}
+
+.RidingStyle {
+  background-color: #29160f;
+  border-radius: 20px;
+  padding: 2vw;
+  margin: 1vw;
+  margin-bottom: 10vw;
+}
+
+.stylesImage {
+  width:100%;
+}
+
+.stylesName {
+    color: #E4D9C7;
+    font-weight: 900;
+    font-size: 1.5vw;
+}
+
+.stylesLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.stylesContent {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  width: 15vw;
+  min-width: 0vw;
+}
+
+@media (max-width: 1000px) {
+  .stylesContent {
+  width: 18vw;
+  min-width: 23vw;
+}
 }

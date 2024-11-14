@@ -11,6 +11,9 @@ import LineHores from "./images/LineHores.png";
 import Foundation from "./images/Foundation.png";
 import FoundationCutUp from "./images/FoundationCutUp.png";
 import FoundationCutDown from "./images/FoundatonCutDown.png";
+import TypeseOfRiding from "./images/TypeseOfRiding.png";
+import TypeseOfRidingCut from "./images/TypeseOfRidingCut.png";
+import ExampleCircleImageRiding from "./images/ExampleCircleImageRiding.png";
 import Pole from "./images/pole.jpeg";
 import Guy from "./images/guyonhorse.jpeg";
 import Hora from "./images/horanakone.jpeg";
@@ -240,6 +243,57 @@ const WelcomePage = () => {
             <button id="AboutFoundationButon">Още</button>
           </div>
           <img src={FoundationCutDown} alt="" width={"100%"} />
+        </div>
+      </div>
+
+      <div id="alignFoundationCenter">
+        <div
+          style={{ backgroundImage: `url(${TypeseOfRiding})` }}
+          id="TypeseOfRiding"
+        >
+          <img src={TypeseOfRidingCut} alt="" width={"100%"} />
+          <div id="ThreeStyles">
+            <div className="RidingStyle">
+              <a className="stylesLink" href="">
+                <div className="stylesContent">
+                  <img
+                    className="stylesImage"
+                    src={ExampleCircleImageRiding}
+                    alt=""
+                  />
+                  <p className="stylesName">
+                    УЕСТЪРН <br /> ЕЗДА
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div className="RidingStyle">
+              <a className="stylesLink" href="">
+                <div className="stylesContent">
+                  <img
+                    className="stylesImage"
+                    src={ExampleCircleImageRiding}
+                    alt=""
+                  />
+                  <p className="stylesName">
+                    NATURAL <br /> HORSMANSHIP
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div className="RidingStyle">
+              <a className="stylesLink" href="">
+                <div className="stylesContent">
+                  <img
+                    className="stylesImage"
+                    src={ExampleCircleImageRiding}
+                    alt=""
+                  />
+                  <p className="stylesName">ФАЛАБЕЛА</p>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 

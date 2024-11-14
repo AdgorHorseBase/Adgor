@@ -1,6 +1,29 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+#productVoucher {
+    width: 300px;
+    text-align: center;
+    border: 1px solid #c7c1b9;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0e8de
+}
+
+#itemButton {
+    background-color: #876254;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#itemButton:hover {
+    background-color: #29160F;
+    border-color: transparent;
+}
+
 .directory-menu {
     position: relative;
     display: inline-block;

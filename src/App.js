@@ -6,6 +6,7 @@ import Success from './components/Success.jsx';
 import Vouchers from './components/Vouchers.jsx';
 import WelcomePage from './components/WelcomePage.jsx';
 import Footer from './components/Footer.jsx';
+import FooterMobile from './components/FooterMobile.jsx';
 
 const isAuthenticated = () => {
   return true;
@@ -43,7 +44,7 @@ function App() {
         />
       </Routes>
 
-      {showFooter && <Footer />}
+      {showFooter && (window.innerWidth > 750 ? <Footer /> : <FooterMobile />)}
     </BrowserRouter>
   );
 }

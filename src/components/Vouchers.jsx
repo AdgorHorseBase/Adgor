@@ -93,10 +93,11 @@ const Vouchers = () => {
     return (
         <div>
             <MenuSections />
-            <h1 id='title'>{lang === "bg" ? "Ваучери" : "Vouchers"}</h1>
-            <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
+            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Ваучери" : "Vouchers"}</h1>
+
+            <div style={{ display: 'flex', justifyContent: "center", alignItems: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {vouchers.length === 0 ? <div>Vouchers coming soon</div> : vouchers.map((item) => (
-                    <div key={item.id} className='item' style={{ width: '300px', textAlign: 'center' }}>
+                    <div key={item.id} className='item' id='productVoucher'>
                         {item.imagePath && (
                             <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={`/server/files/images/${item.imagePath}`} width="100%" />
                         )}
@@ -108,16 +109,16 @@ const Vouchers = () => {
                         )}
                         {selectedVouchers[item.id]?.quantity > 0 ? (
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                                <button onClick={() => removeVoucher(item)} style={{ margin: '0' }}>
+                                <button id='itemButton' onClick={() => removeVoucher(item)} style={{ margin: '9px 0' }}>
                                     -
                                 </button>
                                 <p style={{ margin: "0" }}>{selectedVouchers[item.id]?.quantity}</p>
-                                <button onClick={() => addVoucher(item)} style={{ margin: '0' }}>
+                                <button id='itemButton' onClick={() => addVoucher(item)} style={{ margin: '0' }}>
                                     +
                                 </button>
                             </div>
                         ) : (
-                            <button onClick={() => addVoucher(item)} style={{ margin: '0' }}>
+                            <button id='itemButton' onClick={() => addVoucher(item)} style={{ margin: '0', padding: '12px 24px' }}>
                                 {lang === "bg" ? "Добави" : "Add"}
                             </button>
                         )}
@@ -125,13 +126,13 @@ const Vouchers = () => {
                 ))}
             </div>
 
-            <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px', marginLeft: "10%", marginBottom: "24px" }}>
+            <button id='itemButton' onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "0" }}>
                 {lang === "bg" ? "Продължи" : "Continue"}
             </button>
 
             {showForm && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
-                    <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
+                    <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative', maxHeight: '80%', overflowY: 'auto' }}>
                         <button 
                             onClick={handleCloseForm} 
                             style={{ 
@@ -174,7 +175,7 @@ const Vouchers = () => {
                                     const voucher = selectedVouchers[voucherId];
                                     return (
                                         <li key={voucherId}>
-                                            {lang === "bg" ? voucher.nameBg : voucher.nameEn} - {lang === "bg" ? "Количество" : "Quantity"}: {voucher.quantity}
+                                            {voucher.quantity} &times; {lang === "bg" ? voucher.nameBg : voucher.nameEn}
                                         </li>
                                     );
                                 })}
@@ -186,7 +187,7 @@ const Vouchers = () => {
                                     const product = selectedProducts[productId];
                                     return (
                                         <li key={productId}>
-                                            {lang === "bg" ? product.nameBg : product.nameEn} - {lang === "bg" ? "Количество" : "Quantity"}: {product.quantity}
+                                            {product.quantity} &times; {lang === "bg" ? product.nameBg : product.nameEn}
                                         </li>
                                     );
                                 })}
@@ -221,31 +222,31 @@ const Vouchers = () => {
                 </div>
             )}
 
-            <h2 style={{width: "80%", margin: "auto"}}>You will also like</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto", marginBottom: "24px" }}>
+            <h2 id='title' style={{fontSize: "30px", marginTop: "22px", marginBottom: "20px"}}>{lang === "bg" ? "Може да ви хареса" : "You will also like"}:</h2>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto", marginBottom: "24px" }}>
                 {products.map((product) => (
-                    <div key={product.id} className='item' style={{ width: '200px', textAlign: 'center' }}>
+                    <div key={product.id} className='item' id="productVoucher">
                         {product.imagePath && (
-                            <img alt="" style={{width: "200px", height: "300px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
+                            <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
                         )}
                         {(product.nameBg || product.nameEn) && (
-                            <h2 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{lang === "bg" ? product.nameBg : product.nameEn}</h2>
+                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? product.nameBg : product.nameEn}</h2>
                         )}
                         {product.price && (
-                            <h3 style={{margin: "0", textAlign: "left", fontSize: "16px"}}>{product.price} лв</h3>
+                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{product.price} лв</h3>
                         )}
                         {selectedProducts[product.id]?.quantity > 0 ? (
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                                <button onClick={() => removeProduct(product)} style={{ margin: '0' }}>
+                                <button id='itemButton' onClick={() => removeProduct(product)} style={{ margin: '9px 0' }}>
                                     -
                                 </button>
                                 <p style={{ margin: "0" }}>{selectedProducts[product.id]?.quantity}</p>
-                                <button onClick={() => addProduct(product)} style={{ margin: '0' }}>
+                                <button id="itemButton" onClick={() => addProduct(product)} style={{ margin: '0' }}>
                                     +
                                 </button>
                             </div>
                         ) : (
-                            <button onClick={() => addProduct(product)} style={{ margin: '0' }}>
+                            <button id='itemButton' onClick={() => addProduct(product)} style={{ margin: "0", padding: '12px 24px' }}>
                                 {lang === "bg" ? "Добави" : "Add"}
                             </button>
                         )}

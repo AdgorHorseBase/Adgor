@@ -60,10 +60,10 @@ const Products = () => {
     return (
         <div>
             <MenuSections />
-            <h1 id='title'>{lang === "bg" ? "Продукти" : "Products"}</h1>
+            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Продукти" : "Products"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
-                    <div key={item.id} className='item' style={{ width: '300px', textAlign: 'center' }}>
+                    <div id='productVoucher' key={item.id} className='item'>
                         {item.imagePath && (
                             <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
                         )}
@@ -75,16 +75,16 @@ const Products = () => {
                         )}
                         {selectedProducts[item.id]?.quantity > 0 ? (
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                                <button onClick={() => removeProduct(item)} style={{ margin: '0' }}>
+                                <button id='itemButton' onClick={() => removeProduct(item)} style={{ margin: '9px 0' }}>
                                     -
                                 </button>
                                 <p style={{ margin: "0" }}>{selectedProducts[item.id]?.quantity}</p>
-                                <button onClick={() => addProduct(item)} style={{ margin: '0' }}>
+                                <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0' }}>
                                     +
                                 </button>
                             </div>
                         ) : (
-                            <button onClick={() => addProduct(item)} style={{ margin: '0' }}>
+                            <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0', padding: '12px 24px' }}>
                                 {lang === "bg" ? "Добави" : "Add"}
                             </button>
                         )}
@@ -92,13 +92,13 @@ const Products = () => {
                 ))}
             </div>
 
-            <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px', marginLeft: "10%", marginBottom: "24px" }}>
+            <button id='itemButton' onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "24px" }}>
                 {lang === "bg" ? "Продължи" : "Continue"}
             </button>
 
             {showForm && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
-                    <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
+                    <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative', maxHeight: '80%', overflowY: 'auto' }}>
                         <button 
                             onClick={handleCloseForm} 
                             style={{ 
@@ -107,14 +107,14 @@ const Products = () => {
                                 right: '10px', 
                                 background: 'none', 
                                 border: 'none', 
-                                fontSize: '30px', // Increase font size to make it bigger
+                                fontSize: '30px', 
                                 cursor: 'pointer',
                                 transition: 'background-color 0.3s',
                                 borderRadius: '50%',
                                 width: '47px',
                                 height: '47px',
                             }}
-                            onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255, 0, 0, 0.1)'} // Red background on hover
+                            onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255, 0, 0, 0.1)'}
                             onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                         >
                             <svg x="0px" y="0px" width="20" height="20" viewBox="0 0 122.878 122.88"><g><path d="M1.426,8.313c-1.901-1.901-1.901-4.984,0-6.886c1.901-1.902,4.984-1.902,6.886,0l53.127,53.127l53.127-53.127 c1.901-1.902,4.984-1.902,6.887,0c1.901,1.901,1.901,4.985,0,6.886L68.324,61.439l53.128,53.128c1.901,1.901,1.901,4.984,0,6.886 c-1.902,1.902-4.985,1.902-6.887,0L61.438,68.326L8.312,121.453c-1.901,1.902-4.984,1.902-6.886,0 c-1.901-1.901-1.901-4.984,0-6.886l53.127-53.128L1.426,8.313L1.426,8.313z"/></g></svg>
@@ -141,7 +141,7 @@ const Products = () => {
                                     const product = selectedProducts[productId];
                                     return (
                                         <li key={productId}>
-                                            {lang === "bg" ? product.nameBg : product.nameEn} - {lang === "bg" ? "Количество" : "Quantity"}: {product.quantity}
+                                            {product.quantity} &times; {lang === "bg" ? product.nameBg : product.nameEn}
                                         </li>
                                     );
                                 })}

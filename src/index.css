@@ -1,6 +1,29 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+#productVoucher {
+    width: 300px;
+    text-align: center;
+    border: 1px solid #c7c1b9;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0e8de
+}
+
+#itemButton {
+    background-color: #876254;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#itemButton:hover {
+    background-color: #29160F;
+    border-color: transparent;
+}
+
 .directory-menu {
     position: relative;
     display: inline-block;
@@ -70,6 +93,7 @@
 
 .Menu button:hover {
     border: none;
+    background: none;
 }
 
 .Menu button + button::before,
@@ -152,17 +176,16 @@ button{
     color: #29160F;
     font-weight: 600;
     background-color:#fefefe;
-    border: 0.25vh solid #fefefe;
+    border: 4px solid #fefefe;
     border-radius: 30px;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    padding-top: 0.2vh;
-    padding-bottom: 0.2vh;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 2px;
     transition: 0.4s;
-    font-size: 2vh;
-    margin-right: 1vw;
-    margin-top: 2vh;
-    
+    font-size: 24px;
+    margin-right: 12px;
+    margin-top: 24px;
 }
 
 button:hover{
@@ -179,7 +202,7 @@ button:hover{
 #title{
     font-family: Source Serif Pro;
 
-    margin-left: 13vw;
+    margin-left: 10%;
     color: #29160F;
     font-size: 6vh;
     margin-top: 5vh;

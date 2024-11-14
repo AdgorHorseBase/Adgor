@@ -20,9 +20,6 @@
   "\\asdf": {
     "type": "file"
   },
-  "\\rar": {
-    "type": "file"
-  },
   "\\Test": {
     "type": "directory",
     "contents": [

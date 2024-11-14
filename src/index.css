@@ -76,7 +76,7 @@
     background-color: #2e1a11;
     padding: 10px 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap; /* Allows wrapping */
     font-family: 'Georgia', serif;
     font-size: 16px;

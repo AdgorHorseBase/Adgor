@@ -16,6 +16,7 @@ import TypeseOfRidingCut from "./images/TypeseOfRidingCut.png";
 import ExampleCircleImageRiding from "./images/ExampleCircleImageRiding.png";
 import AchievementsImage from "./images/horanakone.jpeg";
 import AchievementsCutDown from "./images/AchievementsCutDown.png";
+import AchievementsCutBig from "./images/AchievementsCutBig.png";
 import Pole from "./images/pole.jpeg";
 import Guy from "./images/guyonhorse.jpeg";
 import Hora from "./images/horanakone.jpeg";
@@ -335,115 +336,31 @@ const WelcomePage = () => {
           <button id="AboutAchievementsButon">Още</button>
         </div>
         <br />
-        <img
-          id="AchievementsCutDown"
-          src={AchievementsCutDown}
-          alt=""
-          width={"100%"}
-        />
+        {window.innerWidth < 3950 && (
+          <>
+            {window.innerWidth < 1970 ? (
+              <div id="broqnBackgroundUnderAchievementsCut">
+                <img
+                  id="AchievementsCutDown"
+                  src={AchievementsCutDown}
+                  alt=""
+                  width={"100%"}
+                />
+              </div>
+            ) : (
+              <div id="broqnBackgroundUnderAchievementsCutBig">
+                <img
+                  id="AchievementsCutDownBig"
+                  src={AchievementsCutBig}
+                  alt=""
+                  width={"100%"}
+                />
+              </div>
+            )}
+          </>
+        )}
       </div>
-
-      {/* <div className="parent-container">
-        <div className="Zentranlni">
-          <img id="FondaziqIMG" alt="" src={Fondaziq}></img>
-          <p id="FondaziqTitle">
-            Фондация<br></br>"Адгор за конете"
-          </p>
-          <a id="FondaziqOshte" href="">
-            Още
-          </a>
-
-          <img id="PoleIMG" alt="" src={Pole}></img>
-
-          <div className="kdvadrati">
-            <div className="WesternEzda">
-              <img id="GuyPic" alt="" src={Guy}></img>
-              <br></br>
-              <p>
-                Уестърн <br></br>Езда
-              </p>
-            </div>
-            <div className="NaturalHorsmanship">
-              <img id="GuyPic" alt="" src={Guy}></img>
-              <br></br>
-              <p>
-                Natural <br></br>Horsmanship
-              </p>
-            </div>
-            <div className="Falabela">
-              <img id="GuyPic" alt="" src={Guy}></img>
-              <p>Фалабела</p>
-            </div>
-          </div>
-
-          <img id="Hora" alt="" src={Hora}></img>
-
-          <p id="Postijeniq">Нашите Постижения</p>
-          <p id="Paragraph">
-            Adgor riding complex offers riding, groundwork, horse and people
-            training. It is up to you to make up your mind about what exactly
-            you would like to achieve, feel or learn.
-          </p>
-          <a id="vtoriOshte" href="">
-            Още
-          </a>
-
-          <img id="MomicheIMG" alt="" src={Momiche}></img>
-          <img id="SkachashtIMG" alt="" src={Skachasht}></img>
-        </div>
-      </div> */}
-      {/* <div className="posledni">
-        <img id="Shapka" alt="" src={Shapka}></img>
-        <br></br>
-        <div className="uslugi">
-          <div className="purviTri">
-            <div className="uslugaedno">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshteEdno" href="">
-                Още
-              </a>
-            </div>
-            <div className="uslugadve">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshteDve" href="">
-                Още
-              </a>
-            </div>
-            <div className="uslugatri">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshteTri" href="">
-                Още
-              </a>
-            </div>
-          </div>
-          <div className="vtoriTri">
-            <div className="uslugachetiri">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshteChetiri" href="">
-                Още
-              </a>
-            </div>
-            <div className="uslugapet">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshtePet" href="">
-                Още
-              </a>
-            </div>
-            <div className="uslugashest">
-              <img className="UslugaIMG" src={Usluga} alt="" />
-              <p>Описание на услуга</p>
-              <a id="OshteShest" href="">
-                Още
-              </a>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      <div style={{ background: "#2e1a11" }}></div>
     </div>
   );
 };

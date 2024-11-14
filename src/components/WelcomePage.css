@@ -358,6 +358,19 @@ p {
 }
 
 #AchievementsCutDown {
-    position: relative;
-    bottom: 4.5vw;
+  position: relative;
+  bottom: 4.5vw;
+}
+
+#broqnBackgroundUnderAchievementsCut {
+  height: 0.5vw;
+}
+
+#broqnBackgroundUnderAchievementsCutBig {
+  height: 0.5vw;
+}
+
+#AchievementsCutDownBig {
+  position: relative;
+  bottom: 2.5vw;
 }

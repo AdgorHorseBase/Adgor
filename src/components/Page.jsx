@@ -49,6 +49,8 @@ const MenuSections = () => {
         }
       }
 
+      console.log(updatedStructure)
+
       setStruct(updatedStructure);
     };
 
@@ -66,12 +68,12 @@ const MenuSections = () => {
 
   return (
     <div className='Menu'>
-      <button onClick={() => { document.location.href = "/" }}>{lang === 'bg' ? 'Начало' : 'Home'}</button>
+      <button id="menuButton" onClick={() => { document.location.href = "/" }}>{lang === 'bg' ? 'Начало' : 'Home'}</button>
       {titlesFetched.current && Object.keys(structure).map((dir, index) => (
         <React.Fragment key={dir}>
           {structure[dir].type === 'directory' ? structure[dir].contents && (
             <div className="directory-menu">
-              <p className="directory-name">{lang === "bg" ? structure[dir].directoryBg : dir.slice(1, dir.length)}</p>
+              <p id="menuButton" className="directory-name">{lang === "bg" ? structure[dir].directoryBg : dir.slice(1, dir.length)}</p>
               <ul className="page-list">
                 {structure[dir].contents.map((page, index) => (
                   <li key={`${dir}-${index}`}>
@@ -90,12 +92,12 @@ const MenuSections = () => {
           )}
         </React.Fragment>
       ))}
-      <button className="dot" onClick={() => { document.location.href = "/products" }}>{lang === "bg" ? "Продукти" : "Products"}</button>
-      <button onClick={() => { document.location.href = "/vouchers" }}>{lang === "bg" ? "Ваучери" : "Vouchers"}</button>
+      <button id="menuButton" className="dot" onClick={() => { document.location.href = "/products" }}>{lang === "bg" ? "Продукти" : "Products"}</button>
+      <button id="menuButton" onClick={() => { document.location.href = "/vouchers" }}>{lang === "bg" ? "Ваучери" : "Vouchers"}</button>
       {lang === "bg" ? (
-        <button onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>Switch to english</button>
+        <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>Switch to english</button>
       ) : (
-        <button onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>Смени на български</button>
+        <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>Смени на български</button>
       )}
     </div>
   )

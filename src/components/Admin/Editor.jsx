@@ -40,7 +40,6 @@ const MyCustomToolbar = () => (
         <button className="ql-list" value="ordered" />
         <button className="ql-list" value="bullet" />
         <button className="ql-link" />
-        <button className="ql-image" />
         <select className="ql-align" defaultValue="">
             <option value="" />
             <option value="left" />
@@ -83,6 +82,8 @@ function Editor({ structure }) {
                 const [directory, page] = editPath.split("/");
                 setDirectory(directory);
                 setPage(page);
+            } else {
+                setPage(editPath);
             }
         }
     }, [editPath]);
@@ -96,7 +97,7 @@ function Editor({ structure }) {
     // Adds new element to schema (text, image, video, menu)
     const addElement = (type) => {
         let newElement;
-
+    
         if (type === "menu") {
             newElement = {
                 id: uuidv4(),
@@ -150,11 +151,20 @@ function Editor({ structure }) {
                     textEn: "Enter your text"
                 }
             };
+        } else if (type === "video") {
+            newElement = {
+                id: uuidv4(),
+                type,
+                content: {
+                    url: "",
+                    autoplay: false
+                }
+            };
         } else {
             newElement = {
                 id: uuidv4(),
                 type,
-                content: type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : type === "video" ? "" : "",
+                content: type === "formated" ? "Type here"  : type === "html" ? "Enter your html" : type === "formated" ? "" : type === "image" ? "" : "",
             };
         }
         
@@ -183,20 +193,24 @@ function Editor({ structure }) {
                 });
             break;
             case "video":
-                formData.append("video", newContent);
-                
-                await axios.post(URL + "/video", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                })
-                .then(response => {
-                    const video = response.data.video;
-                    setSchema(schema.map(el => el.id === id ? { ...el, content: video } : el));
-                })
-                .catch(error => {
-                    console.error("Error uploading image:", error);
-                });
+                if (newContent.url) {
+                    formData.append("video", newContent.url);
+                    
+                    await axios.post(URL + "/video", formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    })
+                    .then(response => {
+                        const video = response.data.video;
+                        setSchema(schema.map(el => el.id === id ? { ...el, content: { url: video, autoplay: el.content.autoplay } } : el));
+                    })
+                    .catch(error => {
+                        console.error("Error uploading video:", error);
+                    });
+                } else {
+                    setSchema(schema.map(el => el.id === id ? { ...el, content: { url: el.content.url, autoplay: newContent.autoplay } } : el));
+                }
             break;
             case "youtube":
                 if(newContent?.url) {
@@ -204,7 +218,7 @@ function Editor({ structure }) {
                     const youtubeUrl = newContent.url;
                     const videoIdMatch = youtubeUrl.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})|youtu\.be\/([a-zA-Z0-9_-]{11})/);
                     const videoId = videoIdMatch ? videoIdMatch[1] || videoIdMatch[2] : null;
-
+    
                     schema.map(el => el.id === id && console.log(el));
                     setSchema(schema.map(el => el.id === id ? { ...el, content: {...el.content, url: `https://www.youtube.com/embed/${videoId}`} } : el));
                 } else {
@@ -214,7 +228,7 @@ function Editor({ structure }) {
             case "image_text":
                 if(newContent?.url) {
                     formData.append("image", newContent.url);
-
+    
                     axios.post(URL + "/image", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data"
@@ -269,11 +283,11 @@ function Editor({ structure }) {
         if(!page) {
             return alert("You need to specify path");
         }
-
+    
         if(schema.length === 0) {
             return alert("You need to place some content");
         }
-
+    
         // Create HTML string
         let htmlContent = "";
         schema.forEach(element => {
@@ -292,7 +306,7 @@ function Editor({ structure }) {
             } else if (element.type === "four_images") {
                 htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`
             } else if (element.type === "video") {
-                htmlContent += `<video id="pageVideo" src="/server/files/videos/${element.content}" controls></video>`;
+                htmlContent += `<video id="pageVideo" src="/server/files/videos/${element.content.url}" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
             } else if (element.type === "menu") {
                 if (element.content.length > 0) {
                     htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;
@@ -312,9 +326,9 @@ function Editor({ structure }) {
                 htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
             }
         });
-
+    
         const schemaContent = { titleBg, titleEn, directoryBg, schema };
-
+    
         // Send request to the backend to save the page
         try {
             const editUrl = (editPath === "create") ? `${URL}/page` : `${URL}/page/edit`;
@@ -363,7 +377,7 @@ function Editor({ structure }) {
                     value={titleEn}
                     onChange={(e) => setTitleEn(e.target.value)}
                     placeholder="Page Title"
-                    style={{ display: "block" }}
+                    style={{ display: "block", marginBottom: "24px" }}
                 />
                 <input
                     id="Path_Input"
@@ -379,7 +393,7 @@ function Editor({ structure }) {
                     value={directoryBg}
                     onChange={(e) => setDirectoryBg(e.target.value)}
                     placeholder="Сложи директория"
-                    style={{display: "block" }}
+                    style={{display: "block", marginBottom: "16px" }}
                 />
                 <input
                     id="Path_Input"
@@ -390,18 +404,18 @@ function Editor({ structure }) {
                     style={{display: "block" }}
                 />
                 <div className="Add_buttons">
-                <button onClick={() => addElement("title")}>Add Title</button>
-                <button onClick={() => addElement("text")}>Add Text</button>
-                <button onClick={() => addElement("html")}>Add html</button>
-                <button onClick={() => addElement("separation")}>Add separation line</button>
-                <button onClick={() => addElement("image")}>Add Image</button>
-                <button onClick={() => addElement("two_images")}>Add Two Images</button>
-                <button onClick={() => addElement("four_images")}>Add Four Images</button>
-                <button onClick={() => addElement("video")}>Add Video</button>
-                <button onClick={() => addElement("formated")}>Add Formated Text</button>
-                <button onClick={() => addElement("youtube")}>YouTube video</button>
-                <button onClick={() => addElement("menu")}>Add Menu</button>
-                <button onClick={() => addElement("image_text")}>Add Image with Text</button>
+                    <button onClick={() => addElement("title")}>Add Title</button>
+                    <button onClick={() => addElement("text")}>Add Text</button>
+                    <button onClick={() => addElement("html")}>Add html</button>
+                    <button onClick={() => addElement("separation")}>Add separation line</button>
+                    <button onClick={() => addElement("image")}>Add Image</button>
+                    <button onClick={() => addElement("two_images")}>Add Two Images</button>
+                    <button onClick={() => addElement("four_images")}>Add Four Images</button>
+                    <button onClick={() => addElement("video")}>Add Video</button>
+                    <button onClick={() => addElement("formated")}>Add Formated Text</button>
+                    <button onClick={() => addElement("youtube")}>YouTube video</button>
+                    <button onClick={() => addElement("menu")}>Add Menu</button>
+                    <button onClick={() => addElement("image_text")}>Add Image with Text</button>
                 </div>
                 <button id="Save_button" onClick={savePage}>Save Page</button>
                 <button id="home_button" onClick={() => { document.location.href = "/admin" }}>Home</button>
@@ -526,15 +540,23 @@ function Editor({ structure }) {
                         )}
                         {element.type === "video" && (
                             <div id="Added_Video">
-                                {element.content && <video id="Added_Video_vid" src={URL + "/video?name=" + element.content} controls />}
+                                {element.content.url && <video id="Added_Video_vid" src={URL + "/video?name=" + element.content.url} controls />}
                                 <br></br>
                                 <input
                                     id="Added_Video_file"
                                     type="file"
-                                    onChange={(e) => updateElement(element.id, e.target.files[0], "video")}
+                                    onChange={(e) => updateElement(element.id, { url: e.target.files[0] }, "video")}
                                     placeholder="Choose Video"
                                 />
-                                
+                                <label>
+                                    <input
+                                        id="Added_Video_autoplay"
+                                        type="checkbox"
+                                        checked={element.content.autoplay}
+                                        onChange={(e) => updateElement(element.id, { autoplay: e.target.checked }, "video")}
+                                    />
+                                    Autoplay
+                                </label>
                             </div>
                         )}
                         {element.type === "menu" && (

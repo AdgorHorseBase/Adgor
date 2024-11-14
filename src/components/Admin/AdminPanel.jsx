@@ -82,21 +82,21 @@ function AdminPanel() {
     
             if (info.type === "directory") {
                 return (
-                    <div key={cleanPath}>
+                    <div key={cleanPath} style={{margin: "0", padding: "0", marginLeft: "16px"}}>
                         {/* Display directory name */}
-                        <strong style={{marginRight: "12px"}}>{cleanPath}:</strong>
-                        <button onClick={() => handleRename(cleanPath)}>Rename</button>
-                        <button onClick={() => handleDelete(cleanPath)}>Delete</button>
+                        <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
+                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
+                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
                         <div style={{ paddingLeft: "20px" }}>
                             {/* Render subdirectories and files */}
                             {info.contents && info.contents.map((fileName) => {
                                 const fullPath = `${cleanPath}/${fileName}`;
                                 return (
                                     <div key={fullPath}>
-                                        <a href={`/page${fullPath}`} style={{marginRight: "12px"}}>{fileName}</a>
-                                        <button onClick={() => handleRename(fullPath)}>Rename</button>
-                                        <button onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                        <button onClick={() => handleDelete(fullPath)}>Delete</button>
+                                        <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{fileName}</a>
+                                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
+                                        <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
+                                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
                                     </div>
                                 );
                             })}
@@ -105,11 +105,11 @@ function AdminPanel() {
                 );
             } else if (info.type === "file") {
                 return (
-                    <div key={cleanPath}>
-                        <a href={`/page${cleanPath}`} style={{marginRight: "12px"}}>{cleanPath}</a>
-                        <button onClick={() => handleRename(cleanPath)}>Rename</button>
-                        <button onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>
-                        <button onClick={() => handleDelete(cleanPath)}>Delete</button>
+                    <div key={cleanPath} style={{marginLeft: "16px"}}>
+                        <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
+                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
+                        <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>
+                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
                     </div>
                 );
             }
@@ -119,12 +119,11 @@ function AdminPanel() {
 
     const Structure = () => {
         return (
-            <div>
-
+            <div style={{marginLeft: "10%"}}>
                 <button onClick={() => {document.location.href = "/admin/create"}}>Create</button>
                 <button onClick={() => {document.location.href = "/admin/products"}}>Products</button>
                 <button onClick={() => {document.location.href = "/admin/vouchers"}}>Vouchers</button>
-                <h2 id="PageStructure">Page Structure</h2>
+                <h2 id="PageStructure" style={{marginLeft: "0"}}>Page Structure</h2>
                 {/* {structure == true ? renderStructure(structure) : <h3>Empty</h3>} */}
                 {renderStructure(structure)}
             </div>

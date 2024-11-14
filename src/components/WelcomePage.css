@@ -266,13 +266,15 @@ p {
 }
 
 .stylesImage {
-  width:100%;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .stylesName {
-    color: #E4D9C7;
-    font-weight: 900;
-    font-size: 1.5vw;
+  color: #e4d9c7;
+  font-weight: 900;
+  font-size: 2.2vw;
+  margin-bottom: 20px;
 }
 
 .stylesLink {
@@ -291,7 +293,71 @@ p {
 
 @media (max-width: 1000px) {
   .stylesContent {
-  width: 18vw;
-  min-width: 23vw;
+    width: 18vw;
+    min-width: 23vw;
+  }
 }
+
+/* achievements */
+#Achievements {
+  width: 100%;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#AchievementsImage {
+  width: 70%;
+  min-height: 39vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  #AchievementsImage {
+    width: 95%;
+  }
+}
+
+#AboutAchievementsButon {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 2px;
+  background-color: #e2d9c6;
+  border: none;
+  color: #2e1a11;
+  padding: 5px 30px;
+  border-radius: 108px;
+  font-size: clamp(15px, 2.4vw, 40px);
+  height: 4vw;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+
+#OurAchievementsTitle {
+  font-size: 3vw;
+}
+
+#OurAchievementsText {
+  font-size: 2vw;
+  max-width: 50%;
+}
+
+@media (max-width: 1000px) {
+  #OurAchievementsTitle {
+    font-size: 7vw;
+  }
+  #OurAchievementsText {
+    font-size: 3.5vw;
+    max-width: 80%;
+  }
+}
+
+#AchievementsCutDown {
+    position: relative;
+    bottom: 4.5vw;
 }

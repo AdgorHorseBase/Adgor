@@ -14,6 +14,8 @@ import FoundationCutDown from "./images/FoundatonCutDown.png";
 import TypeseOfRiding from "./images/TypeseOfRiding.png";
 import TypeseOfRidingCut from "./images/TypeseOfRidingCut.png";
 import ExampleCircleImageRiding from "./images/ExampleCircleImageRiding.png";
+import AchievementsImage from "./images/horanakone.jpeg";
+import AchievementsCutDown from "./images/AchievementsCutDown.png";
 import Pole from "./images/pole.jpeg";
 import Guy from "./images/guyonhorse.jpeg";
 import Hora from "./images/horanakone.jpeg";
@@ -262,7 +264,9 @@ const WelcomePage = () => {
                     alt=""
                   />
                   <p className="stylesName">
-                    УЕСТЪРН <br /> ЕЗДА
+                    УЕСТЪРН
+                    <br />
+                    ЕЗДА
                   </p>
                 </div>
               </a>
@@ -276,7 +280,9 @@ const WelcomePage = () => {
                     alt=""
                   />
                   <p className="stylesName">
-                    NATURAL <br /> HORSMANSHIP
+                    NATURAL
+                    <br />
+                    HORSMANSHIP
                   </p>
                 </div>
               </a>
@@ -295,6 +301,46 @@ const WelcomePage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div id="Achievements">
+        <div
+          style={{ backgroundImage: `url(${AchievementsImage})` }}
+          id="AchievementsImage"
+        >
+          <p
+            id="OurAchievementsTitle"
+            style={{ color: "#e4d9c7", fontWeight: "900", marginTop: "4vw" }}
+          >
+            Нашите постижения
+          </p>
+          <br />
+          <div
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            <p
+              id="OurAchievementsText"
+              style={{
+                color: "#e4d9c7",
+                fontWeight: "600",
+                textAlign: "center",
+              }}
+            >
+              Adgor riding complex offers riding, groundwork, horse and people
+              training. It is up to you to make up your mind about what exactly
+              you would like to achieve, feel or learn.
+            </p>
+          </div>
+          <br />
+          <button id="AboutAchievementsButon">Още</button>
+        </div>
+        <br />
+        <img
+          id="AchievementsCutDown"
+          src={AchievementsCutDown}
+          alt=""
+          width={"100%"}
+        />
       </div>
 
       {/* <div className="parent-container">

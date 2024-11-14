@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AdminPanel from './components/Admin/AdminPanel';
-import {Page} from './components/Page.jsx';
+import { Page } from './components/Page.jsx';
 import Products from './components/Products';
 import Success from './components/Success.jsx';
 import Vouchers from './components/Vouchers.jsx';
@@ -19,6 +19,8 @@ function App() {
   if (!localStorage.getItem('lang')) {
     localStorage.setItem('lang', 'bg');
   }
+
+  const showFooter = !window.location.pathname.startsWith('/admin');
 
   return (
     <BrowserRouter>
@@ -41,9 +43,9 @@ function App() {
         />
       </Routes>
 
-      <Footer />
+      {showFooter && <Footer />}
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

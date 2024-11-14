@@ -17,13 +17,8 @@ import ExampleCircleImageRiding from "./images/ExampleCircleImageRiding.png";
 import AchievementsImage from "./images/horanakone.jpeg";
 import AchievementsCutDown from "./images/AchievementsCutDown.png";
 import AchievementsCutBig from "./images/AchievementsCutBig.png";
-import Pole from "./images/pole.jpeg";
-import Guy from "./images/guyonhorse.jpeg";
-import Hora from "./images/horanakone.jpeg";
-import Momiche from "./images/momichenakon.jpeg";
-import Skachasht from "./images/skacha.jpeg";
-import Shapka from "./images/Group.png";
-import Usluga from "./images/usluga.jpeg";
+import Hat from "./images/Group.png";
+import Sevice from "./images/usluga.jpeg";
 import { MenuSections } from "./Page";
 
 const WelcomePage = () => {
@@ -360,7 +355,9 @@ const WelcomePage = () => {
           </>
         )}
       </div>
-      <div style={{ background: "#2e1a11" }}></div>
+      <div style={{ background: "#22120C", paddingTop: "5vw" }}>
+        <img className="hat" src={Hat} alt="" />
+      </div>
     </div>
   );
 };

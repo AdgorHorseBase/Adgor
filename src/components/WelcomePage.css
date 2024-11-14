@@ -7,6 +7,13 @@ p {
   color: #29160f;
 }
 
+li {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: 2px;
+  margin: 0px;
+  color: #29160f;
+}
+
 /* header */
 #HeadLogo {
   width: 80%;
@@ -373,4 +380,17 @@ p {
 #AchievementsCutDownBig {
   position: relative;
   bottom: 2.5vw;
+}
+
+.hat {
+  width: 30vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1000px) {
+  .hat {
+    width: 50vw;
+  }
 }

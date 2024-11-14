@@ -5,6 +5,7 @@ import Products from './components/Products';
 import Success from './components/Success.jsx';
 import Vouchers from './components/Vouchers.jsx';
 import WelcomePage from './components/WelcomePage.jsx';
+import Footer from './components/Footer.jsx';
 
 const isAuthenticated = () => {
   return true;
@@ -39,6 +40,8 @@ function App() {
           } 
         />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   )
 }

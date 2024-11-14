@@ -70,6 +70,7 @@
 
 .Menu button:hover {
     border: none;
+    background: none;
 }
 
 .Menu button + button::before,

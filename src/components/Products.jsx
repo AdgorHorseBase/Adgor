@@ -60,7 +60,7 @@ const Products = () => {
     return (
         <div>
             <MenuSections />
-            <h1 id='title'>{lang === "bg" ? "Продукти" : "Products"}</h1>
+            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Продукти" : "Products"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
                     <div key={item.id} className='item' style={{ width: '300px', textAlign: 'center' }}>
@@ -92,7 +92,7 @@ const Products = () => {
                 ))}
             </div>
 
-            <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px', marginLeft: "10%", marginBottom: "24px" }}>
+            <button onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "24px" }}>
                 {lang === "bg" ? "Продължи" : "Continue"}
             </button>
 
@@ -141,7 +141,7 @@ const Products = () => {
                                     const product = selectedProducts[productId];
                                     return (
                                         <li key={productId}>
-                                            {lang === "bg" ? product.nameBg : product.nameEn} - {lang === "bg" ? "Количество" : "Quantity"}: {product.quantity}
+                                            {product.quantity} &times; {lang === "bg" ? product.nameBg : product.nameEn}
                                         </li>
                                     );
                                 })}

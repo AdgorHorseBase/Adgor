@@ -40,7 +40,6 @@ const MyCustomToolbar = () => (
         <button className="ql-list" value="ordered" />
         <button className="ql-list" value="bullet" />
         <button className="ql-link" />
-        <button className="ql-image" />
         <select className="ql-align" defaultValue="">
             <option value="" />
             <option value="left" />

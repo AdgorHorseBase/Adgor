@@ -1,6 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+#menuButton, Menu button {
+    font-size: 22px;
+    margin: 4px 0;
+}
+
 #productVoucher {
     width: 300px;
     text-align: center;
@@ -71,7 +76,7 @@
     background-color: #2e1a11;
     padding: 10px 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap; /* Allows wrapping */
     font-family: 'Georgia', serif;
     font-size: 16px;
@@ -83,7 +88,7 @@
     background: none;
     border: none;
     color: inherit;
-    font-size: inherit;
+    font-size: 22px;
     font-family: inherit;
     cursor: pointer;
     padding: 0 2px;
@@ -214,7 +219,7 @@ button:hover{
 
 
 #Page_Title{
-    margin-top: -4.6vh;
+    margin-top: 8px;
     font-style: Source Serif Pro ;
     color: #29160F;
     margin-left: 13vw;
@@ -236,7 +241,7 @@ button:hover{
 
 
 #Path_Input{
-    margin-top: 2vh;
+    margin-top: 8px;
     color: #29160F;
     margin-left: 13vw;
     font-weight: 500;

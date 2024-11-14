@@ -363,7 +363,7 @@ function Editor({ structure }) {
                     value={titleEn}
                     onChange={(e) => setTitleEn(e.target.value)}
                     placeholder="Page Title"
-                    style={{ display: "block" }}
+                    style={{ display: "block", marginBottom: "24px" }}
                 />
                 <input
                     id="Path_Input"
@@ -379,7 +379,7 @@ function Editor({ structure }) {
                     value={directoryBg}
                     onChange={(e) => setDirectoryBg(e.target.value)}
                     placeholder="Сложи директория"
-                    style={{display: "block" }}
+                    style={{display: "block", marginBottom: "16px" }}
                 />
                 <input
                     id="Path_Input"
@@ -390,18 +390,18 @@ function Editor({ structure }) {
                     style={{display: "block" }}
                 />
                 <div className="Add_buttons">
-                <button onClick={() => addElement("title")}>Add Title</button>
-                <button onClick={() => addElement("text")}>Add Text</button>
-                <button onClick={() => addElement("html")}>Add html</button>
-                <button onClick={() => addElement("separation")}>Add separation line</button>
-                <button onClick={() => addElement("image")}>Add Image</button>
-                <button onClick={() => addElement("two_images")}>Add Two Images</button>
-                <button onClick={() => addElement("four_images")}>Add Four Images</button>
-                <button onClick={() => addElement("video")}>Add Video</button>
-                <button onClick={() => addElement("formated")}>Add Formated Text</button>
-                <button onClick={() => addElement("youtube")}>YouTube video</button>
-                <button onClick={() => addElement("menu")}>Add Menu</button>
-                <button onClick={() => addElement("image_text")}>Add Image with Text</button>
+                    <button onClick={() => addElement("title")}>Add Title</button>
+                    <button onClick={() => addElement("text")}>Add Text</button>
+                    <button onClick={() => addElement("html")}>Add html</button>
+                    <button onClick={() => addElement("separation")}>Add separation line</button>
+                    <button onClick={() => addElement("image")}>Add Image</button>
+                    <button onClick={() => addElement("two_images")}>Add Two Images</button>
+                    <button onClick={() => addElement("four_images")}>Add Four Images</button>
+                    <button onClick={() => addElement("video")}>Add Video</button>
+                    <button onClick={() => addElement("formated")}>Add Formated Text</button>
+                    <button onClick={() => addElement("youtube")}>YouTube video</button>
+                    <button onClick={() => addElement("menu")}>Add Menu</button>
+                    <button onClick={() => addElement("image_text")}>Add Image with Text</button>
                 </div>
                 <button id="Save_button" onClick={savePage}>Save Page</button>
                 <button id="home_button" onClick={() => { document.location.href = "/admin" }}>Home</button>

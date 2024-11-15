@@ -73,12 +73,6 @@ li {
   font-size: clamp(15px, 2.4vw, 40px);
 }
 
-#StickyMenu {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
 /* socials */
 .socials {
   display: flex;

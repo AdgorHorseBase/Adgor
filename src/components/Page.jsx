@@ -99,13 +99,18 @@ const MenuSections = () => {
       )}
     </div>
   ) : (
-    <MenuMobile lang={lang} structure={structure} titlesFetched={titlesFetched} fetchTitles={fetchTitles} />
+    <div id='StickyMenu'>
+      <MenuMobile lang={lang} structure={structure} titlesFetched={titlesFetched} />
+    </div>
   ))
 }
 
-const MenuMobile = ({ lang, structure, titlesFetched, fetchTitles }) => {
+const MenuMobile = ({ lang, structure, titlesFetched }) => {
   const [menuExpanded, setMenuExpanded] = useState(false);
   const [expandedDirectories, setExpandedDirectories] = useState({});
+  const location = useLocation();
+
+  console.log(menuExpanded);
 
   const getDirectories = (structure) => {
     const newExpandedDirectories = {...structure};
@@ -116,14 +121,12 @@ const MenuMobile = ({ lang, structure, titlesFetched, fetchTitles }) => {
       }
     }
 
-    console.log(structure, newExpandedDirectories);
-
     setExpandedDirectories(newExpandedDirectories);
   };
 
   useEffect(() => {
     getDirectories(structure);
-  }, [structure]);
+  }, [structure, location]);
 
   const toggleDirectory = (dir) => {
     setExpandedDirectories((prevState) => ({
@@ -152,13 +155,13 @@ const MenuMobile = ({ lang, structure, titlesFetched, fetchTitles }) => {
               {structure[dir].type === 'directory' && structure[dir].contents && (
                 <div className="directory">
                   <p 
-                    className="directory-name" 
+                    className="directory-name-mobile" 
                     onClick={() => toggleDirectory(dir)} // Toggle directory on click
                   >
                     {lang === 'bg' ? structure[dir].directoryBg : dir.slice(1)}
                   </p>
                   {expandedDirectories[dir] && ( // Check expanded state
-                    <ul className="page-list">
+                    <ul className="page-list-mobile">
                       {structure[dir].contents.map((page, index) => (
                         <li key={`${dir}-${index}`}>
                           <a href={`/page${dir}/${page.page}`}>

@@ -19,6 +19,8 @@ import AchievementsCutDown from "./images/AchievementsCutDown.png";
 import AchievementsCutBig from "./images/AchievementsCutBig.png";
 import Hat from "./images/Group.png";
 import Sevice from "./images/usluga.jpeg";
+import Girl from "./images/GirlOnHorse.png";
+import Jumping from "./images/skacha.jpeg";
 import { MenuSections } from "./Page";
 
 const WelcomePage = () => {
@@ -306,7 +308,7 @@ const WelcomePage = () => {
         >
           <p
             id="OurAchievementsTitle"
-            style={{ color: "#e4d9c7", fontWeight: "900", marginTop: "4vw" }}
+            style={{ color: "white", fontWeight: "900", marginTop: "4vw" }}
           >
             Нашите постижения
           </p>
@@ -317,7 +319,7 @@ const WelcomePage = () => {
             <p
               id="OurAchievementsText"
               style={{
-                color: "#e4d9c7",
+                color: "white",
                 fontWeight: "600",
                 textAlign: "center",
               }}
@@ -355,7 +357,14 @@ const WelcomePage = () => {
           </>
         )}
       </div>
+
       <div style={{ background: "#22120C", paddingTop: "5vw" }}>
+        {window.innerWidth > 1000 && (
+          <div style={{ height: "0px", width: "100%" }}>
+            <img className="albumPhoto" id="Girl" src={Girl} alt="" />
+            <img className="albumPhoto" id="Jumping" src={Jumping} alt="" />
+          </div>
+        )}
         <img className="hat" src={Hat} alt="" />
         <div id="SixServices">
           {/* 1 */}

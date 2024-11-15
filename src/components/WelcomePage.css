@@ -387,10 +387,72 @@ li {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 1000px) {
   .hat {
     width: 50vw;
   }
+}
+
+/* services */
+#SixServices {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 160px;
+}
+
+.serviceBox {
+  width: clamp(270px, 25vw, 800px);
+  margin: clamp(20px, 2.5vw, 80px);
+  text-align: center;
+}
+
+.serviceImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+.serviceTitle {
+  color: white;
+  text-align: center;
+  font-size: 22px;
+}
+
+.serviceText {
+  color: white;
+  text-align: center;
+}
+
+.moreServicesButton {
+  background-color: #bda583;
+  color: #29160f;
+  font-weight: 200;
+  border: none;
+}
+
+/* album like photoes */
+.albumPhoto {
+  position: relative;
+  z-index: 100;
+  border: solid 0.2vw, white;
+  box-shadow: 0px 0px 9px -3px rgba(0,0,0,0.75);
+}
+
+#Girl {
+  top: -50vw;
+  width: 20vw;
+  left: 8vw;
+  transform: rotate(-8deg);
+}
+
+#Jumping {
+  top: -28vw;
+  width: 26vw;
+  left: 48vw;
+  transform: rotate(4deg);
 }

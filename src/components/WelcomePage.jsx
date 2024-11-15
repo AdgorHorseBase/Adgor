@@ -7,7 +7,7 @@ import Pansion from "./images/PansionIMG.jpeg";
 import Ezda from "./images/EzdaIMG.jpeg";
 import Steps from "./images/Steps.png";
 import StepsSmall from "./images/StepsSmall.png";
-import LineHores from "./images/LineHores.png";
+import LineHores from "./images/twohorses.png";
 import Foundation from "./images/Foundation.png";
 import FoundationCutUp from "./images/FoundationCutUp.png";
 import FoundationCutDown from "./images/FoundatonCutDown.png";
@@ -19,6 +19,8 @@ import AchievementsCutDown from "./images/AchievementsCutDown.png";
 import AchievementsCutBig from "./images/AchievementsCutBig.png";
 import Hat from "./images/Group.png";
 import Sevice from "./images/usluga.jpeg";
+import Girl from "./images/GirlOnHorse.png";
+import Jumping from "./images/skacha.jpeg";
 import { MenuSections } from "./Page";
 
 const WelcomePage = () => {
@@ -306,7 +308,7 @@ const WelcomePage = () => {
         >
           <p
             id="OurAchievementsTitle"
-            style={{ color: "#e4d9c7", fontWeight: "900", marginTop: "4vw" }}
+            style={{ color: "white", fontWeight: "900", marginTop: "4vw" }}
           >
             Нашите постижения
           </p>
@@ -317,7 +319,7 @@ const WelcomePage = () => {
             <p
               id="OurAchievementsText"
               style={{
-                color: "#e4d9c7",
+                color: "white",
                 fontWeight: "600",
                 textAlign: "center",
               }}
@@ -355,8 +357,59 @@ const WelcomePage = () => {
           </>
         )}
       </div>
+
       <div style={{ background: "#22120C", paddingTop: "5vw" }}>
+        {window.innerWidth > 1000 && (
+          <div style={{ height: "0px", width: "100%" }}>
+            <img className="albumPhoto" id="Girl" src={Girl} alt="" />
+            <img className="albumPhoto" id="Jumping" src={Jumping} alt="" />
+          </div>
+        )}
         <img className="hat" src={Hat} alt="" />
+        <div id="SixServices">
+          {/* 1 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 2 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 3 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 4 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 5 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 6 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+        </div>
       </div>
     </div>
   );

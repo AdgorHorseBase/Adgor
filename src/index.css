@@ -1,36 +1,64 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-.MenuMobile {
+.menu-container {
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.expand-button {
+    margin-left: auto;
 }
   
-.menu-itemsMobile {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.menu-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
 }
   
-#toggleMenuButton {
-    display: none;
+.directory {
+    margin-bottom: 10px;
 }
   
-@media (max-width: 750px) {
-    .menu-itemsMobile {
-        display: none;
-        flex-direction: column;
-    }
+.directory-name {
+    font-family: Source Serif Pro;
+    color: #29160F;
+    font-weight: 600;
+    background-color: #fefefe;
+    border: 4px solid #fefefe;
+    border-radius: 30px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    transition: 0.4s;
+    font-size: 24px;
+    margin-right: 12px;
+    margin-top: 24px;
+}
   
-    #toggleMenuButton {
-        display: block;
-    }
+.page-list {
+    margin: 5px 0 10px 15px;
+    list-style: none;
+    z-index: 1000;
+}
   
-    .menu-itemsMobile.open {
-        display: flex;
-    }
-}  
+.page-list li {
+    margin: 5px 0;
+}
+  
+.file-button {
+    margin-bottom: 10px;
+    display: block;
+}
 
 #menuButton, Menu button {
     font-size: 22px;

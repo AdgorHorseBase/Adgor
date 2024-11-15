@@ -22,38 +22,36 @@ const MenuSections = () => {
     getStruct();
   }, [])
 
-  useEffect(() => {
-    const fetchTitles = async (structure) => {
-      const updatedStructure = { ...structure };
+  const fetchTitles = async (structure) => {
+    const updatedStructure = { ...structure };
 
-      for (const dir in updatedStructure) {
-        if (updatedStructure[dir].type === 'directory') {
-          for (const page of updatedStructure[dir].contents) {
-            try {
-              const titleResponse = await axios.get(`/server/uploads${dir}/${page}/schema.json`);
-              updatedStructure[dir].directoryBg = titleResponse.data.directoryBg ?? "";
-              updatedStructure[dir].contents = updatedStructure[dir].contents.map(p => 
-                p === page ? { page, titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn, directoryBg: titleResponse.data.directoryBg ?? "Directory" } : p
-              );
-            } catch (err) {
-              console.log(`Error fetching title for ${dir}/${page}:`, err);
-            }
-          }
-        } else if (updatedStructure[dir].type === 'file') {
+    for (const dir in updatedStructure) {
+      if (updatedStructure[dir].type === 'directory') {
+        for (const page of updatedStructure[dir].contents) {
           try {
-            const titleResponse = await axios.get(`/server/uploads${dir}/schema.json`);
-            updatedStructure[dir] = { ...updatedStructure[dir], titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn };
+            const titleResponse = await axios.get(`/server/uploads${dir}/${page}/schema.json`);
+            updatedStructure[dir].directoryBg = titleResponse.data.directoryBg ?? "";
+            updatedStructure[dir].contents = updatedStructure[dir].contents.map(p => 
+              p === page ? { page, titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn, directoryBg: titleResponse.data.directoryBg ?? "Directory" } : p
+            );
           } catch (err) {
-            console.log(`Error fetching title for ${dir}:`, err);
+            console.log(`Error fetching title for ${dir}/${page}:`, err);
           }
         }
+      } else if (updatedStructure[dir].type === 'file') {
+        try {
+          const titleResponse = await axios.get(`/server/uploads${dir}/schema.json`);
+          updatedStructure[dir] = { ...updatedStructure[dir], titleBg: titleResponse.data.titleBg, titleEn: titleResponse.data.titleEn };
+        } catch (err) {
+          console.log(`Error fetching title for ${dir}:`, err);
+        }
       }
+    }
 
-      console.log(updatedStructure)
+    setStruct(updatedStructure);
+  };
 
-      setStruct(updatedStructure);
-    };
-
+  useEffect(() => {
     if (structure && !titlesFetched.current) {
       fetchTitles(structure);
       titlesFetched.current = true;
@@ -101,74 +99,105 @@ const MenuSections = () => {
       )}
     </div>
   ) : (
-    <MenuMobile lang={lang} structure={structure} titlesFetched={titlesFetched} />
+    <MenuMobile lang={lang} structure={structure} titlesFetched={titlesFetched} fetchTitles={fetchTitles} />
   ))
 }
 
-const MenuMobile = ({ lang, structure, titlesFetched }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const MenuMobile = ({ lang, structure, titlesFetched, fetchTitles }) => {
+  const [menuExpanded, setMenuExpanded] = useState(false);
+  const [expandedDirectories, setExpandedDirectories] = useState({});
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const getDirectories = (structure) => {
+    const newExpandedDirectories = {...structure};
+
+    for (const dir in structure) {
+      if (structure[dir].type === 'directory') {
+        newExpandedDirectories[dir] = false;
+      }
+    }
+
+    console.log(structure, newExpandedDirectories);
+
+    setExpandedDirectories(newExpandedDirectories);
+  };
+
+  useEffect(() => {
+    getDirectories(structure);
+  }, [structure]);
+
+  const toggleDirectory = (dir) => {
+    setExpandedDirectories((prevState) => ({
+      ...prevState,
+      [dir]: !prevState[dir],
+    }));
   };
 
   return (
-    <div className="MenuMobile">
+    <div className="menu-container">
       <button id="menuButton" onClick={() => { document.location.href = "/" }}>
         {lang === 'bg' ? 'Начало' : 'Home'}
       </button>
-      
-      {/* Button to toggle menu visibility on smaller screens */}
-      <button id="toggleMenuButton" onClick={toggleMenu}>
-        {isMenuOpen ? 'Close Menu' : 'Open Menu'}
+      <button 
+        id="menuButton" 
+        className="expand-button" 
+        onClick={() => setMenuExpanded(!menuExpanded)}
+      >
+        {menuExpanded ? (lang === 'bg' ? 'Затвори' : 'Close') : (lang === 'bg' ? 'Меню' : 'Menu')}
       </button>
 
-      {/* Conditionally render menu items based on screen size and toggle state */}
-      <div className={`menu-itemsMobile ${isMenuOpen ? 'open' : ''}`}>
-        {titlesFetched.current && Object.keys(structure).map((dir) => (
-          <React.Fragment key={dir}>
-            {structure[dir].type === 'directory' ? (
-              structure[dir].contents && (
-                <div className="directory-menu">
-                  <p id="menuButton" className="directory-name">
-                    {lang === "bg" ? structure[dir].directoryBg : dir.slice(1)}
+      {menuExpanded && (
+        <div className="menu-content">
+          {titlesFetched.current && Object.keys(structure).map((dir) => (
+            <React.Fragment key={dir}>
+              {structure[dir].type === 'directory' && structure[dir].contents && (
+                <div className="directory">
+                  <p 
+                    className="directory-name" 
+                    onClick={() => toggleDirectory(dir)} // Toggle directory on click
+                  >
+                    {lang === 'bg' ? structure[dir].directoryBg : dir.slice(1)}
                   </p>
-                  <ul className="page-list">
-                    {structure[dir].contents.map((page, index) => (
-                      <li key={`${dir}-${index}`}>
-                        <a href={`/page${dir}/${page.page}`}>
-                          {lang === 'bg' ? page.titleBg : page.titleEn}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  {expandedDirectories[dir] && ( // Check expanded state
+                    <ul className="page-list">
+                      {structure[dir].contents.map((page, index) => (
+                        <li key={`${dir}-${index}`}>
+                          <a href={`/page${dir}/${page.page}`}>
+                            {lang === 'bg' ? page.titleBg : page.titleEn}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-              )
-            ) : (
-              structure[dir].type === 'file' && (
-                <button onClick={() => { document.location.href = `/page${dir}` }}>
+              )}
+              {structure[dir].type === 'file' && (
+                <button 
+                  onClick={() => { document.location.href = `/page${dir}` }}
+                  className="file-button"
+                >
                   {lang === 'bg' ? structure[dir].titleBg : structure[dir].titleEn}
                 </button>
-              )
-            )}
-          </React.Fragment>
-        ))}
-        <button id="menuButton" onClick={() => { document.location.href = "/products" }}>
-          {lang === "bg" ? "Продукти" : "Products"}
-        </button>
-        <button id="menuButton" onClick={() => { document.location.href = "/vouchers" }}>
-          {lang === "bg" ? "Ваучери" : "Vouchers"}
-        </button>
-        {lang === "bg" ? (
-          <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>
-            Switch to English
+              )}
+            </React.Fragment>
+          ))}
+
+          <button id="menuButton" onClick={() => { document.location.href = "/products" }}>
+            {lang === "bg" ? "Продукти" : "Products"}
           </button>
-        ) : (
-          <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>
-            Смени на български
+          <button id="menuButton" onClick={() => { document.location.href = "/vouchers" }}>
+            {lang === "bg" ? "Ваучери" : "Vouchers"}
           </button>
-        )}
-      </div>
+          {lang === "bg" ? (
+            <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'en'); window.location.reload(); }}>
+              Switch to English
+            </button>
+          ) : (
+            <button id="menuButton" onClick={() => { localStorage.setItem('lang', 'bg'); window.location.reload(); }}>
+              Смени на български
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

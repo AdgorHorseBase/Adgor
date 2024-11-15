@@ -7,7 +7,7 @@ import Pansion from "./images/PansionIMG.jpeg";
 import Ezda from "./images/EzdaIMG.jpeg";
 import Steps from "./images/Steps.png";
 import StepsSmall from "./images/StepsSmall.png";
-import LineHores from "./images/LineHores.png";
+import LineHores from "./images/twohorses.png";
 import Foundation from "./images/Foundation.png";
 import FoundationCutUp from "./images/FoundationCutUp.png";
 import FoundationCutDown from "./images/FoundatonCutDown.png";
@@ -357,6 +357,50 @@ const WelcomePage = () => {
       </div>
       <div style={{ background: "#22120C", paddingTop: "5vw" }}>
         <img className="hat" src={Hat} alt="" />
+        <div id="SixServices">
+          {/* 1 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 2 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 3 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 4 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 5 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+          {/* 6 */}
+          <div className="serviceBox">
+            <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
+            <p className="serviceTitle">Услуга</p>
+            <p className="serviceText">Описание на услуга.</p>
+            <button className="moreServicesButton">Още</button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -387,10 +387,50 @@ li {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 1000px) {
   .hat {
     width: 50vw;
   }
+}
+
+/* services */
+#SixServices {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 160px;
+}
+
+.serviceBox {
+  width: clamp(270px, 25vw, 800px);
+  margin: clamp(20px, 2.5vw, 80px);
+  text-align: center;
+}
+
+.serviceImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+.serviceTitle {
+  color: white;
+  text-align: center;
+  font-size: 22px;
+}
+
+.serviceText {
+  color: white;
+  text-align: center;
+}
+
+.moreServicesButton {
+  background-color: #bda583;
+  color: #29160F;
+  font-weight: 200;
+  border: none;
 }

@@ -306,7 +306,8 @@ function Editor({ structure }) {
             } else if (element.type === "four_images") {
                 htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`
             } else if (element.type === "video") {
-                htmlContent += `<video id="pageVideo" src="/server/files/videos/${element.content.url}" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
+
+                htmlContent += `<video id="pageVideo" class="autoplay-video" src="/server/files/videos/${element.content.url}" ${element.content.autoplay ? "muted" : ""} controls></video>`;
             } else if (element.type === "menu") {
                 if (element.content.length > 0) {
                     htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;

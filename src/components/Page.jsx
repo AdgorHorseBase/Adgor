@@ -87,7 +87,7 @@ const MenuSections = () => {
       <button
         id="menuButton"
         onClick={() => {
-          document.location.href = "/Adgor";
+          document.location.href = "/";
         }}
       >
         {lang === "bg" ? "Начало" : "Home"}
@@ -106,7 +106,7 @@ const MenuSections = () => {
                     <ul className="page-list">
                       {structure[dir].contents.map((page, index) => (
                         <li key={`${dir}-${index}`}>
-                          <a href={`/Adgor/page${dir}/${page.page}`}>
+                          <a href={`/page${dir}/${page.page}`}>
                             {lang === "bg" ? page.titleBg : page.titleEn}
                           </a>
                         </li>
@@ -117,7 +117,7 @@ const MenuSections = () => {
               : structure[dir].type === "file" && (
                   <button
                     onClick={() => {
-                      document.location.href = `/Adgor/page${dir}`;
+                      document.location.href = `/page${dir}`;
                     }}
                   >
                     {lang === "bg"
@@ -131,7 +131,7 @@ const MenuSections = () => {
         id="menuButton"
         className="dot"
         onClick={() => {
-          document.location.href = "/Adgor/products";
+          document.location.href = "/products";
         }}
       >
         {lang === "bg" ? "Продукти" : "Products"}
@@ -139,7 +139,7 @@ const MenuSections = () => {
       <button
         id="menuButton"
         onClick={() => {
-          document.location.href = "/Adgor/vouchers";
+          document.location.href = "/vouchers";
         }}
       >
         {lang === "bg" ? "Ваучери" : "Vouchers"}
@@ -210,7 +210,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
       <button
         id="menuButton"
         onClick={() => {
-          document.location.href = "/Adgor";
+          document.location.href = "/";
         }}
       >
         {lang === "bg" ? "Начало" : "Home"}
@@ -249,7 +249,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                         <ul className="page-list-mobile">
                           {structure[dir].contents.map((page, index) => (
                             <li key={`${dir}-${index}`}>
-                              <a href={`/Adgor/page${dir}/${page.page}`}>
+                              <a href={`/page${dir}/${page.page}`}>
                                 {lang === "bg" ? page.titleBg : page.titleEn}
                               </a>
                             </li>
@@ -261,7 +261,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                 {structure[dir].type === "file" && (
                   <button
                     onClick={() => {
-                      document.location.href = `/Adgor/page${dir}`;
+                      document.location.href = `/page${dir}`;
                     }}
                     className="file-button"
                   >
@@ -276,7 +276,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           <button
             id="menuButton"
             onClick={() => {
-              document.location.href = "/Adgor/products";
+              document.location.href = "/products";
             }}
           >
             {lang === "bg" ? "Продукти" : "Products"}
@@ -284,7 +284,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           <button
             id="menuButton"
             onClick={() => {
-              document.location.href = "/Adgor/vouchers";
+              document.location.href = "/vouchers";
             }}
           >
             {lang === "bg" ? "Ваучери" : "Vouchers"}
@@ -329,12 +329,12 @@ function Page() {
         const pagePath = location.pathname.replace("/page/", "");
 
         const response = await axios.get(
-          "/Adgor/server/uploads/" + pagePath + "/page.json"
+          "/server/uploads/" + pagePath + "/page.json"
         );
         const content = response.data;
 
         const title = await axios.get(
-          "/Adgor/server/uploads/" + pagePath + "/schema.json"
+          "/server/uploads/" + pagePath + "/schema.json"
         );
 
         // Set the response data (HTML) to state

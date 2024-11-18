@@ -21,10 +21,10 @@ function App() {
     localStorage.setItem('lang', 'bg');
   }
 
-  const showFooter = !window.location.pathname.startsWith('/Adgor/admin');
+  const showFooter = !window.location.pathname.startsWith('/admin');
 
   return (
-    <BrowserRouter basename="/Adgor">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
 

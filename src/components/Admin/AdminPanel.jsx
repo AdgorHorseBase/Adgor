@@ -120,9 +120,9 @@ function AdminPanel() {
     const Structure = () => {
         return (
             <div style={{marginLeft: "10%"}}>
-                <button onClick={() => {document.location.href = "/Adgor/admin/create"}}>Create</button>
-                <button onClick={() => {document.location.href = "/Adgor/admin/products"}}>Products</button>
-                <button onClick={() => {document.location.href = "/Adgor/admin/vouchers"}}>Vouchers</button>
+                <button onClick={() => {document.location.href = "/admin/create"}}>Create</button>
+                <button onClick={() => {document.location.href = "/admin/products"}}>Products</button>
+                <button onClick={() => {document.location.href = "/admin/vouchers"}}>Vouchers</button>
                 <h2 id="PageStructure" style={{marginLeft: "0"}}>Page Structure</h2>
                 {/* {structure == true ? renderStructure(structure) : <h3>Empty</h3>} */}
                 {renderStructure(structure)}

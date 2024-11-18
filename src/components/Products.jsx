@@ -158,7 +158,7 @@ const Products = () => {
                             })}
 
                             {/* Custom Success Page Redirect */}
-                            <input type="hidden" name="redirect" value={`${window.location.origin}/Adgor/success`} />
+                            <input type="hidden" name="redirect" value={`${window.location.origin}/success`} />
 
                             <input type="submit" value={lang === "bg" ? "Изпрати" : "Submit"} style={{ width: '100%', padding: '10px', backgroundColor: '#d19d4f', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} />
                         </form>

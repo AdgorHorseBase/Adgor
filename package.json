@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "homepage": "https://AdgorHorseBase.github.io/Adgor/",
+  "homepage": "https://adgorhorsebase.github.io/Adgor/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

@@ -1,6 +1,7 @@
 {
   "name": "server",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://AdgorHorseBase.github.io/Adgor/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

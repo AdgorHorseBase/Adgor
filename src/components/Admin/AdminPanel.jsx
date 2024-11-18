@@ -46,7 +46,7 @@ function AdminPanel() {
     };
 
     const handleDelete = async (pagePath) => {
-        if(window.confirm("Are you sure?") == false) {
+        if(window.confirm("Are you sure?") === false) {
             return;
         }
 
@@ -56,7 +56,7 @@ function AdminPanel() {
 
         let path = pagePath;
 
-        if(pagePath[0] == "/") {
+        if(pagePath[0] === "/") {
             path = pagePath.slice(1);
         }
 

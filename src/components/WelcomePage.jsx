@@ -82,7 +82,7 @@ const WelcomePage = () => {
               />
             </svg>
           </a>
-          <a href="">
+          <a href="/">
             <svg
               id="TikTokSVG"
               viewBox="0 0 24 24"
@@ -145,7 +145,7 @@ const WelcomePage = () => {
                 />
               </svg>
             </a>
-            <a href="">
+            <a href="/">
               <svg
                 id="TikTokSVG"
                 viewBox="0 0 24 24"
@@ -165,7 +165,7 @@ const WelcomePage = () => {
 
       <div id="OneImageNextToTwoAlignment">
         <div id="TwoImagesOnTopOfEachOther">
-          <a href="" className="threeLinkText">
+          <a href="/" className="threeLinkText">
             <div
               className="threeImages"
               style={{ backgroundImage: `url(${TrenirovkiNaKone})` }}
@@ -178,7 +178,7 @@ const WelcomePage = () => {
             </div>
           </a>
 
-          <a href="" className="threeLinkText">
+          <a href="/" className="threeLinkText">
             <div
               className="threeImages"
               style={{ backgroundImage: `url(${Pansion})` }}
@@ -188,7 +188,7 @@ const WelcomePage = () => {
           </a>
         </div>
 
-        <a id="OneImageNextToTheTwo" href="" className="threeLinkText">
+        <a id="OneImageNextToTheTwo" href="/" className="threeLinkText">
           <div
             className="threeImages"
             id="OneImageNextToTwoTheImage"
@@ -254,7 +254,7 @@ const WelcomePage = () => {
           <img src={TypeseOfRidingCut} alt="" width={"100%"} />
           <div id="ThreeStyles">
             <div className="RidingStyle">
-              <a className="stylesLink" href="">
+              <a className="stylesLink" href="/">
                 <div className="stylesContent">
                   <img
                     className="stylesImage"
@@ -270,7 +270,7 @@ const WelcomePage = () => {
               </a>
             </div>
             <div className="RidingStyle">
-              <a className="stylesLink" href="">
+              <a className="stylesLink" href="/">
                 <div className="stylesContent">
                   <img
                     className="stylesImage"
@@ -286,7 +286,7 @@ const WelcomePage = () => {
               </a>
             </div>
             <div className="RidingStyle">
-              <a className="stylesLink" href="">
+              <a className="stylesLink" href="/">
                 <div className="stylesContent">
                   <img
                     className="stylesImage"

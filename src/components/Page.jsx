@@ -76,11 +76,13 @@ const MenuSections = () => {
     }
   }, [structure]);
 
+  const storedLang = localStorage.getItem("lang");
+
   useEffect(() => {
-    if (localStorage.getItem("lang")) {
-      setLang(localStorage.getItem("lang"));
+    if (storedLang) {
+      setLang(storedLang);
     }
-  }, [localStorage.getItem("lang")]);
+  }, [storedLang]);
 
   return window.innerWidth > 750 ? (
     <div className="Menu">
@@ -318,8 +320,8 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
 
 function Page() {
   const [pageContent, setPageContent] = useState("Loading...");
-  const [titleBg, setTitleBg] = useState("Blog");
-  const [titleEn, setTitleEn] = useState("Blog");
+  // const [titleBg, setTitleBg] = useState("Blog");
+  // const [titleEn, setTitleEn] = useState("Blog");
   const location = useLocation(); // To get the current path
 
   useEffect(() => {
@@ -339,8 +341,8 @@ function Page() {
 
         // Set the response data (HTML) to state
         setPageContent(content);
-        setTitleBg(title.data.titleBg);
-        setTitleEn(title.data.titleEn);
+        // setTitleBg(title.data.titleBg);
+        // setTitleEn(title.data.titleEn);
       } catch (error) {
         console.error("Error fetching page content:", error);
         setPageContent("<p>Failed to load page content.</p>");
@@ -352,11 +354,13 @@ function Page() {
 
   const [lang, setLang] = useState("bg");
 
+  const storedLang = localStorage.getItem("lang");
+
   useEffect(() => {
-    if (localStorage.getItem("lang")) {
-      setLang(localStorage.getItem("lang"));
+    if (storedLang) {
+      setLang(storedLang);
     }
-  }, [localStorage.getItem("lang")]);
+  }, [storedLang]);
 
   useEffect(() => {
     const elementsBg = document.querySelectorAll(".bg");

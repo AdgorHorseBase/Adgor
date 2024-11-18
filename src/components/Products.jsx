@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 
-const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
-
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState({});
@@ -51,11 +49,13 @@ const Products = () => {
         setShowForm(false);
     };
 
+    const storedLang = localStorage.getItem("lang");
+
     useEffect(() => {
-        if (localStorage.getItem('lang')) {
-            setLang(localStorage.getItem('lang'));
+        if (storedLang) {
+            setLang(storedLang);
         }
-    }, [localStorage.getItem('lang')]);
+    }, [storedLang]);
 
     return (
         <div>

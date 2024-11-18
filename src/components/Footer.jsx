@@ -49,7 +49,7 @@ const Footer = () => {
                             />
                             </svg>
                         </a>
-                        <a style={{margin: "0 4px"}} href="">
+                        <a style={{margin: "0 4px"}} href="/">
                             <svg
                             id="TikTokSVG"
                             viewBox="0 0 24 24"

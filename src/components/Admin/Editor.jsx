@@ -347,6 +347,7 @@ function Editor({ structure }) {
             )
           );
         }
+      break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -643,7 +644,7 @@ function Editor({ structure }) {
                 <img
                   id="Added_One_Image_img"
                   src={URL + "/image?name=" + element.content}
-                  alt="image"
+                  alt=""
                 />
                 <br></br>
                 <input
@@ -661,12 +662,12 @@ function Editor({ structure }) {
                 <img
                   id="Added_Two_Images_img_one"
                   src={URL + "/image?name=" + element.content[0]}
-                  alt="Image 1"
+                  alt=""
                 />
                 <img
                   id="Added_Two_Images_img_two"
                   src={URL + "/image?name=" + element.content[1]}
-                  alt="Image 2"
+                  alt=""
                 />
 
                 <br></br>
@@ -702,23 +703,23 @@ function Editor({ structure }) {
                 <img
                   id="Added_Four_Images_img_one"
                   src={URL + "/image?name=" + element.content[0]}
-                  alt="Image 1"
+                  alt=""
                 />
                 <img
                   id="Added_Four_Images_img_two"
                   src={URL + "/image?name=" + element.content[1]}
-                  alt="Image 2"
+                  alt=""
                 />
                 <br></br>
                 <img
                   id="Added_Four_Images_img_three"
                   src={URL + "/image?name=" + element.content[2]}
-                  alt="Image 3"
+                  alt=""
                 />
                 <img
                   id="Added_Four_Images_img_four"
                   src={URL + "/image?name=" + element.content[3]}
-                  alt="Image 4"
+                  alt=""
                 />
                 <br></br>
                 <form onSubmit={(e) => e.preventDefault()}>
@@ -861,7 +862,7 @@ function Editor({ structure }) {
                   <img
                     id="Added_One_Image_img"
                     src={URL + "/image?name=" + element.content.url}
-                    alt="image"
+                    alt=""
                   />
                   <br></br>
                   <input

@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 
-const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
-
 const Vouchers = () => {
     const [vouchers, setVouchers] = useState([]);
     const [products, setProducts] = useState([]);
@@ -84,11 +82,13 @@ const Vouchers = () => {
         setShowForm(false);
     };
 
+    const storedLang = localStorage.getItem("lang");
+
     useEffect(() => {
-        if (localStorage.getItem('lang')) {
-            setLang(localStorage.getItem('lang'));
+        if (storedLang) {
+            setLang(storedLang);
         }
-    }, [localStorage.getItem('lang')]);
+    }, [storedLang]);
 
     return (
         <div>
@@ -169,7 +169,7 @@ const Vouchers = () => {
                             <label htmlFor="address">{lang === "bg" ? "Адрес" : "Address"}:</label>
                             <input type="text" id="address" name="address" required style={{ width: '100%', padding: '8px', margin: '8px 0', boxSizing: 'border-box', backgroundColor: "#f7f1e9", border: "none", borderRadius: "16px" }} /><br /><br />
 
-                            <h3>{lang == "bg" ? "Избрани Ваучери" : "Selected Vouchers"}:</h3>
+                            <h3>{lang === "bg" ? "Избрани Ваучери" : "Selected Vouchers"}:</h3>
                             <ul>
                                 {Object.keys(selectedVouchers).map(voucherId => {
                                     const voucher = selectedVouchers[voucherId];

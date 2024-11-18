@@ -923,6 +923,7 @@ function Editor({ structure }) {
                     height="250"
                     key={`${element.content.url}-${element.content.allowFullscreen}`}
                     src={element.content.url}
+                    title={`YouTube video ${element.id}`}
                     allowFullScreen={element.content.allowFullscreen} // Conditionally add the allowFullScreen attribute
                   />
                 )}

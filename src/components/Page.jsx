@@ -335,9 +335,9 @@ function Page() {
         );
         const content = response.data;
 
-        const title = await axios.get(
-          "/server/uploads/" + pagePath + "/schema.json"
-        );
+        // const title = await axios.get(
+        //   "/server/uploads/" + pagePath + "/schema.json"
+        // );
 
         // Set the response data (HTML) to state
         setPageContent(content);

@@ -6,7 +6,7 @@ const Success = () => {
       <h1 style={styles.heading}>Thank You for Your Purchase!</h1>
       <p style={styles.message}>Your order has been successfully completed.</p>
       <p style={styles.orderInfo}>A confirmation email has been sent to your inbox.</p>
-      <button style={styles.button} onClick={() => window.location.href = '/'}>Back to Home</button>
+      <button style={styles.button} onClick={() => window.location.href = '/Adgor'}>Back to Home</button>
     </div>
   );
 };

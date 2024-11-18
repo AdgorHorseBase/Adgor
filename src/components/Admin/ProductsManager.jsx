@@ -117,7 +117,7 @@ const ProductsManager = () => {
             <h2>Products</h2>
 
             <button onClick={saveProducts}>Save</button>
-            <button onClick={() => {document.location.href = "/admin"}}>Home</button>
+            <button onClick={() => {document.location.href = "/Adgor/admin"}}>Home</button>
             <br />
             <br />
 

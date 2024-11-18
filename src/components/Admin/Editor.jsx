@@ -566,7 +566,7 @@ function Editor({ structure }) {
         <button
           id="home_button"
           onClick={() => {
-            document.location.href = "/admin";
+            document.location.href = "/Adgor/admin";
           }}
         >
           Home

@@ -116,7 +116,7 @@ const VouchersManager = () => {
         <div>
             <h1>Vouchers Manager</h1>
             <button onClick={saveVouchers}>Save</button>
-            <button onClick={() => {document.location.href = "/admin"}}>Home</button>
+            <button onClick={() => {document.location.href = "/Adgor/admin"}}>Home</button>
             <br />
             <br />
 

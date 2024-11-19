@@ -403,7 +403,7 @@ function Page() {
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}
 
-      <div style={{marginTop: "12px"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
+      <div style={{marginTop: "12px", marginBottom: "48px"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
     </div>
   );
 }

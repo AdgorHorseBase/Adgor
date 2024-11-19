@@ -233,13 +233,13 @@
 
 .ql-align-center {
     text-align: center;
-    font-family: Source Serif Pro;
+    /* font-family: Source Serif Pro; */
 
 }
 
 .ql-align-right {
     text-align: end;
-    font-family: Source Serif Pro;
+    /* font-family: Source Serif Pro; */
 
 }
 

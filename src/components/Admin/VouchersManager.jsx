@@ -53,6 +53,13 @@ const VouchersManager = () => {
         setVouchers(updatedVouchers);
     };
 
+    // Deletes an existing voucher
+    const handleDeleteVoucher = (index) => {
+        const updatedVouchers = [...vouchers];
+        updatedVouchers.splice(index, 1);
+        setVouchers(updatedVouchers);
+    }
+
     const addVoucher = async () => {
         newVoucher.id = uuidv4();
     
@@ -166,6 +173,7 @@ const VouchersManager = () => {
                         />
                     </label>
                     <br />
+                    <button className="deleteButton" type="button" onClick={() => handleDeleteVoucher(index)}>Delete</button>
                 </div>
             )) : <div>No Vouchers</div>}
 

@@ -53,6 +53,13 @@ const ProductsManager = () => {
         setProducts(updatedProducts);
     };
 
+    // Deletes an existing product
+    const handleDeleteProduct = (index) => {
+        const updatedProducts = [...products];
+        updatedProducts.splice(index, 1);
+        setProducts(updatedProducts);
+    }
+
     const addProduct = async () => {
         newProduct.id = uuidv4();
     
@@ -167,6 +174,7 @@ const ProductsManager = () => {
                         />
                     </label>
                     <br />
+                    <button className="deleteButton" type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
                 </div>
             )) : <div>No Products</div>}
 

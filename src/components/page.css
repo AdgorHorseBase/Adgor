@@ -25,9 +25,7 @@ h1 {
 }
 
 #pageText {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  margin-left: 10vw;
+  margin: 12px 10%;
   width: 80vw;
   text-align: center;
   font-style: italic;
@@ -123,10 +121,11 @@ h1 {
 #pageYouTube {
   margin-top: 2vh;
   margin-bottom: 2vh;
-  width: 80vw;
+  width: 80%;
   height: calc(80vw * 0.5625);
-  margin-left: 10vw;
+  margin: 12px 10%;
   border-radius: 10px;
+  border: none;
 }
 
 #pageImageText {
@@ -164,9 +163,9 @@ h1 {
   margin-left: 10vw;
 }
 
-#pageFormated {
-  margin-left: 10vw;
-  width: 80vw;
+.pageFormated {
+  margin: 0 10%;
+  width: 80%;
 }
 
 .pageHtml {

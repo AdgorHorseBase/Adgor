@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ContentEditable from "react-contenteditable";
 import { v4 as uuidv4 } from "uuid";
@@ -23,8 +23,8 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
-const MyCustomToolbar = () => (
-  <div id="toolbar">
+const MyCustomToolbar = ({ id }) => (
+  <div id={id}>
     <select className="ql-font">
       <option value="">Normal</option>
       <option value="arial">Arial</option>
@@ -153,7 +153,7 @@ function Editor({ structure }) {
         id: uuidv4(),
         type,
       };
-    } else if (type === "text" || type === "title") {
+    } else if (type === "text" || type === "title" || type === "formated") {
       newElement = {
         id: uuidv4(),
         type,
@@ -176,14 +176,8 @@ function Editor({ structure }) {
         id: uuidv4(),
         type,
         content:
-          type === "formated"
-            ? "Type here"
-            : type === "html"
+          type === "html"
             ? "Enter your html"
-            : type === "formated"
-            ? ""
-            : type === "image"
-            ? ""
             : "",
       };
     }
@@ -192,7 +186,7 @@ function Editor({ structure }) {
   };
 
   // Updates the content of an element in the schema
-  const updateElement = async (id, newContent, type) => {
+  const updateElement = useCallback(async (id, newContent, type) => {
     const formData = new FormData();
     switch (type) {
       case "image":
@@ -348,6 +342,21 @@ function Editor({ structure }) {
           );
         }
       break;
+      case "formated":
+        setSchema((prevSchema) =>
+          prevSchema.map((el) =>
+            el.id === id
+              ? {
+                  ...el,
+                  content: {
+                    textBg: newContent.textBg || el.content.textBg,
+                    textEn: newContent.textEn || el.content.textEn,
+                  },
+                }
+              : el
+          )
+        );
+      break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -383,7 +392,7 @@ function Editor({ structure }) {
         }
         break;
     }
-  };
+  }, [schema]);
 
   // Handles the selection of a directory for the menu
   const selectDirectory = (id, directory) => {
@@ -457,7 +466,8 @@ function Editor({ structure }) {
           htmlContent += `</select>`;
         }
       } else if (element.type === "formated") {
-        htmlContent += `<div id="pageFormated">${element.content}</div>`;
+        htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
+        htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
       } else if (element.type === "youtube") {
         htmlContent += `<iframe id="pageYouTube" src="${element.content.url}${
           element.content.autoplay ? "?autoplay=1" : ""
@@ -853,19 +863,35 @@ function Editor({ structure }) {
               </div>
             )}
             {element.type === "formated" && (
-              <div id="Added_Formated">
-                <MyCustomToolbar /> {/* Include the custom toolbar */}
-                <ReactQuill
-                  value={element.content}
-                  onChange={(newContent) =>
-                    updateElement(element.id, newContent)
-                  }
-                  modules={{
-                    toolbar: {
-                      container: "#toolbar", // Use the custom toolbar
-                    },
-                  }}
-                />
+              <div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-bg`} />
+                  <ReactQuill
+                    value={element.content.textBg}
+                    onChange={(newContent) =>
+                        updateElement(element.id, { textBg: newContent }, "formated")
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-bg`,
+                      },
+                    }}
+                  />
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-en`} />
+                  <ReactQuill
+                    value={element.content.textEn}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textEn: newContent }, "formated")
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-en`,
+                      },
+                    }}
+                  />
+                </div>
               </div>
             )}
             {element.type === "image_text" && (

@@ -402,6 +402,12 @@ function Editor({ structure }) {
     setSchema(schema.filter((el) => el.id !== id));
   };
 
+  const handlePaste = async (e) => {
+    e.preventDefault();
+    const text = await navigator.clipboard.readText();
+    document.execCommand("insertText", false, text);
+  };
+
   // Generates static HTML file and saves the schema for future editing
   const savePage = async () => {
     if (!page) {
@@ -419,8 +425,12 @@ function Editor({ structure }) {
         htmlContent += `<h2 id="pageTitle" class="bg">${element.content.textBg}</h2>`;
         htmlContent += `<h2 id="pageTitle" class="en">${element.content.textEn}</h2>`;
       } else if (element.type === "text") {
-        htmlContent += `<p id="pageText" class="bg">${element.content.textBg}</p>`;
-        htmlContent += `<p id="pageText" class="en">${element.content.textEn}</p>`;
+        const formatText = (text) => {
+          return text.replace(/<div>/g, "").replace(/<\/div>/g, "<br />");
+        };
+
+        htmlContent += `<p id="pageText" class="bg">${formatText(element.content.textBg)}</p>`;
+        htmlContent += `<p id="pageText" class="en">${formatText(element.content.textEn)}</p>`;
       } else if (element.type === "html") {
         htmlContent += `<div class="pageHtml">${decodeHTML(
           element.content
@@ -615,6 +625,7 @@ function Editor({ structure }) {
                       textEn: element.content.textEn,
                     })
                   }
+                  onPaste={handlePaste}
                   tagName="p"
                   id="Added_Text"
                 />
@@ -626,6 +637,7 @@ function Editor({ structure }) {
                       textEn: e.target.value,
                     })
                   }
+                  onPaste={handlePaste}
                   tagName="p"
                   id="Added_Text"
                 />

@@ -378,7 +378,6 @@ function Page() {
   useEffect(() => {
     const handleScroll = () => {
       const videos = document.querySelectorAll('.autoplay-video');
-      console.log(videos);
       videos.forEach(video => {
         const rect = video.getBoundingClientRect();
         if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
@@ -402,7 +401,7 @@ function Page() {
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}
 
-      <div dangerouslySetInnerHTML={{ __html: pageContent }} />
+      <div style={{marginTop: "12px"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
     </div>
   );
 }

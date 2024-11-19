@@ -396,7 +396,9 @@ function Page() {
 
   return (
     <div>
-      <MenuSections />
+      <div id="StickyMenu">
+        <MenuSections />
+      </div>
 
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}

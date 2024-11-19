@@ -132,7 +132,7 @@ function AdminPanel() {
 
     return (
         <div>
-            <h1 id="title" >Admin Panel</h1>
+            <h1 id="title" style={{marginLeft: "0"}}>Admin Panel</h1>
             <Routes>
                 <Route path="/" element={<Structure />} />
                 <Route path="/create" element={<Editor structure={structure} />} />

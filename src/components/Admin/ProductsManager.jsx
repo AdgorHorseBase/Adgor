@@ -120,109 +120,114 @@ const ProductsManager = () => {
     };
 
     return (
-        <div>
-            <h2>Products</h2>
+        <div style={{margin: "0 10%", marginBottom: "36px"}}>
+            <h2 style={{fontSize: "48px", margin: "0"}}>Products Manager</h2>
 
             <button onClick={saveProducts}>Save</button>
             <button onClick={() => {document.location.href = "/admin"}}>Home</button>
             <br />
             <br />
 
-            {/* Rendering existing products with editable fields */}
-            {products.length > 0 ? products.map((item, index) => (
-                <div key={index}>
-                    {item.imagePath && (
-                        <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{ width: "100px" }} />
-                    )}
-                    <br />
-                    <label>
-                        Change Image:
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Name (BG):
-                        <input
-                            type="text"
-                            name="nameBg"
-                            value={item.nameBg}
-                            onChange={(e) => handleEditProductChange(index, e)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Name (EN):
-                        <input
-                            type="text"
-                            name="nameEn"
-                            value={item.nameEn}
-                            onChange={(e) => handleEditProductChange(index, e)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Price:
-                        <input
-                            type="text"
-                            name="price"
-                            value={item.price}
-                            onChange={(e) => handleEditProductChange(index, e)}
-                        />
-                    </label>
-                    <br />
-                    <button className="deleteButton" type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
-                </div>
-            )) : <div>No Products</div>}
+            <div style={{display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px"}}>
+                {/* Rendering existing products with editable fields */}
+                {products.length > 0 ? products.map((item, index) => (
+                    <div key={index} style={{width: "300px"}}>
+                        {item.imagePath && (
+                            <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                        )}
+                        <br />
+                        <label>
+                            Change Image:
+                            <input
+                                type="file"
+                                accept="image/*"
+                                style={{marginTop: "0", marginBottom: "6px"}}
+                                onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Name (BG):
+                            <input
+                                type="text"
+                                name="nameBg"
+                                value={item.nameBg}
+                                onChange={(e) => handleEditProductChange(index, e)}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Name (EN):
+                            <input
+                                type="text"
+                                name="nameEn"
+                                value={item.nameEn}
+                                onChange={(e) => handleEditProductChange(index, e)}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Price:
+                            <input
+                                type="text"
+                                name="price"
+                                value={item.price}
+                                onChange={(e) => handleEditProductChange(index, e)}
+                            />
+                        </label>
+                        <br />
+                        <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
+                    </div>
+                )) : <div>No Products</div>}
+            
 
-            {/* Form to add new product */}
-            <div>
-                <h3>Add New Product</h3>
-                <form>
-                    <label>
-                        Choose Image:
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Name (BG):
-                        <input
-                            type="text"
-                            name="nameBg"
-                            value={newProduct.nameBg}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Name (EN):
-                        <input
-                            type="text"
-                            name="nameEn"
-                            value={newProduct.nameEn}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Price:
-                        <input
-                            type="text"
-                            name="price"
-                            value={newProduct.price}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <br />
-                    <button type="button" onClick={addProduct}>Add Product</button>
-                </form>
+                {/* Form to add new product */}
+                <div style={{width: "300px"}}>
+                    <h3 style={{fontSize: "36px", margin: "0"}}>Add New Product</h3>
+                    <form>
+                        <label>
+                            Choose Image:
+                            <input
+                                type="file"
+                                accept="image/*"
+                                style={{marginTop: "0", marginBottom: "6px"}}
+                                onChange={handleFileChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Name (BG):
+                            <input
+                                type="text"
+                                name="nameBg"
+                                value={newProduct.nameBg}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Name (EN):
+                            <input
+                                type="text"
+                                name="nameEn"
+                                value={newProduct.nameEn}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Price:
+                            <input
+                                type="text"
+                                name="price"
+                                value={newProduct.price}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <br />
+                        <button style={{margin: "6px 0"}} type="button" onClick={addProduct}>Add Product</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

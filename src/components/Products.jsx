@@ -154,7 +154,7 @@ const Products = () => {
                                 const product = selectedProducts[productId];
                                 return (
                                     <div key={productId}>
-                                        <input type="hidden" name={product.name} value={`Quantity: ${product.quantity}`} />
+                                        <input type="hidden" name={product.nameEn} value={`Quantity: ${product.quantity}`} />
                                     </div>
                                 );
                             })}

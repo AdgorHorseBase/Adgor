@@ -200,7 +200,7 @@ const Vouchers = () => {
                                 const voucher = selectedVouchers[voucherId];
                                 return (
                                     <div key={voucherId}>
-                                        <input type="hidden" name={voucher.name} value={`Quantity: ${voucher.quantity}`} />
+                                        <input type="hidden" name={voucher.nameEn} value={`Quantity: ${voucher.quantity}`} />
                                     </div>
                                 );
                             })}
@@ -210,7 +210,7 @@ const Vouchers = () => {
                                 const product = selectedProducts[productId];
                                 return (
                                     <div key={productId}>
-                                        <input type="hidden" name={product.name} value={`Quantity: ${product.quantity}`} />
+                                        <input type="hidden" name={product.nameEn} value={`Quantity: ${product.quantity}`} />
                                     </div>
                                 );
                             })}

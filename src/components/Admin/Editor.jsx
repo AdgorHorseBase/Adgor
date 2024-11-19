@@ -302,7 +302,7 @@ function Editor({ structure }) {
         }
         break;
       case "image_text":
-        if (newContent?.url) {
+        if (newContent.url !== schema.find((el) => el.id === id).content.url) {
           formData.append("image", newContent.url);
 
           axios
@@ -442,7 +442,7 @@ function Editor({ structure }) {
       } else if (element.type === "four_images") {
         htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`;
       } else if (element.type === "video") {
-        htmlContent += `<video id="pageVideo" src="/server/files/videos/${
+        htmlContent += `<video id="pageVideo" ${element.content.autoplay ? "class='autoplay-video' muted" : ""} src="/server/files/videos/${
           element.content.url
         }" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
       } else if (element.type === "menu") {

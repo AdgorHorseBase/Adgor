@@ -34,11 +34,9 @@ h1 {
 }
 
 #pageOneImg {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  margin-left: 10vw;
-  width: 80vw;
-  width: 38vw;
+  margin: 18px 0;
+  margin-left: 10%;
+  width: 80%;
   border-radius: 10px;
 }
 

@@ -59,7 +59,9 @@ const Products = () => {
 
     return (
         <div>
-            <MenuSections />
+            <div id="StickyMenu">
+                <MenuSections />
+            </div>
             <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Продукти" : "Products"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
@@ -135,8 +137,8 @@ const Products = () => {
                             <label htmlFor="address">{lang === "bg" ? "Адрес" : "Address"}:</label>
                             <input type="text" id="address" name="address" required style={{ width: '100%', padding: '8px', margin: '8px 0', boxSizing: 'border-box', backgroundColor: "#f7f1e9", border: "none", borderRadius: "16px" }} /><br /><br />
 
-                            <h3>{lang === "bg" ? "Избрани Продукти" : "Selected Products"}:</h3>
-                            <ul>
+                            <h3 style={{marginBottom: "0", marginTop: "0"}}>{lang === "bg" ? "Избрани Продукти" : "Selected Products"}:</h3>
+                            <ul style={{margin: "0"}}>
                                 {Object.keys(selectedProducts).map(productId => {
                                     const product = selectedProducts[productId];
                                     return (
@@ -160,7 +162,7 @@ const Products = () => {
                             {/* Custom Success Page Redirect */}
                             <input type="hidden" name="redirect" value={`${window.location.origin}/success`} />
 
-                            <input type="submit" value={lang === "bg" ? "Изпрати" : "Submit"} style={{ width: '100%', padding: '10px', backgroundColor: '#d19d4f', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} />
+                            <input type="submit" value={lang === "bg" ? "Изпрати" : "Submit"} style={{ width: '100%', marginTop: "18px", padding: '10px', backgroundColor: '#d19d4f', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} />
                         </form>
                     </div>
                 </div>

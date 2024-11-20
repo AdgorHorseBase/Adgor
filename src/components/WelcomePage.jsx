@@ -22,17 +22,20 @@ import Sevice from "./images/usluga.webp";
 import Girl from "./images/GirlOnHorse.webp";
 import Jumping from "./images/skacha.webp";
 import { MenuSections } from "./Page";
+import { useTranslation } from "react-i18next";
 
 const WelcomePage = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
         <img id="HeadLogo" alt="" src={Logo}></img>
         <div id="Titles">
-          <p id="Title1">Конна База</p>
-          <p id="TItle2">АДГОР</p>
-          <p id="Title3">1# в България по Western и NH</p>
-          <button id="moreButton">Още</button>
+          <p id="Title1">{t("horseBase")}</p>
+          <p id="TItle2">{t("adgor")}</p>
+          <p id="Title3">{t("numberOne")}</p>
+          <button id="moreButton">{t("more")}</button>
         </div>
       </div>
       <div id="StickyMenu">
@@ -171,9 +174,9 @@ const WelcomePage = () => {
               style={{ backgroundImage: `url(${TrenirovkiNaKone})` }}
             >
               <p className="threeTexts">
-                Тренировки
+                {t("workouts")}
                 <br />
-                На Коне
+                {t("forHorses")}
               </p>
             </div>
           </a>
@@ -183,7 +186,7 @@ const WelcomePage = () => {
               className="threeImages"
               style={{ backgroundImage: `url(${Pansion})` }}
             >
-              <p className="threeTexts">Пансион</p>
+              <p className="threeTexts">{t("boardingHouse")}</p>
             </div>
           </a>
         </div>
@@ -194,7 +197,7 @@ const WelcomePage = () => {
             id="OneImageNextToTwoTheImage"
             style={{ backgroundImage: `url(${Ezda})` }}
           >
-            <p className="threeTexts">Езда</p>
+            <p className="threeTexts">{t("riding")}</p>
           </div>
         </a>
       </div>
@@ -213,7 +216,7 @@ const WelcomePage = () => {
           ) : (
             <div>
               <div className="alignCenter">
-                <p id="WantToRide">Искате да яздите?</p>
+                <p id="WantToRide">{t("youWantToRide")}</p>
               </div>
 
               <div
@@ -224,9 +227,9 @@ const WelcomePage = () => {
                 }}
               >
                 <ul>
-                  <li>Обадете се</li>
-                  <li>Запазете час</li>
-                  <li>Насладете се на ездата</li>
+                  <li>{t("callUs")}</li>
+                  <li>{t("makeAnAppointment")}</li>
+                  <li>{t("enjoyTheRide")}</li>
                 </ul>
               </div>
               <img src={LineHores} alt="" width={"100%"} />
@@ -239,8 +242,8 @@ const WelcomePage = () => {
         <div style={{ backgroundImage: `url(${Foundation})` }} id="Foundation">
           <img src={FoundationCutUp} alt="" width={"100%"} />
           <div id="FoundationText">
-            Фондация <br /> “Адгор за конете” <br />
-            <button id="AboutFoundationButon">Още</button>
+            {t("foundation")} <br /> “{t("adgorForHorses")}” <br />
+            <button id="AboutFoundationButon">{t("more")}</button>
           </div>
           <img src={FoundationCutDown} alt="" width={"100%"} />
         </div>
@@ -262,9 +265,9 @@ const WelcomePage = () => {
                     alt=""
                   />
                   <p className="stylesName">
-                    УЕСТЪРН
+                    {t("western")}
                     <br />
-                    ЕЗДА
+                    {t("ride")}
                   </p>
                 </div>
               </a>
@@ -278,9 +281,9 @@ const WelcomePage = () => {
                     alt=""
                   />
                   <p className="stylesName">
-                    NATURAL
+                    {t("natural")}
                     <br />
-                    HORSMANSHIP
+                    {t("horsemanship")}
                   </p>
                 </div>
               </a>
@@ -293,7 +296,7 @@ const WelcomePage = () => {
                     src={ExampleCircleImageRiding}
                     alt=""
                   />
-                  <p className="stylesName">ФАЛАБЕЛА</p>
+                  <p className="stylesName">{t("falabella")}</p>
                 </div>
               </a>
             </div>
@@ -310,7 +313,7 @@ const WelcomePage = () => {
             id="OurAchievementsTitle"
             style={{ color: "white", fontWeight: "900", marginTop: "4vw" }}
           >
-            Нашите постижения
+            {t("ourAchievements")}
           </p>
           <br />
           <div
@@ -324,13 +327,11 @@ const WelcomePage = () => {
                 textAlign: "center",
               }}
             >
-              Adgor riding complex offers riding, groundwork, horse and people
-              training. It is up to you to make up your mind about what exactly
-              you would like to achieve, feel or learn.
+              {t("achievementsDescription")}
             </p>
           </div>
           <br />
-          <button id="AboutAchievementsButon">Още</button>
+          <button id="AboutAchievementsButon">{t("more")}</button>
         </div>
         <br />
         {window.innerWidth < 3950 && (

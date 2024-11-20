@@ -6,7 +6,9 @@ import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.webp";
 import Pansion from "./images/PansionIMG.webp";
 import Ezda from "./images/EzdaIMG.webp";
 import Steps from "./images/Steps.webp";
+import StepsEn from "./images/StepsEn.webp";
 import StepsSmall from "./images/StepsSmall.webp";
+import StepsSmallEn from "./images/StepsSmallEn.webp";
 import LineHores from "./images/twohorses.webp";
 import Foundation from "./images/Foundation.webp";
 import FoundationCutUp from "./images/FoundationCutUp.png";
@@ -25,7 +27,7 @@ import { MenuSections } from "./Page";
 import { useTranslation } from "react-i18next";
 
 const WelcomePage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div>
@@ -203,12 +205,12 @@ const WelcomePage = () => {
       </div>
 
       {window.innerWidth > 800 ? (
-        <img src={Steps} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+        <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
       ) : (
         <>
           {window.innerWidth > 500 ? (
             <img
-              src={StepsSmall}
+              src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}

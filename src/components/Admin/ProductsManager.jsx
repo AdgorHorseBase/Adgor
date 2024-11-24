@@ -80,16 +80,46 @@ const ProductsManager = () => {
         setProducts(updatedProducts);
     };
 
+    // Handles the change for editing existing group parent (excluding images)
+    const handleEditGroupParentChange = (index, e) => {
+        const { name, value } = e.target;
+        const updatedProducts = [...products];
+        updatedProducts[index] = { ...updatedProducts[index], [name]: value };
+        setProducts(updatedProducts);
+    };
+
+    // Handles the change for editing existing products inside a group (excluding images)
+    const handleEditGroupProductChange = (groupIndex, productIndex, e) => {
+        const { name, value } = e.target;
+        const updatedProducts = [...products];
+        updatedProducts[groupIndex].products[productIndex] = { ...updatedProducts[groupIndex].products[productIndex], [name]: value };
+        setProducts(updatedProducts);
+    };
+
     // Deletes an existing product
     const handleDeleteProduct = (index) => {
         const updatedProducts = [...products];
         updatedProducts.splice(index, 1);
         setProducts(updatedProducts);
-    }
+    };
+
+    // Deletes an existing group
+    const handleDeleteGroup = (index) => {
+        const updatedProducts = [...products];
+        updatedProducts.splice(index, 1);
+        setProducts(updatedProducts);
+    };
+
+    // Deletes a product inside a group
+    const handleDeleteGroupProduct = (groupIndex, productIndex) => {
+        const updatedProducts = [...products];
+        updatedProducts[groupIndex].products.splice(productIndex, 1);
+        setProducts(updatedProducts);
+    };
 
     const addProduct = async () => {
         newProduct.id = uuidv4();
-    
+
         try {
             const formData = new FormData();
             if (selectedFile) {
@@ -99,7 +129,7 @@ const ProductsManager = () => {
                         "Content-Type": "multipart/form-data"
                     }
                 });
-    
+
                 // Update the image path immediately after successful upload
                 newProduct.imagePath = response.data.image;
                 setProducts([...products, newProduct]); // Add new product to state
@@ -115,7 +145,7 @@ const ProductsManager = () => {
 
     const addGroup = async () => {
         newGroup.id = uuidv4();
-    
+
         try {
             const formData = new FormData();
             if (newGroup.imagePath) {
@@ -125,7 +155,7 @@ const ProductsManager = () => {
                         "Content-Type": "multipart/form-data"
                     }
                 });
-    
+
                 // Update the image path immediately after successful upload
                 newGroup.imagePath = response.data.image;
                 setProducts([...products, newGroup]); // Add new group to state
@@ -138,13 +168,61 @@ const ProductsManager = () => {
         }
     };
 
+    // Handles the change in the input fields for the new product inside a group
+    const handleNewGroupProductChange = (e) => {
+        const { name, value } = e.target;
+        setNewGroupProduct({ ...newGroupProduct, [name]: value });
+    };
+
+    // Handles the image file selection for new products inside a group
+    const handleNewGroupProductFileChange = (e) => {
+        setNewGroupProduct({ ...newGroupProduct, imagePath: e.target.files[0] });
+    };
+
+    // Handles the image file selection for edited products inside a group
+    const handleEditGroupProductFileChange = (groupIndex, productIndex, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const updatedEditFiles = { ...editFiles, [`${groupIndex}-${productIndex}`]: file };
+            setEditFiles(updatedEditFiles); // Track the new file for the product being edited inside the group
+        }
+    };
+
+    // Adds a new product to a group
+    const addGroupProduct = async (groupIndex) => {
+        newGroupProduct.id = uuidv4();
+
+        try {
+            const formData = new FormData();
+            if (newGroupProduct.imagePath) {
+                formData.append("image", newGroupProduct.imagePath);
+                const response = await axios.post(URL + "/image", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+
+                // Update the image path immediately after successful upload
+                newGroupProduct.imagePath = response.data.image;
+                const updatedProducts = [...products];
+                updatedProducts[groupIndex].products.push(newGroupProduct);
+                setProducts(updatedProducts); // Add new product to group
+                setNewGroupProduct({ id: '', imagePath: '', nameBg: '', nameEn: '' });
+            } else {
+                alert("No file selected for upload.");
+            }
+        } catch (err) {
+            alert(err);
+        }
+    };
+
     const saveProducts = async () => {
         try {
             // Handle image file upload for edited products if there are any changes
             const updatedProducts = [...products];
-    
-            for (let index in editFiles) {
-                const file = editFiles[index];
+
+            for (let key in editFiles) {
+                const file = editFiles[key];
                 if (file) {
                     const formData = new FormData();
                     formData.append("image", file);
@@ -153,16 +231,21 @@ const ProductsManager = () => {
                             "Content-Type": "multipart/form-data"
                         }
                     });
-    
+
                     // Update the image path immediately after successful upload
-                    updatedProducts[index].imagePath = response.data.image;
+                    const [groupIndex, productIndex] = key.split('-');
+                    if (productIndex !== undefined) {
+                        updatedProducts[groupIndex].products[productIndex].imagePath = response.data.image;
+                    } else {
+                        updatedProducts[groupIndex].imagePath = response.data.image;
+                    }
                 }
             }
-    
+
             await axios.post(URL + "/products/edit", {
                 newProducts: updatedProducts
             });
-    
+
             alert("Successfully saved products");
             setEditFiles({}); // Clear edited files after saving
             setProducts(updatedProducts); // Update the products state
@@ -232,7 +315,7 @@ const ProductsManager = () => {
                             <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
                         </div>
                     ) : (
-                        <div style={{width: "100%", display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px", backgroundColor: "rgba(148, 133, 108, 0.7)", padding: "12px", borderRadius: "42px"}}>
+                        <div key={index} style={{width: "100%", display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px", backgroundColor: "rgba(148, 133, 108, 0.7)", padding: "12px", borderRadius: "42px"}}>
                             <div style={{width: "300px", padding: "12px", borderRadius: "30px", backgroundColor: "rgba(148, 133, 108, 0.7)"}}>
                                 <h2 style={{marginBottom: "6px", marginTop: "0", textAlign: "center"}}>Group Parent</h2>
                                 {item.imagePath && (
@@ -255,7 +338,7 @@ const ProductsManager = () => {
                                         type="text"
                                         name="nameBg"
                                         value={item.nameBg}
-                                        onChange={(e) => handleEditProductChange(index, e)}
+                                        onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
                                 <br />
@@ -265,7 +348,7 @@ const ProductsManager = () => {
                                         type="text"
                                         name="nameEn"
                                         value={item.nameEn}
-                                        onChange={(e) => handleEditProductChange(index, e)}
+                                        onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
                                 <br />
@@ -275,17 +358,17 @@ const ProductsManager = () => {
                                         type="text"
                                         name="price"
                                         value={item.price}
-                                        onChange={(e) => handleEditProductChange(index, e)}
+                                        onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
                                 <br />
-                                <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
+                                <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteGroup(index)}>Delete</button>
                             </div>
 
                             {/* Shows the existing products inside the group */}
                             {item.products.map((product, productIndex) => (
                                 <div key={productIndex} style={{marginLeft: "20px", width: "300px"}}>
-                                    {item.imagePath && (
+                                    {product.imagePath && (
                                         <img alt={product.nameEn} src={URL + "/image?name=" + product.imagePath} style={{width: "300px", height: "400px"}} />
                                     )}
                                     <br />
@@ -295,7 +378,7 @@ const ProductsManager = () => {
                                             type="file"
                                             accept="image/*"
                                             style={{marginTop: "0", marginBottom: "6px"}}
-                                            onChange={} // Handle image changes
+                                            onChange={(e) => handleEditGroupProductFileChange(index, productIndex, e)} // Handle image changes
                                         />
                                     </label>
                                     <br />
@@ -305,7 +388,7 @@ const ProductsManager = () => {
                                             type="text"
                                             name="nameBg"
                                             value={product.nameBg}
-                                            onChange={}
+                                            onChange={(e) => handleEditGroupProductChange(index, productIndex, e)}
                                         />
                                     </label>
                                     <br />
@@ -315,13 +398,51 @@ const ProductsManager = () => {
                                             type="text"
                                             name="nameEn"
                                             value={product.nameEn}
-                                            onChange={}
+                                            onChange={(e) => handleEditGroupProductChange(index, productIndex, e)}
                                         />
                                     </label>
                                     <br />
-                                    <button style={{marginTop: "6px"}} type="button" onClick={}>Delete</button>
+                                    <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteGroupProduct(index, productIndex)}>Delete</button>
                                 </div>
                             ))}
+
+                            {/* Form to add new product inside the group */}
+                            <div style={{marginLeft: "20px", width: "300px"}}>
+                                <h3 style={{fontSize: "24px", margin: "0"}}>Add New Product to Group</h3>
+                                <form>
+                                    <label>
+                                        Choose Image:
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            style={{marginTop: "0", marginBottom: "6px"}}
+                                            onChange={handleNewGroupProductFileChange}
+                                        />
+                                    </label>
+                                    <br />
+                                    <label>
+                                        Name (BG):
+                                        <input
+                                            type="text"
+                                            name="nameBg"
+                                            value={newGroupProduct.nameBg}
+                                            onChange={handleNewGroupProductChange}
+                                        />
+                                    </label>
+                                    <br />
+                                    <label>
+                                        Name (EN):
+                                        <input
+                                            type="text"
+                                            name="nameEn"
+                                            value={newGroupProduct.nameEn}
+                                            onChange={handleNewGroupProductChange}
+                                        />
+                                    </label>
+                                    <br />
+                                    <button style={{margin: "6px 0"}} type="button" onClick={() => addGroupProduct(index)}>Add Product to Group</button>
+                                </form>
+                            </div>
                         </div>
                     )
                 )) : <div>No Products</div>}

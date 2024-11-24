@@ -8,10 +8,26 @@ const ProductsManager = () => {
     const [products, setProducts] = useState([]);
     const [newProduct, setNewProduct] = useState({
         id: '',
+        type: 'single',
         imagePath: '',
         nameBg: '',
         nameEn: '',
         price: ''
+    });
+    const [newGroup, setNewGroup] = useState({
+        id: '',
+        type: 'group',
+        imagePath: '',
+        nameBg: '',
+        nameEn: '',
+        price: '',
+        products: []
+    });
+    const [newGroupProduct, setNewGroupProduct] = useState({
+        id: '',
+        imagePath: '',
+        nameBg: '',
+        nameEn: ''
     });
     const [selectedFile, setSelectedFile] = useState(null);
     const [editFiles, setEditFiles] = useState({}); // To track file changes for edited products
@@ -31,9 +47,31 @@ const ProductsManager = () => {
         setNewProduct({ ...newProduct, [name]: value });
     };
 
+    // Handles the change in the input fields for the new group
+    const handleGroupInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewGroup({ ...newGroup, [name]: value });
+    };
+
+    // Handles the change in the input fields for the new group product
+    const handleGroupProductInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewGroupProduct({ ...newGroupProduct, [name]: value });
+    };
+
     // Handles the image file selection for new products
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
+    };
+
+    // Handles the image file selection for new groups
+    const handleGroupFileChange = (e) => {
+        setNewGroup({ ...newGroup, imagePath: e.target.files[0] });
+    };
+
+    // Handles the image file selection for new group products
+    const handleGroupProductFileChange = (e) => {
+        setNewGroupProduct({ ...newGroupProduct, imagePath: e.target.files[0] });
     };
 
     // Handles the image file selection for edited products
@@ -76,7 +114,7 @@ const ProductsManager = () => {
                 // Update the image path immediately after successful upload
                 newProduct.imagePath = response.data.image;
                 setProducts([...products, newProduct]); // Add new product to state
-                setNewProduct({ id: '', imagePath: '', nameBg: '', nameEn: '', price: '' });
+                setNewProduct({ id: '', type: 'single', imagePath: '', nameBg: '', nameEn: '', price: '' });
                 setSelectedFile(null); // Clear the file input after adding
             } else {
                 alert("No file selected for upload.");
@@ -85,7 +123,63 @@ const ProductsManager = () => {
             alert(err);
         }
     };
+
+    const addGroup = async () => {
+        newGroup.id = uuidv4();
     
+        try {
+            const formData = new FormData();
+            if (newGroup.imagePath) {
+                formData.append("image", newGroup.imagePath);
+                const response = await axios.post(URL + "/image", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+    
+                // Update the image path immediately after successful upload
+                newGroup.imagePath = response.data.image;
+                setProducts([...products, newGroup]); // Add new group to state
+                setNewGroup({ id: '', type: 'group', imagePath: '', nameBg: '', nameEn: '', price: '', products: [] });
+            } else {
+                alert("No file selected for upload.");
+            }
+        } catch (err) {
+            alert(err);
+        }
+    };
+
+    const addProductToGroup = async (groupId) => {
+        newGroupProduct.id = uuidv4();
+    
+        try {
+            const formData = new FormData();
+            if (newGroupProduct.imagePath) {
+                formData.append("image", newGroupProduct.imagePath);
+                const response = await axios.post(URL + "/image", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+    
+                // Update the image path immediately after successful upload
+                newGroupProduct.imagePath = response.data.image;
+                const updatedGroups = products.map(product => {
+                    if (product.id === groupId) {
+                        return { ...product, products: [...product.products, newGroupProduct] };
+                    }
+                    return product;
+                });
+                setProducts(updatedGroups);
+                setNewGroupProduct({ id: '', imagePath: '', nameBg: '', nameEn: '' });
+            } else {
+                alert("No file selected for upload.");
+            }
+        } catch (err) {
+            alert(err);
+        }
+    };
+
     const saveProducts = async () => {
         try {
             // Handle image file upload for edited products if there are any changes
@@ -176,57 +270,139 @@ const ProductsManager = () => {
                             />
                         </label>
                         <br />
+                        <button style={{marginTop: "6px"}} type="button" onClick={() => addProductToGroup(item.id)}>Add Product to Group</button>
                         <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
+                        {item.type === 'group' && (
+                            <div>
+                                <div>
+                                    {item.products.map((product, productIndex) => (
+                                        <div key={productIndex} style={{marginLeft: "20px"}}>
+                                            <label>
+                                                Name (BG):
+                                                <input
+                                                    type="text"
+                                                    name="nameBg"
+                                                    value={product.nameBg}
+                                                    onChange={(e) => handleEditProductChange(productIndex, e)}
+                                                />
+                                            </label>
+                                            <br />
+                                            <label>
+                                                Name (EN):
+                                                <input
+                                                    type="text"
+                                                    name="nameEn"
+                                                    value={product.nameEn}
+                                                    onChange={(e) => handleEditProductChange(productIndex, e)}
+                                                />
+                                            </label>
+                                            <br />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )) : <div>No Products</div>}
-            
 
-                {/* Form to add new product */}
-                <div style={{width: "300px"}}>
-                    <h3 style={{fontSize: "36px", margin: "0"}}>Add New Product</h3>
-                    <form>
-                        <label>
-                            Choose Image:
-                            <input
-                                type="file"
-                                accept="image/*"
-                                style={{marginTop: "0", marginBottom: "6px"}}
-                                onChange={handleFileChange}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Name (BG):
-                            <input
-                                type="text"
-                                name="nameBg"
-                                value={newProduct.nameBg}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Name (EN):
-                            <input
-                                type="text"
-                                name="nameEn"
-                                value={newProduct.nameEn}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Price:
-                            <input
-                                type="text"
-                                name="price"
-                                value={newProduct.price}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <br />
-                        <button style={{margin: "6px 0"}} type="button" onClick={addProduct}>Add Product</button>
-                    </form>
+                <div style={{width: "300px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+                    {/* Form to add new product */}
+                    <div>
+                        <h3 style={{fontSize: "36px", margin: "0"}}>Add New Product</h3>
+                        <form>
+                            <label>
+                                Choose Image:
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{marginTop: "0", marginBottom: "6px"}}
+                                    onChange={handleFileChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (BG):
+                                <input
+                                    type="text"
+                                    name="nameBg"
+                                    value={newProduct.nameBg}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (EN):
+                                <input
+                                    type="text"
+                                    name="nameEn"
+                                    value={newProduct.nameEn}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Price:
+                                <input
+                                    type="text"
+                                    name="price"
+                                    value={newProduct.price}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                            <br />
+                            <button style={{margin: "6px 0"}} type="button" onClick={addProduct}>Add Product</button>
+                        </form>
+                    </div>
+
+                    <h2 style={{textAlign: "center"}}>Or</h2>
+
+                    {/* Form to add group of products */}
+                    <div>
+                        <h3 style={{fontSize: "36px", margin: "0"}}>Add Group of Products</h3>
+                        <form>
+                            <label>
+                                Choose Image:
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{marginTop: "0", marginBottom: "6px"}}
+                                    onChange={handleGroupFileChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (BG):
+                                <input
+                                    type="text"
+                                    name="nameBg"
+                                    value={newGroup.nameBg}
+                                    onChange={handleGroupInputChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (EN):
+                                <input
+                                    type="text"
+                                    name="nameEn"
+                                    value={newGroup.nameEn}
+                                    onChange={handleGroupInputChange}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Price:
+                                <input
+                                    type="text"
+                                    name="price"
+                                    value={newGroup.price}
+                                    onChange={handleGroupInputChange}
+                                />
+                            </label>
+                            <br />
+                            <button style={{margin: "6px 0"}} type="button" onClick={addGroup}>Add Group</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

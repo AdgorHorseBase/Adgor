@@ -53,12 +53,6 @@ const ProductsManager = () => {
         setNewGroup({ ...newGroup, [name]: value });
     };
 
-    // Handles the change in the input fields for the new group product
-    const handleGroupProductInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewGroupProduct({ ...newGroupProduct, [name]: value });
-    };
-
     // Handles the image file selection for new products
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
@@ -67,11 +61,6 @@ const ProductsManager = () => {
     // Handles the image file selection for new groups
     const handleGroupFileChange = (e) => {
         setNewGroup({ ...newGroup, imagePath: e.target.files[0] });
-    };
-
-    // Handles the image file selection for new group products
-    const handleGroupProductFileChange = (e) => {
-        setNewGroupProduct({ ...newGroupProduct, imagePath: e.target.files[0] });
     };
 
     // Handles the image file selection for edited products
@@ -149,37 +138,6 @@ const ProductsManager = () => {
         }
     };
 
-    const addProductToGroup = async (groupId) => {
-        newGroupProduct.id = uuidv4();
-    
-        try {
-            const formData = new FormData();
-            if (newGroupProduct.imagePath) {
-                formData.append("image", newGroupProduct.imagePath);
-                const response = await axios.post(URL + "/image", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                });
-    
-                // Update the image path immediately after successful upload
-                newGroupProduct.imagePath = response.data.image;
-                const updatedGroups = products.map(product => {
-                    if (product.id === groupId) {
-                        return { ...product, products: [...product.products, newGroupProduct] };
-                    }
-                    return product;
-                });
-                setProducts(updatedGroups);
-                setNewGroupProduct({ id: '', imagePath: '', nameBg: '', nameEn: '' });
-            } else {
-                alert("No file selected for upload.");
-            }
-        } catch (err) {
-            alert(err);
-        }
-    };
-
     const saveProducts = async () => {
         try {
             // Handle image file upload for edited products if there are any changes
@@ -225,84 +183,147 @@ const ProductsManager = () => {
             <div style={{display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px"}}>
                 {/* Rendering existing products with editable fields */}
                 {products.length > 0 ? products.map((item, index) => (
-                    <div key={index} style={{width: "300px"}}>
-                        {item.imagePath && (
-                            <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
-                        )}
-                        <br />
-                        <label>
-                            Change Image:
-                            <input
-                                type="file"
-                                accept="image/*"
-                                style={{marginTop: "0", marginBottom: "6px"}}
-                                onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Name (BG):
-                            <input
-                                type="text"
-                                name="nameBg"
-                                value={item.nameBg}
-                                onChange={(e) => handleEditProductChange(index, e)}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Name (EN):
-                            <input
-                                type="text"
-                                name="nameEn"
-                                value={item.nameEn}
-                                onChange={(e) => handleEditProductChange(index, e)}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Price:
-                            <input
-                                type="text"
-                                name="price"
-                                value={item.price}
-                                onChange={(e) => handleEditProductChange(index, e)}
-                            />
-                        </label>
-                        <br />
-                        <button style={{marginTop: "6px"}} type="button" onClick={() => addProductToGroup(item.id)}>Add Product to Group</button>
-                        <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
-                        {item.type === 'group' && (
-                            <div>
-                                <div>
-                                    {item.products.map((product, productIndex) => (
-                                        <div key={productIndex} style={{marginLeft: "20px"}}>
-                                            <label>
-                                                Name (BG):
-                                                <input
-                                                    type="text"
-                                                    name="nameBg"
-                                                    value={product.nameBg}
-                                                    onChange={(e) => handleEditProductChange(productIndex, e)}
-                                                />
-                                            </label>
-                                            <br />
-                                            <label>
-                                                Name (EN):
-                                                <input
-                                                    type="text"
-                                                    name="nameEn"
-                                                    value={product.nameEn}
-                                                    onChange={(e) => handleEditProductChange(productIndex, e)}
-                                                />
-                                            </label>
-                                            <br />
-                                        </div>
-                                    ))}
-                                </div>
+                    item.type !== 'group' ? (
+                        <div key={index} style={{width: "300px"}}>
+                            {item.imagePath && (
+                                <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                            )}
+                            <br />
+                            <label>
+                                Change Image:
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{marginTop: "0", marginBottom: "6px"}}
+                                    onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (BG):
+                                <input
+                                    type="text"
+                                    name="nameBg"
+                                    value={item.nameBg}
+                                    onChange={(e) => handleEditProductChange(index, e)}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Name (EN):
+                                <input
+                                    type="text"
+                                    name="nameEn"
+                                    value={item.nameEn}
+                                    onChange={(e) => handleEditProductChange(index, e)}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Price:
+                                <input
+                                    type="text"
+                                    name="price"
+                                    value={item.price}
+                                    onChange={(e) => handleEditProductChange(index, e)}
+                                />
+                            </label>
+                            <br />
+                            <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
+                        </div>
+                    ) : (
+                        <div style={{width: "100%", display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px", backgroundColor: "rgba(148, 133, 108, 0.7)", padding: "12px", borderRadius: "42px"}}>
+                            <div style={{width: "300px", padding: "12px", borderRadius: "30px", backgroundColor: "rgba(148, 133, 108, 0.7)"}}>
+                                <h2 style={{marginBottom: "6px", marginTop: "0", textAlign: "center"}}>Group Parent</h2>
+                                {item.imagePath && (
+                                    <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                                )}
+                                <br />
+                                <label>
+                                    Change Image:
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        style={{marginTop: "0", marginBottom: "6px"}}
+                                        onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
+                                    />
+                                </label>
+                                <br />
+                                <label>
+                                    Name (BG):
+                                    <input
+                                        type="text"
+                                        name="nameBg"
+                                        value={item.nameBg}
+                                        onChange={(e) => handleEditProductChange(index, e)}
+                                    />
+                                </label>
+                                <br />
+                                <label>
+                                    Name (EN):
+                                    <input
+                                        type="text"
+                                        name="nameEn"
+                                        value={item.nameEn}
+                                        onChange={(e) => handleEditProductChange(index, e)}
+                                    />
+                                </label>
+                                <br />
+                                <label>
+                                    Price:
+                                    <input
+                                        type="text"
+                                        name="price"
+                                        value={item.price}
+                                        onChange={(e) => handleEditProductChange(index, e)}
+                                    />
+                                </label>
+                                <br />
+                                <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteProduct(index)}>Delete</button>
                             </div>
-                        )}
-                    </div>
+
+                            {/* Shows the existing products inside the group */}
+                            {item.products.map((product, productIndex) => (
+                                <div key={productIndex} style={{marginLeft: "20px", width: "300px"}}>
+                                    {item.imagePath && (
+                                        <img alt={product.nameEn} src={URL + "/image?name=" + product.imagePath} style={{width: "300px", height: "400px"}} />
+                                    )}
+                                    <br />
+                                    <label>
+                                        Change Image:
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            style={{marginTop: "0", marginBottom: "6px"}}
+                                            onChange={} // Handle image changes
+                                        />
+                                    </label>
+                                    <br />
+                                    <label>
+                                        Name (BG):
+                                        <input
+                                            type="text"
+                                            name="nameBg"
+                                            value={product.nameBg}
+                                            onChange={}
+                                        />
+                                    </label>
+                                    <br />
+                                    <label>
+                                        Name (EN):
+                                        <input
+                                            type="text"
+                                            name="nameEn"
+                                            value={product.nameEn}
+                                            onChange={}
+                                        />
+                                    </label>
+                                    <br />
+                                    <button style={{marginTop: "6px"}} type="button" onClick={}>Delete</button>
+                                </div>
+                            ))}
+                        </div>
+                    )
                 )) : <div>No Products</div>}
 
                 <div style={{width: "300px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>

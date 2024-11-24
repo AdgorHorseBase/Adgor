@@ -17,28 +17,52 @@ const Products = () => {
         GetProducts();
     }, []);
 
-    const addProduct = (product) => {
-        setSelectedProducts(prev => {
-            const newQuantity = (prev[product.id]?.quantity || 0) + 1;
-            return {
-                ...prev,
-                [product.id]: { ...product, quantity: newQuantity }
-            };
-        });
+    const addProduct = (product, nameBg, nameEn) => {
+        if(!nameBg && !nameEn) {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity }
+                };
+            });
+        } else {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity, nameBg: nameBg, nameEn: nameEn }
+                };
+            });
+        }
     };
 
-    const removeProduct = (product) => {
-        setSelectedProducts(prev => {
-            const newQuantity = (prev[product.id]?.quantity || 0) - 1;
-            if (newQuantity <= 0) {
-                const { [product.id]: _, ...rest } = prev;
-                return rest;
-            }
-            return {
-                ...prev,
-                [product.id]: { ...product, quantity: newQuantity }
-            };
-        });
+    const removeProduct = (product, nameBg, nameEn) => {
+        if(!nameBg && !nameEn) {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
+                if (newQuantity <= 0) {
+                    const { [product.id]: _, ...rest } = prev;
+                    return rest;
+                }
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity }
+                };
+            });
+        } else {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
+                if (newQuantity <= 0) {
+                    const { [product.id]: _, ...rest } = prev;
+                    return rest;
+                }
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity, nameBg: nameBg, nameEn: nameEn }
+                };
+            });
+        }
     };
 
     const handleContinue = () => {
@@ -65,32 +89,75 @@ const Products = () => {
             <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Продукти" : "Products"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
-                    <div id='productVoucher' key={item.id} className='item'>
-                        {item.imagePath && (
-                            <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
-                        )}
-                        {(item.nameBg || item.nameEn) && (
-                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? item.nameBg : item.nameEn}</h2>
-                        )}
-                        {item.price && (
-                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
-                        )}
-                        {selectedProducts[item.id]?.quantity > 0 ? (
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                                <button id='itemButton' onClick={() => removeProduct(item)} style={{ margin: '9px 0' }}>
-                                    -
+                    item.type !== "group" ? (
+                        <div id='productVoucher' key={item.id} className='item'>
+                            {item.imagePath && (
+                                <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
+                            )}
+                            {(item.nameBg || item.nameEn) && (
+                                <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? item.nameBg : item.nameEn}</h2>
+                            )}
+                            {item.price && (
+                                <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
+                            )}
+                            {selectedProducts[item.id]?.quantity > 0 ? (
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                    <button id='itemButton' onClick={() => removeProduct(item)} style={{ margin: '9px 0' }}>
+                                        -
+                                    </button>
+                                    <p style={{ margin: "0" }}>{selectedProducts[item.id]?.quantity}</p>
+                                    <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0' }}>
+                                        +
+                                    </button>
+                                </div>
+                            ) : (
+                                <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0', padding: '12px 24px' }}>
+                                    {lang === "bg" ? "Добави" : "Add"}
                                 </button>
-                                <p style={{ margin: "0" }}>{selectedProducts[item.id]?.quantity}</p>
-                                <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0' }}>
-                                    +
+                            )}
+                        </div>
+                    ) : (
+                        // Show the group image, name and price and have button Expand that when pressed shows all the products of the group
+                        <div id='productGroup' key={item.id} className='item' style={{width: item.expanded ? "fit-content" : "300px", padding: item.expanded ? "12px" : "0", background: item.expanded ? "rgba(148, 133, 108, 0.4)" : "transparent", borderRadius: "20px", display: 'flex', justifyContent: item.expanded ? "center": "start", flexWrap: 'wrap', gap: '20px'}}>
+                            <div id='productVoucher' style={{backgroundColor: "transparent"}}>
+                                {item.imagePath && (
+                                    <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
+                                )}
+                                {(item.nameBg || item.nameEn) && (
+                                    <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? item.nameBg : item.nameEn}</h2>
+                                )}
+                                {item.price && (
+                                    <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
+                                )}
+                                <button id='itemButton' onClick={() => setProducts(products.map(p => p.id === item.id ? {...p, expanded: !p.expanded} : p))} style={{ margin: '0', padding: '12px 24px' }}>
+                                    {item.expanded ? (lang === "bg" ? "Скрий" : "Hide") : (lang === "bg" ? "Разшири" : "Expand")}
                                 </button>
                             </div>
-                        ) : (
-                            <button id='itemButton' onClick={() => addProduct(item)} style={{ margin: '0', padding: '12px 24px' }}>
-                                {lang === "bg" ? "Добави" : "Add"}
-                            </button>
-                        )}
-                    </div>
+                            {item.expanded && (
+                                item.products.map(subItem => (
+                                    <div id='productVoucher' key={subItem.id}>
+                                        <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+subItem.imagePath} />
+                                        <h4 style={{ margin: '0', textAlign: 'left', fontSize: '26px' }}>{lang === "bg" ? subItem.nameBg : subItem.nameEn}</h4>
+                                        {selectedProducts[subItem.id]?.quantity > 0 ? (
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                                <button id='itemButton' onClick={() => removeProduct(subItem, `${item.nameBg} ${subItem.nameBg}`, `${item.nameEn} ${subItem.nameEn}`)} style={{ margin: '9px 0' }}>
+                                                    -
+                                                </button>
+                                                <p style={{ margin: "0" }}>{selectedProducts[subItem.id]?.quantity}</p>
+                                                <button id='itemButton' onClick={() => addProduct(subItem, `${item.nameBg} ${subItem.nameBg}`, `${item.nameEn} ${subItem.nameEn}`)} style={{ margin: '0' }}>
+                                                    +
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <button id='itemButton' onClick={() => addProduct(subItem, `${item.nameBg} ${subItem.nameBg}`, `${item.nameEn} ${subItem.nameEn}`)} style={{ margin: '0', padding: '12px 24px' }}>
+                                                {lang === "bg" ? "Добави" : "Add"}
+                                            </button>
+                                        )}
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )
                 ))}
             </div>
 

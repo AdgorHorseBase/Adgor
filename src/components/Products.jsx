@@ -118,7 +118,7 @@ const Products = () => {
                         </div>
                     ) : (
                         // Show the group image, name and price and have button Expand that when pressed shows all the products of the group
-                        <div id='productGroup' key={item.id} className='item' style={{width: item.expanded ? "fit-content" : "300px", padding: item.expanded ? "12px" : "0", background: item.expanded ? "rgba(148, 133, 108, 0.4)" : "transparent", borderRadius: "20px", display: 'flex', justifyContent: item.expanded ? "center": "start", flexWrap: 'wrap', gap: '20px'}}>
+                        <div id='productGroup' key={item.id} className='item' style={{width: "fit-content", padding: item.expanded ? "12px" : "0", background: item.expanded ? "rgba(148, 133, 108, 0.4)" : "transparent", borderRadius: "20px", display: item.expanded ? "flex" : "inline", justifyContent: item.expanded ? "center": "start", flexWrap: 'wrap', gap: '20px'}}>
                             <div id='productVoucher' style={{backgroundColor: "transparent"}}>
                                 {item.imagePath && (
                                     <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
@@ -130,7 +130,7 @@ const Products = () => {
                                     <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
                                 )}
                                 <button id='itemButton' onClick={() => setProducts(products.map(p => p.id === item.id ? {...p, expanded: !p.expanded} : p))} style={{ margin: '0', padding: '12px 24px' }}>
-                                    {item.expanded ? (lang === "bg" ? "Скрий" : "Hide") : (lang === "bg" ? "Разшири" : "Expand")}
+                                    {item.expanded ? (lang === "bg" ? "Затвори" : "Close") : (lang === "bg" ? "Отвори" : "Open")}
                                 </button>
                             </div>
                             {item.expanded && (

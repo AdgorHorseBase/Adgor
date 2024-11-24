@@ -49,28 +49,52 @@ const Vouchers = () => {
         });
     };
 
-    const addProduct = (product) => {
-        setSelectedProducts(prev => {
-            const newQuantity = (prev[product.id]?.quantity || 0) + 1;
-            return {
-                ...prev,
-                [product.id]: { ...product, quantity: newQuantity }
-            };
-        });
+    const addProduct = (product, nameBg, nameEn) => {
+        if(!nameBg && !nameEn) {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity }
+                };
+            });
+        } else {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity, nameBg, nameEn }
+                };
+            });
+        }
     };
 
-    const removeProduct = (product) => {
-        setSelectedProducts(prev => {
-            const newQuantity = (prev[product.id]?.quantity || 0) - 1;
-            if (newQuantity <= 0) {
-                const { [product.id]: _, ...rest } = prev;
-                return rest;
-            }
-            return {
-                ...prev,
-                [product.id]: { ...product, quantity: newQuantity }
-            };
-        });
+    const removeProduct = (product, nameBg, nameEn) => {
+        if(!nameBg && !nameEn) {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
+                if (newQuantity <= 0) {
+                    const { [product.id]: _, ...rest } = prev;
+                    return rest;
+                }
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity }
+                };
+            });
+        } else {
+            setSelectedProducts(prev => {
+                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
+                if (newQuantity <= 0) {
+                    const { [product.id]: _, ...rest } = prev;
+                    return rest;
+                }
+                return {
+                    ...prev,
+                    [product.id]: { ...product, quantity: newQuantity, nameBg, nameEn }
+                };
+            });
+        }
     };
 
     const handleContinue = () => {
@@ -226,7 +250,8 @@ const Vouchers = () => {
 
             <h2 id='title' style={{fontSize: "30px", marginTop: "22px", marginBottom: "20px"}}>{lang === "bg" ? "Може да ви хареса" : "You will also like"}:</h2>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto", marginBottom: "24px" }}>
-                {products.map((product) => (
+            {products.map((product) => (
+                product.type !== "group" ? (
                     <div key={product.id} className='item' id="productVoucher">
                         {product.imagePath && (
                             <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
@@ -253,7 +278,48 @@ const Vouchers = () => {
                             </button>
                         )}
                     </div>
-                ))}
+                ) : (
+                    <div id='productGroup' key={product.id} className='item' style={{width: product.expanded ? "fit-content" : "300px", padding: product.expanded ? "12px" : "0", background: product.expanded ? "rgba(148, 133, 108, 0.4)" : "transparent", borderRadius: "20px", display: 'flex', justifyContent: product.expanded ? "center": "start", flexWrap: 'wrap', gap: '20px'}}>
+                        <div id='productVoucher' style={{backgroundColor: "transparent"}}>
+                            {product.imagePath && (
+                                <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+product.imagePath} width="100%" />
+                            )}
+                            {(product.nameBg || product.nameEn) && (
+                                <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? product.nameBg : product.nameEn}</h2>
+                            )}
+                            {product.price && (
+                                <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{product.price} лв</h3>
+                            )}
+                            <button id='itemButton' onClick={() => setProducts(products.map(p => p.id === product.id ? {...p, expanded: !p.expanded} : p))} style={{ margin: '0', padding: '12px 24px' }}>
+                                {product.expanded ? (lang === "bg" ? "Скрий" : "Hide") : (lang === "bg" ? "Разшири" : "Expand")}
+                            </button>
+                        </div>
+                        {product.expanded && (
+                            product.products.map(subItem => (
+                                <div id='productVoucher' key={subItem.id}>
+                                    <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+subItem.imagePath} />
+                                    <h4 style={{ margin: '0', textAlign: 'left', fontSize: '26px' }}>{lang === "bg" ? subItem.nameBg : subItem.nameEn}</h4>
+                                    {selectedProducts[subItem.id]?.quantity > 0 ? (
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                            <button id='itemButton' onClick={() => removeProduct(subItem, `${product.nameBg} ${subItem.nameBg}`, `${product.nameEn} ${subItem.nameEn}`)} style={{ margin: '9px 0' }}>
+                                                -
+                                            </button>
+                                            <p style={{ margin: "0" }}>{selectedProducts[subItem.id]?.quantity}</p>
+                                            <button id='itemButton' onClick={() => addProduct(subItem, `${product.nameBg} ${subItem.nameBg}`, `${product.nameEn} ${subItem.nameEn}`)} style={{ margin: '0' }}>
+                                                +
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button id='itemButton' onClick={() => addProduct(subItem, `${product.nameBg} ${subItem.nameBg}`, `${product.nameEn} ${subItem.nameEn}`)} style={{ margin: '0', padding: '12px 24px' }}>
+                                            {lang === "bg" ? "Добави" : "Add"}
+                                        </button>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                )
+            ))}
             </div>
         </div>
     );

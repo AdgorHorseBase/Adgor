@@ -5,6 +5,7 @@ import "./page.css";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
+  const [loadingMenu, setLoadingMenu] = useState(true);
   const [structure, setStruct] = useState(false);
   const [lang, setLang] = useState("bg");
   const titlesFetched = useRef(false);
@@ -23,8 +24,18 @@ const MenuSections = () => {
   }, []);
 
   const fetchTitles = async (structure) => {
+    const localStorageKey = 'updatedStructure';
+    const storedStructure = localStorage.getItem(localStorageKey);
+  
+    if (storedStructure) {
+      const updatedStructure = JSON.parse(storedStructure);
+      setStruct(updatedStructure);
+      setLoadingMenu(false);
+      return;
+    }
+  
     const updatedStructure = { ...structure };
-
+  
     for (const dir in updatedStructure) {
       if (updatedStructure[dir].type === "directory") {
         for (const page of updatedStructure[dir].contents) {
@@ -65,8 +76,10 @@ const MenuSections = () => {
         }
       }
     }
-
+  
+    localStorage.setItem(localStorageKey, JSON.stringify(updatedStructure));
     setStruct(updatedStructure);
+    setLoadingMenu(false);
   };
 
   useEffect(() => {
@@ -84,7 +97,11 @@ const MenuSections = () => {
     }
   }, [storedLang]);
 
-  return window.innerWidth > 750 ? (
+  return window.innerWidth > 750 ? loadingMenu === true ? (
+    <div className="Menu">
+      <button id="menuButton">Loading...</button>
+    </div>
+  ) : (
     <div className="Menu">
       <button
         id="menuButton"

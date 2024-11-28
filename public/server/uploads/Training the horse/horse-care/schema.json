@@ -1,0 +1,23 @@
+{
+  "titleBg": "Грижа за конете",
+  "titleEn": "Horse care",
+  "directoryBg": "Обучение на коня",
+  "schema": [
+    {
+      "id": "88f0dabb-ccbc-474c-829e-7d179a12b401",
+      "type": "title",
+      "content": {
+        "textBg": "Грижа за конете",
+        "textEn": "Horse care"
+      }
+    },
+    {
+      "id": "3d2bed08-8393-4e9c-a3a9-e51e889df9a7",
+      "type": "formated",
+      "content": {
+        "textBg": "<h3>Грижа за конете в Адгор</h3><p>За тези, които са наистина влюбени в конете, това да знаят как да яздят не им стига и искат да научат повече. В Адгор предлагаме да се потопите в света на конете и грижата за тях, която осигурява по-дълбока връзка и разбиране между Вас и конят.</p><p><strong>\"Истинските каубои са тези, които не се страхуват да се изцапат.\"</strong></p><p>Нашия девиз: “Мръсни ръце, чисто сърце”</p><p><br></p><h3>Какво предлагаме:</h3><ul><li><strong>Наблюдение на конете</strong></li></ul><p><span class=\"ql-cursor\">﻿</span>Чрез наблюдение можете да разберете повече за начина на общуване в стадото.</p><ul><li><strong>Естествената среда на коня</strong></li><li class=\"ql-indent-1\">Научете разликите на отглеждането на коне в конюшня и на пасище.</li><li><strong>Практически умения при грижата за конете</strong></li><li class=\"ql-indent-1\">Поставяне и сваляне на оглавник</li><li class=\"ql-indent-1\">Извеждане на пасище</li><li class=\"ql-indent-1\">Прибиране в бокс</li><li class=\"ql-indent-1\">Хранене и грижа за здравето на конете</li><li class=\"ql-indent-1\">Безопасни методи за връзване на коня</li><li class=\"ql-indent-1\">Четкане и цялостна поддръжка</li><li class=\"ql-indent-1\">Почистване на копита</li><li class=\"ql-indent-1\">Оседлаване, заюздаване и поддръжка на амуницията</li><li class=\"ql-indent-1\">Основи в подрязването и подковаването на копитата</li><li><strong>Запознаване с екзотичната порода Фалабела (link) и специфичното им отглеждане.</strong></li></ul><p>Знанието как да се грижим за коня ни дава добра възможност да го опознаем по-добре, за да положим добро начало на нашето общуване и партньорство. За децата и младото поколение е чудесен шанс за изграждането на връзка с конете и създаването на нови умения.</p>",
+        "textEn": "<h3>Horse care at Adgor</h3><p>For those who are truly in love with horses, knowing how to ride is not enough and they want to learn more**.** At Adgor, we offer you to immerse yourself in the world of horses and their care, which provides a deeper connection and understanding between you and the horse.</p><p><strong>\"True cowboys are the ones who aren’t afraid to get dirty.\"</strong></p><p>Our motto: \"Dirty hands, pure heart\"</p><p><br></p><h2>What we offer:</h2><ul><li><strong>Understanding Horses</strong></li></ul><p>By observation you can understand more about the way of communication in the herd.</p><ul><li><strong>Understanding the horse's natural environment</strong></li><li class=\"ql-indent-1\">Learn the differences between raising horses in stables and on pastures.</li><li><strong>Practical Horse Care Skills</strong></li><li class=\"ql-indent-1\">Putting on and taking off the halter</li><li class=\"ql-indent-1\">Taking out in the pasture</li><li class=\"ql-indent-1\">Taking the horse into the box</li><li class=\"ql-indent-1\">Feeding and taking care for horse’s heath</li><li class=\"ql-indent-1\">Safe methods for tying</li><li class=\"ql-indent-1\">Brushing, cleaning and general grooming of the horse</li><li class=\"ql-indent-1\">Cleaning hooves</li><li class=\"ql-indent-1\">Saddling and ammunition maintenance</li><li class=\"ql-indent-1\">Basics in hoof trimming and shoeing</li><li><strong>Introduction to the exotic breed falabella (link) and the specifics of its care.</strong></li></ul><p>Knowing how to take care of the horse gives us a good opportunity to get to know him better to give a good start to our communication and partnership. For children and the younger generation, it is a great chance to build a relationship with horses and create new skills.</p>"
+      }
+    }
+  ]
+}

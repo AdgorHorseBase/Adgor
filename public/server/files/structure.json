@@ -1,5 +1,63 @@
 {
+  "\\About us": {
+    "type": "directory",
+    "contents": [
+      "home-page",
+      "natural-horsemanship",
+      "our-achievements",
+      "our-team",
+      "volunteers"
+    ]
+  },
+  "\\contact-us": {
+    "type": "file"
+  },
+  "\\Experience": {
+    "type": "directory",
+    "contents": [
+      "children-birthday",
+      "children-groups",
+      "clinics-and-demonstrations",
+      "long-riding-trips",
+      "miniature-horses-falabella",
+      "team-building",
+      "trail-riding"
+    ]
+  },
+  "\\FAQs": {
+    "type": "directory",
+    "contents": [
+      "general",
+      "training-the-horse"
+    ]
+  },
   "\\foundation": {
     "type": "file"
+  },
+  "\\Rider training": {
+    "type": "directory",
+    "contents": [
+      "bareback-and-bridle-less",
+      "certificate-program",
+      "riding-for-children",
+      "riding-levels",
+      "western-riding"
+    ]
+  },
+  "\\Services": {
+    "type": "directory",
+    "contents": [
+      "film-and-tv-productions",
+      "horse-boarding",
+      "photo-shoots-with-horses"
+    ]
+  },
+  "\\Training the horse": {
+    "type": "directory",
+    "contents": [
+      "groundwork",
+      "horse-care",
+      "training"
+    ]
   }
 }

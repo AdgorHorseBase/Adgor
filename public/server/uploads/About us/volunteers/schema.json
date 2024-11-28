@@ -1,0 +1,87 @@
+{
+  "titleBg": "Доброволци",
+  "titleEn": "Volunteers",
+  "directoryBg": "За нас",
+  "schema": [
+    {
+      "id": "bff04d92-0832-4fa7-8fb7-96c9b9ad74ad",
+      "type": "title",
+      "content": {
+        "textBg": "Доброволци",
+        "textEn": "Volunteers"
+      }
+    },
+    {
+      "id": "a7e318b3-483d-4b53-be0e-80ce02c3f386",
+      "type": "text",
+      "content": {
+        "textBg": "В Адгор даваме възможност на всеки да стане част от нашето семейство. Предлагаме обучение на доброволци, които изпитват всеотдайна любов към конете и природата и желаят да положат отговорен труд, за да помагат на животните. Това е една възможност да научите повече за конете, за начина им на отглеждане, тяхното мислене и поведение. Разбира се не на последно място, да изградите нови запознанства и да намерите приятел в лицето на някой от четирикраките ни любимци.",
+        "textEn": "At Adgor, we give everyone the opportunity to become a part of our family. We offer training to volunteers who have a deep love for horses and nature and are willing to work responsibly to help the animals. This is an opportunity to learn more about horses, their keeping, their way of thinking and behavior. Of course, last but not least, to make new acquaintances and find a friend in the face of one of our four-legged companions."
+      }
+    },
+    {
+      "id": "77d946e1-5bb0-40a5-9b03-7ff86b4204a2",
+      "type": "text",
+      "content": {
+        "textBg": "Трудът не е лесен, често е свързан с физически дейности, които са изморителни и независими от метеорологичните условия. От всекидневното почистване на всеки бокс, до приготвянето на дажбите, зареждането със сено, поддържането на оборудването и амуницията и подготвянето на конете за езда, доброволецът активно се включва във всички нива от живота на конната ни база. Това позволява да изгради усет за конете, да разбира езикът на тялото им, както и да събере опит в разнообразни ситуации, включително полагането на основни медицински грижи.",
+        "textEn": "The work is not easy, it is often associated with physical activities that are tiring and independent of weather conditions. From the daily cleaning of each stall, to the preparation of rations, stocking hay, maintaining equipment and ammunition, and preparing horses for riding, the volunteer is actively involved in all levels of life on our ranch. This allows him to develop a sense for horses, to understand their body language, as well as to gather experience in a variety of situations, including to give basic medical care."
+      }
+    },
+    {
+      "id": "4b78b7e7-fe8e-47d6-a6c9-19c5fc861cc4",
+      "type": "text",
+      "content": {
+        "textBg": "Всеки ден е изпълнен с множество малки вълшебства. От това да наблюдава човек залеза, препускащото стадо на пасището, както и да се вгледа в едни очи – огледало към душата на най-чистото животно и да види там благодарността.&nbsp;",
+        "textEn": "Every day is filled with many little magics. From watching the sunset, the racing herd in the pasture, as well as looking into some eyes - a mirror to the soul of the purest animal and seeing gratitude there.&nbsp;"
+      }
+    },
+    {
+      "id": "42d40c93-e7bf-4dfc-b683-2355b3dd6467",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>“-Доброволците не получават заплащане, не защото са безполезни, а защото са безценни.”</strong></p><p><strong>- Шери Андерсън.</strong></p>",
+        "textEn": "<p><strong>\"-Volunteers are unpaid, not because they are useless, but because they are priceless.\"</strong></p><p><strong>- Sherry Anderson.</strong></p>"
+      }
+    },
+    {
+      "id": "2e3faf54-6424-40d3-bb1a-d8d895816c5d",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>Гергана Митова</strong></p><p>Да опишеш с думи духа на това място е все едно да се състезаваш с вятъра. Той изчезва в див, радостен галоп зад близкия Витошки хълм още преди да си поставил крак в стремето. Това, което Адгор ми дава с пълни шепи, с невероятните си хора, коне и природа, започва от думите щастие, свобода, приятелство, умение, мир. И продължава – едно отворено сърце, пълно с шеги, любопитни конски уши, много прегръдки (и много метене), закачки (конски и човешки), слънчеви дни и малки чудеса, случващи се в самите ти ръце.</p><p>Когато съм тук, не искам да съм никъде другаде и да правя нищо друго – това е невероятен подарък.&nbsp;</p><p>Благодаря ви и се радвам, че съм с вас!</p>",
+        "textEn": "<p><strong>Gergana Mitova</strong></p><p>Capturing the spirit of this place in words is like racing with the wind. It's gone in a wild, joyous canter over the closest Vitosha hill before you can even put your foot in the stirrup. What Adgor gives me with open arms, with its amazing people, horses, and nature, begins with the words happiness, freedom, friendship, skill, peace. And goes on – an open heart, full of jokes, curious horse ears, lots of hugs (and a lot of sweeping), banter (with horses and humans), sunny days, and small miracles, taking place in the palms of your hands.</p><p>When I am here, I do not want to be anywhere else or do anything else – this is an incredible gift. Thank you, and I am glad to be with you!</p>"
+      }
+    },
+    {
+      "id": "4b8caa63-8a0d-468f-b0cc-04086a4c2eb8",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>Анна Антонова</strong></p><p>Когато бях дете, мечтаех да се науча да яздя и да препускам през поляните. Като възрастен, Адгор сбъдна тази мечта и ми даде много нови. Ездата за мен e същевременно спорт, терапия, усещане за свобода и източник на много паметни и безпаметни приключения, но най-вече незаменима общност от скъпи приятели (от няколко биологични вида).<span class=\"ql-cursor\">﻿</span></p>",
+        "textEn": "<p><strong>Anna Antonova</strong></p><p>When I was a kid, I dreamed of learning how to ride and galloping through the meadows. As an adult, Adgor made this dream come true and replaced it with many new ones. To me, riding is simultaneously a sport, therapy, a sense of freedom and a source of adventures both recalled and immemorable. But above all, Adgor is a community of dear friends (from a variety of species).<span class=\"ql-cursor\">﻿</span></p>"
+      }
+    },
+    {
+      "id": "f45f4959-7676-46b8-a284-ad05a71a1f26",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>Андрей Райков</strong></p><p>За мен Адгор е една сбъдната мечта. Мога да се грижа за конете в конюшните, да развивам уменията си като ездач и да се измъкна от ежедневието си в това райско кътче.<span class=\"ql-cursor\">﻿</span></p>",
+        "textEn": "<p><strong>Andrey Raykov</strong></p><p><span class=\"ql-cursor\">﻿</span>For me Adgor is a dream come true. I can take care of the horses by working in the stables, improve my riding skills and escaping my everyday life in this piece of heaven.</p>"
+      }
+    },
+    {
+      "id": "6a473665-f10a-4bf0-b54c-e9372074b07f",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>Боряна Райкова</strong></p><p><span class=\"ql-cursor\">﻿</span>Да препускам свободно, без седло, усещайки вятъра в косата си, сред смайващи пейзажи на поляни, горички, планини, магически неотразими залези и дъх на свежест. Това е моята мечта, която се сбъдна в Адгор. Дивната природа, чудесните коне и невероятните хора, които открих тук, напълно ме плениха. Личното отношение и внимание са неоценими. Не е изминал ден, в който да не съм научила нещо ново, било то за работата с конете или за себе си. Естествените взаимоотношения с тези животни ме учат на търпение и постоянство. Дните, прекарани в Адгор, са ми едни от най-чаканите и любими.</p>",
+        "textEn": "<p><strong>Boryana Raykova</strong></p><p><span class=\"ql-cursor\">﻿</span>To gallop freely, bareback, feeling the wind in my hair, in the midst of stunning landscapes of meadows, forests and mountains, magically irresistible sunsets, and fresh smells. This has been my dream which came true through “Adgor”. The fascinating nature, the wonderful horses, and the incredible people, which I have discovered here, have completely captivated me. The personal attitude and care I have received are priceless. Not a day has passed by when I have not learned something new, either about working with horses, or about myself. The natural relationship with these animals teaches me patience and consistency. The days, spent in “Adgor”, are some of my mostly awaited and favorite ones!</p>"
+      }
+    },
+    {
+      "id": "8e1c4393-ed4a-47b6-879d-857bf3e7a4b9",
+      "type": "formated",
+      "content": {
+        "textBg": "<p><strong>Натали Крземински</strong></p><p><span class=\"ql-cursor\">﻿</span>Разбира се, конете ме удивляваха още като малко момиченце. На 8-годишна възраст получих първите си уроци по езда в английски стил в Германия. Но въпреки че усвоих правилната и центрована стойка на ездача, това, което винаги ми липсваше, беше разбирането на конете, езика на тялото им и ясните и естествени взаимоотношения с тях. Това ме доведе до несигурност и дори страх. Затова наблегнах повече на образованието си и живота... Когато за първи път чух израза \"natural horsemanship\", разбрах, че това ще бъде пътят ми и че трябва непременно да го изуча. Когато случайно чух за Адгор, бяха минали 10 години от последния ми контакт с коне. Тук най-сетне започнах да изучавам онова, което търсех - уравновесен начин на работа с конете, водещ до съвместно доверие и уважение. Оттогава не ми е било възможно да се отърся от нуждата си за знание. Екипът на “Адгор” ми помага да се развивам, но и по своя естествен и инстинктивен начин конете също ми показват, когато греша. Невероятно хубаво е усещането за успех в тренировките, но и осъзнаването, че има още много нови цели, които могат да бъдат постигнати! Благодарна съм за всеки един миг, в който уча, и се радвам, когато мога да обучавам коне и ездачи. Не само съм намерила добри приятели, но тук мога и в необятната природа да преоткрия себе си, да се слея с коня и заедно с него да се наслаждавам на спокойствие и свобода.... просто да се чувствам жива!</p>",
+        "textEn": "<p><strong>Natalie Krzeminski</strong></p><p><span class=\"ql-cursor\">﻿</span>Naturally, I was fascinated with horses from a very young age. When I was 8­ years old, I received my first riding lessons in Germany, mainly in the English style of horse riding. Though I was taught the exceedingly correct and centered posture, I always missed out one thing ­ the understanding of horses, their body language, and the pure and natural way of handling them. This ultimately led to insecurity and fear. Hence, I focused on my studies and life again... When I heard for the first time about \"Natural Horsemanship\", I knew that this was the way I needed to take and learn all about it. Having been away from horses for 10 years, I accidentally came across „Adgor“. Here I finally had the chance to learn what I had sought for: the balanced way of working with horses, which ultimately leads to mutual trust and sound respect. Ever since, I cannot thaw my thirst for knowledge. Adgor's team helps me develop; however, the horses, in their natural and sincere way, reveal to me my mistakes as well. It is wonderful to see success during training and yet realize that there are a lot more goals that can be achieved. I am thankful for every moment in which I expand my knowledge and am happy when I get to train horses and riders. Not only I have found trustworthy friends, but here in the open nature I am able to rediscover myself, become one with the horse, and enjoy peace and freedom with it... to just feel alive!&nbsp;</p>"
+      }
+    }
+  ]
+}

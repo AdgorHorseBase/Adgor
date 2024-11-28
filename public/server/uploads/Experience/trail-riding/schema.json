@@ -1,0 +1,23 @@
+{
+  "titleBg": "Разходка с кон ",
+  "titleEn": "Trail riding",
+  "directoryBg": "Преживявания",
+  "schema": [
+    {
+      "id": "11ae1145-b145-4ad3-934c-39b4e5785549",
+      "type": "title",
+      "content": {
+        "textBg": "Разходка с кон",
+        "textEn": "Trail riding<!-- notionvc: b628d988-208e-49ff-9ae8-bcca942ff9a7 -->"
+      }
+    },
+    {
+      "id": "e1150f6a-ace1-4cdb-9573-244be63c91cc",
+      "type": "formated",
+      "content": {
+        "textBg": "<h2>Езда сред природата</h2><p>Всеки от нас има желанието да се откъсне от всекидневието си, да се разтовари, да си подари няколко мига и да се погрижи за себе си. Една обикновена разходка в природата, яздейки един добре трениран и спокоен кон в този случай със сигурност ще Ви допадне.</p><p>Ездата в природата е подходяща както за деца, така и за възрастни. Оставете нашите опитни инструктори да водят вашият кон, позволявайки Ви да се потопите в спиращи дъхът гледки и самата радост от ездата. Тези моменти, ще Ви заредят за дълго с вълнуващи емоции.</p><p><strong>Разликата между разходка с кон и уроците по езда</strong></p><p>Същността на ездата в природата е насладата от преживяването, без да е задължителен учебния елемент. Подходяща е за както за опитни ездачи, така и за начинаещи, които имат нужда от разтоварване.</p><p>Информирайте инструкторът, който ви води и той ще ви поведе на една приказна и спокойна езда в природата и ще остави тренировките настрана.</p><p>Ако откриете, че преживяването ви е харесало и желаете да се научите да яздите сами, нашият екип е готов да ви помогне и в това приключение.</p>",
+        "textEn": "<h3><strong>Riding in nature</strong></h3><p>Each of us has the desire to break away from our everyday life, unwind, give ourselves a few moments and take care of ourselves. A simple walk in the nature, riding a well-trained and calm horse in this case will surely appeal to you.</p><p>Riding in nature is suitable for both children and adults**.** Let our experienced instructors guide your horse, allowing you to immerse yourself in breathtaking views and the pure joy of riding. These peaceful moments will charge you with exciting emotions for a long time.</p><p><strong>The difference between Trail riding and&nbsp;</strong><a href=\"https://adgor.bg/english/beginner_riders.html\" rel=\"noopener noreferrer\" target=\"_blank\"><strong>riding for beginners</strong></a></p><p>The essence is that the accent is on the pleasure of the ride, without the necessity for educational elements. A trail ride is suitable for experienced riders, as well as for beginners looking to escape from everyday stress.</p><p>Just tell the instructor and he’ll lead you on an amazing trail ride and would leave out the training elements.</p><p>If you find that you enjoyed the experience and wish to learn how to ride solo one day, our team is ready to help you on this adventure.</p>"
+      }
+    }
+  ]
+}

@@ -1017,6 +1017,32 @@ function Editor({ structure }) {
             >
               Delete
             </button>
+            <button
+              style={{marginTop: "0"}}
+              onClick={() => {
+                const index = schema.findIndex((el) => el.id === element.id);
+                if (index > 0) {
+                  const newSchema = [...schema];
+                  [newSchema[index - 1], newSchema[index]] = [newSchema[index], newSchema[index - 1]];
+                  setSchema(newSchema);
+                }
+              }}
+            >
+              <svg width="24px" height="24px" viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>
+            </button>
+            <button
+              style={{marginTop: "0"}}
+              onClick={() => {
+                const index = schema.findIndex((el) => el.id === element.id);
+                if (index < schema.length - 1) {
+                  const newSchema = [...schema];
+                  [newSchema[index + 1], newSchema[index]] = [newSchema[index], newSchema[index + 1]];
+                  setSchema(newSchema);
+                }
+              }}
+            >
+              <svg width="24px" height="24px" style={{transform: "rotate(180deg)"}} viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>
+            </button>
           </div>
         ))}
       </div>

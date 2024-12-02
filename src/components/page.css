@@ -172,3 +172,67 @@ h1 {
   margin-left: 10vw;
   width: 80vw;
 }
+
+@media screen and (min-width: 750px) {
+  #pageTextImageLeft {
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  
+  #pageTextImageLeft .imageContainer {
+    float: left;
+    margin: 0 10px 0px 0;
+    width: 45%;
+  }
+  
+  #pageTextImageLeft .imageContainer img {
+    width: 100%;
+    margin: 0;
+  }
+  
+  #pageTextImageRight {
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  
+  #pageTextImageRight .imageContainer {
+    float: right;
+    margin: 10px 0 0 0;
+    width: 45%;
+  }
+  
+  #pageTextImageRight .imageContainer img {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #pageTextImageLeft, #pageTextImageRight {
+    margin: 12px 0;
+  }
+  
+  #pageTextImageLeft img, #pageTextImageRight img {
+    width: 100%;
+  }
+}
+
+#pageTextImageBehind {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  overflow: hidden;
+}
+
+#pageTextImageBehind img {
+  width: 100%;
+}
+
+#pageTextImageBehind .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  word-wrap: break-word;
+}

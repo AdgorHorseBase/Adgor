@@ -51,7 +51,6 @@ const MyCustomToolbar = ({ id }) => (
     <button className="ql-link" />
     <select className="ql-align" defaultValue="">
       <option value="" />
-      <option value="left" />
       <option value="center" />
       <option value="right" />
       <option value="justify" />
@@ -171,6 +170,16 @@ function Editor({ structure }) {
           autoplay: false,
         },
       };
+    } else if (type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          textBg: "Въведи текст на български",
+          textEn: "Enter your text",
+          url: "",
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -383,6 +392,53 @@ function Editor({ structure }) {
             .catch((error) => {
               return console.error("Error uploading image:", error);
             });
+        } else if(type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
+          if(newContent.url) {
+            formData.append("image", newContent.url);
+  
+            await axios
+              .post(URL + "/image", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              })
+              .then((response) => {
+                const image = response.data.image;
+                return setSchema(
+                  schema.map((el) =>
+                    el.id === id
+                      ? {
+                          ...el,
+                          content: {
+                            textBg: el.content.textBg,
+                            textEn: el.content.textEn,
+                            url: image,
+                          },
+                        }
+                      : el
+                  )
+                );
+              })
+              .catch((error) => {
+                return console.error("Error uploading image:", error);
+              }
+            );
+          } else {
+            setSchema((prevSchema) =>
+              prevSchema.map((el) =>
+                el.id === id
+                  ? {
+                      ...el,
+                      content: {
+                        textBg: newContent.textBg || el.content.textBg,
+                        textEn: newContent.textEn || el.content.textEn,
+                        url: el.content.url,
+                      },
+                    }
+                  : el
+              )
+            );
+          }
         } else {
           setSchema(
             schema.map((el) =>
@@ -470,7 +526,7 @@ function Editor({ structure }) {
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
       } else if (element.type === "youtube") {
         htmlContent += `<iframe id="pageYouTube" src="${element.content.url}${
-          element.content.autoplay ? "?autoplay=1" : ""
+          element.content.autoplay ? "?autoplay=1&mute=1" : ""
         }" ${
           element.content.allowFullscreen ? "allowfullscreen" : ""
         }></iframe><br />`;
@@ -478,6 +534,12 @@ function Editor({ structure }) {
         htmlContent += "<div id='pageLine' ></div>";
       } else if (element.type === "image_text") {
         htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
+      } else if (element.type === "textImageLeft") {
+        htmlContent += `<div id="pageTextImageLeft"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+      } else if (element.type === "textImageBehind") {
+        htmlContent += `<div id="pageTextImageBehind"><img src="/server/files/images/${element.content.url}" alt="image" /><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
+      } else if (element.type === "textImageRight") {
+        htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       }
     });
 
@@ -580,6 +642,9 @@ function Editor({ structure }) {
           <button onClick={() => addElement("image_text")}>
             Add Image with Text
           </button>
+          <button onClick={() => addElement("textImageLeft")}>Add Text with Image Left</button>
+          <button onClick={() => addElement("textImageRight")}>Add Text with Image Right</button>
+          <button onClick={() => addElement("textImageBehind")}>Add Text with Image Behind</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -986,7 +1051,7 @@ function Editor({ structure }) {
                     onChange={(e) => {
                       updateElement(
                         element.id,
-                        { allowFullscreen: e.target.checked },
+                        { allowFullscreen: e.target.checked, autoplay: element.content.autoplay },
                         "youtube"
                       );
                     }}
@@ -1001,13 +1066,65 @@ function Editor({ structure }) {
                     onChange={(e) => {
                       updateElement(
                         element.id,
-                        { autoplay: e.target.checked },
+                        { autoplay: e.target.checked, allowFullscreen: element.content.allowFullscreen },
                         "youtube"
                       );
                     }}
                   />
                   Autoplay
                 </label>
+              </div>
+            )}
+            {(element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind") && (
+              <div>
+                <div id="Added_One_Image">
+                  <img
+                    id="Added_One_Image_img"
+                    src={URL + "/image?name=" + element.content.url}
+                    alt=""
+                  />
+                  <br></br>
+                  <input
+                    id=""
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { url: e.target.files[0] },
+                        element.type
+                      )
+                    }
+                    placeholder="Choose Image"
+                  />
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-bg`} />
+                  <ReactQuill
+                    value={element.content.textBg}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textBg: newContent }, element.type)
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-bg`,
+                      },
+                    }}
+                  />
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-en`} />
+                  <ReactQuill
+                    value={element.content.textEn}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textEn: newContent }, element.type)
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-en`,
+                      },
+                    }}
+                  />
+                </div>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

@@ -7,7 +7,8 @@
       "our-achievements",
       "our-team",
       "volunteers"
-    ]
+    ],
+    "place": 5
   },
   "\\contact-us": {
     "type": "file"
@@ -22,14 +23,16 @@
       "miniature-horses-falabella",
       "team-building",
       "trail-riding"
-    ]
+    ],
+    "place": 6
   },
   "\\FAQs": {
     "type": "directory",
     "contents": [
       "general",
       "training-the-horse"
-    ]
+    ],
+    "place": 5
   },
   "\\foundation": {
     "type": "file"

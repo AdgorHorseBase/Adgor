@@ -9,12 +9,14 @@ const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 function AdminPanel() {
     const [structure, setStruct] = useState({});
+    const [directorySort, setDirectorySort] = useState({});
 
     useEffect(() => {
         const fetchStructure = async () => {
             try {
                 const response = await axios.get(`${URL}/structure`);
                 setStruct(response.data);
+                sortDirectories(response.data);
             } catch (err) {
                 console.error("Error:", err);
             }
@@ -22,6 +24,33 @@ function AdminPanel() {
 
         fetchStructure();
     }, []);
+
+    const sortDirectories = (struct) => {
+        const sorted = {};
+        Object.entries(struct).forEach(([path, info]) => {
+            if (info.type === "directory") {
+                sorted[path] = info.place || 0;
+            }
+        });
+        setDirectorySort(sorted);
+    };
+
+    useEffect(() => {
+        const setPlaces = async () => {
+
+            try {
+                await axios.post(`${URL}/set-places`, {
+                    places: directorySort
+                });
+            } catch (err) {
+                alert("Error setting places:", err);
+            }
+        }
+
+        if(directorySort && directorySort != {}) {
+            setPlaces();
+        }
+    }, [directorySort]);
 
     // Function to rename a file or directory
     const handleRename = async (oldPath) => {
@@ -39,6 +68,7 @@ function AdminPanel() {
             // Fetch the updated structure after renaming
             const response = await axios.get(`${URL}/structure`);
             setStruct(response.data);
+            sortDirectories(response.data);
         } catch (err) {
             console.error("Error renaming:", err);
             alert("Error renaming file or directory.");
@@ -69,6 +99,7 @@ function AdminPanel() {
 
             const response = await axios.get(`${URL}/structure`);
             setStruct(response.data);
+            sortDirectories(response.data);
         } catch (err) {
             console.error("Error deleting:", err);
             alert("Error deleting file or directory");
@@ -84,6 +115,12 @@ function AdminPanel() {
                 return (
                     <div key={cleanPath} style={{margin: "0", padding: "0", marginLeft: "16px"}}>
                         {/* Display directory name */}
+                        <input type="number" style={{width: "30px"}} value={directorySort[cleanPath.replace(/^\//, "\\")]} onChange={(e) => {
+                            setDirectorySort({
+                                ...directorySort,
+                                [cleanPath.replace(/^\//, "\\")]: parseInt(e.target.value)
+                            });
+                        }} />
                         <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                         <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
                         <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>

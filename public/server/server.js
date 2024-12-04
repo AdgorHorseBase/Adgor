@@ -81,8 +81,23 @@ function GetStructure() {
         }
     });
 
-    // Save the final structure to a JSON file
+    // Load the existing structure from the structure.json file
     const structureFilePath = path.join(__dirname, 'files', 'structure.json');
+    if (fs.existsSync(structureFilePath)) {
+        try {
+            const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
+            Object.keys(existingStructure).forEach(key => {
+                if (existingStructure[key].place) {
+                    finalStructure[key] = finalStructure[key] || {};
+                    finalStructure[key].place = existingStructure[key].place;
+                }
+            });
+        } catch (err) {
+            console.error('Error reading or parsing structure file:', err);
+        }
+    }
+
+    // Save the final structure to a JSON file
     fs.writeFileSync(structureFilePath, JSON.stringify(finalStructure, null, 2), 'utf-8');
 
     return finalStructure;
@@ -224,6 +239,31 @@ app.post("/vouchers/edit", (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 })
+
+app.post("/set-places", async (req, res) => {
+    const { places } = req.body;
+
+    if(!places) {
+        res.status(400).json({ error: "No places were given" });
+    }
+
+    Object.keys(places).forEach(placeName => {
+        if (structure[placeName] && structure[placeName].contents) {
+            structure[placeName].place = places[placeName];
+        }
+    });
+    
+    try {
+        const structureFilePath = path.join(__dirname, 'files', 'structure.json');
+        fs.writeFileSync(structureFilePath, JSON.stringify(structure), 'utf-8');
+        structure = GetStructure();
+    
+        return res.status(200).json({ message: "Places set successfully" });
+    } catch(err) {
+        console.log(err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 // Start the server
 app.listen(PORT, () => {

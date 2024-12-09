@@ -29,6 +29,7 @@ const MenuSections = () => {
   
     if (storedStructure) {
       const updatedStructure = JSON.parse(storedStructure);
+      console.log(updatedStructure)
       setStruct(updatedStructure);
       setLoadingMenu(false);
       return;
@@ -112,7 +113,7 @@ const MenuSections = () => {
         {lang === "bg" ? "Начало" : "Home"}
       </button>
       {titlesFetched.current &&
-        Object.keys(structure).map((dir, index) => (
+        Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
           <React.Fragment key={dir}>
             {structure[dir].type === "directory"
               ? structure[dir].contents && (
@@ -251,7 +252,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
       {menuExpanded && (
         <div className="menu-content">
           {titlesFetched.current &&
-            Object.keys(structure).map((dir) => (
+            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
               <React.Fragment key={dir}>
                 {structure[dir].type === "directory" &&
                   structure[dir].contents && (

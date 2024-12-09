@@ -8,10 +8,7 @@
       "our-team",
       "volunteers"
     ],
-    "place": 5
-  },
-  "\\contact-us": {
-    "type": "file"
+    "place": 4
   },
   "\\Experience": {
     "type": "directory",
@@ -45,7 +42,8 @@
       "riding-for-children",
       "riding-levels",
       "western-riding"
-    ]
+    ],
+    "place": 3
   },
   "\\Services": {
     "type": "directory",
@@ -53,7 +51,8 @@
       "film-and-tv-productions",
       "horse-boarding",
       "photo-shoots-with-horses"
-    ]
+    ],
+    "place": 2
   },
   "\\Training the horse": {
     "type": "directory",
@@ -61,6 +60,10 @@
       "groundwork",
       "horse-care",
       "training"
-    ]
+    ],
+    "place": 1
+  },
+  "\\z-contact-us": {
+    "type": "file"
   }
 }

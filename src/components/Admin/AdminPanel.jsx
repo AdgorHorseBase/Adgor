@@ -127,10 +127,10 @@ function AdminPanel() {
                         <div style={{ paddingLeft: "20px" }}>
                             {/* Render subdirectories and files */}
                             {info.contents && info.contents.map((fileName) => {
-                                const fullPath = `${cleanPath}/${fileName}`;
+                                const fullPath = `${cleanPath}/${fileName.page}`;
                                 return (
                                     <div key={fullPath}>
-                                        <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{fileName}</a>
+                                        <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{fileName.page}</a>
                                         <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
                                         <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
                                         <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>

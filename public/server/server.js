@@ -81,22 +81,6 @@ function GetStructure() {
         }
     });
 
-    // Load the existing structure from the structure.json file
-    const structureFilePath = path.join(__dirname, 'files', 'structure.json');
-    if (fs.existsSync(structureFilePath)) {
-        try {
-            const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
-            Object.keys(existingStructure).forEach(key => {
-                if (existingStructure[key].place) {
-                    finalStructure[key] = finalStructure[key] || {};
-                    finalStructure[key].place = existingStructure[key].place;
-                }
-            });
-        } catch (err) {
-            console.error('Error reading or parsing structure file:', err);
-        }
-    }
-
     // Fetch titles from schema.json files and update the structure
     Object.keys(finalStructure).forEach(key => {
         if (finalStructure[key].type === 'file') {
@@ -131,6 +115,22 @@ function GetStructure() {
             });
         }
     });
+
+    // Load the existing structure from the structure.json file
+    const structureFilePath = path.join(__dirname, 'files', 'structure.json');
+    if (fs.existsSync(structureFilePath)) {
+        try {
+            const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
+            Object.keys(existingStructure).forEach(key => {
+                if (existingStructure[key].place) {
+                    finalStructure[key] = finalStructure[key] || {};
+                    finalStructure[key].place = existingStructure[key].place;
+                }
+            });
+        } catch (err) {
+            console.error('Error reading or parsing structure file:', err);
+        }
+    }
 
     // Save the final structure to a JSON file
     fs.writeFileSync(structureFilePath, JSON.stringify(finalStructure, null, 2), 'utf-8');

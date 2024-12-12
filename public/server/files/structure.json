@@ -1,9 +1,4 @@
 {
-  "\\0contact-us": {
-    "type": "file",
-    "titleBg": "Свържете се с нас",
-    "titleEn": "Contact us"
-  },
   "\\About us": {
     "type": "directory",
     "contents": [
@@ -38,7 +33,8 @@
         "directoryBg": "За нас"
       }
     ],
-    "directoryBg": "За нас"
+    "directoryBg": "За нас",
+    "place": 5
   },
   "\\Experience": {
     "type": "directory",
@@ -86,7 +82,8 @@
         "directoryBg": "Преживявания"
       }
     ],
-    "directoryBg": "Преживявания"
+    "directoryBg": "Преживявания",
+    "place": 4
   },
   "\\FAQs": {
     "type": "directory",
@@ -104,7 +101,8 @@
         "directoryBg": "FAQs"
       }
     ],
-    "directoryBg": "FAQs"
+    "directoryBg": "FAQs",
+    "place": 6
   },
   "\\foundation": {
     "type": "file",
@@ -145,7 +143,8 @@
         "directoryBg": "Обучение на ездача"
       }
     ],
-    "directoryBg": "Обучение на ездача"
+    "directoryBg": "Обучение на ездача",
+    "place": 1
   },
   "\\Services": {
     "type": "directory",
@@ -169,7 +168,8 @@
         "directoryBg": "Услуги"
       }
     ],
-    "directoryBg": "Услуги"
+    "directoryBg": "Услуги",
+    "place": 2
   },
   "\\Training the horse": {
     "type": "directory",
@@ -193,6 +193,12 @@
         "directoryBg": "Обучение на коня"
       }
     ],
-    "directoryBg": "Обучение на коня"
+    "directoryBg": "Обучение на коня",
+    "place": 3
+  },
+  "\\z-contact-us": {
+    "type": "file",
+    "titleBg": "Свържете се с нас",
+    "titleEn": "Contact us"
   }
 }

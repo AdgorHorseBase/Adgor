@@ -23,64 +23,64 @@ const MenuSections = () => {
     getStruct();
   }, []);
 
-  const fetchTitles = async (structure) => {
-    const localStorageKey = 'updatedStructure';
-    const storedStructure = localStorage.getItem(localStorageKey);
+  // const fetchTitles = async (structure) => {
+  //   const localStorageKey = 'updatedStructure';
+  //   const storedStructure = localStorage.getItem(localStorageKey);
   
-    if (storedStructure) {
-      const updatedStructure = JSON.parse(storedStructure);
-      setStruct(updatedStructure);
-      setLoadingMenu(false);
-      return;
-    }
+  //   if (storedStructure) {
+  //     const updatedStructure = JSON.parse(storedStructure);
+  //     setStruct(updatedStructure);
+  //     setLoadingMenu(false);
+  //     return;
+  //   }
   
-    const updatedStructure = { ...structure };
+  //   const updatedStructure = { ...structure };
   
-    for (const dir in updatedStructure) {
-      if (updatedStructure[dir].type === "directory") {
-        for (const page of updatedStructure[dir].contents) {
-          try {
-            const titleResponse = await axios.get(
-              `/server/uploads${dir}/${page}/schema.json`
-            );
-            updatedStructure[dir].directoryBg =
-              titleResponse.data.directoryBg ?? "";
-            updatedStructure[dir].contents = updatedStructure[dir].contents.map(
-              (p) =>
-                p === page
-                  ? {
-                      page,
-                      titleBg: titleResponse.data.titleBg,
-                      titleEn: titleResponse.data.titleEn,
-                      directoryBg:
-                        titleResponse.data.directoryBg ?? "Directory",
-                    }
-                  : p
-            );
-          } catch (err) {
-            console.log(`Error fetching title for ${dir}/${page}:`, err);
-          }
-        }
-      } else if (updatedStructure[dir].type === "file") {
-        try {
-          const titleResponse = await axios.get(
-            `/server/uploads${dir}/schema.json`
-          );
-          updatedStructure[dir] = {
-            ...updatedStructure[dir],
-            titleBg: titleResponse.data.titleBg,
-            titleEn: titleResponse.data.titleEn,
-          };
-        } catch (err) {
-          console.log(`Error fetching title for ${dir}:`, err);
-        }
-      }
-    }
+  //   for (const dir in updatedStructure) {
+  //     if (updatedStructure[dir].type === "directory") {
+  //       for (const page of updatedStructure[dir].contents) {
+  //         try {
+  //           const titleResponse = await axios.get(
+  //             `/server/uploads${dir}/${page}/schema.json`
+  //           );
+  //           updatedStructure[dir].directoryBg =
+  //             titleResponse.data.directoryBg ?? "";
+  //           updatedStructure[dir].contents = updatedStructure[dir].contents.map(
+  //             (p) =>
+  //               p === page
+  //                 ? {
+  //                     page,
+  //                     titleBg: titleResponse.data.titleBg,
+  //                     titleEn: titleResponse.data.titleEn,
+  //                     directoryBg:
+  //                       titleResponse.data.directoryBg ?? "Directory",
+  //                   }
+  //                 : p
+  //           );
+  //         } catch (err) {
+  //           console.log(`Error fetching title for ${dir}/${page}:`, err);
+  //         }
+  //       }
+  //     } else if (updatedStructure[dir].type === "file") {
+  //       try {
+  //         const titleResponse = await axios.get(
+  //           `/server/uploads${dir}/schema.json`
+  //         );
+  //         updatedStructure[dir] = {
+  //           ...updatedStructure[dir],
+  //           titleBg: titleResponse.data.titleBg,
+  //           titleEn: titleResponse.data.titleEn,
+  //         };
+  //       } catch (err) {
+  //         console.log(`Error fetching title for ${dir}:`, err);
+  //       }
+  //     }
+  //   }
   
-    localStorage.setItem(localStorageKey, JSON.stringify(updatedStructure));
-    setStruct(updatedStructure);
-    setLoadingMenu(false);
-  };
+  //   localStorage.setItem(localStorageKey, JSON.stringify(updatedStructure));
+  //   setStruct(updatedStructure);
+  //   setLoadingMenu(false);
+  // };
 
   useEffect(() => {
     if (structure && !titlesFetched.current) {

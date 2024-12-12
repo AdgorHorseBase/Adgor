@@ -47,7 +47,7 @@ function AdminPanel() {
             }
         }
 
-        if(directorySort && directorySort != {}) {
+        if(directorySort && Object.keys(directorySort).length > 0) {
             setPlaces();
         }
     }, [directorySort]);

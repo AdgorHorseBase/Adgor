@@ -97,6 +97,41 @@ function GetStructure() {
         }
     }
 
+    // Fetch titles from schema.json files and update the structure
+    Object.keys(finalStructure).forEach(key => {
+        if (finalStructure[key].type === 'file') {
+            const schemaPath = path.join(UPLOADS_DIR, key, 'schema.json');
+            if (fs.existsSync(schemaPath)) {
+                try {
+                    const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+                    finalStructure[key].titleBg = schema.titleBg;
+                    finalStructure[key].titleEn = schema.titleEn;
+                } catch (err) {
+                    console.error(`Error reading or parsing schema file for ${key}:`, err);
+                }
+            }
+        } else if (finalStructure[key].type === 'directory') {
+            finalStructure[key].contents = finalStructure[key].contents.map(page => {
+                const schemaPath = path.join(UPLOADS_DIR, key, page, 'schema.json');
+                if (fs.existsSync(schemaPath)) {
+                    try {
+                        const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+                        finalStructure[key].directoryBg = schema.directoryBg ?? "Directory";
+                        return {
+                            page,
+                            titleBg: schema.titleBg,
+                            titleEn: schema.titleEn,
+                            directoryBg: schema.directoryBg ?? "Directory"
+                        };
+                    } catch (err) {
+                        console.error(`Error reading or parsing schema file for ${key}/${page}:`, err);
+                    }
+                }
+                return { page };
+            });
+        }
+    });
+
     // Save the final structure to a JSON file
     fs.writeFileSync(structureFilePath, JSON.stringify(finalStructure, null, 2), 'utf-8');
 

@@ -29,7 +29,6 @@ const MenuSections = () => {
   
     if (storedStructure) {
       const updatedStructure = JSON.parse(storedStructure);
-      console.log(updatedStructure)
       setStruct(updatedStructure);
       setLoadingMenu(false);
       return;
@@ -85,7 +84,8 @@ const MenuSections = () => {
 
   useEffect(() => {
     if (structure && !titlesFetched.current) {
-      fetchTitles(structure);
+      // fetchTitles(structure);
+      setLoadingMenu(false);
       titlesFetched.current = true;
     }
   }, [structure]);

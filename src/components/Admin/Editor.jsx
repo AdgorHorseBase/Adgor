@@ -180,6 +180,19 @@ function Editor({ structure }) {
           url: "",
         }
       }
+    } else if (type === "starting") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          titleBg: "Въведи текст на български",
+          titleEn: "Enter your text",
+          quoteBg: "Въведи текст на български",
+          quoteEn: "Enter your text",
+          imageBackUrl: "",
+          imageFrontUrl: "",
+        },
+      };
     } else {
       newElement = {
         id: uuidv4(),
@@ -209,7 +222,6 @@ function Editor({ structure }) {
           })
           .then((response) => {
             const image = response.data.image;
-            console.log(image);
             setSchema(
               schema.map((el) =>
                 el.id === id ? { ...el, content: image } : el
@@ -365,6 +377,91 @@ function Editor({ structure }) {
               : el
           )
         );
+      break;
+      case "starting":
+        if(newContent.imageBackUrl) {
+          formData.append("image", newContent.imageBackUrl);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                        ...el,
+                        content: {
+                          titleBg: newContent.titleBg || el.content.titleBg,
+                          titleEn: newContent.titleEn || el.content.titleEn,
+                          quoteBg: newContent.quoteBg || el.content.quoteBg,
+                          quoteEn: newContent.quoteEn || el.content.quoteEn,
+                          imageBackUrl: image,
+                          imageFrontUrl: el.content.imageFrontUrl,
+                        },
+                      }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if(newContent.imageFrontUrl) {
+          formData.append("image", newContent.imageFrontUrl);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                        ...el,
+                        content: {
+                          titleBg: newContent.titleBg || el.content.titleBg,
+                          titleEn: newContent.titleEn || el.content.titleEn,
+                          quoteBg: newContent.quoteBg || el.content.quoteBg,
+                          quoteEn: newContent.quoteEn || el.content.quoteEn,
+                          imageBackUrl: el.content.imageBackUrl,
+                          imageFrontUrl: image,
+                        },
+                      }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else {
+          setSchema((prevSchema) =>
+            prevSchema.map((el) =>
+              el.id === id
+                ? {
+                    ...el,
+                    content: {
+                      titleBg: newContent.titleBg || el.content.titleBg,
+                      titleEn: newContent.titleEn || el.content.titleEn,
+                      quoteBg: newContent.quoteBg || el.content.quoteBg,
+                      quoteEn: newContent.quoteEn || el.content.quoteEn,
+                      imageBackUrl: el.content.imageBackUrl,
+                      imageFrontUrl: el.content.imageFrontUrl,
+                    },
+                  }
+                : el
+            )
+          );
+        }
       break;
       default:
         if (type === "two_images" || type === "four_images") {
@@ -525,7 +622,6 @@ function Editor({ structure }) {
           htmlContent += `</select>`;
         }
       } else if (element.type === "formated") {
-        console.log(element.content.textBg);
         htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
       } else if (element.type === "youtube") {
@@ -544,10 +640,22 @@ function Editor({ structure }) {
         htmlContent += `<div id="pageTextImageBehind"><img src="/server/files/images/${element.content.url}" alt="image" /><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
       } else if (element.type === "textImageRight") {
         htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+      } else if (element.type === "starting") {
+        htmlContent += `
+        <div id="pageStarting">
+          <img id="pageStartingBackImg" src="/server/files/images/${element.content.imageBackUrl}" alt="image" />
+          <div id="pageStartingContent">
+            <h2 class="bg">${element.content.titleBg}</h2>
+            <h2 class="en">${element.content.titleEn}</h2>
+            <div id="pageStartingQuote">
+              <p class="bg">${element.content.quoteBg}</p>
+              <p class="en">${element.content.quoteEn}</p>
+              <img id="pageStartingFrontImg" src="/server/files/images/${element.content.imageFrontUrl}" alt="image" />
+            </div>
+          </div>
+        </div>`;
       }
     });
-
-    console.log(htmlContent);
 
     const schemaContent = { titleBg, titleEn, directoryBg, schema };
 
@@ -651,6 +759,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("textImageLeft")}>Add Text with Image Left</button>
           <button onClick={() => addElement("textImageRight")}>Add Text with Image Right</button>
           <button onClick={() => addElement("textImageBehind")}>Add Text with Image Behind</button>
+          <button onClick={() => addElement("starting")}>Add Initial Vision</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1129,6 +1238,114 @@ function Editor({ structure }) {
                         container: `#toolbar-${element.id}-en`,
                       },
                     }}
+                  />
+                </div>
+              </div>
+            )}
+            {element.type === "starting" && (
+              <div>
+                <div id="Added_Starting">
+                  {/* Back Image */}
+                  <div id="Added_One_Image">
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + element.content.imageBackUrl}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { imageBackUrl: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Image"
+                    />
+                  </div>
+                  {/* Front Image */}
+                  <div id="Added_One_Image">
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + element.content.imageFrontUrl}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { imageFrontUrl: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Image"
+                    />
+                  </div>
+                  <ContentEditable
+                    id="Added_Text"
+                    html={element.content.titleBg}
+                    tagName="p"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        {
+                          titleBg: e.target.value,
+                        },
+                        element.type
+                      )
+                    }
+                    placeholder="Enter your text"
+                  />
+                  <ContentEditable
+                    id="Added_Text"
+                    html={element.content.titleEn}
+                    tagName="p"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        {
+                          titleEn: e.target.value,
+                        },
+                        element.type
+                      )
+                    }
+                    placeholder="Enter your text"
+                  />
+                  <ContentEditable
+                    id="Added_Text"
+                    html={element.content.quoteBg}
+                    tagName="p"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        {
+                          quoteBg: e.target.value,
+                        },
+                        element.type
+                      )
+                    }
+                    placeholder="Enter your text"
+                  />
+                  <ContentEditable
+                    id="Added_Text"
+                    html={element.content.quoteEn}
+                    tagName="p"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        {
+                          quoteEn: e.target.value,
+                        },
+                        element.type
+                      )
+                    }
+                    placeholder="Enter your text"
                   />
                 </div>
               </div>

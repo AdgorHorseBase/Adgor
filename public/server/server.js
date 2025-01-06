@@ -45,8 +45,8 @@ function GetStructure() {
                 // Recursively scan the subdirectory and add its name to contents
                 scanDirectory(path.join(dir, item.name), subPath);
                 contents.push(item.name);
-            } else if (item.name === "page.json" || item.name === "schema.json") {
-                // If the directory contains page.json or schema.json, mark it as a file
+            } else if (item.name === "page.html" || item.name === "schema.json") {
+                // If the directory contains page.html or schema.json, mark it as a file
                 isFile = true;
             }
         });
@@ -141,7 +141,7 @@ function GetStructure() {
 // Serve static HTML pages based on path
 app.get("/page-get", (req, res) => {
     const pagePath = req.query.pagePath.replace(/%20/g, " ").replace(/%2F/g, "/").replace(/%5C/g, "\\");
-    const htmlFilePath = path.join(UPLOADS_DIR, pagePath, "page.json");
+    const htmlFilePath = path.join(UPLOADS_DIR, pagePath, "page.html");
     const schemaFilePath = path.join(UPLOADS_DIR, pagePath, "schema.json");
 
     if (pagePath && fs.existsSync(htmlFilePath) && fs.existsSync(schemaFilePath)) {

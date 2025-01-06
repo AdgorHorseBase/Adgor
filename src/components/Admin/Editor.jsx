@@ -522,6 +522,7 @@ function Editor({ structure }) {
           htmlContent += `</select>`;
         }
       } else if (element.type === "formated") {
+        console.log(element.content.textBg);
         htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
       } else if (element.type === "youtube") {
@@ -542,6 +543,8 @@ function Editor({ structure }) {
         htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       }
     });
+
+    console.log(htmlContent);
 
     const schemaContent = { titleBg, titleEn, directoryBg, schema };
 

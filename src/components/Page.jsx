@@ -349,7 +349,7 @@ function Page() {
         const pagePath = location.pathname.replace("/page/", "");
 
         const response = await axios.get(
-          "/server/uploads/" + pagePath + "/page.json"
+          "/server/uploads/" + pagePath + "/page.html"
         );
         const content = response.data;
 

@@ -494,8 +494,11 @@ function Editor({ structure }) {
           return text.replace(/<div>/g, "").replace(/<\/div>/g, "<br />");
         };
 
-        htmlContent += `<p id="pageText" class="bg">${formatText(element.content.textBg)}</p>`;
-        htmlContent += `<p id="pageText" class="en">${formatText(element.content.textEn)}</p>`;
+        element.content.textBg = formatText(element.content.textBg);
+        element.content.textEn = formatText(element.content.textEn);
+
+        htmlContent += `<p id="pageText" class="bg">${element.content.textBg}</p>`;
+        htmlContent += `<p id="pageText" class="en">${element.content.textEn}</p>`;
       } else if (element.type === "html") {
         htmlContent += `<div class="pageHtml">${decodeHTML(
           element.content

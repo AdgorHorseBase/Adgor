@@ -377,3 +377,56 @@ h1 {
     width: 90%;
   }
 }
+
+.donation {
+  background-color: #2e1a11;
+  color: #e2d9c6;
+  width: 300px;
+  border-radius: 26px;
+  padding: 12px;
+  margin-left: 10%;
+}
+
+.donation h2 {
+  font-size: 24px;
+  margin: 0;
+  padding: 10px;
+}
+
+.donation h3 {
+  font-size: 16px;
+  margin: 0;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.donation h4 {
+  font-size: 16px;
+  margin: 0;
+  padding: 10px;
+  padding-top: 0;
+  padding-bottom: 24px;
+  color: #876254;
+}
+
+.donationSeperation {
+  height: 1px;
+  width: 80%;
+  margin: 12px auto;
+  background-color: #876254;
+}
+
+.donation a {
+  background-color: #876254;
+  text-decoration: none;
+  color: #e2d9c6;
+  padding: 10px 12px;
+  width: fit-content;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.donation a:hover {
+  background-color: #e2d9c6;
+  color: #876254;
+}

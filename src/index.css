@@ -674,8 +674,40 @@ border:none;
 }
 
     
+.donation {
+    background-color: #2e1a11;
+    color: #e2d9c6;
+    width: 300px;
+    border-radius: 24px;
+    padding: 12px;
+    margin-left: 10%;
+}
 
+.donation h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+}
 
+.donation h3 {
+    font-size: 16px;
+    margin: 0;
+    padding: 10px;
+}
+
+.donation h4 {
+    font-size: 16px;
+    margin: 0;
+    padding: 10px;
+    color: #876254;
+}
+
+.donationSeperation {
+    height: 1px;
+    width: 80%;
+    margin: 12px auto;
+    background-color: #876254;
+}
 
 .ql-font-arial {
     font-family: Arial, sans-serif;

@@ -830,6 +830,26 @@ function Editor({ structure }) {
         </div>`;
       } else if(element.type === "slideshow") {
         // Create the slideshow html, css and js if neccessary
+      } else if(element.type === "donation") {
+        htmlContent += `
+          <div class="donation">
+            <h2 class="bg">Информация за даряване</h2>
+            <h2 class="en">Donation Detials</h2>
+
+            <h3 class="bg">Фундация Адгор</h3>
+            <h3 class="en">Adgor Foundation</h3>
+            <h3>IBAN: Намери и сложи IBAN</h3>
+            <h3>BIC: Тук също</h3>
+            
+            <div class="donationSeperation"></div>
+
+            <h4 class="bg">За повече информация не се колебай да се свържеш с нас</h4>
+            <h4 class="en">For more information don't hesitate to contact us</h4>
+
+            <a class="bg" href="/page/contact">Свържи се с нас</a>
+            <a class="en" href="/page/contact">Contact us</a>
+          </div>
+        `;
       }
     });
 
@@ -938,6 +958,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("starting")}>Add Initial Vision</button>
           <button onClick={() => addElement("person")}>Add Person</button>
           <button onClick={() => addElement("slideshow")}>Add Slideshow</button>
+          <button onClick={() => addElement("donation")}>Add Donation</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1665,6 +1686,25 @@ function Editor({ structure }) {
                     placeholder="Choose Image"
                   />
                 </label>
+              </div>
+            )}
+            {element.type === "donation" && (
+              <div className="donation">
+                <h2 className="bg">Информация за даряване</h2>
+                <h2 className="en">Donation Detials</h2>
+
+                <h3 className="bg">Фундация Адгор</h3>
+                <h3 className="en">Adgor Foundation</h3>
+                <h3>IBAN: Намери и сложи IBAN</h3>
+                <h3>BIC: Тук също</h3>
+                
+                <div className="donationSeperation"></div>
+
+                <h4 className="bg">За повече информация не се колебай да се свържеш с нас</h4>
+                <h4 className="en">For more information don't hesitate to contact us</h4>
+
+                <button className="bg" onClick={() => window.location.href = "/page/contact"}>Свържи се с нас</button>
+                <button className="en" onClick={() => window.location.href = "/page/contact"}>Contact us</button>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

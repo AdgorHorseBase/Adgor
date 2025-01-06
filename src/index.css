@@ -665,6 +665,14 @@ border:none;
     
 }
 
+#Added_Slideshow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 80%;
+    margin-left: 10%;
+}
+
     
 
 

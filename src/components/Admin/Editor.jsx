@@ -204,6 +204,12 @@ function Editor({ structure }) {
           imageFront: "",
         },
       };
+    } else if (type === "slideshow") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: [],
+      };
     } else {
       newElement = {
         id: uuidv4(),
@@ -553,6 +559,72 @@ function Editor({ structure }) {
           );
         }
       break;
+      case "slideshow":
+        if(newContent.image) {
+          formData.append("image", newContent.image);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                        ...el,
+                        content: [...el.content, image],
+                      }
+                    : el && console.log(el.content)
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if(newContent.file) {
+            formData.append("image", newContent.file);
+
+            await axios
+            .post(URL + "/image", formData, {
+              headers: {
+              "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+              schema.map((el) =>
+                el.id === id
+                ? {
+                  ...el,
+                  content: el.content.map((img, idx) =>
+                    idx === newContent.index ? image : img
+                  ),
+                  }
+                : el
+              )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if(newContent.delete) {
+            return setSchema(
+            schema.map((el) =>
+              el.id === id
+              ? {
+                ...el,
+                content: el.content.filter((_, idx) => idx !== newContent.index),
+                }
+              : el
+            )
+            );
+        }
+      break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -756,6 +828,8 @@ function Editor({ structure }) {
             <p class="en">${element.content.textEn}</p>
           </div>
         </div>`;
+      } else if(element.type === "slideshow") {
+        // Create the slideshow html, css and js if neccessary
       }
     });
 
@@ -863,6 +937,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("textImageBehind")}>Add Text with Image Behind</button>
           <button onClick={() => addElement("starting")}>Add Initial Vision</button>
           <button onClick={() => addElement("person")}>Add Person</button>
+          <button onClick={() => addElement("slideshow")}>Add Slideshow</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1536,6 +1611,60 @@ function Editor({ structure }) {
                   onPaste={handlePaste}
                   placeholder="Enter your text"
                 />
+              </div>
+            )}
+            {element.type === "slideshow" && (
+              <div>
+                <div id="Added_Slideshow">
+                  {element.content.map((image, index) => (
+                    <div style={{width: "fit-content"}} key={index}>
+                      <img
+                        id="Added_One_Image_img"
+                        src={URL + "/image?name=" + image}
+                        alt=""
+                      />
+                      <br></br>
+                      <input
+                        id=""
+                        type="file"
+                        onChange={(e) =>
+                          updateElement(
+                            element.id,
+                            { index, file: e.target.files[0] },
+                            element.type
+                          )
+                        }
+                        style={{marginBottom: "8px"}}
+                        placeholder="Choose Image"
+                      />
+                      <button
+                      style={{display: "block", marginTop: "0"}}
+                        onClick={() =>
+                          updateElement(
+                            element.id,
+                            { index, delete: true },
+                            element.type
+                          )
+                        }
+                      >Delete</button>
+                    </div>
+                  ))}
+                </div>
+                <label style={{marginLeft: "10%", fontSize: "24px"}}>
+                  New:
+                  <input
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { image: e.target.files[0] },
+                        element.type
+                      )
+                    }
+                    style={{marginLeft: "8px"}}
+                    placeholder="Choose Image"
+                  />
+                </label>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

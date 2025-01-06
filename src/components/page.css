@@ -430,3 +430,40 @@ h1 {
   background-color: #e2d9c6;
   color: #876254;
 }
+
+#overlay {
+  width: 100%;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#overlayImage {
+  width: 70%;
+  min-height: 39vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  #overlayImage {
+    width: 95%;
+  }
+}
+
+#overlayText {
+  font-size: 2vw;
+  max-width: 50%;
+}
+
+@media (max-width: 1000px) {
+  #overlayText {
+    font-size: 3.5vw;
+    max-width: 80%;
+  }
+}

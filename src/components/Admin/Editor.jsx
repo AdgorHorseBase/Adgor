@@ -210,6 +210,18 @@ function Editor({ structure }) {
         type,
         content: [],
       };
+    } else if (type === "overlap") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          textBg: "Въведи текст на български",
+          textEn: "Enter your text",
+          imageBack: "",
+          imageLeft: "",
+          imageRight: "",
+        },
+      };
     } else {
       newElement = {
         id: uuidv4(),
@@ -625,6 +637,57 @@ function Editor({ structure }) {
             );
         }
       break;
+      case "overlap":
+        if(newContent.imageBack || newContent.imageLeft || newContent.imageRight) {
+          formData.append("image", newContent.image);
+
+          await axios
+          .post(URL + "/image", formData, {
+            headers: {
+            "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            const image = response.data.image;
+            return setSchema(
+            schema.map((el) =>
+              el.id === id
+              ? {
+                  ...el,
+                  content: {
+                    textBg: el.content.textBg,
+                    textEn: el.content.textEn,
+                    imageBack: newContent.imageBack ? image : el.content.imageBack,
+                    imageLeft: newContent.imageLeft ? image : el.content.imageLeft,
+                    imageRight: newContent.imageRight ? image : el.content.imageRight
+                  },
+                }
+              : el
+            )
+            );
+          })
+          .catch((error) => {
+            return console.error("Error uploading image:", error);
+          });
+        } else {
+          setSchema((prevSchema) =>
+            prevSchema.map((el) =>
+              el.id === id
+                ? {
+                    ...el,
+                    content: {
+                      textBg: newContent.textBg || el.content.textBg,
+                      textEn: newContent.textEn || el.content.textEn,
+                      imageBack: el.content.imageBack,
+                      imageLeft: el.content.imageLeft,
+                      imageRight: el.content.imageRight
+                    },
+                  }
+                : el
+            )
+          );
+        }
+      break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -850,6 +913,39 @@ function Editor({ structure }) {
             <a class="en" href="/page/contact">Contact us</a>
           </div>
         `;
+      } else if(element.type === "overlap") {
+        // Fix that!!!
+        htmlContent += `
+          <div id="overlay">
+            <div
+              style="backgroundImage: url('/server/files/images/${element.content.imageBack}');"
+              id="overlayImage"
+            >
+              <div
+                style="width: 100%; display: flex; justifyContent: center"
+              >
+                <p
+                  id="overlayText"
+                  class="bg"
+                  style="color: white; fontWeight: 600; textAlign: center"
+                >
+                  ${element.content.textBg}
+                </p>
+                <p
+                  id="overlayText"
+                  class="en"
+                  style="color: white; fontWeight: 600; textAlign: center"
+                >
+                  ${element.content.textEn}
+                </p>
+              </div>
+            </div>
+            <div style="width: 100%;">
+              <img src="/server/files/images/${element.content.imageLeft}" alt="">
+              <img src="/server/files/image/${element.content.imageRight}" alt="">
+            </div>
+          </div>
+        `;
       }
     });
 
@@ -959,6 +1055,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("person")}>Add Person</button>
           <button onClick={() => addElement("slideshow")}>Add Slideshow</button>
           <button onClick={() => addElement("donation")}>Add Donation</button>
+          <button onClick={() => addElement("overlap")}>Add Overlap</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1705,6 +1802,100 @@ function Editor({ structure }) {
 
                 <button className="bg" onClick={() => window.location.href = "/page/contact"}>Свържи се с нас</button>
                 <button className="en" onClick={() => window.location.href = "/page/contact"}>Contact us</button>
+              </div>
+            )}
+            {element.type === "overlap" && (
+              <div>
+                <div style={{display: "flex", justifyContent: "space-between", flexWrap: "wrap"}}>
+                  <div id="Added_One_Image">
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + element.content.imageBack}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { imageBack: true, image: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Back Image"
+                    />
+                  </div>
+                  <div id="Added_One_Image">
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + element.content.imageLeft}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { imageLeft: true, image: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Left Image"
+                    />
+                  </div>
+                  <div id="Added_One_Image">
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + element.content.imageRight}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { imageRight: true, image: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Right Image"
+                    />
+                  </div>
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-bg`} />
+                  <ReactQuill
+                    value={element.content.textBg}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textBg: newContent }, element.type)
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-bg`,
+                      },
+                    }}
+                  />
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-en`} />
+                  <ReactQuill
+                    value={element.content.textEn}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textEn: newContent }, element.type)
+                    }
+                    modules={{
+                      toolbar: {
+                        container: `#toolbar-${element.id}-en`,
+                      },
+                    }}
+                  />
+                </div>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

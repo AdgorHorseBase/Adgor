@@ -193,6 +193,17 @@ function Editor({ structure }) {
           imageFrontUrl: "",
         },
       };
+    } else if (type === "person") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          textBg: "Въведи текст на български",
+          textEn: "Enter your text",
+          imageBack: "",
+          imageFront: "",
+        },
+      };
     } else {
       newElement = {
         id: uuidv4(),
@@ -463,6 +474,85 @@ function Editor({ structure }) {
           );
         }
       break;
+      case "person":
+        if (newContent.imageBack) {
+          formData.append("image", newContent.imageBack);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                        ...el,
+                        content: {
+                          textBg: el.content.textBg,
+                          textEn: el.content.textEn,
+                          imageBack: image,
+                          imageFront: el.content.imageFront,
+                        },
+                      }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if (newContent.imageFront) {
+          formData.append("image", newContent.imageFront);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                        ...el,
+                        content: {
+                          textBg: el.content.textBg,
+                          textEn: el.content.textEn,
+                          imageBack: el.content.imageBack,
+                          imageFront: image,
+                        },
+                      }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else {
+          setSchema((prevSchema) =>
+            prevSchema.map((el) =>
+              el.id === id
+                ? {
+                    ...el,
+                    content: {
+                      textBg: newContent.textBg || el.content.textBg,
+                      textEn: newContent.textEn || el.content.textEn,
+                      imageBack: el.content.imageBack,
+                      imageFront: el.content.imageFront,
+                    },
+                  }
+                : el
+            )
+          );
+        }
+      break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -654,6 +744,18 @@ function Editor({ structure }) {
             </div>
           </div>
         </div>`;
+      } else if (element.type === "person") {
+        htmlContent += `
+        <div id="pagePerson">
+          <div class="pagePersonImages">
+            <img  src="/server/files/images/${element.content.imageBack}" alt="image" />
+            <img src="/server/files/images/${element.content.imageFront}" alt="image" />
+          </div>
+          <div class="pagePersonText">
+            <p class="bg">${element.content.textBg}</p>
+            <p class="en">${element.content.textEn}</p>
+          </div>
+        </div>`;
       }
     });
 
@@ -760,6 +862,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("textImageRight")}>Add Text with Image Right</button>
           <button onClick={() => addElement("textImageBehind")}>Add Text with Image Behind</button>
           <button onClick={() => addElement("starting")}>Add Initial Vision</button>
+          <button onClick={() => addElement("person")}>Add Person</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -789,6 +892,7 @@ function Editor({ structure }) {
                       textEn: element.content.textEn,
                     })
                   }
+                  onPaste={handlePaste}
                   tagName="h2"
                   id="Added_Title"
                 />
@@ -800,6 +904,7 @@ function Editor({ structure }) {
                       textEn: e.target.value,
                     })
                   }
+                  onPaste={handlePaste}
                   tagName="h2"
                   id="Added_Title"
                 />
@@ -839,6 +944,7 @@ function Editor({ structure }) {
                 onChange={(e) => updateElement(element.id, e.target.value)}
                 tagName="p"
                 id="Added_Html"
+                onPaste={handlePaste}
               />
             )}
             {element.type === "image" && (
@@ -1111,6 +1217,7 @@ function Editor({ structure }) {
                       "image_text"
                     )
                   }
+                  onPaste={handlePaste}
                   placeholder="Enter your text"
                 />
                 <ContentEditable
@@ -1128,6 +1235,7 @@ function Editor({ structure }) {
                       "image_text"
                     )
                   }
+                  onPaste={handlePaste}
                   placeholder="Enter your text"
                 />
               </div>
@@ -1300,6 +1408,7 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
+                    onPaste={handlePaste}
                     placeholder="Enter your text"
                   />
                   <ContentEditable
@@ -1315,6 +1424,7 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
+                    onPaste={handlePaste}
                     placeholder="Enter your text"
                   />
                   <ContentEditable
@@ -1330,6 +1440,7 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
+                    onPaste={handlePaste}
                     placeholder="Enter your text"
                   />
                   <ContentEditable
@@ -1345,9 +1456,86 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
+                    onPaste={handlePaste}
                     placeholder="Enter your text"
                   />
                 </div>
+              </div>
+            )}
+            {element.type === "person" && (
+              <div>
+                <div id="Added_One_Image">
+                  <img
+                    id="Added_One_Image_img"
+                    src={URL + "/image?name=" + element.content.imageBack}
+                    alt=""
+                  />
+                  <br></br>
+                  <input
+                    id=""
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { imageBack: e.target.files[0] },
+                        element.type
+                      )
+                    }
+                    placeholder="Choose Image"
+                  />
+                </div>
+                <div id="Added_One_Image">
+                  <img
+                    id="Added_One_Image_img"
+                    src={URL + "/image?name=" + element.content.imageFront}
+                    alt=""
+                  />
+                  <br></br>
+                  <input
+                    id=""
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { imageFront: e.target.files[0] },
+                        element.type
+                      )
+                    }
+                    placeholder="Choose Image"
+                  />
+                </div>
+                <ContentEditable
+                  id="Added_Text"
+                  html={element.content.textBg}
+                  tagName="p"
+                  onChange={(e) =>
+                    updateElement(
+                      element.id,
+                      {
+                        textBg: e.target.value,
+                      },
+                      element.type
+                    )
+                  }
+                  onPaste={handlePaste}
+                  placeholder="Enter your text"
+                />
+                <ContentEditable
+                  id="Added_Text"
+                  html={element.content.textEn}
+                  tagName="p"
+                  onChange={(e) =>
+                    updateElement(
+                      element.id,
+                      {
+                        textEn: e.target.value,
+                      },
+                      element.type
+                    )
+                  }
+                  onPaste={handlePaste}
+                  placeholder="Enter your text"
+                />
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

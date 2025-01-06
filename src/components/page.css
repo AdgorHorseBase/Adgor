@@ -266,6 +266,7 @@ h1 {
   text-align: left;
   margin-left: 10%;
   padding-top: 62px;
+  transform: translateY(300px);
 }
 
 #pageStartingQuote {
@@ -279,6 +280,7 @@ h1 {
   flex: 1;
   text-align: left;
   margin-left: 10%;
+  margin-top: 48px;
   font-size: 24px;
   color: #E4D9C7;
 }
@@ -288,4 +290,90 @@ h1 {
   max-width: 600px;
   max-height: 400px;
   object-fit: cover;
+}
+
+#pagePerson {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.pagePersonImages {
+  position: relative;
+  width: 70%;
+}
+
+.pagePersonImages img:first-of-type {
+  width: 80%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.pagePersonImages img:last-of-type {
+  width: 30%;
+  position: relative;
+  right: 0;
+  z-index: 2;
+  margin: auto;
+  margin-right: 0;
+  margin-top: 60px;
+  display: block;
+}
+
+.pagePersonText {
+  width: 30%;
+  z-index: 3;
+  position: relative;
+}
+
+.pagePersonText p {
+  margin: 10px 0;
+}
+
+.pagePersonText .bg {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.pagePersonText .en {
+  font-size: 16px;
+  color: #666;
+}
+
+.pagePersonText button {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  #pagePerson {
+    flex-direction: column;
+  }
+
+  .pagePersonImages {
+    width: 100%;
+  }
+
+  .pagePersonImages img:first-of-type {
+    width: 100%;
+  }
+
+  .pagePersonImages img:last-of-type {
+    width: 40%;
+    margin-top: 25%;
+    margin-right: -24px;
+  }
+  
+  .pagePersonText {
+    width: 90%;
+  }
 }

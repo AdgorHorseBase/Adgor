@@ -583,14 +583,14 @@ function Editor({ structure }) {
             })
             .then((response) => {
               const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
+              return setSchema((prevSchema) =>
+                prevSchema.map((el) =>
                   el.id === id
                     ? {
                         ...el,
                         content: [...el.content, image],
                       }
-                    : el && console.log(el.content)
+                    : el
                 )
               );
             })
@@ -892,7 +892,7 @@ function Editor({ structure }) {
           </div>
         </div>`;
       } else if(element.type === "slideshow") {
-        // Create the slideshow html, css and js if neccessary
+        // Create the slideshow html, css...
       } else if(element.type === "donation") {
         htmlContent += `
           <div class="donation">
@@ -914,35 +914,32 @@ function Editor({ structure }) {
           </div>
         `;
       } else if(element.type === "overlap") {
-        // Fix that!!!
         htmlContent += `
           <div id="overlay">
             <div
-              style="backgroundImage: url('/server/files/images/${element.content.imageBack}');"
+              style="background-image: url('/server/files/images/${element.content.imageBack}')"
               id="overlayImage"
             >
-              <div
-                style="width: 100%; display: flex; justifyContent: center"
-              >
+              <div id="overlayTextContainer">
                 <p
                   id="overlayText"
                   class="bg"
                   style="color: white; fontWeight: 600; textAlign: center"
                 >
-                  ${element.content.textBg}
+                  ${element.content.textBg.replace(/<\/?p>/g, '')}
                 </p>
                 <p
                   id="overlayText"
                   class="en"
                   style="color: white; fontWeight: 600; textAlign: center"
                 >
-                  ${element.content.textEn}
+                  ${element.content.textEn.replace(/<\/?p>/g, '')}
                 </p>
               </div>
             </div>
-            <div style="width: 100%;">
-              <img src="/server/files/images/${element.content.imageLeft}" alt="">
-              <img src="/server/files/image/${element.content.imageRight}" alt="">
+            <div id="overlayFrontImages" style="width: 100%;">
+              <img id="overlayImageLeft" src="/server/files/images/${element.content.imageLeft}" alt="">
+              <img id="overlayImageRight" src="/server/files/images/${element.content.imageRight}" alt="">
             </div>
           </div>
         `;

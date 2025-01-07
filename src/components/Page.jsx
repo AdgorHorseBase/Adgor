@@ -338,6 +338,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
 
 function Page() {
   const [pageContent, setPageContent] = useState("Loading...");
+  const [sections, setSections] = useState([]);
   // const [titleBg, setTitleBg] = useState("Blog");
   // const [titleEn, setTitleEn] = useState("Blog");
   const location = useLocation(); // To get the current path
@@ -391,6 +392,13 @@ function Page() {
       elementsBg.forEach((el) => (el.style.display = "block"));
       elementsEn.forEach((el) => (el.style.display = "none"));
     }
+
+    const GetSections = () => {
+      const sections = document.querySelectorAll("section");
+      setSections(sections);
+    }
+
+    GetSections();
   }, [lang, pageContent]);
 
   useEffect(() => {
@@ -422,6 +430,22 @@ function Page() {
       <h1 className="en">{titleEn}</h1> */}
 
       <div style={{marginTop: "12px", marginBottom: "48px"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
+
+      {sections && sections.length > 0 && (
+        <div id="sections">
+          {sections.forEach((section) => {
+            const id = section.id;
+            const titleBg = section.getAttribute("data-title-bg");
+            const titleEn = section.getAttribute("data-title-en");
+            return (
+              <>
+                <span className="bg" onClick={() => scrollToSection(id)}>{titleBg}</span>
+                <span className="en" onClick={() => scrollToSection(id)}>{titleEn}</span>
+              </>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

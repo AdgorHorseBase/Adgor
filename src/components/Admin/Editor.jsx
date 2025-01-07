@@ -222,6 +222,15 @@ function Editor({ structure }) {
           imageRight: "",
         },
       };
+    } else if (type === "section") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          titleBg: "Напиши името на секцията",
+          titleEn: "Write the name of this section"
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -954,6 +963,11 @@ function Editor({ structure }) {
             </div>
           </div>
         `;
+      } else if(element.type === "section") {
+        htmlContent += `
+          <section id="${element.id}" data-title-bg="${element.content.titleBg}" data-title-en="${element.content.titleEn}">
+          </section>
+        `;
       }
     });
 
@@ -1064,6 +1078,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("slideshow")}>Add Slideshow</button>
           <button onClick={() => addElement("donation")}>Add Donation</button>
           <button onClick={() => addElement("overlap")}>Add Overlap</button>
+          <button onClick={() => addElement("section")}>Add Section</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1904,6 +1919,35 @@ function Editor({ structure }) {
                     }}
                   />
                 </div>
+              </div>
+            )}
+            {element.type === "section" && (
+              <div id="section">
+                <p style={{marginLeft: "10%"}}>This is a section:</p>
+                <ContentEditable
+                  html={element.content.titleBg}
+                  onChange={(e) =>
+                    updateElement(element.id, {
+                      titleBg: e.target.value,
+                      titleEn: element.content.titleEn
+                    })
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.titleEn}
+                  onChange={(e) =>
+                    updateElement(element.id, {
+                      titleBg: element.content.titleBg,
+                      titleEn: e.target.value
+                    })
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

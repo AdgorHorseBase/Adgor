@@ -398,8 +398,10 @@ function Page() {
       setSections(sections);
     }
 
-    GetSections();
-  }, [lang, pageContent]);
+    if(sections.length === 0) {
+      GetSections();
+    }
+  }, [lang, pageContent, sections]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -420,6 +422,20 @@ function Page() {
     };
   }, [pageContent]);
 
+  const scrollToElement = (id) => {
+    const element = document.getElementById(id);
+    const offset = 150;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
+
   return (
     <div>
       <div id="StickyMenu">
@@ -433,17 +449,23 @@ function Page() {
 
       {sections && sections.length > 0 && (
         <div id="sections">
-          {sections.forEach((section) => {
-            const id = section.id;
-            const titleBg = section.getAttribute("data-title-bg");
-            const titleEn = section.getAttribute("data-title-en");
-            return (
-              <>
-                <span className="bg" onClick={() => scrollToSection(id)}>{titleBg}</span>
-                <span className="en" onClick={() => scrollToSection(id)}>{titleEn}</span>
-              </>
-            );
-          })}
+          {Array.from(sections).map((section) => (
+            <>
+              <React.Fragment key={section.id}>
+                <div className="bg" onClick={() => {scrollToElement(section.id)}}>{section.getAttribute("data-title-bg")}
+                  <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />
+                  </svg>
+                </div>
+                <div className="en" onClick={() => {scrollToElement(section.id)}}>
+                  {section.getAttribute("data-title-en")}
+                  <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />
+                  </svg>
+                </div>
+              </React.Fragment>
+            </>
+          ))}
         </div>
       )}
     </div>

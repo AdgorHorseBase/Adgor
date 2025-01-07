@@ -476,6 +476,8 @@ h1 {
 #overlayText {
   font-size: 2vw;
   max-width: 50%;
+  align-content: center;
+  text-align: center;
 }
 
 @media (max-width: 1000px) {
@@ -487,7 +489,7 @@ h1 {
 
 #overlayImageLeft {
   width: 20vw;
-  left: 12vw;
+  left: 10vw;
   top: -42vw;
   position: relative;
 }
@@ -498,3 +500,40 @@ h1 {
   top: -20vw;
   width: 26vw;
 }
+
+/* Slideshow styles */
+.slideshow {
+  position: relative;
+  width: 80%;
+  height: 600px;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.slide {
+  display: none;
+  text-align: center;
+  object-fit: cover;
+}
+
+.slide img {
+  height: 600px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+  transform: translateY(-50%);
+}
+
+.prev { left: 0; }
+.next { right: 0; }

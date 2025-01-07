@@ -893,6 +893,17 @@ function Editor({ structure }) {
         </div>`;
       } else if(element.type === "slideshow") {
         // Create the slideshow html, css...
+        const slideshowId = `slideshow-${element.id}`;
+        htmlContent += `
+        <div id="${slideshowId}" class="slideshow">
+          ${element.content.map((image, index) => `
+            <div class="slide" style="display: ${index === 0 ? 'block' : 'none'};">
+              <img src="/server/files/images/${image}" alt="slide image" />
+            </div>
+          `).join('')}
+          <a class="prev" onclick="plusSlides(-1, '${slideshowId}')">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, '${slideshowId}')">&#10095;</a>
+        </div>`;
       } else if(element.type === "donation") {
         htmlContent += `
           <div class="donation">

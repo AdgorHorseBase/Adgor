@@ -29,6 +29,30 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      let slideIndex = {};
+
+      function showSlides(n, slideshowId) {
+        let i;
+        const slides = document.querySelectorAll(`#${slideshowId} .slide`);
+        if (!slideIndex[slideshowId]) {
+          slideIndex[slideshowId] = 1;
+        }
+        if (n > slides.length) { slideIndex[slideshowId] = 1 }
+        if (n < 1) { slideIndex[slideshowId] = slides.length }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex[slideshowId] - 1].style.display = "block";
+      }
+
+      function plusSlides(n, slideshowId) {
+        if (!slideIndex[slideshowId]) {
+          slideIndex[slideshowId] = 1;
+        }
+        showSlides(slideIndex[slideshowId] += n, slideshowId);
+      }
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

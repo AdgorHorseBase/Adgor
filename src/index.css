@@ -294,10 +294,11 @@ button:hover{
 
 
 #Page_Title{
-    margin-top: 8px;
+    /* margin-top: 8px; */
     font-style: Source Serif Pro ;
     color: #29160F;
     margin-left: 13vw;
+    margin-bottom: 6px;
     font-weight: 500;
     background-color:#fefefe;
     border: 0.3vh solid #fefefe;
@@ -316,9 +317,10 @@ button:hover{
 
 
 #Path_Input{
-    margin-top: 8px;
+    /* margin-top: 8px; */
     color: #29160F;
     margin-left: 13vw;
+    margin-bottom: 6px;
     font-weight: 500;
     background-color:#fefefe;
     border: 0.3vh solid #fefefe;
@@ -352,32 +354,35 @@ button:hover{
 
 #Delete_button{
     margin-top: -2vh;
-    margin-left: 13vw;
-    margin-bottom: 4vh;
+    margin-left: auto;
+    margin-bottom: 0;
 
 }
 
 #Added_Title{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
     font-size: 3.3vh;
     margin-bottom: 2vh;
     margin-top: 0;
     font-style: bold;
     font-size: 3.5vh;
     font-weight: 600;
+    border: none;
+    border-bottom: 2px solid #29160F;
 }
 
 #Added_Text{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
     width: 74vw;
     margin-bottom: 2vh;
     margin-top: 0;
     font-size: 2vh;
     font-style: italic;
+    border-bottom: 2px solid #29160F;
 }
 
 #Added_Video{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
 
     margin-top: 0;
 }
@@ -388,7 +393,7 @@ button:hover{
 
 
 #Added_Html{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
     width: 74vw;
     margin-bottom: 2vh;
     margin-top: 0;
@@ -415,7 +420,7 @@ input[type="file"]:hover{
 }
 
 #Added_menu{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
 }
 
 #Added_menu_select{
@@ -439,7 +444,7 @@ input[type="file"]:hover{
 }
 
 #Added_One_Image{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
     width: 74vw;
 }
 
@@ -450,7 +455,7 @@ width: 20vw;
 
 
 #Added_Two_Images{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
 }
 
 #Added_Two_Images_img_one{
@@ -467,7 +472,7 @@ margin-left: 11.3vw;
 }
 
 #Added_Four_Images{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
 }
 
 #Added_Four_Images_img_one{
@@ -504,7 +509,7 @@ margin-left: 11.3vw;
 }
 
 #Added_Formated{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
     width: 74vw;
     color:#293241;
     background-color: #fefefe;
@@ -557,7 +562,7 @@ border:none;
 }
 
 #Added_YouTube{
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
 
 }
 
@@ -740,4 +745,31 @@ border:none;
 
 #PageStructure{
     margin-left: 2vw;
+}
+
+.labelTitles {
+    margin-left: 13vw;
+    font-size: 18px;
+}
+
+.elements {
+    padding-bottom: 18px;
+}
+
+.element {
+    background-color: #87625469;
+    margin: auto;
+    margin-bottom: 16px;
+    padding: 12px;
+    width: 80%;
+}
+
+.element:first-child {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.element:last-child {
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
 }

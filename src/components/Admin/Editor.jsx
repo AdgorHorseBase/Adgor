@@ -286,9 +286,9 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: { url: video, autoplay: el.content.autoplay },
-                      }
+                      ...el,
+                      content: { url: video, autoplay: el.content.autoplay },
+                    }
                     : el
                 )
               );
@@ -301,12 +301,12 @@ function Editor({ structure }) {
             schema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      url: el.content.url,
-                      autoplay: newContent.autoplay,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    url: el.content.url,
+                    autoplay: newContent.autoplay,
+                  },
+                }
                 : el
             )
           );
@@ -328,12 +328,12 @@ function Editor({ structure }) {
             schema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      ...el.content,
-                      url: `https://www.youtube.com/embed/${videoId}`,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    ...el.content,
+                    url: `https://www.youtube.com/embed/${videoId}`,
+                  },
+                }
                 : el
             )
           );
@@ -342,13 +342,13 @@ function Editor({ structure }) {
             schema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      ...el.content,
-                      allowFullscreen: newContent.allowFullscreen,
-                      autoplay: newContent.autoplay,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    ...el.content,
+                    allowFullscreen: newContent.allowFullscreen,
+                    autoplay: newContent.autoplay,
+                  },
+                }
                 : el
             )
           );
@@ -370,13 +370,13 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: {
-                          textBg: el.content.textBg,
-                          textEn: el.content.textEn,
-                          url: image,
-                        },
-                      }
+                      ...el,
+                      content: {
+                        textBg: el.content.textBg,
+                        textEn: el.content.textEn,
+                        url: image,
+                      },
+                    }
                     : el
                 )
               );
@@ -389,35 +389,35 @@ function Editor({ structure }) {
             schema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      textBg: newContent.textBg,
-                      textEn: newContent.textEn,
-                      url: el.content.url,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    textBg: newContent.textBg,
+                    textEn: newContent.textEn,
+                    url: el.content.url,
+                  },
+                }
                 : el
             )
           );
         }
-      break;
+        break;
       case "formated":
         setSchema((prevSchema) =>
           prevSchema.map((el) =>
             el.id === id
               ? {
-                  ...el,
-                  content: {
-                    textBg: newContent.textBg || el.content.textBg,
-                    textEn: newContent.textEn || el.content.textEn,
-                  },
-                }
+                ...el,
+                content: {
+                  textBg: newContent.textBg || el.content.textBg,
+                  textEn: newContent.textEn || el.content.textEn,
+                },
+              }
               : el
           )
         );
-      break;
+        break;
       case "starting":
-        if(newContent.imageBackUrl) {
+        if (newContent.imageBackUrl) {
           formData.append("image", newContent.imageBackUrl);
 
           await axios
@@ -432,16 +432,16 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: {
-                          titleBg: newContent.titleBg || el.content.titleBg,
-                          titleEn: newContent.titleEn || el.content.titleEn,
-                          quoteBg: newContent.quoteBg || el.content.quoteBg,
-                          quoteEn: newContent.quoteEn || el.content.quoteEn,
-                          imageBackUrl: image,
-                          imageFrontUrl: el.content.imageFrontUrl,
-                        },
-                      }
+                      ...el,
+                      content: {
+                        titleBg: newContent.titleBg || el.content.titleBg,
+                        titleEn: newContent.titleEn || el.content.titleEn,
+                        quoteBg: newContent.quoteBg || el.content.quoteBg,
+                        quoteEn: newContent.quoteEn || el.content.quoteEn,
+                        imageBackUrl: image,
+                        imageFrontUrl: el.content.imageFrontUrl,
+                      },
+                    }
                     : el
                 )
               );
@@ -449,7 +449,7 @@ function Editor({ structure }) {
             .catch((error) => {
               return console.error("Error uploading image:", error);
             });
-        } else if(newContent.imageFrontUrl) {
+        } else if (newContent.imageFrontUrl) {
           formData.append("image", newContent.imageFrontUrl);
 
           await axios
@@ -464,16 +464,16 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: {
-                          titleBg: newContent.titleBg || el.content.titleBg,
-                          titleEn: newContent.titleEn || el.content.titleEn,
-                          quoteBg: newContent.quoteBg || el.content.quoteBg,
-                          quoteEn: newContent.quoteEn || el.content.quoteEn,
-                          imageBackUrl: el.content.imageBackUrl,
-                          imageFrontUrl: image,
-                        },
-                      }
+                      ...el,
+                      content: {
+                        titleBg: newContent.titleBg || el.content.titleBg,
+                        titleEn: newContent.titleEn || el.content.titleEn,
+                        quoteBg: newContent.quoteBg || el.content.quoteBg,
+                        quoteEn: newContent.quoteEn || el.content.quoteEn,
+                        imageBackUrl: el.content.imageBackUrl,
+                        imageFrontUrl: image,
+                      },
+                    }
                     : el
                 )
               );
@@ -486,21 +486,21 @@ function Editor({ structure }) {
             prevSchema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      titleBg: newContent.titleBg || el.content.titleBg,
-                      titleEn: newContent.titleEn || el.content.titleEn,
-                      quoteBg: newContent.quoteBg || el.content.quoteBg,
-                      quoteEn: newContent.quoteEn || el.content.quoteEn,
-                      imageBackUrl: el.content.imageBackUrl,
-                      imageFrontUrl: el.content.imageFrontUrl,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    titleBg: newContent.titleBg || el.content.titleBg,
+                    titleEn: newContent.titleEn || el.content.titleEn,
+                    quoteBg: newContent.quoteBg || el.content.quoteBg,
+                    quoteEn: newContent.quoteEn || el.content.quoteEn,
+                    imageBackUrl: el.content.imageBackUrl,
+                    imageFrontUrl: el.content.imageFrontUrl,
+                  },
+                }
                 : el
             )
           );
         }
-      break;
+        break;
       case "person":
         if (newContent.imageBack) {
           formData.append("image", newContent.imageBack);
@@ -517,14 +517,14 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: {
-                          textBg: el.content.textBg,
-                          textEn: el.content.textEn,
-                          imageBack: image,
-                          imageFront: el.content.imageFront,
-                        },
-                      }
+                      ...el,
+                      content: {
+                        textBg: el.content.textBg,
+                        textEn: el.content.textEn,
+                        imageBack: image,
+                        imageFront: el.content.imageFront,
+                      },
+                    }
                     : el
                 )
               );
@@ -547,14 +547,14 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: {
-                          textBg: el.content.textBg,
-                          textEn: el.content.textEn,
-                          imageBack: el.content.imageBack,
-                          imageFront: image,
-                        },
-                      }
+                      ...el,
+                      content: {
+                        textBg: el.content.textBg,
+                        textEn: el.content.textEn,
+                        imageBack: el.content.imageBack,
+                        imageFront: image,
+                      },
+                    }
                     : el
                 )
               );
@@ -567,21 +567,21 @@ function Editor({ structure }) {
             prevSchema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      textBg: newContent.textBg || el.content.textBg,
-                      textEn: newContent.textEn || el.content.textEn,
-                      imageBack: el.content.imageBack,
-                      imageFront: el.content.imageFront,
-                    },
-                  }
+                  ...el,
+                  content: {
+                    textBg: newContent.textBg || el.content.textBg,
+                    textEn: newContent.textEn || el.content.textEn,
+                    imageBack: el.content.imageBack,
+                    imageFront: el.content.imageFront,
+                  },
+                }
                 : el
             )
           );
         }
-      break;
+        break;
       case "slideshow":
-        if(newContent.image) {
+        if (newContent.image) {
           formData.append("image", newContent.image);
 
           await axios
@@ -596,9 +596,9 @@ function Editor({ structure }) {
                 prevSchema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: [...el.content, image],
-                      }
+                      ...el,
+                      content: [...el.content, image],
+                    }
                     : el
                 )
               );
@@ -606,97 +606,97 @@ function Editor({ structure }) {
             .catch((error) => {
               return console.error("Error uploading image:", error);
             });
-        } else if(newContent.file) {
-            formData.append("image", newContent.file);
+        } else if (newContent.file) {
+          formData.append("image", newContent.file);
 
-            await axios
+          await axios
             .post(URL + "/image", formData, {
               headers: {
-              "Content-Type": "multipart/form-data",
+                "Content-Type": "multipart/form-data",
               },
             })
             .then((response) => {
               const image = response.data.image;
               return setSchema(
-              schema.map((el) =>
-                el.id === id
-                ? {
-                  ...el,
-                  content: el.content.map((img, idx) =>
-                    idx === newContent.index ? image : img
-                  ),
-                  }
-                : el
-              )
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: el.content.map((img, idx) =>
+                        idx === newContent.index ? image : img
+                      ),
+                    }
+                    : el
+                )
               );
             })
             .catch((error) => {
               return console.error("Error uploading image:", error);
             });
-        } else if(newContent.delete) {
-            return setSchema(
+        } else if (newContent.delete) {
+          return setSchema(
             schema.map((el) =>
               el.id === id
-              ? {
-                ...el,
-                content: el.content.filter((_, idx) => idx !== newContent.index),
+                ? {
+                  ...el,
+                  content: el.content.filter((_, idx) => idx !== newContent.index),
                 }
-              : el
+                : el
             )
-            );
+          );
         }
-      break;
+        break;
       case "overlap":
-        if(newContent.imageBack || newContent.imageLeft || newContent.imageRight) {
+        if (newContent.imageBack || newContent.imageLeft || newContent.imageRight) {
           formData.append("image", newContent.image);
 
           await axios
-          .post(URL + "/image", formData, {
-            headers: {
-            "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
-            const image = response.data.image;
-            return setSchema(
-            schema.map((el) =>
-              el.id === id
-              ? {
-                  ...el,
-                  content: {
-                    textBg: el.content.textBg,
-                    textEn: el.content.textEn,
-                    imageBack: newContent.imageBack ? image : el.content.imageBack,
-                    imageLeft: newContent.imageLeft ? image : el.content.imageLeft,
-                    imageRight: newContent.imageRight ? image : el.content.imageRight
-                  },
-                }
-              : el
-            )
-            );
-          })
-          .catch((error) => {
-            return console.error("Error uploading image:", error);
-          });
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: {
+                        textBg: el.content.textBg,
+                        textEn: el.content.textEn,
+                        imageBack: newContent.imageBack ? image : el.content.imageBack,
+                        imageLeft: newContent.imageLeft ? image : el.content.imageLeft,
+                        imageRight: newContent.imageRight ? image : el.content.imageRight
+                      },
+                    }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
         } else {
           setSchema((prevSchema) =>
             prevSchema.map((el) =>
               el.id === id
                 ? {
-                    ...el,
-                    content: {
-                      textBg: newContent.textBg || el.content.textBg,
-                      textEn: newContent.textEn || el.content.textEn,
-                      imageBack: el.content.imageBack,
-                      imageLeft: el.content.imageLeft,
-                      imageRight: el.content.imageRight
-                    },
-                  }
+                  ...el,
+                  content: {
+                    textBg: newContent.textBg || el.content.textBg,
+                    textEn: newContent.textEn || el.content.textEn,
+                    imageBack: el.content.imageBack,
+                    imageLeft: el.content.imageLeft,
+                    imageRight: el.content.imageRight
+                  },
+                }
                 : el
             )
           );
         }
-      break;
+        break;
       default:
         if (type === "two_images" || type === "four_images") {
           formData.append("image", newContent.file);
@@ -713,9 +713,9 @@ function Editor({ structure }) {
                 schema.map((el) =>
                   el.id === id
                     ? {
-                        ...el,
-                        content: { ...el.content, [newContent.id]: image },
-                      }
+                      ...el,
+                      content: { ...el.content, [newContent.id]: image },
+                    }
                     : el
                 )
               );
@@ -723,10 +723,10 @@ function Editor({ structure }) {
             .catch((error) => {
               return console.error("Error uploading image:", error);
             });
-        } else if(type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
-          if(newContent.url) {
+        } else if (type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
+          if (newContent.url) {
             formData.append("image", newContent.url);
-  
+
             await axios
               .post(URL + "/image", formData, {
                 headers: {
@@ -739,13 +739,13 @@ function Editor({ structure }) {
                   schema.map((el) =>
                     el.id === id
                       ? {
-                          ...el,
-                          content: {
-                            textBg: el.content.textBg,
-                            textEn: el.content.textEn,
-                            url: image,
-                          },
-                        }
+                        ...el,
+                        content: {
+                          textBg: el.content.textBg,
+                          textEn: el.content.textEn,
+                          url: image,
+                        },
+                      }
                       : el
                   )
                 );
@@ -753,19 +753,19 @@ function Editor({ structure }) {
               .catch((error) => {
                 return console.error("Error uploading image:", error);
               }
-            );
+              );
           } else {
             setSchema((prevSchema) =>
               prevSchema.map((el) =>
                 el.id === id
                   ? {
-                      ...el,
-                      content: {
-                        textBg: newContent.textBg || el.content.textBg,
-                        textEn: newContent.textEn || el.content.textEn,
-                        url: el.content.url,
-                      },
-                    }
+                    ...el,
+                    content: {
+                      textBg: newContent.textBg || el.content.textBg,
+                      textEn: newContent.textEn || el.content.textEn,
+                      url: el.content.url,
+                    },
+                  }
                   : el
               )
             );
@@ -841,9 +841,8 @@ function Editor({ structure }) {
       } else if (element.type === "four_images") {
         htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`;
       } else if (element.type === "video") {
-        htmlContent += `<video id="pageVideo" ${element.content.autoplay ? "class='autoplay-video' muted" : ""} src="/server/files/videos/${
-          element.content.url
-        }" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
+        htmlContent += `<video id="pageVideo" ${element.content.autoplay ? "class='autoplay-video' muted" : ""} src="/server/files/videos/${element.content.url
+          }" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
       } else if (element.type === "menu") {
         if (element.content.length > 0) {
           htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;
@@ -859,11 +858,9 @@ function Editor({ structure }) {
         htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
       } else if (element.type === "youtube") {
-        htmlContent += `<iframe id="pageYouTube" src="${element.content.url}${
-          element.content.autoplay ? "?autoplay=1&mute=1" : ""
-        }" ${
-          element.content.allowFullscreen ? "allowfullscreen" : ""
-        }></iframe><br />`;
+        htmlContent += `<iframe id="pageYouTube" src="${element.content.url}${element.content.autoplay ? "?autoplay=1&mute=1" : ""
+          }" ${element.content.allowFullscreen ? "allowfullscreen" : ""
+          }></iframe><br />`;
       } else if (element.type === "separation") {
         htmlContent += "<div id='pageLine' ></div>";
       } else if (element.type === "image_text") {
@@ -900,7 +897,7 @@ function Editor({ structure }) {
             <p class="en">${element.content.textEn}</p>
           </div>
         </div>`;
-      } else if(element.type === "slideshow") {
+      } else if (element.type === "slideshow") {
         // Create the slideshow html, css...
         const slideshowId = `slideshow-${element.id}`;
         htmlContent += `
@@ -913,7 +910,7 @@ function Editor({ structure }) {
           <a class="prev" onclick="plusSlides(-1, '${slideshowId}')">&#10094;</a>
           <a class="next" onclick="plusSlides(1, '${slideshowId}')">&#10095;</a>
         </div>`;
-      } else if(element.type === "donation") {
+      } else if (element.type === "donation") {
         htmlContent += `
           <div class="donation">
             <h2 class="bg">Информация за даряване</h2>
@@ -933,7 +930,7 @@ function Editor({ structure }) {
             <a class="en" href="/page/contact">Contact us</a>
           </div>
         `;
-      } else if(element.type === "overlap") {
+      } else if (element.type === "overlap") {
         htmlContent += `
           <div id="overlay">
             <div
@@ -963,7 +960,7 @@ function Editor({ structure }) {
             </div>
           </div>
         `;
-      } else if(element.type === "section") {
+      } else if (element.type === "section") {
         htmlContent += `
           <section id="${element.id}" data-title-bg="${element.content.titleBg}" data-title-en="${element.content.titleEn}">
           </section>
@@ -1002,11 +999,12 @@ function Editor({ structure }) {
   };
 
   return (
-    <div className="Setting_buttons">
+    <div className="Setting_buttons" style={{ paddingBottom: "86px" }}>
       <br />
       <br />
 
       <div>
+        <label className="labelTitles">Заглавие на страницата BG</label>
         <input
           id="Page_Title"
           type="text"
@@ -1015,30 +1013,34 @@ function Editor({ structure }) {
           placeholder="Page Title"
           style={{ display: "block" }}
         />
+        <label className="labelTitles">Заглавие на страницата EN</label>
         <input
           id="Page_Title"
           type="text"
           value={titleEn}
           onChange={(e) => setTitleEn(e.target.value)}
           placeholder="Page Title"
-          style={{ display: "block", marginBottom: "24px" }}
+          style={{ display: "block", marginBottom: "18px" }}
         />
-        <input
-          id="Path_Input"
-          type="text"
-          value={directory}
-          onChange={(e) => setDirectory(e.target.value)}
-          placeholder="Set Directory"
-          style={{ display: "block" }}
-        />
+        <label className="labelTitles">Име на папката BG</label>
         <input
           id="Path_Input"
           type="text"
           value={directoryBg}
           onChange={(e) => setDirectoryBg(e.target.value)}
           placeholder="Сложи директория"
+          style={{ display: "block" }}
+        />
+        <label className="labelTitles">Име на папката EN</label>
+        <input
+          id="Path_Input"
+          type="text"
+          value={directory}
+          onChange={(e) => setDirectory(e.target.value)}
+          placeholder="Set Directory"
           style={{ display: "block", marginBottom: "16px" }}
         />
+        <label className="labelTitles"></label>
         <input
           id="Path_Input"
           type="text"
@@ -1095,9 +1097,9 @@ function Editor({ structure }) {
 
       <div className="line"></div>
 
-      <div>
+      <div className="elements">
         {schema.map((element) => (
-          <div key={element.id}>
+          <div className="element" key={element.id}>
             {element.type === "title" && (
               <div>
                 <ContentEditable
@@ -1371,7 +1373,7 @@ function Editor({ structure }) {
                   <ReactQuill
                     value={element.content.textBg}
                     onChange={(newContent) =>
-                        updateElement(element.id, { textBg: newContent }, "formated")
+                      updateElement(element.id, { textBg: newContent }, "formated")
                     }
                     modules={{
                       toolbar: {
@@ -1758,7 +1760,7 @@ function Editor({ structure }) {
               <div>
                 <div id="Added_Slideshow">
                   {element.content.map((image, index) => (
-                    <div style={{width: "fit-content"}} key={index}>
+                    <div style={{ width: "fit-content" }} key={index}>
                       <img
                         id="Added_One_Image_img"
                         src={URL + "/image?name=" + image}
@@ -1775,11 +1777,11 @@ function Editor({ structure }) {
                             element.type
                           )
                         }
-                        style={{marginBottom: "8px"}}
+                        style={{ marginBottom: "8px" }}
                         placeholder="Choose Image"
                       />
                       <button
-                      style={{display: "block", marginTop: "0"}}
+                        style={{ display: "block", marginTop: "0" }}
                         onClick={() =>
                           updateElement(
                             element.id,
@@ -1791,7 +1793,7 @@ function Editor({ structure }) {
                     </div>
                   ))}
                 </div>
-                <label style={{marginLeft: "10%", fontSize: "24px"}}>
+                <label style={{ marginLeft: "10%", fontSize: "24px" }}>
                   New:
                   <input
                     type="file"
@@ -1802,7 +1804,7 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
-                    style={{marginLeft: "8px"}}
+                    style={{ marginLeft: "8px" }}
                     placeholder="Choose Image"
                   />
                 </label>
@@ -1817,7 +1819,7 @@ function Editor({ structure }) {
                 <h3 className="en">Adgor Foundation</h3>
                 <h3>IBAN: Намери и сложи IBAN</h3>
                 <h3>BIC: Тук също</h3>
-                
+
                 <div className="donationSeperation"></div>
 
                 <h4 className="bg">За повече информация не се колебай да се свържеш с нас</h4>
@@ -1829,7 +1831,7 @@ function Editor({ structure }) {
             )}
             {element.type === "overlap" && (
               <div>
-                <div style={{display: "flex", justifyContent: "space-between", flexWrap: "wrap"}}>
+                <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
@@ -1923,7 +1925,7 @@ function Editor({ structure }) {
             )}
             {element.type === "section" && (
               <div id="section">
-                <p style={{marginLeft: "10%"}}>This is a section:</p>
+                <p style={{ marginLeft: "10%" }}>This is a section:</p>
                 <ContentEditable
                   html={element.content.titleBg}
                   onChange={(e) =>
@@ -1951,38 +1953,41 @@ function Editor({ structure }) {
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}
-            <button
-              id="Delete_button"
-              onClick={() => deleteElement(element.id)}
-            >
-              Delete
-            </button>
-            <button
-              style={{marginTop: "0"}}
-              onClick={() => {
-                const index = schema.findIndex((el) => el.id === element.id);
-                if (index > 0) {
-                  const newSchema = [...schema];
-                  [newSchema[index - 1], newSchema[index]] = [newSchema[index], newSchema[index - 1]];
-                  setSchema(newSchema);
-                }
-              }}
-            >
-              <svg width="24px" height="24px" viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>
-            </button>
-            <button
-              style={{marginTop: "0"}}
-              onClick={() => {
-                const index = schema.findIndex((el) => el.id === element.id);
-                if (index < schema.length - 1) {
-                  const newSchema = [...schema];
-                  [newSchema[index + 1], newSchema[index]] = [newSchema[index], newSchema[index + 1]];
-                  setSchema(newSchema);
-                }
-              }}
-            >
-              <svg width="24px" height="24px" style={{transform: "rotate(180deg)"}} viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>
-            </button>
+
+            <div className="options">
+              <button
+                id="Delete_button"
+                onClick={() => deleteElement(element.id)}
+              >
+                Delete
+              </button>
+              <button
+                style={{ marginTop: "0" }}
+                onClick={() => {
+                  const index = schema.findIndex((el) => el.id === element.id);
+                  if (index > 0) {
+                    const newSchema = [...schema];
+                    [newSchema[index - 1], newSchema[index]] = [newSchema[index], newSchema[index - 1]];
+                    setSchema(newSchema);
+                  }
+                }}
+              >
+                <svg width="24px" height="24px" viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z" /></svg>
+              </button>
+              <button
+                style={{ marginTop: "0" }}
+                onClick={() => {
+                  const index = schema.findIndex((el) => el.id === element.id);
+                  if (index < schema.length - 1) {
+                    const newSchema = [...schema];
+                    [newSchema[index + 1], newSchema[index]] = [newSchema[index], newSchema[index + 1]];
+                    setSchema(newSchema);
+                  }
+                }}
+              >
+                <svg width="24px" height="24px" style={{ transform: "rotate(180deg)" }} viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z" /></svg>
+              </button>
+            </div>
           </div>
         ))}
       </div>

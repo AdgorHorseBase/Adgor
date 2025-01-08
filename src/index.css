@@ -76,8 +76,8 @@
 }
 
 #menuButton, Menu button {
-    font-size: 22px;
-    margin: 4px 0;
+    font-size: 18px;
+    /* margin: 4px 0; */
 }
 
 #productVoucher {
@@ -148,7 +148,7 @@
 
 .Menu {
     background-color: #2e1a11;
-    padding: 10px 0;
+    padding: 6px 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap; /* Allows wrapping */

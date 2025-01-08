@@ -37,7 +37,7 @@ const WelcomePage = () => {
           <p id="Title1">{t("horseBase")}</p>
           <p id="TItle2">{t("adgor")}</p>
           <p id="Title3">{t("numberOne")}</p>
-          <button id="moreButton">{t("more")}</button>
+          {/* <button id="moreButton">{t("more")}</button> */}
         </div>
       </div>
       <div id="StickyMenu">
@@ -87,7 +87,7 @@ const WelcomePage = () => {
               />
             </svg>
           </a>
-          <a href="/">
+          {/* <a href="/">
             <svg
               id="TikTokSVG"
               viewBox="0 0 24 24"
@@ -100,7 +100,7 @@ const WelcomePage = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </a> */}
           <p id="SocialsNumber">0876120025</p>
         </div>
       ) : (

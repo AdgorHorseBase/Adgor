@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./page.css";
+import logo from "./images/AdgorLogo.webp";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
@@ -106,11 +107,13 @@ const MenuSections = () => {
     <div className="Menu">
       <button
         id="menuButton"
+        className="menuLogoButton"
         onClick={() => {
           document.location.href = "/";
         }}
       >
-        {lang === "bg" ? "Начало" : "Home"}
+        {/* {lang === "bg" ? "Начало" : "Home"} */}
+        <img id="menuLogo" src={logo} />
       </button>
       {titlesFetched.current &&
         Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
@@ -172,7 +175,7 @@ const MenuSections = () => {
             window.location.reload();
           }}
         >
-          Switch to english
+          BG/EN
         </button>
       ) : (
         <button
@@ -182,7 +185,7 @@ const MenuSections = () => {
             window.location.reload();
           }}
         >
-          Смени на български
+          BG/EN
         </button>
       )}
     </div>

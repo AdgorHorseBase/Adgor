@@ -563,3 +563,9 @@ h1 {
 #sections div:hover {
   transform: scale(1.5) translateX(-18px);
 }
+
+#menuLogo {
+  max-height: 24px;
+  transform: scale(1.6);
+  margin-right: 0px;
+}

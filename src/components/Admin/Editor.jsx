@@ -157,8 +157,8 @@ function Editor({ structure }) {
         id: uuidv4(),
         type,
         content: {
-          textBg: "Въведи текст на български",
-          textEn: "Enter your text",
+          textBg: "Български",
+          textEn: "English",
         },
       };
     } else if (type === "video") {
@@ -185,10 +185,10 @@ function Editor({ structure }) {
         id: uuidv4(),
         type,
         content: {
-          titleBg: "Въведи текст на български",
-          titleEn: "Enter your text",
-          quoteBg: "Въведи текст на български",
-          quoteEn: "Enter your text",
+          titleBg: "Български",
+          titleEn: "English",
+          quoteBg: "Български",
+          quoteEn: "English",
           imageBackUrl: "",
           imageFrontUrl: "",
         },
@@ -198,8 +198,8 @@ function Editor({ structure }) {
         id: uuidv4(),
         type,
         content: {
-          textBg: "Въведи текст на български",
-          textEn: "Enter your text",
+          textBg: "Български",
+          textEn: "English",
           imageBack: "",
           imageFront: "",
         },
@@ -1102,6 +1102,7 @@ function Editor({ structure }) {
           <div className="element" key={element.id}>
             {element.type === "title" && (
               <div>
+                <label className="labelElement">Title:</label>
                 <ContentEditable
                   html={element.content.textBg}
                   onChange={(e) =>
@@ -1113,6 +1114,7 @@ function Editor({ structure }) {
                   onPaste={handlePaste}
                   tagName="h2"
                   id="Added_Title"
+                  className="contentEditable"
                 />
                 <ContentEditable
                   html={element.content.textEn}
@@ -1125,11 +1127,13 @@ function Editor({ structure }) {
                   onPaste={handlePaste}
                   tagName="h2"
                   id="Added_Title"
+                  className="contentEditable"
                 />
               </div>
             )}
             {element.type === "text" && (
               <div>
+                <label className="labelElement">Text:</label>
                 <ContentEditable
                   html={element.content.textBg}
                   onChange={(e) =>
@@ -1141,6 +1145,7 @@ function Editor({ structure }) {
                   onPaste={handlePaste}
                   tagName="p"
                   id="Added_Text"
+                  className="contentEditable"
                 />
                 <ContentEditable
                   html={element.content.textEn}
@@ -1153,20 +1158,26 @@ function Editor({ structure }) {
                   onPaste={handlePaste}
                   tagName="p"
                   id="Added_Text"
+                  className="contentEditable"
                 />
               </div>
             )}
             {element.type === "html" && (
-              <ContentEditable
-                html={element.content}
-                onChange={(e) => updateElement(element.id, e.target.value)}
-                tagName="p"
-                id="Added_Html"
-                onPaste={handlePaste}
-              />
+              <div>
+                <label className="labelElement">HTML:</label>
+                <ContentEditable
+                  html={element.content}
+                  onChange={(e) => updateElement(element.id, e.target.value)}
+                  tagName="p"
+                  id="Added_Html"
+                  onPaste={handlePaste}
+                  className="contentEditable"
+                />
+              </div>
             )}
             {element.type === "image" && (
               <div id="Added_One_Image">
+                <label className="labelElement">One Image:</label>
                 <img
                   id="Added_One_Image_img"
                   src={URL + "/image?name=" + element.content}
@@ -1185,6 +1196,7 @@ function Editor({ structure }) {
             )}
             {element.type === "two_images" && (
               <div id="Added_Two_Images">
+                <label className="labelElement">Two Images:</label>
                 <img
                   id="Added_Two_Images_img_one"
                   src={URL + "/image?name=" + element.content[0]}
@@ -1226,6 +1238,7 @@ function Editor({ structure }) {
             )}
             {element.type === "four_images" && (
               <div id="Added_Four_Images">
+                <label className="labelElement">Four Images:</label>
                 <img
                   id="Added_Four_Images_img_one"
                   src={URL + "/image?name=" + element.content[0]}
@@ -1302,6 +1315,7 @@ function Editor({ structure }) {
             )}
             {element.type === "video" && (
               <div id="Added_Video">
+                <label className="labelElement">Video:</label>
                 {element.content.url && (
                   <video
                     id="Added_Video_vid"
@@ -1341,6 +1355,7 @@ function Editor({ structure }) {
             )}
             {element.type === "menu" && (
               <div id="Added_menu">
+                <label className="labelElement">Menu Dropdown:</label>
                 <label>Select Directory: </label>
                 <select
                   id="Added_menu_select"
@@ -1368,6 +1383,7 @@ function Editor({ structure }) {
             )}
             {element.type === "formated" && (
               <div>
+                <label className="labelElement">Formated Text:</label>
                 <div id="Added_Formated">
                   <MyCustomToolbar id={`toolbar-${element.id}-bg`} />
                   <ReactQuill
@@ -1400,6 +1416,7 @@ function Editor({ structure }) {
             )}
             {element.type === "image_text" && (
               <div id="Added_Image_Text">
+                <label className="labelElement">Image with text inside:</label>
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
@@ -1460,6 +1477,7 @@ function Editor({ structure }) {
             )}
             {element.type === "youtube" && (
               <div id="Added_YouTube">
+                <label className="labelElement">YouTube video:</label>
                 {element.content?.url && (
                   <iframe
                     id="Added_YouTube_vid"
@@ -1518,6 +1536,7 @@ function Editor({ structure }) {
             )}
             {(element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind") && (
               <div>
+                <label className="labelElement">{element.type === "textImageLeft" ? "Text with image on the left" : element.type === "textImageRight" ? "Text with image on the right" : "Text With image behind"}</label>
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
@@ -1570,15 +1589,17 @@ function Editor({ structure }) {
             )}
             {element.type === "starting" && (
               <div>
+                <label className="labelElement">Custom Page Beginning:</label>
                 <div id="Added_Starting">
                   {/* Back Image */}
+                  <label className="labelElementSmall">Image Behind</label>
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
                       src={URL + "/image?name=" + element.content.imageBackUrl}
                       alt=""
                     />
-                    <br></br>
+                    {/* <br></br> */}
                     <input
                       id=""
                       type="file"
@@ -1593,13 +1614,13 @@ function Editor({ structure }) {
                     />
                   </div>
                   {/* Front Image */}
+                  <label className="labelElementSmall">Image Front</label>
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
                       src={URL + "/image?name=" + element.content.imageFrontUrl}
                       alt=""
                     />
-                    <br></br>
                     <input
                       id=""
                       type="file"
@@ -1613,6 +1634,7 @@ function Editor({ structure }) {
                       placeholder="Choose Image"
                     />
                   </div>
+                  <label className="labelElementSmall">Title</label>
                   <ContentEditable
                     id="Added_Text"
                     html={element.content.titleBg}
@@ -1645,6 +1667,7 @@ function Editor({ structure }) {
                     onPaste={handlePaste}
                     placeholder="Enter your text"
                   />
+                  <label className="labelElementSmall">Quote</label>
                   <ContentEditable
                     id="Added_Text"
                     html={element.content.quoteBg}
@@ -1682,13 +1705,14 @@ function Editor({ structure }) {
             )}
             {element.type === "person" && (
               <div>
+                <label className="labelElement">Person:</label>
+                <label className="labelElementSmall">Image Behind</label>
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
                     src={URL + "/image?name=" + element.content.imageBack}
                     alt=""
                   />
-                  <br></br>
                   <input
                     id=""
                     type="file"
@@ -1702,13 +1726,13 @@ function Editor({ structure }) {
                     placeholder="Choose Image"
                   />
                 </div>
+                <label className="labelElementSmall">Image Front</label>
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
                     src={URL + "/image?name=" + element.content.imageFront}
                     alt=""
                   />
-                  <br></br>
                   <input
                     id=""
                     type="file"
@@ -1758,6 +1782,7 @@ function Editor({ structure }) {
             )}
             {element.type === "slideshow" && (
               <div>
+                <label className="labelElement">Slideshow:</label>
                 <div id="Added_Slideshow">
                   {element.content.map((image, index) => (
                     <div style={{ width: "fit-content" }} key={index}>
@@ -1831,6 +1856,7 @@ function Editor({ structure }) {
             )}
             {element.type === "overlap" && (
               <div>
+                <label className="labelElement">Covered Images:</label>
                 <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
                   <div id="Added_One_Image">
                     <img

@@ -187,11 +187,11 @@
 }
 
 .line {
-    width: 74vw;
+    width: 74%;
     height: 0.3vh;
     background-color: #29160F;
+    margin: auto;
     margin-top: 2vh;
-    margin-left: 13vw; 
     margin-bottom: 2vh;
 }
 
@@ -353,10 +353,8 @@ button:hover{
 }
 
 #Delete_button{
-    margin-top: -2vh;
-    margin-left: auto;
+    margin-top: 0;
     margin-bottom: 0;
-
 }
 
 #Added_Title{
@@ -369,16 +367,28 @@ button:hover{
     font-weight: 600;
     border: none;
     border-bottom: 2px solid #29160F;
+    background-color: #87625469;
+    padding: 8px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+#Added_Title:focus {
+    border: none;
 }
 
 #Added_Text{
     /* margin-left: 13vw; */
-    width: 74vw;
+    /* width: 100%; */
     margin-bottom: 2vh;
     margin-top: 0;
     font-size: 2vh;
     font-style: italic;
     border-bottom: 2px solid #29160F;
+}
+
+#Added_Text:focus {
+    border: none;
 }
 
 #Added_Video{
@@ -394,7 +404,7 @@ button:hover{
 
 #Added_Html{
     /* margin-left: 13vw; */
-    width: 74vw;
+    /* width: 74vw; */
     margin-bottom: 2vh;
     margin-top: 0;
     font-size: 2vh;
@@ -450,6 +460,7 @@ input[type="file"]:hover{
 
 #Added_One_Image_img{
 width: 20vw;
+display: block;
 }
 
 
@@ -510,7 +521,7 @@ margin-left: 11.3vw;
 
 #Added_Formated{
     /* margin-left: 13vw; */
-    width: 74vw;
+    /* width: 74vw; */
     color:#293241;
     background-color: #fefefe;
     border-radius: 2vh;
@@ -772,4 +783,30 @@ border:none;
 .element:last-child {
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
+}
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.labelElement {
+    font-size: 32px;
+    display: block;
+}
+
+.labelElementSmall {
+    font-size: 24px;
+}
+
+.contentEditable {
+    border-bottom: 2px solid #29160F;
+    background-color: #87625469;
+    padding: 8px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.contentEditable:focus {
+    border: none;
 }

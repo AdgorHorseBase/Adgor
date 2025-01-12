@@ -31,6 +31,10 @@ const WelcomePage = () => {
 
   return (
     <div>
+      <div id="StickyMenu">
+        <MenuSections />
+      </div>
+
       <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
         <img id="HeadLogo" alt="" src={Logo}></img>
         <div id="Titles">
@@ -39,9 +43,6 @@ const WelcomePage = () => {
           <p id="Title3">{t("numberOne")}</p>
           {/* <button id="moreButton">{t("more")}</button> */}
         </div>
-      </div>
-      <div id="StickyMenu">
-        <MenuSections />
       </div>
 
       {window.innerWidth > 665 ? (

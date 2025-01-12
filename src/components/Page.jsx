@@ -105,90 +105,104 @@ const MenuSections = () => {
     </div>
   ) : (
     <div className="Menu">
-      <button
-        id="menuButton"
-        className="menuLogoButton"
-        onClick={() => {
-          document.location.href = "/";
-        }}
-      >
-        {/* {lang === "bg" ? "Начало" : "Home"} */}
-        <img id="menuLogo" src={logo} />
-      </button>
-      {titlesFetched.current &&
-        Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
-          <React.Fragment key={dir}>
-            {structure[dir].type === "directory"
-              ? structure[dir].contents && (
-                  <div className="directory-menu">
-                    <p id="menuButton" className="directory-name">
-                      {lang === "bg"
-                        ? structure[dir].directoryBg
-                        : dir.slice(1, dir.length)}
-                    </p>
-                    <ul className="page-list">
-                      {structure[dir].contents.map((page, index) => (
-                        <li key={`${dir}-${index}`}>
-                          <a href={`/page${dir}/${page.page}`}>
-                            {lang === "bg" ? page.titleBg : page.titleEn}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              : structure[dir].type === "file" && (
-                  <button
-                    onClick={() => {
-                      document.location.href = `/page${dir}`;
-                    }}
-                  >
-                    {lang === "bg"
-                      ? structure[dir].titleBg
-                      : structure[dir].titleEn}
-                  </button>
-                )}
-          </React.Fragment>
-        ))}
-      <button
-        id="menuButton"
-        className="dot"
-        onClick={() => {
-          document.location.href = "/products";
-        }}
-      >
-        {lang === "bg" ? "Продукти" : "Products"}
-      </button>
-      <button
-        id="menuButton"
-        onClick={() => {
-          document.location.href = "/vouchers";
-        }}
-      >
-        {lang === "bg" ? "Ваучери" : "Vouchers"}
-      </button>
-      {lang === "bg" ? (
+      <div className="menuLogoContainer">
+          <button
+            id="menuButton"
+            className="menuLogoButton"
+            onClick={() => {
+                document.location.href = "/";
+            }}
+          >
+            <img id="menuLogo" src={logo} />  
+          </button>
+      </div>
+      <div className="menuItemsContainer">
+          {titlesFetched.current &&
+              Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
+                  <React.Fragment key={dir}>
+                      {structure[dir].type === "directory"
+                          ? structure[dir].contents && (
+                              <div className="directory-menu">
+                                  <p id="menuButton" className="directory-name">
+                                      {lang === "bg"
+                                          ? structure[dir].directoryBg
+                                          : dir.slice(1, dir.length)}
+                                  </p>
+                                  <ul className="page-list">
+                                      {structure[dir].contents.map((page, index) => (
+                                          <li key={`${dir}-${index}`}>
+                                              <a href={`/page${dir}/${page.page}`}>
+                                                  {lang === "bg" ? page.titleBg : page.titleEn}
+                                              </a>
+                                          </li>
+                                      ))}
+                                  </ul>
+                              </div>
+                          )
+                          : structure[dir].type === "file" && (
+                              <button
+                                  onClick={() => {
+                                      document.location.href = `/page${dir}`;
+                                  }}
+                              >
+                                  {lang === "bg"
+                                      ? structure[dir].titleBg
+                                      : structure[dir].titleEn}
+                              </button>
+                          )}
+                  </React.Fragment>
+              ))}
+          <button
+              id="menuButton"
+              className="dot"
+              onClick={() => {
+                  document.location.href = "/products";
+              }}
+          >
+              {lang === "bg" ? "Продукти" : "Products"}
+          </button>
+          <button
+              id="menuButton"
+              onClick={() => {
+                  document.location.href = "/vouchers";
+              }}
+          >
+              {lang === "bg" ? "Ваучери" : "Vouchers"}
+          </button>
+      </div>
+      <div className="menuEndContainer">
+        {/* Button for contact us */}
         <button
           id="menuButton"
           onClick={() => {
-            localStorage.setItem("lang", "en");
-            window.location.reload();
+            document.location.href = "/contacts";
           }}
         >
-          BG/EN
+          {lang === "bg" ? "Контакти" : "Contacts"}
         </button>
-      ) : (
-        <button
-          id="menuButton"
-          onClick={() => {
-            localStorage.setItem("lang", "bg");
-            window.location.reload();
-          }}
-        >
-          BG/EN
-        </button>
-      )}
-    </div>
+        {lang === "bg" ? (
+            <button
+                id="menuButton"
+                onClick={() => {
+                    localStorage.setItem("lang", "en");
+                    window.location.reload();
+                }}
+            >
+                BG/EN
+            </button>
+        ) : (
+            <button
+                id="menuButton"
+                onClick={() => {
+                    localStorage.setItem("lang", "bg");
+                    window.location.reload();
+                }}
+            >
+                BG/EN
+            </button>
+        )}
+      </div>
+  </div>
   ) : (
     <div id="StickyMenu">
       <MenuMobile

@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 #StickyMenu {
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
 }
@@ -12,7 +13,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #2e1a11;
+    /* background-color: #2e1a11; */
+    background-color: transparent;
+    border-bottom: 2px solid #2e1a11;
 }
 
 .expand-button {
@@ -33,7 +36,7 @@
 #menuButton, .file-button {
     background-color: transparent;
     border: none;
-    color: #e2d9c6;
+    color: inherit;
 }
   
 .directory {
@@ -76,7 +79,8 @@
 }
 
 #menuButton, Menu button {
-    font-size: 18px;
+    font-size: 24px;
+    padding: 12px;
     /* margin: 4px 0; */
 }
 
@@ -147,15 +151,27 @@
 }
 
 .Menu {
-    background-color: #2e1a11;
-    padding: 6px 0;
+    background-color: transparent;
+    padding: 0px 0;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Allows wrapping */
+    justify-content: space-between; /* Align items to the left and right */
+    align-items: center; /* Center items vertically */
     font-family: 'Georgia', serif;
     font-size: 16px;
     color: #e5d5c0;
     letter-spacing: 2px;
+    transform: all 0.3s ease;
+}
+
+.menuLogoContainer {
+    transform: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.Menu.solid {
+    transform: all 0.3s ease;
+    background-color: #2e1a11;
 }
 
 .Menu button {
@@ -175,16 +191,15 @@
     background: none;
 }
 
-.Menu button + button::before,
+/* .Menu button + button::before,
 .Menu button + .directory-menu p::before,
 .Menu .directory-menu p + button::before,
 .Menu .directory-menu + button::before,
 .directory-menu + .directory-menu p::before {
     content: "•";
-    color: #e5d5c0;
     padding-right: 10px;
     padding-left: 10px;
-}
+} */
 
 .line {
     width: 74%;

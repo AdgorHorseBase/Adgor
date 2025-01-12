@@ -1,6 +1,6 @@
 import React from "react";
 import "./WelcomePage.css";
-import HeaderSnimka from "./images/HeaderSnimka.webp";
+// import HeaderSnimka from "./images/HeaderSnimka.webp";
 // import Logo from "./images/AdgorLogo.webp";
 import AdgorVideo from "./images/adgorStartingVideo.webm";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.webp";

@@ -284,7 +284,7 @@ const WelcomePage = () => {
                     src={ExampleCircleImageRiding}
                     alt=""
                   />
-                  <p className="stylesName">
+                  <p className="stylesName" style={{letterSpacing: "0"}}>
                     {t("natural")}
                     <br />
                     {t("horsemanship")}

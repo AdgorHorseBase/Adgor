@@ -5,7 +5,7 @@ const resources = {
     en: {
         translation: {
             horseBase: "Welcome to Adgor Equestrian Center",
-            adgor: "ADGOR",
+            adgor: "Freedom, development, community.",
             numberOne: "1# in Bulgaria for Western and NH",
             more: "More",
             workouts: "Horse",

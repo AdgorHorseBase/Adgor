@@ -1,7 +1,8 @@
 import React from "react";
 import "./WelcomePage.css";
 import HeaderSnimka from "./images/HeaderSnimka.webp";
-import Logo from "./images/AdgorLogo.webp";
+// import Logo from "./images/AdgorLogo.webp";
+import AdgorVideo from "./images/adgorStartingVideo.webm";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.webp";
 import Pansion from "./images/PansionIMG.webp";
 import Ezda from "./images/EzdaIMG.webp";
@@ -35,13 +36,13 @@ const WelcomePage = () => {
         <MenuSections />
       </div>
 
-      <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
-        {/* <img id="HeadLogo" alt="" src={Logo}></img> */}
+      <div id="Header">
+        <video autoPlay muted loop id="HeaderVideo">
+          <source src={AdgorVideo} type="video/webm" />
+        </video>
         <div id="Titles">
           <p id="Title1">{t("horseBase")}</p>
           <p id="TItle2">{t("adgor")}</p>
-          <p id="Title3">{t("numberOne")}</p>
-          {/* <button id="moreButton">{t("more")}</button> */}
         </div>
       </div>
 

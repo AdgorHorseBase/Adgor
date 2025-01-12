@@ -4,7 +4,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
     en: {
         translation: {
-            horseBase: "Horse Base",
+            horseBase: "Welcome to Adgor Equestrian Center",
             adgor: "ADGOR",
             numberOne: "1# in Bulgaria for Western and NH",
             more: "More",
@@ -29,8 +29,8 @@ const resources = {
     },
     bg: {
         translation: {
-            horseBase: "Конна База",
-            adgor: "АДГОР",
+            horseBase: "ДОБРЕ ДОШЛИ В КОННА БАЗА АДГОР",
+            adgor: "Свобода, развитие, общност.",
             numberOne: "1# в България по Western и NH",
             more: "Още",
             workouts: "Тренировки",

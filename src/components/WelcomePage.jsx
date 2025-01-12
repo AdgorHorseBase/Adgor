@@ -325,6 +325,7 @@ const WelcomePage = () => {
           >
             <p
               id="OurAchievementsText"
+              className=""
               style={{
                 color: "white",
                 fontWeight: "600",
@@ -376,42 +377,42 @@ const WelcomePage = () => {
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
           {/* 2 */}
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
           {/* 3 */}
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
           {/* 4 */}
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
           {/* 5 */}
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
           {/* 6 */}
           <div className="serviceBox">
             <img className="serviceImage" src={Sevice} alt="" width={"100%"} />
             <p className="serviceTitle">Услуга</p>
-            <p className="serviceText">Описание на услуга.</p>
+            <p className="serviceText normalText">Описание на услуга.</p>
             <button className="moreServicesButton">Още</button>
           </div>
         </div>

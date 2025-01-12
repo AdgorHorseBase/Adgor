@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+@font-face {
+  font-family: 'VinnytsiaSerif';
+  src: url('./font/vinnytsiaserif.otf') format('opentype');
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: Source Serif Pro;
+  font-family: 'VinnytsiaSerif', serif;
   margin: 0;
   padding: 0;
 }

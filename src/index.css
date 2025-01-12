@@ -1,6 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+@font-face {
+    font-family: 'VelaSans';
+    src: url('./components/font/VelaSans-GX.ttf') format('truetype');
+}
+
 #StickyMenu {
     position: fixed;
     width: 100%;
@@ -15,7 +20,6 @@
     padding: 10px;
     /* background-color: #2e1a11; */
     background-color: transparent;
-    border-bottom: 2px solid #2e1a11;
 }
 
 .expand-button {
@@ -824,4 +828,8 @@ border:none;
 
 .contentEditable:focus {
     border: none;
+}
+
+.normalText {
+    font-family: "VelaSans", serif;
 }

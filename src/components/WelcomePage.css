@@ -1,14 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap");
 
 p {
-  font-family: "Source Serif 4", serif;
+  /* font-family: "Source Serif 4", serif; */
+  font-family: 'VinnytsiaSerif', serif;
   letter-spacing: 2px;
   margin: 0px;
   color: #29160f;
 }
 
 li {
-  font-family: "Source Serif 4", serif;
+  /* font-family: "Source Serif 4", serif; */
+  font-family: 'VinnytsiaSerif', serif;
   letter-spacing: 2px;
   margin: 0px;
   color: #29160f;
@@ -69,7 +71,8 @@ li {
 }
 
 #moreButton {
-  font-family: "Source Serif 4", serif;
+  /* font-family: "Source Serif 4", serif; */
+  font-family: 'VinnytsiaSerif', serif;
   letter-spacing: 2px;
   background-color: #e2d9c6;
   border: none;
@@ -128,7 +131,7 @@ li {
 .threeTexts {
   text-align: center;
   color: white;
-  font-size: clamp(20px, 5vw, 70px);
+  font-size: clamp(15px, 4vw, 50px);
 }
 
 .threeImages {
@@ -138,7 +141,7 @@ li {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  height: 200px;
+  height: 300px;
 }
 
 #TwoImagesOnTopOfEachOther {
@@ -159,15 +162,15 @@ li {
 }
 
 #OneImageNextToTwoTheImage {
-  height: 400px;
+  height: 600px;
 }
 
 @media (min-width: 1200px) {
   .threeImages {
-    height: 350px !important;
+    height: 450px !important;
   }
   #OneImageNextToTwoTheImage {
-    height: 700px !important;
+    height: 900px !important;
   }
 }
 
@@ -232,7 +235,8 @@ li {
 }
 
 #AboutFoundationButon {
-  font-family: "Source Serif 4", serif;
+  /* font-family: "Source Serif 4", serif; */
+  font-family: 'VinnytsiaSerif', serif;
   letter-spacing: 2px;
   background-color: #e2d9c6;
   border: none;
@@ -332,7 +336,8 @@ li {
 }
 
 #AboutAchievementsButon {
-  font-family: "Source Serif 4", serif;
+  /* font-family: "Source Serif 4", serif; */
+  font-family: 'VinnytsiaSerif', serif;
   letter-spacing: 2px;
   background-color: #e2d9c6;
   border: none;

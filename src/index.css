@@ -80,7 +80,6 @@
 
 #menuButton, Menu button {
     font-size: 24px;
-    padding: 12px;
     /* margin: 4px 0; */
 }
 
@@ -161,6 +160,7 @@
     color: #e5d5c0;
     letter-spacing: 2px;
     transform: all 0.3s ease;
+    height: 70px;
 }
 
 .menuLogoContainer {

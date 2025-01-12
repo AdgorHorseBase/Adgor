@@ -113,7 +113,7 @@ const MenuSections = () => {
                 document.location.href = "/";
             }}
           >
-            <img id="menuLogo" src={logo} />  
+            <img id="menuLogo" alt="" src={logo} />  
           </button>
       </div>
       <div className="menuItemsContainer">

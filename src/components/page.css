@@ -566,10 +566,16 @@ h1 {
 
 #menuLogo {
   /* max-height: 24px; */
-  height: 50px;
-  transform: scale(1.6);
+  height: 70px;
+  /* transform: scale(1.6); */
   margin-right: 0px;
   text-align: left;
-  margin-right: 80px;
-  margin-left: 10px;
+}
+
+.menuLogoButton {
+  height: 70px;
+}
+
+.menuItemsContainer button:hover {
+  color: inherit
 }

@@ -36,7 +36,7 @@ const WelcomePage = () => {
       </div>
 
       <div style={{ backgroundImage: `url(${HeaderSnimka})` }} id="Header">
-        <img id="HeadLogo" alt="" src={Logo}></img>
+        {/* <img id="HeadLogo" alt="" src={Logo}></img> */}
         <div id="Titles">
           <p id="Title1">{t("horseBase")}</p>
           <p id="TItle2">{t("adgor")}</p>

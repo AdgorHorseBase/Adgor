@@ -91,6 +91,7 @@ li {
   font-size: 25px;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-bottom: 2px solid #29160f;
 }
 
 #contactsSmall {
@@ -120,6 +121,59 @@ li {
 
 #TikTokSVG {
   width: 40px;
+}
+
+#forUs {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  max-width: 1280px;
+  margin: 38px auto;
+  align-items: center;
+}
+
+#forUsImage {
+  height: 100%;
+  width: 50%;
+}
+
+#forUsImage img {
+  width: 100%;
+  margin: auto 0;
+}
+
+#forUsTitle {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+#forUsText {
+  width: 50%;
+  padding-left: 48px;
+}
+
+#forUsNormalText {
+  font-size: 18px;
+}
+
+#forUsButton {
+  margin-top: 12px;
+}
+
+@media screen and (max-width: 1200px) {
+  #forUs {
+    flex-direction: column;
+  }
+
+  #forUsImage {
+    width: 100%;
+  }
+
+  #forUsText {
+    width: 100%;
+    padding-left: 0;
+    padding-top: 36px;
+  }
 }
 
 /* three */

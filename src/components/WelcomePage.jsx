@@ -170,6 +170,18 @@ const WelcomePage = () => {
         </div>
       )}
 
+      <div id="forUs">
+        <div id="forUsImage">
+          <img src={Foundation} alt=""/>
+        </div>
+        <div id="forUsText">
+          <p id="forUsSmallText">Текстът по-долу е написан от ChatGPT</p>
+          <p id="forUsTitle">За Нас Заглавие</p>
+          <p id="forUsNormalText" className="normalText">Конете са едни от най-великолепните и благородни животни, съпътстващи човека от древни времена. Те впечатляват с изяществото на движенията си, интелигентността и предаността. От ездата и състезанията до терапевтичните програми, конете са незаменима част от живота на много хора. Тяхната връзка с човека е уникална, изградена на доверие и взаимно уважение. Независимо дали сте любител на природата, състезател или просто търсите спокойствие, конете носят радост и вдъхновение на всеки, който се докосне до тях.</p>
+          <button id="forUsButton">Научете повече</button>
+        </div>
+      </div>
+
       <div id="OneImageNextToTwoAlignment">
         <div id="TwoImagesOnTopOfEachOther">
           <a href="/" className="threeLinkText">
@@ -241,15 +253,6 @@ const WelcomePage = () => {
           )}
         </>
       )}
-
-      <div id="forUs" style={{display: "flex", flexDirection: "row", width: "80%", margin: "0 auto"}}>
-        <div style={{width: "40%"}}>
-          <img src={Foundation} alt="" width={"100%"} />
-        </div>
-        <div style={{width: "60%"}}>
-          <p>Finish this section</p>
-        </div>
-      </div>
 
       <div id="alignFoundationCenter">
         <div style={{ backgroundImage: `url(${Foundation})` }} id="Foundation">

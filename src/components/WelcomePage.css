@@ -126,6 +126,7 @@ li {
 .threeLinkText {
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
 }
 
 .threeTexts {
@@ -149,16 +150,27 @@ li {
   flex-direction: column;
   align-items: stretch;
   width: 50%;
+  overflow: hidden;
 }
 
 #OneImageNextToTwoAlignment {
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  overflow: hidden;
 }
 
 #OneImageNextToTheTwo {
   width: 50%;
+}
+
+.threeImages {
+  transition: all 0.3s ease-in-out;
+}
+
+.threeImages:hover {
+  transform: scale(1.1);
+  filter: brightness(0.8);
 }
 
 #OneImageNextToTwoTheImage {

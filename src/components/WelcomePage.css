@@ -37,12 +37,14 @@ li {
   top: 0;
   left: 0;
   z-index: -1;
+  /* filter: brightness(0.8); */
 }
 
 #Title1 {
   color: #e2d9c6;
   font-size: clamp(30px, 4vw, 60px);
   font-weight: bold;
+  text-shadow: 0px 5px 10px rgb(0, 0, 0);
   /* height: clamp(100px, 10vw, 1800px); */
 }
 
@@ -50,6 +52,7 @@ li {
   color: #e2d9c6;
   font-size: clamp(25px, 3vw, 50px);
   font-weight: 600;
+  text-shadow: 0px 5px 8px rgb(0, 0, 0);
   /* height: clamp(60px, 10vw, 80px); */
 }
 
@@ -266,6 +269,80 @@ li {
 
 .alignCenter {
   display: flex;
+}
+
+#fourSections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+}
+
+
+#fourSectionsObject {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+}
+
+#fourSectionsText, #foundationImage {
+  width: 50%;
+  height: 100%;
+}
+
+#foundationImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#foundationTitle {
+  font-size: 36px;
+  margin: 12px 36px;
+  padding: 12px 0px;
+  border-bottom: 2px solid #29160f;
+}
+
+#foundationNormalText {
+  margin: 16px 36px;
+}
+
+@media screen and (max-width: 1000px) {
+  #fourSectionsObject {
+    flex-direction: column;
+    height: auto;
+    margin-top: 48px;
+    /* margin-bottom: 24px; */
+  }
+
+  #fourSectionsObject:first-child {
+    flex-direction: column-reverse;
+  }
+
+  #fourSectionsObject:last-child {
+    margin-top: 24px;
+  }
+
+  #fourSectionsText {
+    width: 100%;
+  }
+
+  #foundationImage {
+    width: auto;
+    margin: 0 36px;
+  }
+
+  #foundationImage img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #foundationImage {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 #Foundation {

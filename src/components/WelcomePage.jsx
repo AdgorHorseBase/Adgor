@@ -242,6 +242,15 @@ const WelcomePage = () => {
         </>
       )}
 
+      <div id="forUs" style={{display: "flex", flexDirection: "row", width: "80%", margin: "0 auto"}}>
+        <div style={{width: "40%"}}>
+          <img src={Foundation} alt="" width={"100%"} />
+        </div>
+        <div style={{width: "60%"}}>
+          <p>Finish this section</p>
+        </div>
+      </div>
+
       <div id="alignFoundationCenter">
         <div style={{ backgroundImage: `url(${Foundation})` }} id="Foundation">
           <img src={FoundationCutUp} alt="" width={"100%"} />

@@ -833,3 +833,11 @@ border:none;
 .normalText {
     font-family: "VelaSans", serif;
 }
+
+.twoObjects {
+    display: flex;
+}
+
+.twoObjects > div {
+    width: 50%;
+}

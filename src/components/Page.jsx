@@ -287,7 +287,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
       {menuExpanded && (
         <div className="menu-content">
           {titlesFetched.current &&
-            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
+            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
               <React.Fragment key={dir}>
                 {structure[dir].type === "directory" &&
                   structure[dir].contents && (

@@ -1,0 +1,15 @@
+{
+  "titleBg": "Ваучери и подаръци",
+  "titleEn": "Vouchers and gifts",
+  "directoryBg": "Услуги",
+  "schema": [
+    {
+      "id": "5be730c9-0f45-4076-807e-d0b50393c3cb",
+      "type": "title",
+      "content": {
+        "textBg": "Български",
+        "textEn": "English"
+      }
+    }
+  ]
+}

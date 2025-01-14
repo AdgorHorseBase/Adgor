@@ -1,0 +1,23 @@
+{
+  "titleBg": "Кариери",
+  "titleEn": "Careers",
+  "directoryBg": "За нас",
+  "schema": [
+    {
+      "id": "0d755c49-b966-4ac2-b50b-10e8b05178e9",
+      "type": "title",
+      "content": {
+        "textBg": "Начална Страница",
+        "textEn": "Home page"
+      }
+    },
+    {
+      "id": "2be0dcf1-0abd-4c01-bf51-30e1e5a412d7",
+      "type": "formated",
+      "content": {
+        "textBg": "<h3>ДОБРЕ ДОШЛИ В КОННА БАЗА АДГОР</h3><p><strong>Чист въздух близо до София</strong></p><p>Kонна база Адгор се намира в непосредствена близост до София, заобиколена от 4 магнетични планини - Рила, Верила, Витоша и План<span style=\"color: rgb(55, 53, 47);\">а.</span></p><p>Ранчото е подходящо за индивидуални и семейни преживяваня, за посещение от детски групи, провеждане на тийм билдинг и рожденни дни. Предлагаме също подаръчни ваучери с които да зарадвате близки и приятели и да ги дарите с незабравими емоции. <span style=\"color: rgb(55, 53, 47);\">В базата се предлагат уроци по езда, които са базирани на специално разработена обучителна програма, подходяща за деца, аб</span>солютно начинаещи и напреднали ездачи. <span style=\"color: rgb(55, 53, 47);\">Предоставяме възможност за пълен пансион на вашите коне - обширни пасища, пълноценна храна, общуване и безопасност.&nbsp;</span></p>",
+        "textEn": "<h3>Welcome to Equestrian Center Adgor!</h3><p><strong>Fresh air near Sofia</strong></p><p>Equestrian center \"Adgor\" is located in the immediate vicinity of Sofia, surrounded by 4 magnetic mountains - Rila, Verila, Vitosha and Plana.</p><p>The ranch is suitable for individual and family experiences, for visits by children's groups, team building and birthday parties. We also offer gift vouchers with which you can delight your relatives and friends and give them unforgettable emotions. We offer riding lessons, which are based on a specially developed training program, suitable for childrens, absolute beginners and advanced riders. We offer the opportunity for full boarding for your horses - expansive pastures, wholesome food, socialization and safety.</p>"
+      }
+    }
+  ]
+}

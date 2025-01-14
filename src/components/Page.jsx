@@ -118,7 +118,7 @@ const MenuSections = () => {
       </div>
       <div className="menuItemsContainer">
           {titlesFetched.current &&
-              Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => (
+              Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
                   <React.Fragment key={dir}>
                       {structure[dir].type === "directory"
                           ? structure[dir].contents && (
@@ -172,20 +172,20 @@ const MenuSections = () => {
               ))}
           <button
               id="menuButton"
-              className="dot"
-              onClick={() => {
-                  document.location.href = "/products";
-              }}
-          >
-              {lang === "bg" ? "Продукти" : "Products"}
-          </button>
-          <button
-              id="menuButton"
               onClick={() => {
                   document.location.href = "/vouchers";
               }}
           >
               {lang === "bg" ? "Ваучери" : "Vouchers"}
+          </button>
+          <button
+              id="menuButton"
+              className="dot"
+              onClick={() => {
+                  document.location.href = "/products";
+              }}
+          >
+              {lang === "bg" ? "Подаръци" : "Gifts"}
           </button>
       </div>
       <div className="menuEndContainer">

@@ -36,29 +36,59 @@ function GetStructure() {
     function scanDirectory(dir, currentPath) {
         const items = fs.readdirSync(dir, { withFileTypes: true });
         const contents = [];
-        let isFile = false;
 
         items.forEach(item => {
             const subPath = path.join(currentPath, item.name);
+            const itemPath = path.join(dir, item.name);
 
             if (item.isDirectory()) {
-                // Recursively scan the subdirectory and add its name to contents
-                scanDirectory(path.join(dir, item.name), subPath);
-                contents.push(item.name);
-            } else if (item.name === "page.html" || item.name === "schema.json") {
-                // If the directory contains page.html or schema.json, mark it as a file
-                isFile = true;
+                // Recursively scan the subdirectory
+                const subDirContents = scanDirectory(itemPath, subPath);
+                const pageHtmlPath = path.join(itemPath, 'page.html');
+
+                if (fs.existsSync(pageHtmlPath)) {
+                    // If the directory contains page.html, treat it as a page
+                    const schemaPath = path.join(itemPath, 'schema.json');
+                    let titleBg = '';
+                    let titleEn = '';
+                    let directoryBg = 'Directory';
+
+                    if (fs.existsSync(schemaPath)) {
+                        try {
+                            const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+                            titleBg = schema.titleBg;
+                            titleEn = schema.titleEn;
+                            directoryBg = schema.directoryBg ?? "Directory";
+                        } catch (err) {
+                            console.error(`Error reading or parsing schema file for ${subPath}:`, err);
+                        }
+                    }
+
+                    contents.push({
+                        page: item.name,
+                        titleBg: titleBg,
+                        titleEn: titleEn,
+                        directoryBg: directoryBg
+                    });
+                } else {
+                    // Otherwise, treat it as a directory
+                    contents.push({
+                        directory: item.name,
+                        contents: subDirContents
+                    });
+                }
             }
         });
 
-        if (isFile) {
-            structure[currentPath] = { type: 'file' };
-        } else if (contents.length > 0) {
+        if (contents.length > 0) {
             structure[currentPath] = {
                 type: 'directory',
+                directory: true,
                 contents: contents
             };
         }
+
+        return contents;
     }
 
     // Start scanning from the root directory
@@ -71,48 +101,13 @@ function GetStructure() {
         // Skip the root directory "/"
         if (key === "/") return;
 
-        if (structure[key].type === 'file' || structure[key].type === 'directory') {
+        if (structure[key].type === 'directory') {
             // Avoid adding subdirectories that are already in their parent's contents
             const parentPath = path.dirname(key);
-            if (structure[parentPath]?.contents?.includes(path.basename(key))) {
+            if (structure[parentPath]?.contents?.some(item => item.directory === path.basename(key))) {
                 return;
             }
             finalStructure[key] = structure[key];
-        }
-    });
-
-    // Fetch titles from schema.json files and update the structure
-    Object.keys(finalStructure).forEach(key => {
-        if (finalStructure[key].type === 'file') {
-            const schemaPath = path.join(UPLOADS_DIR, key, 'schema.json');
-            if (fs.existsSync(schemaPath)) {
-                try {
-                    const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
-                    finalStructure[key].titleBg = schema.titleBg;
-                    finalStructure[key].titleEn = schema.titleEn;
-                } catch (err) {
-                    console.error(`Error reading or parsing schema file for ${key}:`, err);
-                }
-            }
-        } else if (finalStructure[key].type === 'directory') {
-            finalStructure[key].contents = finalStructure[key].contents.map(page => {
-                const schemaPath = path.join(UPLOADS_DIR, key, page, 'schema.json');
-                if (fs.existsSync(schemaPath)) {
-                    try {
-                        const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
-                        finalStructure[key].directoryBg = schema.directoryBg ?? "Directory";
-                        return {
-                            page,
-                            titleBg: schema.titleBg,
-                            titleEn: schema.titleEn,
-                            directoryBg: schema.directoryBg ?? "Directory"
-                        };
-                    } catch (err) {
-                        console.error(`Error reading or parsing schema file for ${key}/${page}:`, err);
-                    }
-                }
-                return { page };
-            });
         }
     });
 
@@ -318,7 +313,7 @@ app.listen(PORT, () => {
     try {
         const structureData = fs.readFileSync(structureFilePath, 'utf-8'); // Read the file synchronously
         structure = JSON.parse(structureData); // Parse the JSON data
-        console.log(structure); // Log the loaded structure
+        console.log(structure['\\About us'].contents[4]); // Log the loaded structure
     } catch (err) {
         console.error('Error reading or parsing structure file:', err);
         structure = {}; // Fallback to an empty object in case of error
@@ -334,7 +329,7 @@ app.listen(PORT, () => {
     try {
         const productsData = fs.readFileSync(productsFilePath, 'utf-8'); // Read the file synchronously
         products = JSON.parse(productsData); // Parse the JSON data
-        console.log('Products loaded:', products); // Log the loaded products
+        // console.log('Products loaded:', products); // Log the loaded products
     } catch (err) {
         console.error('Error reading or parsing products file:', err);
         products = []; // Fallback to an empty array in case of error
@@ -350,7 +345,7 @@ app.listen(PORT, () => {
     try {
         const vouchersData = fs.readFileSync(vouchersFilePath, 'utf-8'); // Read the file synchronously
         vouchers = JSON.parse(vouchersData); // Parse the JSON data
-        console.log('Vouchers loaded:', vouchers); // Log the loaded products
+        // console.log('Vouchers loaded:', vouchers); // Log the loaded products
     } catch (err) {
         console.error('Error reading or parsing products file:', err);
         vouchers = []; // Fallback to an empty array in case of error

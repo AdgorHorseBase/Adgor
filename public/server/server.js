@@ -37,8 +37,6 @@ function GetStructure() {
         const items = fs.readdirSync(dir, { withFileTypes: true });
         const contents = [];
 
-
-
         items.forEach(item => {
             const subPath = path.join(currentPath, item.name);
             const itemPath = path.join(dir, item.name);
@@ -81,21 +79,24 @@ function GetStructure() {
                         titleEn: titleEn,
                         directoryBg: directoryBg
                     });
-
-                    
+ 
                 } else {
                     // Otherwise, treat it as a directory
-                    const schemaPath = path.join(itemPath, 'schema.json');
                     let directoryBg = 'Directory';
 
-                    if (fs.existsSync(schemaPath)) {
-                        try {
-                            const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
-                            directoryBg = schema.directoryBg ?? "Directory";
-                        } catch (err) {
-                            console.error(`Error reading or parsing schema file for ${subPath}:`, err);
+                    fs.readdirSync(itemPath).forEach(file => {
+                        const schemaPath = path.join(itemPath, file, 'schema.json');
+                        if (fs.existsSync(schemaPath)) {
+                            try {
+                                const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+                                directoryBg = schema.directoryBg ?? "Directory";
+                            } catch (err) {
+                                console.error(`Error reading or parsing schema file for ${subPath}:`, err);
+                            }
                         }
-                    }
+                    });
+
+                    structure[subPath].directoryBg = directoryBg;
 
                     contents.push({
                         directory: item.name,
@@ -341,7 +342,7 @@ app.listen(PORT, () => {
     try {
         const structureData = fs.readFileSync(structureFilePath, 'utf-8'); // Read the file synchronously
         structure = JSON.parse(structureData); // Parse the JSON data
-        console.log(structure['\\About us'].contents[4]); // Log the loaded structure
+        // console.log(structure); // Log the loaded structure
     } catch (err) {
         console.error('Error reading or parsing structure file:', err);
         structure = {}; // Fallback to an empty object in case of error

@@ -37,6 +37,8 @@ function GetStructure() {
         const items = fs.readdirSync(dir, { withFileTypes: true });
         const contents = [];
 
+
+
         items.forEach(item => {
             const subPath = path.join(currentPath, item.name);
             const itemPath = path.join(dir, item.name);
@@ -59,6 +61,15 @@ function GetStructure() {
                             titleBg = schema.titleBg;
                             titleEn = schema.titleEn;
                             directoryBg = schema.directoryBg ?? "Directory";
+
+                            if(currentPath === "/") {
+                                const filePath = `\\${item.name}`;
+                                structure[filePath] = {
+                                    type: 'file',
+                                    titleBg: titleBg,
+                                    titleEn: titleEn,
+                                };
+                            }
                         } catch (err) {
                             console.error(`Error reading or parsing schema file for ${subPath}:`, err);
                         }
@@ -70,10 +81,25 @@ function GetStructure() {
                         titleEn: titleEn,
                         directoryBg: directoryBg
                     });
+
+                    
                 } else {
                     // Otherwise, treat it as a directory
+                    const schemaPath = path.join(itemPath, 'schema.json');
+                    let directoryBg = 'Directory';
+
+                    if (fs.existsSync(schemaPath)) {
+                        try {
+                            const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+                            directoryBg = schema.directoryBg ?? "Directory";
+                        } catch (err) {
+                            console.error(`Error reading or parsing schema file for ${subPath}:`, err);
+                        }
+                    }
+
                     contents.push({
                         directory: item.name,
+                        directoryBg: directoryBg,
                         contents: subDirContents
                     });
                 }
@@ -107,6 +133,8 @@ function GetStructure() {
             if (structure[parentPath]?.contents?.some(item => item.directory === path.basename(key))) {
                 return;
             }
+            finalStructure[key] = structure[key];
+        } else if(structure[key].type === 'file') {
             finalStructure[key] = structure[key];
         }
     });

@@ -55,6 +55,9 @@
 
       window.addEventListener('scroll', function() {
         const menu = document.querySelector('.Menu') || document.querySelector('.menu-container');
+        if(!menu) {
+          return;
+        }
         if (window.scrollY > 50) {
             // menu.classList.add('solid');
             menu.style.backgroundColor = 'white';

@@ -129,12 +129,30 @@ const MenuSections = () => {
                                           : dir.slice(1, dir.length)}
                                   </p>
                                   <ul className="page-list">
-                                      {structure[dir].contents.map((page, index) => (
+                                      {structure[dir].contents.map((page, index) => page.page ? (
                                           <li key={`${dir}-${index}`}>
                                               <a href={`/page${dir}/${page.page}`}>
                                                   {lang === "bg" ? page.titleBg : page.titleEn}
                                               </a>
                                           </li>
+                                      ) : (page.directory && page.contents && page.contents.length > 0 && (
+                                          <div id="subDirectory">
+                                            <p id="menuSubButton" className="subDirectory-name">
+                                                {lang === "bg"
+                                                    ? page.directoryBg
+                                                    : page.directory}
+                                            </p>
+                                            <ul>
+                                                {page.contents.map((subPage, subIndex) => (
+                                                    <li key={`${dir}-${index}-${subIndex}`}>
+                                                        <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                                            {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                                        </a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                          </div>
+                                        )
                                       ))}
                                   </ul>
                               </div>
@@ -284,12 +302,29 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                       </p>
                       {expandedDirectories[dir] && ( // Check expanded state
                         <ul className="page-list-mobile">
-                          {structure[dir].contents.map((page, index) => (
+                          {structure[dir].contents.map((page, index) => page.page ? (
                             <li key={`${dir}-${index}`}>
                               <a href={`/page${dir}/${page.page}`}>
                                 {lang === "bg" ? page.titleBg : page.titleEn}
                               </a>
                             </li>
+                          ) : (
+                            <div id="subDirectoryMobile">
+                              <p className="directory-name-mobile">
+                                {lang === "bg"
+                                  ? page.directoryBg
+                                  : page.directory}
+                              </p>
+                              <ul>
+                                {page.contents.map((subPage, subIndex) => (
+                                  <li key={`${dir}-${index}-${subIndex}`}>
+                                    <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                      {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           ))}
                         </ul>
                       )}

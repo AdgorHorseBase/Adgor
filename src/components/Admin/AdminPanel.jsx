@@ -124,18 +124,42 @@ function AdminPanel() {
                         <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                         <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
                         <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
-                        <div style={{ paddingLeft: "20px" }}>
+                        <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
-                            {info.contents && info.contents.map((fileName) => {
-                                const fullPath = `${cleanPath}/${fileName.page}`;
-                                return (
-                                    <div key={fullPath}>
-                                        <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{fileName.page}</a>
-                                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
-                                        <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
-                                    </div>
-                                );
+                            {info.contents && info.contents.map((content) => {
+                                if(content.directory) {
+                                    return (
+                                        <div key={content.directory} style={{marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)"}}>
+                                            <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
+                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(`${cleanPath}/${content.directory}`)}>Rename</button>
+                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
+                                            <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
+                                                {content.contents && content.contents.map((page) => {
+                                                    const fullPath = `${cleanPath}/${content.directory}/${page.page}`;
+                                                    console.log(page);
+                                                    return (
+                                                        <div key={fullPath}>
+                                                            <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
+                                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
+                                                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
+                                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    );
+                                } else if(content.page) {
+                                    const fullPath = `${cleanPath}/${content.page}`;
+                                    return (
+                                        <div key={fullPath}>
+                                            <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
+                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
+                                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
+                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                        </div>
+                                    );
+                                }
                             })}
                         </div>
                     </div>
@@ -156,7 +180,7 @@ function AdminPanel() {
 
     const Structure = () => {
         return (
-            <div style={{marginLeft: "10%"}}>
+            <div style={{marginLeft: "10%", marginBottom: "72px"}}>
                 <button onClick={() => {document.location.href = "/admin/create"}}>Create</button>
                 <button onClick={() => {document.location.href = "/admin/products"}}>Products</button>
                 <button onClick={() => {document.location.href = "/admin/vouchers"}}>Vouchers</button>

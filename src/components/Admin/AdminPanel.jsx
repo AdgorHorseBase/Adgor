@@ -136,7 +136,6 @@ function AdminPanel() {
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                                                 {content.contents && content.contents.map((page) => {
                                                     const fullPath = `${cleanPath}/${content.directory}/${page.page}`;
-                                                    console.log(page);
                                                     return (
                                                         <div key={fullPath}>
                                                             <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>

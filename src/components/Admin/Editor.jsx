@@ -89,9 +89,16 @@ function Editor({ structure }) {
       fetchPage();
 
       if (editPath.search("/") !== -1) {
-        const [directory, page] = editPath.split("/");
-        setDirectory(directory);
-        setPage(page);
+        if(editPath.split("/").length === 2) {
+          const [directory, page] = editPath.split("/");
+          setDirectory(directory);
+          setPage(page);
+        } else if(editPath.split("/").length === 3) {
+          const [directory, subDirectory, page] = editPath.split("/");
+          setDirectory(directory);
+          setDirectoryBg(directoryBg);
+          setPage(`${subDirectory}/${page}`);
+        }
       } else {
         setPage(editPath);
       }

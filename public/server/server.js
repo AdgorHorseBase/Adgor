@@ -66,6 +66,7 @@ function GetStructure() {
                                     type: 'file',
                                     titleBg: titleBg,
                                     titleEn: titleEn,
+                                    place: 1
                                 };
                             }
                         } catch (err) {
@@ -77,7 +78,8 @@ function GetStructure() {
                         page: item.name,
                         titleBg: titleBg,
                         titleEn: titleEn,
-                        directoryBg: directoryBg
+                        directoryBg: directoryBg,
+                        place: 1
                     });
  
                 } else {
@@ -107,7 +109,8 @@ function GetStructure() {
                     contents.push({
                         directory: item.name,
                         directoryBg: directoryBg,
-                        contents: subDirContents
+                        contents: subDirContents,
+                        place: 1
                     });
                 }
             }
@@ -117,7 +120,8 @@ function GetStructure() {
             structure[currentPath] = {
                 type: 'directory',
                 directory: true,
-                contents: contents
+                contents: contents,
+                place: 1
             };
         }
 
@@ -158,6 +162,27 @@ function GetStructure() {
                     } else {
                         finalStructure[key].place = existingStructure[key].place;
                     }
+                }
+
+                // Fix this
+                if(existingStructure[key].contents) {
+                    existingStructure[key].contents.forEach((existingContent, index) => {
+                        const matchingContent = finalStructure[key]?.contents?.find(content => content.page === existingContent.page || content.directory === existingContent.directory);
+                        if (matchingContent) {
+                            // console.log(finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].place, existingContent.place);
+                            finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].place = existingContent.place;
+                            console.log(finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].page);
+                        }
+                        
+                        if(existingContent.contents) {
+                            existingContent.contents.forEach(existingSubContent => {
+                                const matchingSubContent = matchingContent?.contents?.find(content => content.page === existingSubContent.page || content.directory === existingSubContent.directory);
+                                if (matchingSubContent) {
+                                    finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].contents[matchingContent.contents.indexOf(matchingSubContent)].place = existingSubContent.place;
+                                }
+                            });
+                        }
+                    });
                 }
             });
         } catch (err) {

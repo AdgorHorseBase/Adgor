@@ -122,16 +122,15 @@ function AdminPanel() {
                             });
                         }} />
                         <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
-                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
+                        {/* <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button> */}
                         <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
                         <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
                             {info.contents && info.contents.map((content) => {
                                 if(content.directory) {
                                     return (
-                                        <div key={content.directory} style={{marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)"}}>
+                                        <div key={content.directory}>
                                             <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
-                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(`${cleanPath}/${content.directory}`)}>Rename</button>
                                             <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                                                 {content.contents && content.contents.map((page) => {

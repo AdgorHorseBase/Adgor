@@ -82,6 +82,12 @@ function GetStructure() {
  
                 } else {
                     // Otherwise, treat it as a directory
+
+                    if (fs.readdirSync(itemPath).length === 0) {
+                        fs.rmdirSync(itemPath);
+                        return;
+                    }
+
                     let directoryBg = 'Directory';
 
                     fs.readdirSync(itemPath).forEach(file => {
@@ -147,8 +153,11 @@ function GetStructure() {
             const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
             Object.keys(existingStructure).forEach(key => {
                 if (existingStructure[key].place) {
-                    finalStructure[key] = finalStructure[key] || {};
-                    finalStructure[key].place = existingStructure[key].place;
+                    if(!finalStructure[key]) {
+                        delete finalStructure[key];
+                    } else {
+                        finalStructure[key].place = existingStructure[key].place;
+                    }
                 }
             });
         } catch (err) {

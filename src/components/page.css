@@ -584,3 +584,22 @@ h1 {
 .menuItemsContainer button:hover {
   color: inherit
 }
+
+.menuItemsContainer button{
+  padding-right: 10px;
+  font-size: 22px;
+}
+
+.directory-name{
+  padding-right: 10px;
+}
+
+.menuItemsContainer{
+  margin-top: 8px;
+  /*margin-left: -2px;*/
+}
+
+.menuEndContainer{
+  margin-left: -25px;
+  margin-top: 10px;
+}

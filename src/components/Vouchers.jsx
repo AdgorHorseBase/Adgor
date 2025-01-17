@@ -99,7 +99,6 @@ const Vouchers = () => {
 
     const handleContinue = () => {
         setShowForm(true);
-        console.log(selectedVouchers);
     };
 
     const handleCloseForm = () => {

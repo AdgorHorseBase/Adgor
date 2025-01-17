@@ -9,14 +9,12 @@ const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 function AdminPanel() {
     const [structure, setStruct] = useState({});
-    const [directorySort, setDirectorySort] = useState({});
 
     useEffect(() => {
         const fetchStructure = async () => {
             try {
                 const response = await axios.get(`${URL}/structure`);
                 setStruct(response.data);
-                sortDirectories(response.data);
             } catch (err) {
                 console.error("Error:", err);
             }
@@ -25,32 +23,15 @@ function AdminPanel() {
         fetchStructure();
     }, []);
 
-    const sortDirectories = (struct) => {
-        const sorted = {};
-        Object.entries(struct).forEach(([path, info]) => {
-            if (info.type === "directory") {
-                sorted[path] = info.place || 0;
-            }
-        });
-        setDirectorySort(sorted);
-    };
-
-    useEffect(() => {
-        const setPlaces = async () => {
-
-            try {
-                await axios.post(`${URL}/set-places`, {
-                    places: directorySort
-                });
-            } catch (err) {
-                alert("Error setting places:", err);
-            }
+    const handlePlaceChange = async (e) => {
+        try {
+            await axios.post(`${URL}/place-change`, {
+                state: e,
+            });
+        } catch (err) {
+            alert("Error changing place:", err);
         }
-
-        if(directorySort && Object.keys(directorySort).length > 0) {
-            setPlaces();
-        }
-    }, [directorySort]);
+    }
 
     // Function to rename a file or directory
     const handleRename = async (oldPath) => {
@@ -68,7 +49,6 @@ function AdminPanel() {
             // Fetch the updated structure after renaming
             const response = await axios.get(`${URL}/structure`);
             setStruct(response.data);
-            sortDirectories(response.data);
         } catch (err) {
             console.error("Error renaming:", err);
             alert("Error renaming file or directory.");
@@ -99,7 +79,6 @@ function AdminPanel() {
 
             const response = await axios.get(`${URL}/structure`);
             setStruct(response.data);
-            sortDirectories(response.data);
         } catch (err) {
             console.error("Error deleting:", err);
             alert("Error deleting file or directory");
@@ -107,7 +86,9 @@ function AdminPanel() {
     }
 
     const renderStructure = (struct) => {
-        return Object.entries(struct).map(([path, info]) => {
+        return Object.entries(struct)
+            .sort((a, b) => (a[1].place || 0) - (b[1].place || 0))
+            .map(([path, info]) => {
             // Replace backslashes with forward slashes for consistency
             const cleanPath = path.replace(/\\/g, '/');
     
@@ -115,28 +96,31 @@ function AdminPanel() {
                 return (
                     <div key={cleanPath} style={{margin: "0", padding: "0", marginLeft: "16px"}}>
                         {/* Display directory name */}
-                        <input type="number" style={{width: "30px"}} value={directorySort[cleanPath.replace(/^\//, "\\")]} onChange={(e) => {
-                            setDirectorySort({
-                                ...directorySort,
-                                [cleanPath.replace(/^\//, "\\")]: parseInt(e.target.value)
-                            });
+                        <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
+                            handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
                         }} />
                         <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                         {/* <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button> */}
                         <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
                         <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
-                            {info.contents && info.contents.map((content) => {
+                            {info.contents && info.contents.sort((a, b) => a.place - b.place).map((content) => {
                                 if(content.directory) {
                                     return (
                                         <div key={content.directory}>
+                                            <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
+                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory]);
+                                            }} />
                                             <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
                                             <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
-                                                {content.contents && content.contents.map((page) => {
+                                                {content.contents && content.contents.sort((a, b) => a.place - b.place).map((page) => {
                                                     const fullPath = `${cleanPath}/${content.directory}/${page.page}`;
                                                     return (
                                                         <div key={fullPath}>
+                                                            <input type="number" style={{width: "30px"}} value={page.place} onChange={(e) => {
+                                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page]);
+                                                            }} />
                                                             <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
                                                             <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
                                                             <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
@@ -151,6 +135,9 @@ function AdminPanel() {
                                     const fullPath = `${cleanPath}/${content.page}`;
                                     return (
                                         <div key={fullPath}>
+                                            <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
+                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "page", content.page]);
+                                            }} />
                                             <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
                                             <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
                                             <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
@@ -165,6 +152,9 @@ function AdminPanel() {
             } else if (info.type === "file") {
                 return (
                     <div key={cleanPath} style={{marginLeft: "16px"}}>
+                        <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
+                            handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
+                        }} />
                         <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
                         <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
                         <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>

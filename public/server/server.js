@@ -368,6 +368,61 @@ app.post("/set-places", async (req, res) => {
     }
 });
 
+app.post("/place-change", async (req, res) => {
+    const { state } = req.body;
+
+    if(!Array.isArray(state) || state.length === 0) {
+        return res.status(400).json({ error: "No state was given" });
+    }
+    
+    try {
+        if(state.length === 2) {
+            const [newPlace, objectName] = state;
+    
+            if(structure[objectName]) {
+                structure[objectName].place = newPlace;
+            }
+        } else if(state.length === 4) {
+            if(state[2] === 'directory') {
+                const [newPlace, objectName, type, subDirectory] = state;
+                structure[objectName].contents.forEach(content => {
+                    if(content.directory === subDirectory) {
+                        content.place = newPlace;
+                    }
+                });
+            } else if(state[2] === 'page') {
+                const [newPlace, objectName, type, page] = state;
+                structure[objectName].contents.forEach(content => {
+                    console.log(content.page, page);
+                    if(content.page === page) {
+                        content.place = newPlace;
+                    }
+                });
+            }
+        } else if(state.length === 5) {
+            const [newPlace, objectName, type, subDirectory, page] = state;
+            structure[objectName].contents.forEach(content => {
+                if(content.directory === subDirectory) {
+                    content.contents.forEach(subContent => {
+                        if(subContent.page === page) {
+                            subContent.place = newPlace;
+                        }
+                    });
+                }
+            });
+        }
+
+        const structureFilePath = path.join(__dirname, 'files', 'structure.json');
+        fs.writeFileSync(structureFilePath, JSON.stringify(structure, null, 2), 'utf-8');
+        structure = GetStructure();
+    
+        return res.status(200).json({ message: "Places set successfully" });
+    } catch(err) {
+        console.log(err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+})
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

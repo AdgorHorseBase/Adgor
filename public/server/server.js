@@ -393,7 +393,6 @@ app.post("/place-change", async (req, res) => {
             } else if(state[2] === 'page') {
                 const [newPlace, objectName, type, page] = state;
                 structure[objectName].contents.forEach(content => {
-                    console.log(content.page, page);
                     if(content.page === page) {
                         content.place = newPlace;
                     }

@@ -330,7 +330,7 @@ function Editor({ structure }) {
             ? videoIdMatch[1] || videoIdMatch[2]
             : null;
 
-          schema.map((el) => el.id === id && console.log(el));
+          schema.map((el) => el.id === id);
           setSchema(
             schema.map((el) =>
               el.id === id

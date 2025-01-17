@@ -107,7 +107,9 @@ function AdminPanel() {
     }
 
     const renderStructure = (struct) => {
-        return Object.entries(struct).map(([path, info]) => {
+        return Object.entries(struct)
+            .sort((a, b) => (a[1].place || 0) - (b[1].place || 0))
+            .map(([path, info]) => {
             // Replace backslashes with forward slashes for consistency
             const cleanPath = path.replace(/\\/g, '/');
     

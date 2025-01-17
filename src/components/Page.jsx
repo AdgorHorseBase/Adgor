@@ -129,7 +129,7 @@ const MenuSections = () => {
                                           : dir.slice(1, dir.length)}
                                   </p>
                                   <ul className="page-list">
-                                      {structure[dir].contents.map((page, index) => page.page ? (
+                                      {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
                                           <li key={`${dir}-${index}`}>
                                               <a href={`/page${dir}/${page.page}`}>
                                                   {lang === "bg" ? page.titleBg : page.titleEn}
@@ -143,7 +143,7 @@ const MenuSections = () => {
                                                     : page.directory}
                                             </p>
                                             <ul>
-                                                {page.contents.map((subPage, subIndex) => (
+                                                {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
                                                     <li key={`${dir}-${index}-${subIndex}`}>
                                                         <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
                                                             {lang === "bg" ? subPage.titleBg : subPage.titleEn}

@@ -4,18 +4,18 @@
     "directory": true,
     "contents": [
       {
-        "page": "home-page",
+        "page": "careers",
         "titleBg": "Кариери",
         "titleEn": "Careers",
         "directoryBg": "За нас",
-        "place": 1
+        "place": 4
       },
       {
         "page": "our-achievements",
         "titleBg": "Постижения",
         "titleEn": "Achievements",
         "directoryBg": "За нас",
-        "place": 1
+        "place": 3
       },
       {
         "page": "our-team",
@@ -29,7 +29,7 @@
         "titleBg": "Доброволци",
         "titleEn": "Volunteers",
         "directoryBg": "За нас",
-        "place": 1
+        "place": 2
       }
     ],
     "place": 1,
@@ -39,25 +39,25 @@
     "type": "file",
     "titleBg": "Блог",
     "titleEn": "BLOG",
-    "place": 3
+    "place": 5
   },
   "\\contact-us": {
     "type": "file",
     "titleBg": "Свържете се с нас",
     "titleEn": "Contact us",
-    "place": 4
+    "place": 7
   },
   "\\foundation": {
     "type": "file",
     "titleBg": "Фондацията",
     "titleEn": "Foundation",
-    "place": 3
+    "place": 6
   },
   "\\Horse boarding": {
     "type": "file",
     "titleBg": "Пансион за коне",
     "titleEn": "Horse boarding",
-    "place": 1
+    "place": 3
   },
   "\\Services": {
     "type": "directory",
@@ -68,63 +68,63 @@
         "titleBg": "Детски рожден ден",
         "titleEn": "Children’s birthday",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 6
       },
       {
         "page": "children-groups",
         "titleBg": "Детски групи",
         "titleEn": "Children’s groups",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 5
       },
       {
         "page": "clinics-and-demonstrations",
         "titleBg": "Клиники и демонстрации",
         "titleEn": "Clinics and demonstrations",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 9
       },
       {
         "page": "films-and-tv-productions",
         "titleBg": "Филмове и ТВ продукции",
         "titleEn": "Films and TV productions",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 10
       },
       {
         "page": "long-riding-trips",
         "titleBg": "Преходи с коне ",
         "titleEn": "Long riding trips",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 3
       },
       {
         "page": "miniature-horses-falabella",
         "titleBg": "Мини коне Фалабела",
         "titleEn": "Mini horses Falabella",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 8
       },
       {
         "page": "Photoshoot",
         "titleBg": "Фотосесия",
         "titleEn": "Photoshoot",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 7
       },
       {
         "page": "team-building",
         "titleBg": "Тийм билдинг",
         "titleEn": "Team Building",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 4
       },
       {
         "page": "trail-riding",
         "titleBg": "Разходка с кон ",
         "titleEn": "Trail riding",
         "directoryBg": "Услуги",
-        "place": 1
+        "place": 2
       },
       {
         "page": "Vouchers and gifts",
@@ -134,7 +134,7 @@
         "place": 1
       }
     ],
-    "place": 3,
+    "place": 4,
     "directoryBg": "Услуги"
   },
   "\\Training": {
@@ -146,7 +146,7 @@
         "titleBg": "Естествени взаимоотношения с конете",
         "titleEn": "Natural horsemanship",
         "directoryBg": "Обучение",
-        "place": 1
+        "place": 3
       },
       {
         "directory": "Rider training",
@@ -157,21 +157,21 @@
             "titleBg": "Езда без седло",
             "titleEn": "Bareback riding",
             "directoryBg": "Обучение на ездача",
-            "place": 1
+            "place": 3
           },
           {
             "page": "certificate-program",
             "titleBg": "Oбучителна програма",
             "titleEn": "Certificate Program",
             "directoryBg": "Обучение на ездача",
-            "place": 1
+            "place": 2
           },
           {
             "page": "riding-for-children",
             "titleBg": "Езда за деца",
             "titleEn": "Kids riding",
             "directoryBg": "Обучение на ездача",
-            "place": 1
+            "place": 5
           },
           {
             "page": "riding-levels",
@@ -185,7 +185,7 @@
             "titleBg": "Western езда",
             "titleEn": "Western riding",
             "directoryBg": "Обучение на ездача",
-            "place": 1
+            "place": 4
           }
         ],
         "place": 1
@@ -199,14 +199,14 @@
             "titleBg": "Работа от земя",
             "titleEn": "Ground work",
             "directoryBg": "Обучение на коня",
-            "place": 1
+            "place": 2
           },
           {
             "page": "horse-care",
             "titleBg": "Грижа за коня",
             "titleEn": "Horse care",
             "directoryBg": "Обучение на коня",
-            "place": 1
+            "place": 3
           },
           {
             "page": "training",
@@ -216,14 +216,14 @@
             "place": 1
           }
         ],
-        "place": 1
+        "place": 2
       },
       {
         "page": "training-the-horse",
         "titleBg": "Често задавани въпроси",
         "titleEn": "FAQs",
         "directoryBg": "Обучение",
-        "place": 1
+        "place": 4
       }
     ],
     "place": 2,

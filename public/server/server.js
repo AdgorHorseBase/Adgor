@@ -60,7 +60,7 @@ function GetStructure() {
                             titleEn = schema.titleEn;
                             directoryBg = schema.directoryBg ?? "Directory";
 
-                            if(currentPath === "/") {
+                            if (currentPath === "/") {
                                 const filePath = `\\${item.name}`;
                                 structure[filePath] = {
                                     type: 'file',
@@ -81,10 +81,9 @@ function GetStructure() {
                         directoryBg: directoryBg,
                         place: 1
                     });
- 
+
                 } else {
                     // Otherwise, treat it as a directory
-
                     if (fs.readdirSync(itemPath).length === 0) {
                         fs.rmdirSync(itemPath);
                         return;
@@ -145,7 +144,7 @@ function GetStructure() {
                 return;
             }
             finalStructure[key] = structure[key];
-        } else if(structure[key].type === 'file') {
+        } else if (structure[key].type === 'file') {
             finalStructure[key] = structure[key];
         }
     });
@@ -157,30 +156,41 @@ function GetStructure() {
             const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
             Object.keys(existingStructure).forEach(key => {
                 if (existingStructure[key].place) {
-                    if(!finalStructure[key]) {
+                    if (!finalStructure[key]) {
                         delete finalStructure[key];
                     } else {
                         finalStructure[key].place = existingStructure[key].place;
                     }
                 }
 
-                // Fix this
-                if(existingStructure[key].contents) {
-                    existingStructure[key].contents.forEach((existingContent, index) => {
-                        const matchingContent = finalStructure[key]?.contents?.find(content => content.page === existingContent.page || content.directory === existingContent.directory);
-                        if (matchingContent) {
-                            // console.log(finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].place, existingContent.place);
-                            finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].place = existingContent.place;
-                            console.log(finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].page);
-                        }
-                        
-                        if(existingContent.contents) {
-                            existingContent.contents.forEach(existingSubContent => {
-                                const matchingSubContent = matchingContent?.contents?.find(content => content.page === existingSubContent.page || content.directory === existingSubContent.directory);
-                                if (matchingSubContent) {
-                                    finalStructure[key].contents[finalStructure[key].contents.indexOf(matchingContent)].contents[matchingContent.contents.indexOf(matchingSubContent)].place = existingSubContent.place;
+                if (existingStructure[key].contents) {
+                    existingStructure[key].contents.forEach(existingContent => {
+                        if (Array.isArray(finalStructure[key]?.contents)) {
+                            const matchingContent = finalStructure[key].contents.find(content => {
+                                if(content.directory) {
+                                    return content.directory === existingContent.directory;
+                                } else {
+                                    return content.page === existingContent.page;
                                 }
                             });
+                            if (matchingContent) {
+                                matchingContent.place = existingContent.place;
+                            }
+
+                            if (existingContent.contents) {
+                                existingContent.contents.forEach(existingSubContent => {
+                                    const matchingSubContent = matchingContent?.contents?.find(content => {
+                                        if(content.directory) {
+                                            return content.directory === existingSubContent.directory;
+                                        } else {
+                                            return content.page === existingSubContent.page;
+                                        }
+                                    });
+                                    if (matchingSubContent) {
+                                        matchingSubContent.place = existingSubContent.place;
+                                    }
+                                });
+                            }
                         }
                     });
                 }

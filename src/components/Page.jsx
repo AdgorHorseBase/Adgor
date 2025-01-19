@@ -116,38 +116,7 @@ const MenuSections = () => {
             <img id="menuLogo" alt="" src={logo} />  
           </button>
       </div>
-      <div className="menuEndContainer">
-        {/* Button for contact us */}
-        <button
-          id="menuButton"
-          onClick={() => {
-            document.location.href = "/contacts";
-          }}
-        >
-          {lang === "bg" ? "Контакти" : "Contacts"}
-        </button><br></br>
-        {lang === "bg" ? (
-            <button
-                id="menuButton"
-                onClick={() => {
-                    localStorage.setItem("lang", "en");
-                    window.location.reload();
-                }}
-            >
-                BG/EN
-            </button>
-        ) : (
-            <button
-                id="menuButton"
-                onClick={() => {
-                    localStorage.setItem("lang", "bg");
-                    window.location.reload();
-                }}
-            >
-                BG/EN
-            </button>
-        )}
-      </div>
+      
       <div className="menuItemsContainer">
           {titlesFetched.current &&
               Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
@@ -221,6 +190,38 @@ const MenuSections = () => {
           </button>
       </div>
       
+      <div className="menuEndContainer">
+        {/* Button for contact us */}
+        <button
+          id="menuButton"
+          onClick={() => {
+            document.location.href = "/contacts";
+          }}
+        >
+          {lang === "bg" ? "Контакти" : "Contacts"}
+        </button><br></br>
+        {lang === "bg" ? (
+            <button
+                id="menuButton"
+                onClick={() => {
+                    localStorage.setItem("lang", "en");
+                    window.location.reload();
+                }}
+            >
+                BG/EN
+            </button>
+        ) : (
+            <button
+                id="menuButton"
+                onClick={() => {
+                    localStorage.setItem("lang", "bg");
+                    window.location.reload();
+                }}
+            >
+                BG/EN
+            </button>
+        )}
+      </div>
   </div>
   ) : (
     <div id="StickyMenu">

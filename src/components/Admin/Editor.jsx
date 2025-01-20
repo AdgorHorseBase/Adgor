@@ -103,7 +103,7 @@ function Editor({ structure }) {
         setPage(editPath);
       }
     }
-  }, [editPath]);
+  }, [editPath, directoryBg]);
 
   const decodeHTML = (html) => {
     const textArea = document.createElement("textarea");

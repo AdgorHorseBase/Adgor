@@ -3,51 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 
 const Vouchers = () => {
-    const [vouchers, setVouchers] = useState([]);
     const [products, setProducts] = useState([]);
-    const [selectedVouchers, setSelectedVouchers] = useState({});
     const [selectedProducts, setSelectedProducts] = useState({});
     const [showForm, setShowForm] = useState(false);
     const [lang, setLang] = useState('bg');
 
     useEffect(() => {
-        const GetVouchers = async () => {
-            const response = await axios.get("/server/files/vouchers.json");
-            setVouchers(response.data);
-        };
-
         const GetProducts = async () => {
             const response = await axios.get("/server/files/products.json");
             setProducts(response.data);
         };
-        
-        GetVouchers();
+
         GetProducts();
     }, []);
-
-    const addVoucher = (voucher) => {
-        setSelectedVouchers(prev => {
-            const newQuantity = (prev[voucher.id]?.quantity || 0) + 1;
-            return {
-                ...prev,
-                [voucher.id]: { ...voucher, quantity: newQuantity }
-            };
-        });
-    };
-
-    const removeVoucher = (voucher) => {
-        setSelectedVouchers(prev => {
-            const newQuantity = (prev[voucher.id]?.quantity || 0) - 1;
-            if (newQuantity <= 0) {
-                const { [voucher.id]: _, ...rest } = prev;
-                return rest;
-            }
-            return {
-                ...prev,
-                [voucher.id]: { ...voucher, quantity: newQuantity }
-            };
-        });
-    };
 
     const addProduct = (product, nameBg, nameEn) => {
         if(!nameBg && !nameEn) {

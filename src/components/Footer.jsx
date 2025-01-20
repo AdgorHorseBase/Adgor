@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+// import React, { useEffect, useRef, useState } from 'react';
 import "./footer.css";
 const Footer = () => {
   return (
     <>
     <div className="image-footer">
-    <img src="jeep2.jpg" alt="Image 1" className="image" />
+    <img src="jeep2.jpg" alt="" className="image" />
     </div>
 
     <div className="footer-container">

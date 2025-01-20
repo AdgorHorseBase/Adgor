@@ -218,10 +218,6 @@ const Vouchers = () => {
                 </form>
             </div>
 
-            <button id='itemButton' onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "0" }}>
-                {lang === "bg" ? "Продължи" : "Continue"}
-            </button>
-
             {showForm && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
                     <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative', maxHeight: '80%', overflowY: 'auto' }}>
@@ -261,18 +257,6 @@ const Vouchers = () => {
                             <label htmlFor="address">{lang === "bg" ? "Адрес" : "Address"}:</label>
                             <input type="text" id="address" name="address" required style={{ width: '100%', padding: '8px', margin: '8px 0', boxSizing: 'border-box', backgroundColor: "#f7f1e9", border: "none", borderRadius: "16px" }} /><br /><br />
 
-                            <h3 style={{marginBottom: "0", marginTop: "0"}}>{lang === "bg" ? "Избрани Ваучери" : "Selected Vouchers"}:</h3>
-                            <ul style={{margin: "0"}}>
-                                {Object.keys(selectedVouchers).map(voucherId => {
-                                    const voucher = selectedVouchers[voucherId];
-                                    return (
-                                        <li key={voucherId}>
-                                            {voucher.quantity} &times; {lang === "bg" ? voucher.nameBg : voucher.nameEn}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-
                             <h3 style={{marginBottom: "0", marginTop: "8px"}}>{lang === "bg" ? "Избрани Продукти" : "Selected Products"}:</h3>
                             <ul style={{margin: "0"}}>
                                 {Object.keys(selectedProducts).map(productId => {
@@ -284,16 +268,6 @@ const Vouchers = () => {
                                     );
                                 })}
                             </ul>
-
-                            {/* Hidden inputs to include the selected products in the form submission */}
-                            {Object.keys(selectedVouchers).map(voucherId => {
-                                const voucher = selectedVouchers[voucherId];
-                                return (
-                                    <div key={voucherId}>
-                                        <input type="hidden" name={voucher.nameEn} value={`Quantity: ${voucher.quantity}`} />
-                                    </div>
-                                );
-                            })}
 
                             {/* Hidden inputs to include the selected products in the form submission */}
                             {Object.keys(selectedProducts).map(productId => {
@@ -387,6 +361,10 @@ const Vouchers = () => {
                 )
             ))}
             </div>
+
+            <button id='itemButton' onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "48px" }}>
+                {lang === "bg" ? "Продължи" : "Continue"}
+            </button>
         </div>
     );
 };

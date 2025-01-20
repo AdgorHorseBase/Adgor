@@ -120,7 +120,7 @@ const Vouchers = () => {
             </div>
             <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Ваучери" : "Vouchers"}</h1>
 
-            <div style={{ display: 'flex', justifyContent: "center", alignItems: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
+            {/* <div style={{ display: 'flex', justifyContent: "center", alignItems: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
                 {vouchers.length === 0 ? <div>Vouchers coming soon</div> : vouchers.map((item) => (
                     <div key={item.id} className='item' id='productVoucher'>
                         {item.imagePath && (
@@ -149,6 +149,73 @@ const Vouchers = () => {
                         )}
                     </div>
                 ))}
+            </div> */}
+
+            <div id="voucherForm">
+                <form action="https://api.web3forms.com/submit" method="post" style={{ maxWidth: '100%' }}>
+                    <input type="hidden" name="access_key" value="218421e2-dd98-4307-b489-5748ec4d492e" />
+
+                    <label htmlFor="voucherType">
+                        <span>{lang === "bg" ? "Тип Ваучер" : "Voucher Type"}:</span>
+                        <select id="voucherType" name="voucherType" required>
+                            <option value="ride">{lang === "bg" ? "Езда" : "Ride"}</option>
+                            <option value="meeting_with_falabela">{lang === "bg" ? "Среща с Фалабела" : "Meeting with Falabela"}</option>
+                            <option value="photoshoot_with_horses">{lang === "bg" ? "Фотосесия с коне" : "Photoshoot with Horses"}</option>
+                            <option value="ride_falabela">{lang === "bg" ? "Езда + Фалабела" : "Ride + Falabela"}</option>
+                            <option value="photoshoot_falabela">{lang === "bg" ? "Фотосесия + Фалабела" : "Photoshoot + Falabela"}</option>
+                            <option value="ride_photoshoot">{lang === "bg" ? "Езда + Фотосесия" : "Ride + Photoshoot"}</option>
+                            <option value="ride_falabela_photoshoot">{lang === "bg" ? "Езда + Фалабела + Фотосесия" : "Ride + Falabela + Photoshoot"}</option>
+                        </select>    
+                    </label>
+
+                    <label htmlFor="hours">
+                        <span>{lang === "bg" ? "Часове" : "Hours"}:</span>
+                        <input type="number" id="hours" name="hours" required />
+                    </label>
+
+                    <label htmlFor="fromWho">
+                        <span>{lang === "bg" ? "От Кого" : "From Who"}:</span>
+                        <input type="text" id="fromWho" name="fromWho" required />
+                    </label>
+
+                    <label htmlFor="toWho">
+                        <span>{lang === "bg" ? "До Кого" : "To Who"}:</span>
+                        <input type="text" id="toWho" name="toWho" required />
+                    </label>
+
+
+                    <label htmlFor="name">
+                        <span>{lang === "bg" ? "Име" : "Name"}:</span>
+                        <input type="text" id="name" name="name" required />
+                    </label>
+
+                    <label htmlFor="phone">
+                        <span>{lang === "bg" ? "Телефонен Номер" : "Phone Number"}:</span>
+                        <input type="tel" id="phone" name="phone" required />                    
+                    </label>
+
+                    <label htmlFor="address">
+                        <span>{lang === "bg" ? "Адрес за Доставка" : "Address for Shipping"}:</span>
+                        <input type="text" id="address" name="address" required />
+                    </label>
+
+                    <label htmlFor="email">
+                        <span>{lang === "bg" ? "Имейл" : "Email"}:</span>
+                        <input type="email" id="email" name="email" required />
+                    </label>
+
+                    <label htmlFor="note">
+                        <span>{lang === "bg" ? "Бележка" : "Note"}:</span>
+                        <textarea id="note" name="note"></textarea>
+                    </label>
+
+                    {/* Custom Success Page Redirect */}
+                    <input type="hidden" name="redirect" value={`${window.location.origin}/success`} />
+
+                    <div id='voucherFormSubmit'>
+                        <input type="submit" value={lang === "bg" ? "Изпрати" : "Submit"} />
+                    </div>
+                </form>
             </div>
 
             <button id='itemButton' onClick={handleContinue} style={{ marginTop: '20px', padding: '10px 20px', marginLeft: "10%", marginBottom: "0" }}>

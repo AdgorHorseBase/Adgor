@@ -842,3 +842,28 @@ border:none;
 .twoObjects > div {
     width: 50%;
 }
+
+#voucherForm > form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 500px;
+}
+
+#voucherForm > form > label {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#voucherForm > form > label > input {
+    height: 18px;
+}
+
+#voucherFormSubmit {
+    width: 100%;
+}
+
+#voucherFormSubmit > button {
+    width: fit-content;
+}

@@ -305,7 +305,7 @@ button:hover{
     margin-left: 10%;
     color: #29160F;
     font-size: 6vh;
-    margin-top: 5vh;
+    margin-top: 68px;
     margin-bottom: 10px;
 }
 
@@ -848,6 +848,7 @@ border:none;
     flex-wrap: wrap;
     gap: 12px;
     width: 500px;
+    margin: 0 auto;
 }
 
 #voucherForm > form > label {
@@ -858,6 +859,13 @@ border:none;
 
 #voucherForm > form > label > input {
     height: 18px;
+    border-radius: 12px;
+}
+
+#voucherForm > form > label > textarea {
+    border-radius: 12px;
+    height: 72px;
+    resize: none;
 }
 
 #voucherFormSubmit {

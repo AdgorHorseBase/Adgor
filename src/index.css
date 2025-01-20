@@ -849,9 +849,19 @@ border:none;
 #voucherForm label[for="voucherType"] {
     width: 100%;
 }
+
 #voucherForm label[for="voucherType"] > select {
     height: 28px;
     padding-left: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#voucherForm label[for="address"] {
+    width: 100%;
+}
+
+#voucherForm label[for="email"] {
+    width: 100%;
 }
 
 #voucherType {
@@ -875,6 +885,7 @@ border:none;
     padding-left: 12px;
     font-size: 16px;
     border: 1px solid rgb(118, 118, 118);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #voucherForm > form > label > input:focus {
@@ -890,6 +901,7 @@ border:none;
     padding-top: 6px;
     font-family: arial;
     font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #voucherForm label[for="note"] {
@@ -914,6 +926,7 @@ border:none;
     transition: 0.4s;
     font-size: 24px;
     margin-right: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     /* margin-top: 12px; */
 }
 

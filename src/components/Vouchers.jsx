@@ -151,12 +151,6 @@ const Vouchers = () => {
                         <input type="text" id="toWho" name="toWho" required />
                     </label>
 
-
-                    <label htmlFor="name">
-                        <span>{lang === "bg" ? "Име" : "Name"}:</span>
-                        <input type="text" id="name" name="name" required />
-                    </label>
-
                     <label htmlFor="phone">
                         <span>{lang === "bg" ? "Телефонен Номер" : "Phone Number"}:</span>
                         <input type="tel" id="phone" name="phone" required />                    

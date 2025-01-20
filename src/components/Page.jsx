@@ -24,65 +24,6 @@ const MenuSections = () => {
     getStruct();
   }, []);
 
-  // const fetchTitles = async (structure) => {
-  //   const localStorageKey = 'updatedStructure';
-  //   const storedStructure = localStorage.getItem(localStorageKey);
-  
-  //   if (storedStructure) {
-  //     const updatedStructure = JSON.parse(storedStructure);
-  //     setStruct(updatedStructure);
-  //     setLoadingMenu(false);
-  //     return;
-  //   }
-  
-  //   const updatedStructure = { ...structure };
-  
-  //   for (const dir in updatedStructure) {
-  //     if (updatedStructure[dir].type === "directory") {
-  //       for (const page of updatedStructure[dir].contents) {
-  //         try {
-  //           const titleResponse = await axios.get(
-  //             `/server/uploads${dir}/${page}/schema.json`
-  //           );
-  //           updatedStructure[dir].directoryBg =
-  //             titleResponse.data.directoryBg ?? "";
-  //           updatedStructure[dir].contents = updatedStructure[dir].contents.map(
-  //             (p) =>
-  //               p === page
-  //                 ? {
-  //                     page,
-  //                     titleBg: titleResponse.data.titleBg,
-  //                     titleEn: titleResponse.data.titleEn,
-  //                     directoryBg:
-  //                       titleResponse.data.directoryBg ?? "Directory",
-  //                   }
-  //                 : p
-  //           );
-  //         } catch (err) {
-  //           console.log(`Error fetching title for ${dir}/${page}:`, err);
-  //         }
-  //       }
-  //     } else if (updatedStructure[dir].type === "file") {
-  //       try {
-  //         const titleResponse = await axios.get(
-  //           `/server/uploads${dir}/schema.json`
-  //         );
-  //         updatedStructure[dir] = {
-  //           ...updatedStructure[dir],
-  //           titleBg: titleResponse.data.titleBg,
-  //           titleEn: titleResponse.data.titleEn,
-  //         };
-  //       } catch (err) {
-  //         console.log(`Error fetching title for ${dir}:`, err);
-  //       }
-  //     }
-  //   }
-  
-  //   localStorage.setItem(localStorageKey, JSON.stringify(updatedStructure));
-  //   setStruct(updatedStructure);
-  //   setLoadingMenu(false);
-  // };
-
   useEffect(() => {
     if (structure && !titlesFetched.current) {
       // fetchTitles(structure);
@@ -130,31 +71,28 @@ const MenuSections = () => {
                                           : dir.slice(1, dir.length)}
                                   </p>
                                   <ul className="page-list">
-                                      {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
-                                          <li key={`${dir}-${index}`}>
-                                              <a href={`/page${dir}/${page.page}`}>
-                                                  {lang === "bg" ? page.titleBg : page.titleEn}
-                                              </a>
-                                          </li>
-                                      ) : (page.directory && page.contents && page.contents.length > 0 && (
-                                          <div id="subDirectory">
+                                  {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
+                                        <li key={`${dir}-${page.page}-${index}`}>
+                                            <a href={`/page${dir}/${page.page}`}>
+                                                {lang === "bg" ? page.titleBg : page.titleEn}
+                                            </a>
+                                        </li>
+                                    ) : (page.directory && page.contents && page.contents.length > 0 && (
+                                        <div id="subDirectory" key={`${dir}-${page.directory}-${index}`}>
                                             <p id="menuSubButton" className="subDirectory-name">
-                                                {lang === "bg"
-                                                    ? page.directoryBg
-                                                    : page.directory}
+                                                {lang === "bg" ? page.directoryBg : page.directory}
                                             </p>
                                             <ul>
                                                 {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
-                                                    <li key={`${dir}-${index}-${subIndex}`}>
+                                                    <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
                                                         <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
                                                             {lang === "bg" ? subPage.titleBg : subPage.titleEn}
                                                         </a>
                                                     </li>
                                                 ))}
                                             </ul>
-                                          </div>
-                                        )
-                                      ))}
+                                        </div>
+                                    )))} 
                                   </ul>
                               </div>
                           )

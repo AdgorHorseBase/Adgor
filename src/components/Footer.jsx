@@ -10,8 +10,8 @@ const Footer = () => {
     <div className="footer-container">
     <h1>
         Looking for an <br></br>
-        <span class="adventure-container">
-    <span class="adventure">adventure?</span>
+        <span className="adventure-container">
+    <span className="adventure">adventure?</span>
   </span>
     </h1>
     <div className="contact-form">

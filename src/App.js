@@ -3,7 +3,7 @@ import AdminPanel from './components/Admin/AdminPanel';
 import { Page } from './components/Page.jsx';
 import Products from './components/Products';
 import Success from './components/Success.jsx';
-import Vouchers from './components/Vouchers.jsx';
+import { Vouchers } from './components/Vouchers.jsx';
 import WelcomePage from './components/WelcomePage.jsx';
 import Footer from './components/Footer.jsx';
 import FooterMobile from './components/FooterMobile.jsx';

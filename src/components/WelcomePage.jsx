@@ -26,6 +26,7 @@ import Girl from "./images/GirlOnHorse.webp";
 import Jumping from "./images/skacha.webp";
 import { MenuSections } from "./Page";
 import { useTranslation } from "react-i18next";
+import { VoucherForm } from "./Vouchers";
 
 const WelcomePage = () => {
   const { t, i18n } = useTranslation();
@@ -275,6 +276,11 @@ const WelcomePage = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div style={{margin: "48px"}}>
+        <p style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Вземи си ваучер" : "Get a voucher"}</p>
+        <VoucherForm lang={i18n.language} />
       </div>
 
       <div id="alignFoundationCenter">

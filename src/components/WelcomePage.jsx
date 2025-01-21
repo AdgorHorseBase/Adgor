@@ -279,7 +279,7 @@ const WelcomePage = () => {
       </div>
 
       <div style={{margin: "48px"}}>
-        <p style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Поръчай си ваучер" : "Order a voucher"}</p>
+        <p style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Поръчай ваучер" : "Order a voucher"}</p>
         <VoucherForm lang={i18n.language} />
       </div>
 

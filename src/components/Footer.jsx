@@ -1,10 +1,34 @@
 // import React, { useEffect, useRef, useState } from 'react';
 import "./footer.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const Footer = () => {
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      if (!window.location.pathname.startsWith("/page")) {
+        return;
+      }
+      const pagePath = window.location.pathname.replace("/page/", "");
+      try {
+        const schema = await axios.get("/server/uploads/" + pagePath + "/schema.json");
+        if(schema && schema.data && schema.data.footerImage) {
+          setImageSrc("/server/files/images/" + schema.data.footerImage);
+        }
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    fetchImage();
+  }, []);
+  
   return (
     <>
     <div className="image-footer">
-    <img src="jeep2.jpg" alt="" className="image" />
+    <img src={imageSrc ? imageSrc : "/jeep2.jpg"} alt="" className="image" />
     </div>
 
     <div className="footer-container">

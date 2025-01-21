@@ -38,7 +38,7 @@ const WelcomePage = () => {
       </div>
 
       <div id="Header">
-        <video autoPlay muted loop id="HeaderVideo">
+        <video autoPlay muted loop playsInline id="HeaderVideo">
           <source src={AdgorVideo} type="video/webm" />
         </video>
         <div id="Titles">

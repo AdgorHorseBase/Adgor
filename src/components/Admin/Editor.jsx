@@ -68,6 +68,7 @@ function Editor({ structure }) {
   const [directory, setDirectory] = useState("");
   const [directoryBg, setDirectoryBg] = useState("");
   const [page, setPage] = useState("");
+  const [footerImage, setFooterImage] = useState("");
 
   useEffect(() => {
     if (editPath && editPath !== "create") {
@@ -811,6 +812,22 @@ function Editor({ structure }) {
     document.execCommand("insertText", false, text);
   };
 
+  const uploadFooterImage = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e);
+
+    try {
+      const response = await axios.post(URL + "/image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setFooterImage(response.data.image);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  }
+
   // Generates static HTML file and saves the schema for future editing
   const savePage = async () => {
     if (!page) {
@@ -975,7 +992,7 @@ function Editor({ structure }) {
       }
     });
 
-    const schemaContent = { titleBg, titleEn, directoryBg, schema };
+    const schemaContent = { titleBg, titleEn, directoryBg, footerImage, schema };
 
     // Send request to the backend to save the page
     try {
@@ -993,12 +1010,7 @@ function Editor({ structure }) {
         schema: schemaContent,
       });
       alert("Page saved successfully!");
-      setTitleBg("Неименувана Страница"); // Reset title;
-      setTitleEn("Untitled Page"); // Reset title
-      setSchema([]); // Reset schema
-      setDirectory(""); // Reset path
-      setDirectoryBg(""); // Reset path
-      setPage(""); // Reset path
+      window.location.reload();
     } catch (error) {
       console.error("Error saving page:", error);
       alert("Failed to save page.");
@@ -2023,6 +2035,25 @@ function Editor({ structure }) {
             </div>
           </div>
         ))}
+
+        <div className="image-footer" style={{width: "100%", marginTop: "48px", marginBottom: "12px"}}>
+          <label className="labelElement" style={{marginLeft: "13%"}}>{footerImage ? "Footer Image:" : "Choose image for the footer:"}</label>
+          {footerImage && (
+            <img
+              id="Added_One_Image_img"
+              src={URL + "/image?name=" + footerImage}
+              style={{width: "100%"}}
+              alt=""
+            />
+          )}
+          <br></br>
+          <input
+            type="file"
+            onChange={(e) => uploadFooterImage(e.target.files[0])}
+            placeholder="Choose Image"
+            style={{marginLeft: "13%"}}
+          />
+        </div>
       </div>
     </div>
   );

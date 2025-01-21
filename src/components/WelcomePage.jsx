@@ -38,7 +38,7 @@ const WelcomePage = () => {
       </div>
 
       <div id="Header">
-        <video autoPlay muted loop playsInline id="HeaderVideo">
+        <video autoPlay muted playsInline id="HeaderVideo" onEnded={(e) => e.target.play()} preload="auto" onCanPlayThrough={(e) => e.target.play()}>
           <source src={AdgorVideo} type="video/webm" />
         </video>
         <div id="Titles">

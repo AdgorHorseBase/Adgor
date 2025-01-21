@@ -384,16 +384,16 @@ function Page() {
       elementsBg.forEach((el) => (el.style.display = "block"));
       elementsEn.forEach((el) => (el.style.display = "none"));
     }
+  }, [lang, pageContent]);
 
+  useEffect(() => {
     const GetSections = () => {
       const sections = document.querySelectorAll("section");
       setSections(sections);
-    }
+    };
 
-    if(sections.length === 0) {
-      GetSections();
-    }
-  }, [lang, pageContent, sections]);
+    GetSections();
+  }, [pageContent]);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -29,7 +29,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         if(products.length > 0 && id) {
-            setCurrProduct(products.find(product => product.id === id) || {});
+            setCurrProduct(products.find(product => product.id === id) || products.find(product => product.products && product.products.find(p => p.id === id)).find(p => p.id === id));
         }
     }, [products, id]);
 

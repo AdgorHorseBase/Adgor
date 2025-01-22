@@ -989,3 +989,7 @@ border:none;
 .continueBtn {
     margin-top: 12px !important;
 }
+
+.cursorPointer {
+    cursor: pointer;
+}

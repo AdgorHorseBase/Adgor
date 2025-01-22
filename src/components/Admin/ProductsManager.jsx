@@ -303,6 +303,26 @@ const ProductsManager = () => {
                             </label>
                             <br />
                             <label>
+                                Description (BG):
+                                <input
+                                    type="text"
+                                    name="descriptionBg"
+                                    value={item.descriptionBg}
+                                    onChange={(e) => handleEditProductChange(index, e)}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Description (EN):
+                                <input
+                                    type="text"
+                                    name="descriptionEn"
+                                    value={item.descriptionEn}
+                                    onChange={(e) => handleEditProductChange(index, e)}
+                                />
+                            </label>
+                            <br />
+                            <label>
                                 Price:
                                 <input
                                     type="text"
@@ -349,6 +369,26 @@ const ProductsManager = () => {
                                         name="nameEn"
                                         value={item.nameEn}
                                         onChange={(e) => handleEditGroupParentChange(index, e)}
+                                    />
+                                </label>
+                                <br />
+                                <label>
+                                    Description (BG):
+                                    <input
+                                        type="text"
+                                        name="descriptionBg"
+                                        value={item.descriptionBg}
+                                        onChange={(e) => handleEditProductChange(index, e)}
+                                    />
+                                </label>
+                                <br />
+                                <label>
+                                    Description (EN):
+                                    <input
+                                        type="text"
+                                        name="descriptionEn"
+                                        value={item.descriptionEn}
+                                        onChange={(e) => handleEditProductChange(index, e)}
                                     />
                                 </label>
                                 <br />

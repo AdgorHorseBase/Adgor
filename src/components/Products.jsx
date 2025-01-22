@@ -86,9 +86,9 @@ const Products = () => {
             <div id="StickyMenu">
                 <MenuSections />
             </div>
-            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Продукти" : "Products"}</h1>
+            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Подаръци" : "Gifts"}</h1>
             <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto" }}>
-                {products.length === 0 ? <div>Products coming soon</div> : products.map((item) => (
+                {products.length === 0 ? <div>{lang === "bg" ? "Подаръците идват скоро" : "Gifts coming soon"}</div> : products.map((item) => (
                     item.type !== "group" ? (
                         <div id='productVoucher' key={item.id} className='item'>
                             {item.imagePath && (

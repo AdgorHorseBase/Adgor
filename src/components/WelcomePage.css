@@ -101,14 +101,21 @@ li {
 #contactsSmall {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
   gap: 15px;
   font-size: 23px;
+  overflow: hidden;
 }
 
 #SocialsEmail {
   color: #1f1b1a;
   font-weight: 600;
+}
+
+#SocialsEmail, #SocialsNumber {
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 #SocialsNumber {

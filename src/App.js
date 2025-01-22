@@ -8,7 +8,6 @@ import WelcomePage from './components/WelcomePage.jsx';
 import Footer from './components/Footer.jsx';
 import FooterMobile from './components/FooterMobile.jsx';
 import { useEffect, useState } from 'react';
-import Cart from './components/Cart.jsx';
 import ProductPage from './components/ProductPage.jsx';
 
 const isAuthenticated = () => {
@@ -80,8 +79,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Cart />
-
       <Routes>
         <Route path="/" element={<WelcomePage />} />
 

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { MenuSections } from './Page';
 import "./productPage.css";
+import Cart from './Cart';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -57,6 +58,8 @@ const ProductPage = () => {
 
     return (
         <div style={{marginBottom: "72px", width: "100%"}}>  
+            <Cart />
+            
             <div id="StickyMenu">
                 <MenuSections />
             </div>

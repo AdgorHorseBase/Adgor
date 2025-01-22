@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
+import Cart from './Cart';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -36,6 +37,7 @@ const Products = () => {
 
     return (
         <div>
+            <Cart />
             <div id="StickyMenu">
                 <MenuSections />
             </div>

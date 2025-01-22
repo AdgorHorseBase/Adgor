@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Success = () => {
+  
+  localStorage.removeItem('cart');
+
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Thank You for Your Purchase!</h1>

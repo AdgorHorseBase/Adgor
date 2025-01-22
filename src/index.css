@@ -940,7 +940,7 @@ border:none;
     position: fixed;
     top: 82px;
     right: 12px;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .cartIcon {

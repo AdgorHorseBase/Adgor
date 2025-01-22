@@ -58,19 +58,25 @@ const Cart = () => {
                         <FaTimes />
                     </button>
                     <div className="cartContent">
-                        {Object.keys(cartItems).map(key => cartItems[key]).map((item) => {
+                        {!Array.isArray(cartItems) ? (Object.keys(cartItems).map(key => cartItems[key]).map((item) => {
                             return (
                                 <div key={item.id} className="cartItem">
                                     <img src={`/server/files/images/${item.imagePath}`} alt={item.name} />
                                     <div>
-                                        <h4>{lang === "bg" ? item.nameBg : item.nameEn}</h4>
+                                        <h4>{lang === "bg" ? item.parentNameBg ? item.parentNameBg + " - " + item.nameBg : item.nameBg : item.parentNameEn ? item.parentNameEn + " - " + item.nameEn : item.nameEn}</h4>
                                         <p>{item.price} лв</p>
                                         <p>Quantity: {item.quantity}</p>
                                     </div>
                                 </div>
                             )
-                        })}
+                        })) : (
+                            <p>{lang === "bg" ? "Количката е празна" : "Cart is empty"}</p>
+                        )}
                     </div>
+                    <p className='total'>
+                        <span>{lang === "bg" ? "Общо" : "Total"}:</span>
+                        <span>{Object.keys(cartItems).map(key => cartItems[key]).reduce((acc, item) => acc + item.price * item.quantity, 0)} лв</span>
+                    </p>
                     <button className="continueBtn" onClick={handleContinue}>Continue</button>
                 </div>
             ) : (
@@ -123,7 +129,7 @@ const Cart = () => {
                                     const product = cartItems[productId];
                                     return (
                                         <li key={productId}>
-                                            {product.quantity} &times; {lang === "bg" ? product.nameBg : product.nameEn}
+                                            {product.quantity} &times; {lang === "bg" ? product.parentNameBg ? product.parentNameBg + " - " + product.nameBg : product.nameBg : product.parentNameEn ? product.parentNameEn + " - " + product.nameEn : product.nameEn}
                                         </li>
                                     );
                                 })}
@@ -134,7 +140,7 @@ const Cart = () => {
                                 const product = cartItems[productId];
                                 return (
                                     <div key={productId}>
-                                        <input type="hidden" name={product.nameEn} value={`Quantity: ${product.quantity}`} />
+                                        <input type="hidden" name={product.parentNameEn ? product.parentNameEn + " - " + product.nameEn : product.nameEn} value={`Quantity: ${product.quantity}`} />
                                     </div>
                                 );
                             })}

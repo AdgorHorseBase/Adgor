@@ -962,7 +962,7 @@ border:none;
     flex-direction: column;
     width: 300px;
     max-width: 80%;
-    max-height: 50vh;
+    max-height: 60vh !important;
 }
 
 .cartContent {
@@ -986,8 +986,17 @@ border:none;
     transform: translate(6px, -6px);
 }
 
-.continueBtn {
+.total {
     margin-top: 12px !important;
+    margin-bottom: 6px !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.total > :last-child {
+    font-weight: bold;
 }
 
 .cursorPointer {

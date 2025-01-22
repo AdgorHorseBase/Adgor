@@ -10,6 +10,7 @@ const ProductPage = () => {
     const [currProduct, setCurrProduct] = useState({});
     const [lang, setLang] = useState("bg");
     const [quantity, setQuantity] = useState(1);
+    const [selectedType, setSelectedType] = useState("");
 
     const storedLang = localStorage.getItem("lang");
     
@@ -35,11 +36,22 @@ const ProductPage = () => {
     }, [products, id]);
 
     const addToCart = () => {
+        if(currProduct.products && !selectedType) {
+            return alert(lang === "bg" ? "Моля изберете вид на продукта" : "Please select a product type");
+        }
+
         let cart = JSON.parse(localStorage.getItem('cart'));
         if (Array.isArray(cart) && cart.length === 0) {
             cart = {};
         }
-        cart[id] = { ...currProduct, quantity: cart[id]?.quantity ? (quantity + cart[id].quantity) : quantity };
+        const productToAdd = selectedType ? currProduct.products.find(type => type.id === selectedType) : currProduct;
+        const idToUse = selectedType ? selectedType : id;
+        if(selectedType && !productToAdd.nameEn.includes(currProduct.nameEn)) {
+            productToAdd.parentNameBg = currProduct.nameBg;
+            productToAdd.parentNameEn = currProduct.nameEn;
+            productToAdd.price = currProduct.price;
+        }
+        cart[idToUse] = { ...productToAdd, quantity: cart[idToUse]?.quantity ? (quantity + cart[idToUse].quantity) : quantity };
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
@@ -50,15 +62,27 @@ const ProductPage = () => {
             </div>
 
             <div className='product' style={{marginTop: "100px"}}>
-
                 <div className='productDetails'>
-                    <img src={`/server/files/images/${currProduct.imagePath}`} alt='' />
+                    <img src={`/server/files/images/${selectedType ? currProduct.products.find(type => type.id === selectedType).imagePath : currProduct.imagePath}`} alt='' />
                     <div>
                         <h1 className='productTitle'>{lang === "bg" ? currProduct.nameBg : currProduct.nameEn}</h1>
                         <h3 className='productDescription normalText'>{lang === "bg" ? currProduct.descriptionBg : currProduct.descriptionEn}</h3>
                         <p className='productPrice'>{currProduct.price} лв</p>
 
                         <div className='productButtons'>
+                            {currProduct.products && currProduct.products.length > 0 && (
+                                <div className='productTypes'>
+                                    {currProduct.products.map(product => (
+                                        <button
+                                            key={product.id}
+                                            className={selectedType === product.id ? 'selected' : ''}
+                                            onClick={() => setSelectedType(product.id)}
+                                        >
+                                            {lang === "bg" ? product.nameBg : product.nameEn}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                             <div className='productQuantity'>
                                 <button onClick={() => {quantity > 1 && setQuantity(quantity - 1)}}>-</button>
                                 <span>{quantity}</span>

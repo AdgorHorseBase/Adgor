@@ -50,3 +50,9 @@
 .productButtons button {
     cursor: pointer;
 }
+
+.selected {
+    background-color: #29160F;
+    border-color: #29160F;
+    color: white;
+}

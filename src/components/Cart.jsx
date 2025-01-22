@@ -64,7 +64,8 @@ const Cart = () => {
                                     <img src={`/server/files/images/${item.imagePath}`} alt={item.name} />
                                     <div>
                                         <h4>{lang === "bg" ? item.nameBg : item.nameEn}</h4>
-                                        <p>{item.price}</p>
+                                        <p>{item.price} лв</p>
+                                        <p>Quantity: {item.quantity}</p>
                                     </div>
                                 </div>
                             )
@@ -73,7 +74,7 @@ const Cart = () => {
                     <button className="continueBtn" onClick={handleContinue}>Continue</button>
                 </div>
             ) : (
-                // cartItems.lenght === 0 && <FaShoppingCart className="cartIcon" onClick={toggleCart} />
+                // cartItems && !Array.isArray(cartItems) && <FaShoppingCart className="cartIcon" onClick={toggleCart} />
                 <FaShoppingCart className="cartIcon" onClick={toggleCart} />
             )}
 

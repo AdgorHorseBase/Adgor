@@ -9,6 +9,7 @@ const ProductPage = () => {
     const [products, setProducts] = useState([]);
     const [currProduct, setCurrProduct] = useState({});
     const [lang, setLang] = useState("bg");
+    const [quantity, setQuantity] = useState(1);
 
     const storedLang = localStorage.getItem("lang");
     
@@ -33,6 +34,15 @@ const ProductPage = () => {
         }
     }, [products, id]);
 
+    const addToCart = () => {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        if (Array.isArray(cart) && cart.length === 0) {
+            cart = {};
+        }
+        cart[id] = { ...currProduct, quantity: cart[id]?.quantity ? (quantity + cart[id].quantity) : quantity };
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     return (
         <div style={{marginBottom: "72px", width: "100%"}}>  
             <div id="StickyMenu">
@@ -45,16 +55,16 @@ const ProductPage = () => {
                     <img src={`/server/files/images/${currProduct.imagePath}`} alt='' />
                     <div>
                         <h1 className='productTitle'>{lang === "bg" ? currProduct.nameBg : currProduct.nameEn}</h1>
-                        <h3 className='productDescription'>Description</h3>
+                        <h3 className='productDescription normalText'>{lang === "bg" ? currProduct.descriptionBg : currProduct.descriptionEn}</h3>
                         <p className='productPrice'>{currProduct.price} лв</p>
 
                         <div className='productButtons'>
                             <div className='productQuantity'>
-                                <button>-</button>
-                                <span>{currProduct.quantity || 0}</span>
-                                <button>+</button>
+                                <button onClick={() => {quantity > 1 && setQuantity(quantity - 1)}}>-</button>
+                                <span>{quantity}</span>
+                                <button onClick={() => {setQuantity(quantity + 1)}}>+</button>
                             </div>
-                            <button className='productAddToCart'>{lang === "bg" ? "Добави в количката" : "Add to cart"}</button>
+                            <button className='productAddToCart' onClick={addToCart}>{lang === "bg" ? "Добави в количката" : "Add to cart"}</button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +74,7 @@ const ProductPage = () => {
 
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "20px", marginBottom: "24px" }}>
                         {products.map((product) => (
-                            <div key={product.id} className='item' id="productVoucher">
+                            <div key={product.id} onClick={() => document.location.href = `/product/${product.id}`} className='item cursorPointer' id="productVoucher">
                                 {product.imagePath && (
                                     <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
                                 )}

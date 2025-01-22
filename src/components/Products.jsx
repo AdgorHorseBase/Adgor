@@ -26,54 +26,6 @@ const Products = () => {
         localStorage.setItem('cart', JSON.stringify(selectedProducts));
     }, [selectedProducts]);
 
-    const addProduct = (product, nameBg, nameEn) => {
-        if(!nameBg && !nameEn) {
-            setSelectedProducts(prev => {
-                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
-                return {
-                    ...prev,
-                    [product.id]: { ...product, quantity: newQuantity }
-                };
-            });
-        } else {
-            setSelectedProducts(prev => {
-                const newQuantity = (prev[product.id]?.quantity || 0) + 1;
-                return {
-                    ...prev,
-                    [product.id]: { ...product, quantity: newQuantity, nameBg: nameBg, nameEn: nameEn }
-                };
-            });
-        }
-    };
-
-    const removeProduct = (product, nameBg, nameEn) => {
-        if(!nameBg && !nameEn) {
-            setSelectedProducts(prev => {
-                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
-                if (newQuantity <= 0) {
-                    const { [product.id]: _, ...rest } = prev;
-                    return rest;
-                }
-                return {
-                    ...prev,
-                    [product.id]: { ...product, quantity: newQuantity }
-                };
-            });
-        } else {
-            setSelectedProducts(prev => {
-                const newQuantity = (prev[product.id]?.quantity || 0) - 1;
-                if (newQuantity <= 0) {
-                    const { [product.id]: _, ...rest } = prev;
-                    return rest;
-                }
-                return {
-                    ...prev,
-                    [product.id]: { ...product, quantity: newQuantity, nameBg: nameBg, nameEn: nameEn }
-                };
-            });
-        }
-    };
-
     const storedLang = localStorage.getItem("lang");
 
     useEffect(() => {

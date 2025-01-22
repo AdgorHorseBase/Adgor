@@ -8,6 +8,7 @@ import WelcomePage from './components/WelcomePage.jsx';
 import Footer from './components/Footer.jsx';
 import FooterMobile from './components/FooterMobile.jsx';
 import { useEffect, useState } from 'react';
+import Cart from './components/Cart.jsx';
 
 const isAuthenticated = () => {
   return true;
@@ -70,10 +71,16 @@ function App() {
     localStorage.setItem('lang', 'bg');
   }
 
+  if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+
   const showFooter = !window.location.pathname.startsWith('/admin');
 
   return (
     <BrowserRouter>
+      <Cart />
+
       <Routes>
         <Route path="/" element={<WelcomePage />} />
 

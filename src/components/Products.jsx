@@ -15,7 +15,17 @@ const Products = () => {
         };
         
         GetProducts();
+
+        // FIX: Make it check if there are such products
+        const storedCart = localStorage.getItem('cart');
+        if (storedCart) {
+            setSelectedProducts(JSON.parse(storedCart));
+        }
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(selectedProducts));
+    }, [selectedProducts]);
 
     const addProduct = (product, nameBg, nameEn) => {
         if(!nameBg && !nameEn) {

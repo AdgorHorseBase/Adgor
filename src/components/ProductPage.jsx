@@ -34,7 +34,7 @@ const ProductPage = () => {
     }, [products, id]);
 
     return (
-        <div width="100%">  
+        <div style={{marginBottom: "72px", width: "100%"}}>  
             <div id="StickyMenu">
                 <MenuSections />
             </div>

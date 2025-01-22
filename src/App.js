@@ -9,6 +9,7 @@ import Footer from './components/Footer.jsx';
 import FooterMobile from './components/FooterMobile.jsx';
 import { useEffect, useState } from 'react';
 import Cart from './components/Cart.jsx';
+import ProductPage from './components/ProductPage.jsx';
 
 const isAuthenticated = () => {
   return true;
@@ -87,6 +88,8 @@ function App() {
         <Route path="/page/*" element={<Page />} />
 
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<ProductPage /> } />
+
         <Route path="/vouchers" element={<Vouchers />} />
         <Route path="/success" element={<Success />} />
         

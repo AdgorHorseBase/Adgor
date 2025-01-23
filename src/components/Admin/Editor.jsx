@@ -218,6 +218,12 @@ function Editor({ structure }) {
         type,
         content: [],
       };
+    } else if (type === "gallery") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: [],
+      };
     } else if (type === "overlap") {
       newElement = {
         id: uuidv4(),
@@ -654,6 +660,72 @@ function Editor({ structure }) {
           );
         }
         break;
+      case "gallery":
+        if (newContent.image) {
+          formData.append("image", newContent.image);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema((prevSchema) =>
+                prevSchema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: [...el.content, image],
+                    }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if (newContent.file) {
+          formData.append("image", newContent.file);
+
+          await axios
+            .post(URL + "/image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              const image = response.data.image;
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: el.content.map((img, idx) =>
+                        idx === newContent.index ? image : img
+                      ),
+                    }
+                    : el
+                )
+              );
+            })
+            .catch((error) => {
+              return console.error("Error uploading image:", error);
+            });
+        } else if (newContent.delete) {
+          return setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: el.content.filter((_, idx) => idx !== newContent.index),
+                }
+                : el
+            )
+          );
+        }
+        break;
       case "overlap":
         if (newContent.imageBack || newContent.imageLeft || newContent.imageRight) {
           formData.append("image", newContent.image);
@@ -934,6 +1006,15 @@ function Editor({ structure }) {
           <a class="prev" onclick="plusSlides(-1, '${slideshowId}')">&#10094;</a>
           <a class="next" onclick="plusSlides(1, '${slideshowId}')">&#10095;</a>
         </div>`;
+      } else if (element.type === "gallery") {
+        // Create the gallery html, css...
+        const galleryId = `gallery-${element.id}`;
+        htmlContent += `
+        <div id="${galleryId}" class="gallery">
+          ${element.content.map(image => `
+            <img src="/server/files/images/${image}" alt="gallery image" />
+          `).join('')}
+        </div>`;
       } else if (element.type === "donation") {
         htmlContent += `
           <div class="donation">
@@ -1100,6 +1181,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("donation")}>Add Donation</button>
           <button onClick={() => addElement("overlap")}>Add Overlap</button>
           <button onClick={() => addElement("section")}>Add Section</button>
+          <button onClick={() => addElement("gallery")}>Add Gallery</button>
         </div>
         <button id="Save_button" onClick={savePage}>
           Save Page
@@ -1995,6 +2077,61 @@ function Editor({ structure }) {
                   tagName="p"
                   id="Added_Text"
                 />
+              </div>
+            )}
+            {element.type === "gallery" && (
+              <div>
+                <label className="labelElement">Gallery:</label>
+                <div id="Added_Gallery">
+                  {element.content.map((image, index) => (
+                    <div style={{ width: "fit-content" }} key={index}>
+                      <img
+                        id="Added_One_Image_img"
+                        src={URL + "/image?name=" + image}
+                        alt=""
+                      />
+                      <br></br>
+                      <input
+                        id=""
+                        type="file"
+                        onChange={(e) =>
+                          updateElement(
+                            element.id,
+                            { index, file: e.target.files[0] },
+                            element.type
+                          )
+                        }
+                        style={{ marginBottom: "8px" }}
+                        placeholder="Choose Image"
+                      />
+                      <button
+                        style={{ display: "block", marginTop: "0" }}
+                        onClick={() =>
+                          updateElement(
+                            element.id,
+                            { index, delete: true },
+                            element.type
+                          )
+                        }
+                      >Delete</button>
+                    </div>
+                  ))}
+                </div>
+                <label style={{ marginLeft: "10%", fontSize: "24px" }}>
+                  New:
+                  <input
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { image: e.target.files[0] },
+                        element.type
+                      )
+                    }
+                    style={{ marginLeft: "8px" }}
+                    placeholder="Choose Image"
+                  />
+                </label>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

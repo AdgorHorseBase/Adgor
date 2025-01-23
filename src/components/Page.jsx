@@ -392,7 +392,65 @@ function Page() {
       setSections(sections);
     };
 
+    const GetGalleries = () => {
+      const galleries = document.querySelectorAll(".gallery");
+      galleries.forEach((gallery) => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        gallery.addEventListener("mousedown", (e) => {
+          isDown = true;
+          gallery.classList.add("active");
+          startX = e.pageX - gallery.offsetLeft;
+          scrollLeft = gallery.scrollLeft;
+        });
+
+        gallery.addEventListener("mouseleave", () => {
+          isDown = false;
+          gallery.classList.remove("active");
+        });
+
+        gallery.addEventListener("mouseup", () => {
+          isDown = false;
+          gallery.classList.remove("active");
+        });
+
+        gallery.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - gallery.offsetLeft;
+          const walk = (x - startX) * 3; //scroll-fast
+          gallery.scrollLeft = scrollLeft - walk;
+        });
+
+        gallery.addEventListener("scroll", () => {
+          if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth) {
+            gallery.scrollLeft = 0;
+          } else if (gallery.scrollLeft <= 0) {
+            gallery.scrollLeft = gallery.scrollWidth - gallery.clientWidth;
+          }
+        });
+
+        const allImages = gallery.querySelectorAll("img");
+        allImages.forEach((img) => {
+          img.addEventListener("click", () => {
+            const modal = document.createElement("div");
+            modal.className = "galleryImageModal";
+            const modalContent = document.createElement("img");
+            modalContent.src = img.src;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            modal.addEventListener("click", () => {
+              modal.remove();
+            });
+          });
+        });
+      });
+    }
+
     GetSections();
+    GetGalleries();
   }, [pageContent]);
 
   useEffect(() => {
@@ -437,7 +495,7 @@ function Page() {
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}
 
-      <div style={{marginTop: "12px", marginBottom: "48px"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
+      <div style={{marginTop: "70px", marginBottom: "0"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
 
       {sections && sections.length > 0 && (
         <div id="sections">

@@ -604,3 +604,18 @@ h1 {
   margin-right: 30px;
   margin-top: 8px;
 }
+
+.gallery {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.gallery img {
+  width: 25vw;
+  height: 25vw;
+  object-fit: cover;
+}

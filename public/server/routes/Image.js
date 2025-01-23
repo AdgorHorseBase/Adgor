@@ -40,10 +40,19 @@ router.post("/", upload.single('image'), async (req, res) => {
         const outputPath = path.join(__dirname, "..", "files", "images", outputFilename);
 
         // Resize the image to a width of 1920 pixels and convert to WebP format
-        await sharp(file.buffer)
+        const image = sharp(file.buffer);
+        const metadata = await image.metadata();
+
+        if (metadata.width > 1920) {
+            await image
             .resize({ width: 1920 })
             .webp({ quality: 80 })
             .toFile(outputPath);
+        } else {
+            await image
+            .webp({ quality: 80 })
+            .toFile(outputPath);
+        }
 
         // Respond with the file information
         res.json({

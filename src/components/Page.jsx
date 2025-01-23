@@ -82,7 +82,7 @@ const MenuSections = () => {
                                             <p id="menuSubButton" className="subDirectory-name">
                                                 {lang === "bg" ? page.directoryBg : page.directory}
                                             </p>
-                                            <ul>
+                                            <ul className="subPage-list">
                                                 {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
                                                     <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
                                                         <a href={`/page${dir}/${page.directory}/${subPage.page}`}>

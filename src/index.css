@@ -116,6 +116,7 @@
     display: inline-block;
 }
 
+
 .directory-name {
     cursor: pointer;
     font-family: 'Georgia', serif;
@@ -124,6 +125,21 @@
     letter-spacing: 1px;
     margin: 0;
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.directory-menu > p::after {
+    display: inline;
+    content: "▼";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin-left: 2px;
+    width: fit-content;
+    height: fit-content;
+    padding-top: 3px;
 }
   
 .page-list {
@@ -135,7 +151,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
+}
   
 .page-list li {
     padding: 8px 16px;
@@ -152,6 +168,45 @@
   
 .directory-menu:hover .page-list {
     display: block;
+}
+
+.subPage-list {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    left: 100%;
+    top: 0;
+}
+
+#subDirectory {
+    position: relative;
+}
+
+#subDirectory:hover .subPage-list {
+    display: block;
+}
+
+.subDirectory-name  {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.subDirectory-name::after {
+    display: inline;
+    content: "▶";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin-left: 2px;
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 3px;
 }
 
 .Menu {
@@ -205,6 +260,26 @@
     padding-right: 10px;
     padding-left: 10px;
 } */
+
+#subDirectory {
+    padding: 8px 16px;
+    padding-right: 0;
+}
+
+#menuSubButton {
+    cursor: pointer;
+}
+
+.subPage-list {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
 .line {
     width: 74%;

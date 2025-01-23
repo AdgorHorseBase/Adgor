@@ -2082,7 +2082,7 @@ function Editor({ structure }) {
             {element.type === "gallery" && (
               <div>
                 <label className="labelElement">Gallery:</label>
-                <div id="Added_Gallery">
+                <div id="Added_Slideshow">
                   {element.content.map((image, index) => (
                     <div style={{ width: "fit-content" }} key={index}>
                       <img
@@ -2117,7 +2117,7 @@ function Editor({ structure }) {
                     </div>
                   ))}
                 </div>
-                <label style={{ marginLeft: "10%", fontSize: "24px" }}>
+                <label style={{ marginLeft: "0", fontSize: "24px" }}>
                   New:
                   <input
                     type="file"
@@ -2128,7 +2128,7 @@ function Editor({ structure }) {
                         element.type
                       )
                     }
-                    style={{ marginLeft: "8px" }}
+                    style={{ marginLeft: "8px", marginTop: "32px" }}
                     placeholder="Choose Image"
                   />
                 </label>
@@ -2173,8 +2173,8 @@ function Editor({ structure }) {
           </div>
         ))}
 
-        <div className="image-footer" style={{width: "100%", marginTop: "48px", marginBottom: "12px"}}>
-          <label className="labelElement" style={{marginLeft: "13%"}}>{footerImage ? "Footer Image:" : "Choose image for the footer:"}</label>
+        <div className="element" >
+          <label className="labelElement">{footerImage ? "Footer Image:" : "Choose image for the footer:"}</label>
           {footerImage && (
             <img
               id="Added_One_Image_img"
@@ -2188,7 +2188,7 @@ function Editor({ structure }) {
             type="file"
             onChange={(e) => uploadFooterImage(e.target.files[0])}
             placeholder="Choose Image"
-            style={{marginLeft: "13%"}}
+            style={{marginBottom: "0"}}
           />
         </div>
       </div>

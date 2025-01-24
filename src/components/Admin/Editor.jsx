@@ -1010,9 +1010,11 @@ function Editor({ structure }) {
         // Create the gallery html, css...
         const galleryId = `gallery-${element.id}`;
         htmlContent += `
-        <div id="${galleryId}" class="gallery">
+        <div id="${galleryId}" class="gallery-container">
           ${element.content.map(image => `
-            <img src="/server/files/images/${image}" alt="gallery image" />
+            <div class="gallery-item" key={index}>
+              <img src="/server/files/images/${image}" alt="gallery image" />
+            </div>
           `).join('')}
         </div>`;
       } else if (element.type === "donation") {

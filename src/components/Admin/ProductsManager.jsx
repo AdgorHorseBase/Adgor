@@ -1,8 +1,61 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { MdModeEdit } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
+import ReactQuill, { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { IoClose } from "react-icons/io5";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+
+const Font = Quill.import("formats/font");
+Font.whitelist = [
+  "arial",
+  "times-new-roman",
+  "courier-new",
+  "verdana",
+  "georgia",
+  "trebuchet-ms",
+  "comic-sans-ms",
+  "impact",
+];
+Quill.register(Font, true);
+
+const MyCustomToolbar = ({ id }) => (
+  <div id={id}>
+    <select className="ql-font">
+      <option value="">Normal</option>
+      <option value="arial">Arial</option>
+      <option value="times-new-roman">Times New Roman</option>
+      <option value="courier-new">Courier New</option>
+      <option value="verdana">Verdana</option>
+      <option value="georgia">Georgia</option>
+      <option value="trebuchet-ms">Trebuchet MS</option>
+      <option value="comic-sans-ms">Comic Sans MS</option>
+      <option value="impact">Impact</option>
+    </select>
+    <select className="ql-header" defaultValue="">
+      <option value="">Normal</option>
+      <option value="1">Header 1</option>
+      <option value="2">Header 2</option>
+      <option value="3">Header 3</option>
+    </select>
+    <button className="ql-bold" />
+    <button className="ql-italic" />
+    <button className="ql-underline" />
+    <button className="ql-strike" />
+    <button className="ql-list" value="ordered" />
+    <button className="ql-list" value="bullet" />
+    <button className="ql-link" />
+    <select className="ql-align" defaultValue="">
+      <option value="" />
+      <option value="center" />
+      <option value="right" />
+      <option value="justify" />
+    </select>
+    <button className="ql-clean" />
+  </div>
+);
 
 const ProductsManager = () => {
     const [products, setProducts] = useState([]);
@@ -31,6 +84,7 @@ const ProductsManager = () => {
     });
     const [selectedFile, setSelectedFile] = useState(null);
     const [editFiles, setEditFiles] = useState({}); // To track file changes for edited products
+    const [descriptionOpen, setDescriptionOpen] = useState({});
 
     useEffect(() => {
         const getProducts = async () => {
@@ -302,24 +356,87 @@ const ProductsManager = () => {
                                 />
                             </label>
                             <br />
-                            <label>
-                                Description (BG):
-                                <input
-                                    type="text"
+                            <label className="description">
+                                Description (BG)
+                                <button
                                     name="descriptionBg"
                                     value={item.descriptionBg}
-                                    onChange={(e) => handleEditProductChange(index, e)}
-                                />
+                                    onClick={(e) => {
+                                        if(!e.target.closest(".description-content")) {
+                                            setDescriptionOpen({...descriptionOpen, [item.id]: {bg: true, en: false}})
+                                        }
+                                    }}
+                                    style={{height: "24px", width: "24px", border: "none", backgroundColor: ""}}
+                                >
+                                    <MdModeEdit />
+                                    <div className="description-content" style={{display: descriptionOpen[item.id]?.bg ? "block" : "none"}}
+                                        onClick={(e) => {
+                                            if (!e.target.closest(".description-editor")) {
+                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                            }
+                                        }}
+                                    >
+                                        <div className="description-close">
+                                            <IoClose />
+                                        </div>
+                                        <div className="description-editor">
+                                            <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
+                                            <ReactQuill
+                                                value={item.descriptionBg}
+                                                onChange={(e) =>
+                                                    handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                }
+                                                modules={{
+                                                    toolbar: {
+                                                        container: `#toolbar-${item.id}-bg`,
+                                                    },
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
                             </label>
-                            <br />
-                            <label>
-                                Description (EN):
-                                <input
-                                    type="text"
+                            <label className="description">
+                                Description (EN)
+                                <button
                                     name="descriptionEn"
                                     value={item.descriptionEn}
-                                    onChange={(e) => handleEditProductChange(index, e)}
-                                />
+                                    onClick={(e) => {
+                                        if(!e.target.closest(".description-content")) {
+                                            setDescriptionOpen({...descriptionOpen, [item.id]: {bg: false, en: true}})
+                                        }
+                                    }}
+                                    style={{height: "24px", width: "24px", border: "none", backgroundColor: ""}}
+                                >
+                                    <MdModeEdit />
+                                    <div className="description-content" style={{display: descriptionOpen[item.id]?.en ? "block" : "none"}}
+                                        onClick={(e) => {
+                                            if (!e.target.closest(".description-editor")) {
+                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                            }
+                                        }}
+                                    >
+                                        <div className="description-close">
+                                            <IoClose />
+                                        </div>
+                                        <div className="description-editor">
+                                            <MyCustomToolbar id={`toolbar-${item.id}-en`} />
+                                            <ReactQuill
+                                                value={item.descriptionEn}
+                                                onChange={(e) =>
+                                                    handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                }
+                                                modules={{
+                                                    toolbar: {
+                                                        container: `#toolbar-${item.id}-en`,
+                                                    },
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
                             </label>
                             <br />
                             <label>
@@ -336,12 +453,11 @@ const ProductsManager = () => {
                         </div>
                     ) : (
                         <div key={index} style={{width: "100%", display: "flex", alignContent: "start", flexWrap: "wrap", gap: "12px", backgroundColor: "rgba(148, 133, 108, 0.7)", padding: "12px", borderRadius: "42px"}}>
-                            <div style={{width: "300px", padding: "12px", borderRadius: "30px", backgroundColor: "rgba(148, 133, 108, 0.7)"}}>
+                            <div style={{display: "flex", flexDirection: "column", width: "300px", padding: "12px", borderRadius: "30px", backgroundColor: "rgba(148, 133, 108, 0.7)"}}>
                                 <h2 style={{marginBottom: "6px", marginTop: "0", textAlign: "center"}}>Group Parent</h2>
                                 {item.imagePath && (
                                     <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
                                 )}
-                                <br />
                                 <label>
                                     Change Image:
                                     <input
@@ -351,7 +467,6 @@ const ProductsManager = () => {
                                         onChange={(e) => handleEditFileChange(index, e)} // Handle image changes
                                     />
                                 </label>
-                                <br />
                                 <label>
                                     Name (BG):
                                     <input
@@ -361,7 +476,6 @@ const ProductsManager = () => {
                                         onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
-                                <br />
                                 <label>
                                     Name (EN):
                                     <input
@@ -371,27 +485,88 @@ const ProductsManager = () => {
                                         onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
-                                <br />
-                                <label>
-                                    Description (BG):
-                                    <input
-                                        type="text"
+                                <label className="description">
+                                    Description (BG)
+                                    <button
                                         name="descriptionBg"
                                         value={item.descriptionBg}
-                                        onChange={(e) => handleEditProductChange(index, e)}
-                                    />
+                                        onClick={(e) => {
+                                            if(!e.target.closest(".description-content")) {
+                                                setDescriptionOpen({...descriptionOpen, [item.id]: {bg: true, en: false}})
+                                            }
+                                        }}
+                                        style={{height: "24px", width: "24px", border: "none", backgroundColor: ""}}
+                                    >
+                                        <MdModeEdit />
+                                        <div className="description-content" style={{display: descriptionOpen[item.id]?.bg ? "block" : "none"}}
+                                            onClick={(e) => {
+                                                if (!e.target.closest(".description-editor")) {
+                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                }
+                                            }}
+                                        >
+                                            <div className="description-close">
+                                                <IoClose />
+                                            </div>
+                                            <div className="description-editor">
+                                                <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
+                                                <ReactQuill
+                                                    value={item.descriptionBg}
+                                                    onChange={(e) =>
+                                                        handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                    }
+                                                    modules={{
+                                                        toolbar: {
+                                                            container: `#toolbar-${item.id}-bg`,
+                                                        },
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </button>
+
                                 </label>
-                                <br />
-                                <label>
-                                    Description (EN):
-                                    <input
-                                        type="text"
+                                <label className="description">
+                                    Description (EN)
+                                    <button
                                         name="descriptionEn"
                                         value={item.descriptionEn}
-                                        onChange={(e) => handleEditProductChange(index, e)}
-                                    />
+                                        onClick={(e) => {
+                                            if(!e.target.closest(".description-content")) {
+                                                setDescriptionOpen({...descriptionOpen, [item.id]: {bg: false, en: true}})
+                                            }
+                                        }}
+                                        style={{height: "24px", width: "24px", border: "none", backgroundColor: ""}}
+                                    >
+                                        <MdModeEdit />
+                                        <div className="description-content" style={{display: descriptionOpen[item.id]?.en ? "block" : "none"}}
+                                            onClick={(e) => {
+                                                if (!e.target.closest(".description-editor")) {
+                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                }
+                                            }}
+                                        >
+                                            <div className="description-close">
+                                                <IoClose />
+                                            </div>
+                                            <div className="description-editor">
+                                                <MyCustomToolbar id={`toolbar-${item.id}-en`} />
+                                                <ReactQuill
+                                                    value={item.descriptionEn}
+                                                    onChange={(e) =>
+                                                        handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                    }
+                                                    modules={{
+                                                        toolbar: {
+                                                            container: `#toolbar-${item.id}-en`,
+                                                        },
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </button>
+
                                 </label>
-                                <br />
                                 <label>
                                     Price:
                                     <input
@@ -401,7 +576,6 @@ const ProductsManager = () => {
                                         onChange={(e) => handleEditGroupParentChange(index, e)}
                                     />
                                 </label>
-                                <br />
                                 <button style={{marginTop: "6px"}} type="button" onClick={() => handleDeleteGroup(index)}>Delete</button>
                             </div>
 

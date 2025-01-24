@@ -69,7 +69,7 @@ const ProductPage = () => {
                     <img src={`/server/files/images/${selectedType ? currProduct.products.find(type => type.id === selectedType).imagePath : currProduct.imagePath}`} alt='' />
                     <div>
                         <h1 className='productTitle'>{lang === "bg" ? currProduct.nameBg : currProduct.nameEn}</h1>
-                        <h3 className='productDescription normalText'>{lang === "bg" ? currProduct.descriptionBg : currProduct.descriptionEn}</h3>
+                        <div className='productDescription normalText' dangerouslySetInnerHTML={{ __html: lang === "bg" ? currProduct.descriptionBg : currProduct.descriptionEn }} />
                         <p className='productPrice'>{currProduct.price} лв</p>
 
                         <div className='productButtons'>

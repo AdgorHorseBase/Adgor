@@ -393,30 +393,33 @@ function Page() {
     };
 
     const GetGalleries = () => {
-      const galleries = document.querySelectorAll(".gallery");
+      const galleries = document.querySelectorAll(".gallery-container");
       galleries.forEach((gallery) => {
+        gallery.scrollLeft = gallery.scrollWidth / 2;
         let isDown = false;
         let startX;
         let scrollLeft;
+        let isAppending = false;
+        let isPrepending = false;
 
-        gallery.addEventListener("mousedown", (e) => {
+        gallery.addEventListener('mousedown', (e) => {
           isDown = true;
-          gallery.classList.add("active");
+          gallery.classList.add('active');
           startX = e.pageX - gallery.offsetLeft;
           scrollLeft = gallery.scrollLeft;
         });
 
-        gallery.addEventListener("mouseleave", () => {
+        gallery.addEventListener('mouseleave', () => {
           isDown = false;
-          gallery.classList.remove("active");
+          gallery.classList.remove('active');
         });
 
-        gallery.addEventListener("mouseup", () => {
+        gallery.addEventListener('mouseup', () => {
           isDown = false;
-          gallery.classList.remove("active");
+          gallery.classList.remove('active');
         });
 
-        gallery.addEventListener("mousemove", (e) => {
+        gallery.addEventListener('mousemove', (e) => {
           if (!isDown) return;
           e.preventDefault();
           const x = e.pageX - gallery.offsetLeft;
@@ -424,34 +427,57 @@ function Page() {
           gallery.scrollLeft = scrollLeft - walk;
         });
 
-        gallery.addEventListener("scroll", () => {
-          if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth) {
-            gallery.scrollLeft = 0;
-          } else if (gallery.scrollLeft <= 0) {
-            gallery.scrollLeft = gallery.scrollWidth - gallery.clientWidth;
+        gallery.addEventListener('scroll', debounce(() => {
+          if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth && !isAppending && !isPrepending) {
+            isAppending = true;
+            appendImages(gallery);
+            isAppending = false;
+          } else if (gallery.scrollLeft === 0 && !isPrepending && !isAppending) {
+            isPrepending = true;
+            if(isDown) {
+              isDown = false;
+            }
+            prependImages(gallery);
+            gallery.scrollLeft = gallery.scrollWidth / 2;
+            isDown = false;
+            isPrepending = false;
           }
-        });
-
-        const allImages = gallery.querySelectorAll("img");
-        allImages.forEach((img) => {
-          img.addEventListener("click", () => {
-            const modal = document.createElement("div");
-            modal.className = "galleryImageModal";
-            const modalContent = document.createElement("img");
-            modalContent.src = img.src;
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            modal.addEventListener("click", () => {
-              modal.remove();
-            });
-          });
-        });
+        }), 500);
       });
     }
 
     GetSections();
     GetGalleries();
   }, [pageContent]);
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
+  const appendImages = (gallery) => {
+    // Logic to append images to the end of the gallery
+    const images = gallery.querySelectorAll('.gallery-item');
+    images.forEach((image) => {
+      const clone = image.cloneNode(true);
+      gallery.appendChild(clone);
+    });
+  };
+
+  const prependImages = (gallery) => {
+    const images = gallery.querySelectorAll('.gallery-item');
+    Array.from(images).reverse().forEach((image) => {
+      const clone = image.cloneNode(true);
+      gallery.prepend(clone);
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,4 +1,4 @@
-@media (max-width: 400px) {
+@media (max-width: 902px) {
     .image-footer img {
       width: 100%;
       height: auto;
@@ -65,12 +65,13 @@
       margin-top: 10px;
     }
 
-    .contact-form{
-      min-width: auto;
-    }
+    /*.contact-form{
+      min-width: 902px;
+    }*/
   
     .contact-form h1 {
       margin-top: -25px;
+      
     }
   
     .contact-form2 h1 {

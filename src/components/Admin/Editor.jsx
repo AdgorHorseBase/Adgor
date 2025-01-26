@@ -6,6 +6,9 @@ import axios from "axios";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../index.css";
+import "../page.css";
+import { IoClose } from "react-icons/io5";
+import { FaExchangeAlt } from "react-icons/fa";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
@@ -69,6 +72,8 @@ function Editor({ structure }) {
   const [directoryBg, setDirectoryBg] = useState("");
   const [page, setPage] = useState("");
   const [footerImage, setFooterImage] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewContent, setPreviewContent] = useState("");
 
   useEffect(() => {
     if (editPath && editPath !== "create") {
@@ -900,12 +905,7 @@ function Editor({ structure }) {
     }
   }
 
-  // Generates static HTML file and saves the schema for future editing
-  const savePage = async () => {
-    if (!page) {
-      return alert("You need to specify path");
-    }
-
+  const ConvertSchemaToHtml = (schema) => {
     if (schema.length === 0) {
       return alert("You need to place some content");
     }
@@ -1075,6 +1075,17 @@ function Editor({ structure }) {
       }
     });
 
+    return htmlContent;
+  }
+
+  // Generates static HTML file and saves the schema for future editing
+  const savePage = async () => {
+    if (!page) {
+      return alert("You need to specify path");
+    }
+
+    const htmlContent = ConvertSchemaToHtml(schema);
+
     const schemaContent = { titleBg, titleEn, directoryBg, footerImage, schema };
 
     // Send request to the backend to save the page
@@ -1099,9 +1110,38 @@ function Editor({ structure }) {
       alert("Failed to save page.");
     }
   };
+  
+  const memoizedConvertSchemaToHtml = useCallback(ConvertSchemaToHtml, []);
+  useEffect(() => {
+    if (showPreview) {
+      setPreviewContent(memoizedConvertSchemaToHtml(schema));
+    }
+  }, [showPreview, schema, memoizedConvertSchemaToHtml]);
+  const [lang, setLang] = useState("bg");
+  
+  const storedLang = localStorage.getItem("lang");
+
+  useEffect(() => {
+    if (storedLang) {
+      setLang(storedLang);
+    }
+  }, [storedLang]);
+
+  useEffect(() => {
+    const elementsBg = document.querySelectorAll(".bg");
+    const elementsEn = document.querySelectorAll(".en");
+
+    if (lang === "en") {
+      elementsBg.forEach((el) => (el.style.display = "none"));
+      elementsEn.forEach((el) => (el.style.display = "block"));
+    } else if (lang === "bg") {
+      elementsBg.forEach((el) => (el.style.display = "block"));
+      elementsEn.forEach((el) => (el.style.display = "none"));
+    }
+  }, [lang, previewContent]);
 
   return (
-    <div className="Setting_buttons" style={{ paddingBottom: "86px" }}>
+    <div className="Setting_buttons" style={{ paddingBottom: "86px", height: showPreview ? "0px": "auto", overflow: showPreview ? "hidden" : "auto" }}>
       <br />
       <br />
 
@@ -1188,6 +1228,9 @@ function Editor({ structure }) {
         <button id="Save_button" onClick={savePage}>
           Save Page
         </button>
+        <button id="Preview_button" onClick={() => setShowPreview(!showPreview)}>
+          Preview
+        </button>
         <button
           id="home_button"
           onClick={() => {
@@ -1201,7 +1244,7 @@ function Editor({ structure }) {
       <div className="line"></div>
 
       <div className="elements">
-        {schema.map((element) => (
+        {!showPreview && schema.map((element) => (
           <div className="element" key={element.id}>
             {element.type === "title" && (
               <div>
@@ -2194,6 +2237,28 @@ function Editor({ structure }) {
           />
         </div>
       </div>
+
+      {showPreview && (
+        <div>
+          <div
+            className="preview"
+            style={{position: "fixed", top: "0", left: "0", width: "100%", height: "100%", backgroundColor: "white", zIndex: "1000", overflowY: "scroll"}}
+            dangerouslySetInnerHTML={{ __html: previewContent }}
+          />
+          <button
+            style={{position: "fixed", top: "12px", left: "12px", margin: "0", padding: "0", height: "32px", zIndex: "1001"}}
+            onClick={() => setShowPreview(false)}
+          >
+            <IoClose />
+          </button>
+          <button
+            style={{position: "fixed", top: "48px", left: "12px", margin: "0", padding: "0", height: "32px", zIndex: "1001"}}
+            onClick={() => setLang(lang === "bg" ? "en" : "bg")}
+          >
+            <FaExchangeAlt />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

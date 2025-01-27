@@ -112,17 +112,29 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-between;
   background-color: #243D30;
-  width: 100%;
-  min-height: 600px;
-  margin: 0;
+  height: fit-content;
+  padding: 0 10%;
+  padding-bottom: 24px;
 }
 
+.footer2-container a {
+  transition: all .2s ease-in;
+}
+
+.footer2-container a:hover {
+  color: white;
+}
 
 .footerPage, .footerDirectory {
   height: fit-content;
   width: fit-content;
   margin: 48px;
+}
+
+.footerPage > ul > li, .footerDirectory > ul > li, .footerSubDirectory {
+  margin-bottom: 8px;
 }
 
 .footerDirectory h3 {
@@ -138,6 +150,7 @@
 
 .footerSubDirectory p {
   color: #E6DED1;
+  font-family: "VelaSans", serif;
 }
 
 .footerSubDirectory > ul {

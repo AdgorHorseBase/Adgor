@@ -468,11 +468,8 @@ function Page() {
 
         const images = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
         gallery.querySelectorAll("img").forEach((img, index) => {
-          img.parentElement.parentElement.addEventListener("click", () => {
-            if(!isDown) {
-              console.log(startX, scrollLeft);
-              handleImageClick(gallery.id, images, index)
-            }
+          img.parentElement.addEventListener("click", () => {
+            handleImageClick(gallery.id, images, index)
           });
         });
       });
@@ -483,7 +480,7 @@ function Page() {
   }, [pageContent]);
 
   const handleImageClick = (galleryId, images, index) => {
-    setOpenGallery({ isOpen: true, images, currentIndex: 0 });
+    setOpenGallery({ isOpen: true, images, currentIndex: index });
   };
 
   const handleCloseModal = () => {
@@ -523,6 +520,13 @@ function Page() {
       const clone = image.cloneNode(true);
       gallery.appendChild(clone);
     });
+
+    const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+    gallery.querySelectorAll("img").forEach((img, index) => {
+      img.parentElement.addEventListener("click", () => {
+        handleImageClick(gallery.id, allImages, index)
+      });
+    });
   };
 
   const prependImages = (gallery) => {
@@ -530,6 +534,13 @@ function Page() {
     Array.from(images).reverse().forEach((image) => {
       const clone = image.cloneNode(true);
       gallery.prepend(clone);
+    });
+
+    const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+    gallery.querySelectorAll("img").forEach((img, index) => {
+      img.parentElement.addEventListener("click", () => {
+        handleImageClick(gallery.id, allImages, index)
+      });
     });
   };
 

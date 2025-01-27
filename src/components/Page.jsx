@@ -328,12 +328,34 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
   );
 };
 
+const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay"
+      onClick={(e) => {
+        if(!e.target.closest(".modal-next") && !e.target.closest(".modal-prev") && !e.target.closest(".modal-close")) {
+          onClose();
+        }
+      }}
+    >
+      <button className="modal-prev" onClick={onPrev}>{"<"}</button>
+      <button className="modal-close" onClick={onClose}>X</button>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <img src={images[currentIndex]} alt="Gallery" className="modal-image" />
+      </div>
+      <button className="modal-next" onClick={onNext}>{">"}</button>
+    </div>
+  );
+};
+
 function Page() {
   const [pageContent, setPageContent] = useState("Loading...");
   const [sections, setSections] = useState([]);
   // const [titleBg, setTitleBg] = useState("Blog");
   // const [titleEn, setTitleEn] = useState("Blog");
   const location = useLocation(); // To get the current path
+  const [openGallery, setOpenGallery] = useState({ isOpen: false, images: [], currentIndex: 0 });
 
   useEffect(() => {
     const fetchPageContent = async () => {
@@ -450,6 +472,49 @@ function Page() {
     GetGalleries();
   }, [pageContent]);
 
+  const handleImageClick = (galleryId, images, index) => {
+    const isMouseHovering = (galleryId, index) => {
+      const gallery = document.getElementById(galleryId);
+      const images = gallery.querySelectorAll("img");
+      return images[index].matches(":hover");
+    };
+    if(console.log(galleryId, index, isMouseHovering(galleryId, index))) return;
+    setOpenGallery({ isOpen: true, images, currentIndex: 0 });
+  };
+
+  const handleCloseModal = () => {
+    setOpenGallery({ ...openGallery, isOpen: false });
+  };
+
+  const handleNextImage = () => {
+    setOpenGallery((prevState) => ({
+      ...prevState,
+      currentIndex: (prevState.currentIndex + 1) % prevState.images.length,
+    }));
+  };
+
+  const handlePrevImage = () => {
+    setOpenGallery((prevState) => ({
+      ...prevState,
+      currentIndex: (prevState.currentIndex - 1 + prevState.images.length) % prevState.images.length,
+    }));
+  };
+
+  useEffect(() => {
+    const GetGalleries = () => {
+      const galleries = document.querySelectorAll(".gallery-container");
+      galleries.forEach((gallery) => {
+        const images = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+        gallery.querySelectorAll("img").forEach((img, index) => {
+          img.parentElement.parentElement.addEventListener("click", () => {handleImageClick(gallery.id, images, index)});
+          console.log(img);
+        });
+      });
+    };
+
+    GetGalleries();
+  }, [pageContent]);
+
   const debounce = (func, wait) => {
     let timeout;
     return function(...args) {
@@ -517,6 +582,15 @@ function Page() {
       <div id="StickyMenu">
         <MenuSections />
       </div>
+
+      <ImageModal
+        isOpen={openGallery.isOpen}
+        images={openGallery.images}
+        currentIndex={openGallery.currentIndex}
+        onClose={handleCloseModal}
+        onNext={handleNextImage}
+        onPrev={handlePrevImage}
+      />
 
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}

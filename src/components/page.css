@@ -612,7 +612,7 @@ h1 {
   flex-direction: row;
   overflow: hidden;
   overflow-x: scroll;
-  cursor: grab;
+  cursor: pointer;
   scrollbar-width: none;
 }
 
@@ -637,4 +637,57 @@ h1 {
   object-fit: cover;
   user-select: none;
   pointer-events: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-image {
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+.modal-close,
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.modal-close {
+  top: 10px;
+  right: 10px;
+  transform: none;
+}
+
+.modal-prev {
+  left: 10px;
+}
+
+.modal-next {
+  right: 10px;
 }

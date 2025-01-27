@@ -1,10 +1,11 @@
-// import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "./footer.css";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Footer = () => {
   const [imageSrc, setImageSrc] = useState("");
+  const [structure, setStruct] = useState({});
+  const [lang, setLang] = useState("bg");
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -22,8 +23,26 @@ const Footer = () => {
       }
     }
 
+    const GetStructure = async () => {
+      try {
+        const schema = await axios.get(`/server/files/structure.json`);
+        setStruct(schema.data);
+      } catch (err) {
+        console.log("Error:", err);
+      }
+    };
+
     fetchImage();
+    GetStructure();
   }, []);
+
+  const storedLang = localStorage.getItem("lang");
+  
+  useEffect(() => {
+    if (storedLang) {
+      setLang(storedLang);
+    }
+  }, [storedLang]);
   
   return (
     <>
@@ -55,7 +74,54 @@ const Footer = () => {
     <p className='email'>adgor@abv.bg</p>
     </div>
     </div>
-    <div className="footer2-container"></div>
+    <div className="footer2-container">
+      {Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
+        <React.Fragment key={dir}>
+          {structure[dir].type === "directory" ? structure[dir].contents && (
+            <div className="footerDirectory">
+              <h3>{lang === "bg"
+                ? structure[dir].directoryBg
+                : dir.slice(1, dir.length)}
+              </h3>
+              <ul className="footerPageList">
+                {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
+                  <li key={`${dir}-${page.page}-${index}`}>
+                    <a href={`/page${dir}/${page.page}`}>
+                      {lang === "bg" ? page.titleBg : page.titleEn}
+                    </a>
+                  </li>
+                ) : (page.directory && page.contents && page.contents.length > 0 && (
+                  <div className="footerSubDirectory" key={`${dir}-${page.directory}-${index}`}>
+                      <p>
+                          {lang === "bg" ? page.directoryBg : page.directory}
+                      </p>
+                      <ul>
+                        {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
+                          <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
+                            <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                              {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                  </div>
+                )))} 
+              </ul>
+            </div>
+          ) : (
+            structure[dir].type === "file" && (
+              <a
+                className="footerPage"
+                href={`/page${dir}`}
+              >
+                {lang === "bg"
+                  ? structure[dir].titleBg
+                  : structure[dir].titleEn}
+              </a>
+          ))}
+        </React.Fragment>
+      ))}
+    </div>
     </>
 );
 };

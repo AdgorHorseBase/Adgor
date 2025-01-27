@@ -465,6 +465,16 @@ function Page() {
             isPrepending = false;
           }
         }), 500);
+
+        const images = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+        gallery.querySelectorAll("img").forEach((img, index) => {
+          img.parentElement.parentElement.addEventListener("click", () => {
+            if(!isDown) {
+              console.log(startX, scrollLeft);
+              handleImageClick(gallery.id, images, index)
+            }
+          });
+        });
       });
     }
 
@@ -473,12 +483,6 @@ function Page() {
   }, [pageContent]);
 
   const handleImageClick = (galleryId, images, index) => {
-    const isMouseHovering = (galleryId, index) => {
-      const gallery = document.getElementById(galleryId);
-      const images = gallery.querySelectorAll("img");
-      return images[index].matches(":hover");
-    };
-    if(console.log(galleryId, index, isMouseHovering(galleryId, index))) return;
     setOpenGallery({ isOpen: true, images, currentIndex: 0 });
   };
 
@@ -499,21 +503,6 @@ function Page() {
       currentIndex: (prevState.currentIndex - 1 + prevState.images.length) % prevState.images.length,
     }));
   };
-
-  useEffect(() => {
-    const GetGalleries = () => {
-      const galleries = document.querySelectorAll(".gallery-container");
-      galleries.forEach((gallery) => {
-        const images = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
-        gallery.querySelectorAll("img").forEach((img, index) => {
-          img.parentElement.parentElement.addEventListener("click", () => {handleImageClick(gallery.id, images, index)});
-          console.log(img);
-        });
-      });
-    };
-
-    GetGalleries();
-  }, [pageContent]);
 
   const debounce = (func, wait) => {
     let timeout;

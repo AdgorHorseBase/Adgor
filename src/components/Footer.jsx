@@ -75,9 +75,9 @@ const Footer = () => {
     </div>
     </div>
     <div className="footer2-container">
-      {Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
+      {Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => structure[dir].type === "directory" && (
         <React.Fragment key={dir}>
-          {structure[dir].type === "directory" ? structure[dir].contents && (
+          {structure[dir].contents && (
             <div className="footerDirectory">
               <h3>{lang === "bg"
                 ? structure[dir].directoryBg
@@ -108,19 +108,23 @@ const Footer = () => {
                 )))} 
               </ul>
             </div>
-          ) : (
-            structure[dir].type === "file" && (
-              <a
-                className="footerPage"
-                href={`/page${dir}`}
-              >
-                {lang === "bg"
-                  ? structure[dir].titleBg
-                  : structure[dir].titleEn}
-              </a>
-          ))}
+          )}
         </React.Fragment>
       ))}
+      <div className="footerDirectory">
+        <h3>{lang === "bg" ? "Други" : "Other"}</h3>
+        <ul className="footerPageList">
+          {Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => structure[dir].type === "file" && (
+            <React.Fragment key={dir}>
+              <li>
+                <a href={`/page${dir}`}>
+                  {lang === "bg" ? structure[dir].titleBg : structure[dir].titleEn}
+                </a>
+              </li>
+            </React.Fragment>
+          ))}
+        </ul>
+      </div>
     </div>
     </>
 );

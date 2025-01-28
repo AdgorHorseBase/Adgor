@@ -110,6 +110,7 @@
 
 .footer2-container {
   display: flex;
+  gap: 24px;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
@@ -130,7 +131,13 @@
 .footerPage, .footerDirectory {
   height: fit-content;
   width: fit-content;
-  margin: 48px;
+  /* margin: 48px; */
+}
+
+.footerDirectory {
+  flex-grow: 1;
+  width: 20%;
+  min-width: 300px;
 }
 
 .footerPage > ul > li, .footerDirectory > ul > li, .footerSubDirectory {

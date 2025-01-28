@@ -691,3 +691,19 @@ h1 {
 .modal-next {
   right: 10px;
 }
+
+.modal-overlay > button {
+  margin: 0;
+  padding: 6px;
+  width: 44px;
+  height: 44px;
+  transition: all 0.15s ease;
+}
+
+.modal-overlay > button:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-overlay > button:active {
+  background: transparent;
+}

@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./page.css";
 import logo from "./images/AdgorLogo.webp";
+import { IoClose } from "react-icons/io5";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
@@ -339,12 +341,12 @@ const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) =
         }
       }}
     >
-      <button className="modal-prev" onClick={onPrev}>{"<"}</button>
-      <button className="modal-close" onClick={onClose}>X</button>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <img src={images[currentIndex]} alt="Gallery" className="modal-image" />
       </div>
-      <button className="modal-next" onClick={onNext}>{">"}</button>
+      <button className="modal-close" onClick={onClose}><IoClose /></button>
+      <button className="modal-prev" onClick={onPrev}><FaChevronLeft /></button>
+      <button className="modal-next" onClick={onNext}><FaChevronRight /></button>
     </div>
   );
 };

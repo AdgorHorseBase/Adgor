@@ -477,6 +477,37 @@ function Page() {
       });
     }
 
+    const appendImages = (gallery) => {
+      // Logic to append images to the end of the gallery
+      const images = gallery.querySelectorAll('.gallery-item');
+      images.forEach((image) => {
+        const clone = image.cloneNode(true);
+        gallery.appendChild(clone);
+      });
+  
+      const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+      gallery.querySelectorAll("img").forEach((img, index) => {
+        img.parentElement.addEventListener("click", () => {
+          handleImageClick(gallery.id, allImages, index)
+        });
+      });
+    };
+  
+    const prependImages = (gallery) => {
+      const images = gallery.querySelectorAll('.gallery-item');
+      Array.from(images).reverse().forEach((image) => {
+        const clone = image.cloneNode(true);
+        gallery.prepend(clone);
+      });
+  
+      const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+      gallery.querySelectorAll("img").forEach((img, index) => {
+        img.parentElement.addEventListener("click", () => {
+          handleImageClick(gallery.id, allImages, index)
+        });
+      });
+    };
+
     GetSections();
     GetGalleries();
   }, [pageContent]);
@@ -513,37 +544,6 @@ function Page() {
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
-  };
-
-  const appendImages = (gallery) => {
-    // Logic to append images to the end of the gallery
-    const images = gallery.querySelectorAll('.gallery-item');
-    images.forEach((image) => {
-      const clone = image.cloneNode(true);
-      gallery.appendChild(clone);
-    });
-
-    const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
-    gallery.querySelectorAll("img").forEach((img, index) => {
-      img.parentElement.addEventListener("click", () => {
-        handleImageClick(gallery.id, allImages, index)
-      });
-    });
-  };
-
-  const prependImages = (gallery) => {
-    const images = gallery.querySelectorAll('.gallery-item');
-    Array.from(images).reverse().forEach((image) => {
-      const clone = image.cloneNode(true);
-      gallery.prepend(clone);
-    });
-
-    const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
-    gallery.querySelectorAll("img").forEach((img, index) => {
-      img.parentElement.addEventListener("click", () => {
-        handleImageClick(gallery.id, allImages, index)
-      });
-    });
   };
 
   useEffect(() => {

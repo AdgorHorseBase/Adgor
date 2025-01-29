@@ -137,12 +137,6 @@
     "place": 4,
     "directoryBg": "Услуги"
   },
-  "\\testasfd": {
-    "type": "file",
-    "titleBg": "Неименувана Страница",
-    "titleEn": "Untitled Page",
-    "place": 1
-  },
   "\\Training": {
     "type": "directory",
     "directory": true,

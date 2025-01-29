@@ -2242,7 +2242,7 @@ function Editor({ structure }) {
         <div>
           <div
             className="preview"
-            style={{position: "fixed", top: "0", left: "0", width: "100%", height: "100%", backgroundColor: "white", zIndex: "1000", overflowY: "scroll"}}
+            style={{position: "fixed", top: "0", left: "0", width: "100%", height: "100%", backgroundColor: "white", zIndex: "1000", overflowY: "auto", overflowX: "hidden"}}
             dangerouslySetInnerHTML={{ __html: previewContent }}
           />
           <button

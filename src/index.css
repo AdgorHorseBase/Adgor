@@ -122,7 +122,7 @@
     font-family: 'Georgia', serif;
     color: #e5d5c0;
     font-size: 16px;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     margin: 0;
     font-weight: bold;
     display: flex;
@@ -215,12 +215,16 @@
     display: flex;
     justify-content: space-between; /* Align items to the left and right */
     align-items: center; /* Center items vertically */
-    font-family: 'Georgia', serif;
+    font-family: 'Forum', serif;
     font-size: 16px;
     color: #e5d5c0;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     transform: all 0.3s ease;
-    height: 70px;
+    height: 100px;
+}
+
+#menuButton {
+    font-family: 'Forum', serif;
 }
 
 .menuLogoContainer {

@@ -6,7 +6,7 @@ import Success from './components/Success.jsx';
 import { Vouchers } from './components/Vouchers.jsx';
 import WelcomePage from './components/WelcomePage.jsx';
 import Footer from './components/Footer.jsx';
-import FooterMobile from './components/FooterMobile.jsx';
+// import FooterMobile from './components/FooterMobile.jsx';
 import { useEffect, useState } from 'react';
 import ProductPage from './components/ProductPage.jsx';
 

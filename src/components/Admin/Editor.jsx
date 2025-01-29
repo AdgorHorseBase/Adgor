@@ -1084,11 +1084,6 @@ function Editor({ structure }) {
     return htmlContent;
   }
 
-  const normalizeContent = (content) => {
-    // Remove unnecessary <p><br></p> tags
-    return content;
-  };
-
   // Generates static HTML file and saves the schema for future editing
   const savePage = async () => {
     if (!page) {

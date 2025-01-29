@@ -172,7 +172,7 @@ function AdminPanel() {
             <div style={{marginLeft: "10%", marginBottom: "72px"}}>
                 <button onClick={() => {document.location.href = "/admin/create"}}>Create</button>
                 <button onClick={() => {document.location.href = "/admin/products"}}>Products</button>
-                <button onClick={() => {document.location.href = "/admin/vouchers"}}>Vouchers</button>
+                <button onClick={() => {document.location.href = "/"}}>Site</button>
                 <h2 id="PageStructure" style={{marginLeft: "0"}}>Page Structure</h2>
                 {/* {structure == true ? renderStructure(structure) : <h3>Empty</h3>} */}
                 {renderStructure(structure)}

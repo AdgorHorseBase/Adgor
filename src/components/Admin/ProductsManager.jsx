@@ -65,6 +65,8 @@ const ProductsManager = () => {
         imagePath: '',
         nameBg: '',
         nameEn: '',
+        descriptionBg: '',
+        descriptionEn: '',
         price: ''
     });
     const [newGroup, setNewGroup] = useState({
@@ -73,6 +75,8 @@ const ProductsManager = () => {
         imagePath: '',
         nameBg: '',
         nameEn: '',
+        descriptionBg: '',
+        descriptionEn: '',
         price: '',
         products: []
     });
@@ -89,6 +93,14 @@ const ProductsManager = () => {
     useEffect(() => {
         const getProducts = async () => {
             const response = await axios.get(URL + "/products");
+            response.data.forEach(product => {
+                if (product.descriptionBg) {
+                    product.descriptionBg = product.descriptionBg.replace(/<p><br><\/p>/g, "\n");
+                }
+                if (product.descriptionEn) {
+                    product.descriptionEn = product.descriptionEn.replace(/<p><br><\/p>/g, "\n");
+                }
+            });
             setProducts(response.data);
         };
 

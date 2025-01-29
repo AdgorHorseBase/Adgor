@@ -82,6 +82,12 @@ function Editor({ structure }) {
           const response = await axios.get(
             `${URL}/page-get-schema?pagePath=${editPath}`
           );
+          response.data.schema.schema.forEach((element) => {
+            if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
+              element.content.textBg = element.content.textBg.replace(/<p><br><\/p>/g, "\n");
+              element.content.textEn = element.content.textEn.replace(/<p><br><\/p>/g, "\n");
+            }
+          });
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
           setTitleEn(response.data.schema.titleEn);
@@ -1078,6 +1084,11 @@ function Editor({ structure }) {
     return htmlContent;
   }
 
+  const normalizeContent = (content) => {
+    // Remove unnecessary <p><br></p> tags
+    return content;
+  };
+
   // Generates static HTML file and saves the schema for future editing
   const savePage = async () => {
     if (!page) {
@@ -1549,7 +1560,7 @@ function Editor({ structure }) {
                   <ReactQuill
                     value={element.content.textEn}
                     onChange={(newContent) =>
-                      updateElement(element.id, { textEn: newContent }, "formated")
+                      updateElement(element.id, { textEn: console.log(element.content.textEn) || newContent }, "formated")
                     }
                     modules={{
                       toolbar: {

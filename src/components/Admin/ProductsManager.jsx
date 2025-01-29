@@ -372,7 +372,7 @@ const ProductsManager = () => {
                                     <div className="description-content" style={{display: descriptionOpen[item.id]?.bg ? "block" : "none"}}
                                         onClick={(e) => {
                                             if (!e.target.closest(".description-editor")) {
-                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: {bg: false, en: false} });
                                             }
                                         }}
                                     >
@@ -413,7 +413,7 @@ const ProductsManager = () => {
                                     <div className="description-content" style={{display: descriptionOpen[item.id]?.en ? "block" : "none"}}
                                         onClick={(e) => {
                                             if (!e.target.closest(".description-editor")) {
-                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                setDescriptionOpen({ ...descriptionOpen, [item.id]: {bg: false, en: false} });
                                             }
                                         }}
                                     >
@@ -501,7 +501,7 @@ const ProductsManager = () => {
                                         <div className="description-content" style={{display: descriptionOpen[item.id]?.bg ? "block" : "none"}}
                                             onClick={(e) => {
                                                 if (!e.target.closest(".description-editor")) {
-                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: {bg: false, en: false} });
                                                 }
                                             }}
                                         >
@@ -542,7 +542,7 @@ const ProductsManager = () => {
                                         <div className="description-content" style={{display: descriptionOpen[item.id]?.en ? "block" : "none"}}
                                             onClick={(e) => {
                                                 if (!e.target.closest(".description-editor")) {
-                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: false });
+                                                    setDescriptionOpen({ ...descriptionOpen, [item.id]: {bg: false, en: false} });
                                                 }
                                             }}
                                         >

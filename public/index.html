@@ -61,10 +61,13 @@
         if(!menu) {
           return;
         }
-        const menuItems = [...menu.querySelector('.menuItemsContainer').children, ...menu.querySelector('.menuEndContainer').children];
+        const menuItems = [...menu.querySelector('.menuItemsContainer')?.children || [], ...menu.querySelector('.menuEndContainer')?.children || []];
         if (window.scrollY > 50) {
           // menu.classList.add('solid');
           menu.style.backgroundColor = 'white';
+          if(menuItems.length === 0) {
+            return;
+          }
           for(let i = 0; i < menuItems.length; i++) {
             menuItems[i].style.color = 'black';
             menuItems[i].style.textShadow = 'none';
@@ -72,6 +75,9 @@
         } else {
           // menu.classList.remove('solid');
           menu.style.backgroundColor = 'transparent';
+          if(menuItems.length === 0) {
+            return;
+          }
           for(let i = 0; i < menuItems.length; i++) {
             menuItems[i].style.color = 'white';
             menuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';

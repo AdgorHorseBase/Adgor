@@ -102,7 +102,8 @@ function App() {
 
       <ReturnToTop />
 
-      {showFooter && (window.innerWidth > 750 ? <Footer /> : <FooterMobile />)}
+      {showFooter && <Footer />}
+      {/* {showFooter && (window.innerWidth > 750 ? <Footer /> : <FooterMobile />)} */}
     </BrowserRouter>
   );
 }

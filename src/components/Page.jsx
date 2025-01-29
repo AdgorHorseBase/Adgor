@@ -597,7 +597,7 @@ function Page() {
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}
 
-      <div style={{marginTop: "70px", marginBottom: "0"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
+      <div style={{marginTop: "100px", marginBottom: "0"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
 
       {sections && sections.length > 0 && (
         <div id="sections">

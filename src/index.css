@@ -1114,12 +1114,22 @@ button[name="descriptionBg"] > svg, button[name="descriptionEn"] > svg {
 }
 
 .description-editor {
+    position: fixed;
+    inset: 0px;
     width: 70%;
-    height: 70%;
-    transform: translateY(25%);
+    height: fit-content;
+    /* height: 70%; */
+    max-height: 70%;
     margin: auto;
+    padding-bottom: 24px;
     background-color: #fefefe;
     border-radius: 24px;
+}
+
+.description-editor > div:last-child {
+    max-height: calc(70dvh - 40px);
+    overflow-y: auto;
+    padding-left: 9px;
 }
 
 .description-close {

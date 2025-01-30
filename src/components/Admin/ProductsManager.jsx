@@ -392,18 +392,20 @@ const ProductsManager = () => {
                                             <IoClose />
                                         </div>
                                         <div className="description-editor">
-                                            <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
-                                            <ReactQuill
-                                                value={item.descriptionBg}
-                                                onChange={(e) =>
-                                                    handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
-                                                }
-                                                modules={{
-                                                    toolbar: {
-                                                        container: `#toolbar-${item.id}-bg`,
-                                                    },
-                                                }}
-                                            />
+                                            {descriptionOpen[item.id]?.bg && (<>
+                                                <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
+                                                <ReactQuill
+                                                    value={item.descriptionBg}
+                                                    onChange={(e) =>
+                                                        handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                    }
+                                                    modules={{
+                                                        toolbar: {
+                                                            container: `#toolbar-${item.id}-bg`,
+                                                        },
+                                                    }}
+                                                />
+                                            </>)}
                                         </div>
                                     </div>
                                 </button>
@@ -433,18 +435,20 @@ const ProductsManager = () => {
                                             <IoClose />
                                         </div>
                                         <div className="description-editor">
-                                            <MyCustomToolbar id={`toolbar-${item.id}-en`} />
-                                            <ReactQuill
-                                                value={item.descriptionEn}
-                                                onChange={(e) =>
-                                                    handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
-                                                }
-                                                modules={{
-                                                    toolbar: {
-                                                        container: `#toolbar-${item.id}-en`,
-                                                    },
-                                                }}
-                                            />
+                                            {descriptionOpen[item.id]?.en && (<>
+                                                <MyCustomToolbar id={`toolbar-${item.id}-en`} />
+                                                <ReactQuill
+                                                    value={item.descriptionEn}
+                                                    onChange={(e) =>
+                                                        handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                    }
+                                                    modules={{
+                                                        toolbar: {
+                                                            container: `#toolbar-${item.id}-en`,
+                                                        },
+                                                    }}
+                                                />
+                                            </>)}
                                         </div>
                                     </div>
                                 </button>
@@ -521,18 +525,20 @@ const ProductsManager = () => {
                                                 <IoClose />
                                             </div>
                                             <div className="description-editor">
-                                                <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
-                                                <ReactQuill
-                                                    value={item.descriptionBg}
-                                                    onChange={(e) =>
-                                                        handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
-                                                    }
-                                                    modules={{
-                                                        toolbar: {
-                                                            container: `#toolbar-${item.id}-bg`,
-                                                        },
-                                                    }}
-                                                />
+                                                {descriptionOpen[item.id]?.bg && (<>
+                                                    <MyCustomToolbar id={`toolbar-${item.id}-bg`} />
+                                                    <ReactQuill
+                                                        value={item.descriptionBg}
+                                                        onChange={(e) =>
+                                                            handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                        }
+                                                        modules={{
+                                                            toolbar: {
+                                                                container: `#toolbar-${item.id}-bg`,
+                                                            },
+                                                        }}
+                                                    />
+                                                </>)}
                                             </div>
                                         </div>
                                     </button>
@@ -562,18 +568,20 @@ const ProductsManager = () => {
                                                 <IoClose />
                                             </div>
                                             <div className="description-editor">
-                                                <MyCustomToolbar id={`toolbar-${item.id}-en`} />
-                                                <ReactQuill
-                                                    value={item.descriptionEn}
-                                                    onChange={(e) =>
-                                                        handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
-                                                    }
-                                                    modules={{
-                                                        toolbar: {
-                                                            container: `#toolbar-${item.id}-en`,
-                                                        },
-                                                    }}
-                                                />
+                                                {descriptionOpen[item.id]?.en && (<>
+                                                    <MyCustomToolbar id={`toolbar-${item.id}-en`} />
+                                                    <ReactQuill
+                                                        value={item.descriptionEn}
+                                                        onChange={(e) =>
+                                                            handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                        }
+                                                        modules={{
+                                                            toolbar: {
+                                                                container: `#toolbar-${item.id}-en`,
+                                                            },
+                                                        }}
+                                                    />
+                                                </>)}
                                             </div>
                                         </div>
                                     </button>

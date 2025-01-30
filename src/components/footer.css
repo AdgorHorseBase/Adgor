@@ -13,7 +13,7 @@
 .footer-container {
   display: flex;
   flex-direction: row;
-  padding: 24px;
+  padding: 48px 24px;
   background-color: #1B1B1B;
 }
 
@@ -30,13 +30,14 @@
 .footerContacts {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  flex-grow: 1;
 }
 
 .footerContacts > h1 {
   width: 100%;
   font-size: 26px;
   text-align: left;
+  margin-top: 0;
   margin-bottom: 26px;
 }
 
@@ -75,6 +76,28 @@
 
   .contacts {
     width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .contacts > div {
+    flex-grow: unset;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 400px) {
+  .contacts {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contacts > div {
+    /* width: 100%; */
+    margin: 0 auto
+  }
+
+  .contacts > div:first-child {
+    margin-bottom: 48px;
   }
 }
 
@@ -88,6 +111,7 @@
   height: fit-content;
   padding: 0 10%;
   padding-bottom: 24px;
+  overflow: hidden;
 }
 
 .footer2-container a {

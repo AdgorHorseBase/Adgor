@@ -50,7 +50,7 @@ const Footer = () => {
     <>
       <div className="image-footer">
         <img
-          src={imageSrc ? imageSrc : "/jeep2.jpg"}
+          src={imageSrc ? imageSrc : "/footerImage.png"}
           alt=""
           className="image"
         />

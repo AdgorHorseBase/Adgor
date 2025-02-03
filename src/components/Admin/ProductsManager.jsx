@@ -400,6 +400,9 @@ const ProductsManager = () => {
                                                         handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
                                                     }
                                                     modules={{
+                                                        clipboard: {
+                                                            matchVisual: false, // Prevent Quill from auto-inserting new lines
+                                                        },
                                                         toolbar: {
                                                             container: `#toolbar-${item.id}-bg`,
                                                         },
@@ -443,6 +446,9 @@ const ProductsManager = () => {
                                                         handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
                                                     }
                                                     modules={{
+                                                        clipboard: {
+                                                            matchVisual: false, // Prevent Quill from auto-inserting new lines
+                                                        },
                                                         toolbar: {
                                                             container: `#toolbar-${item.id}-en`,
                                                         },
@@ -533,6 +539,9 @@ const ProductsManager = () => {
                                                             handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
                                                         }
                                                         modules={{
+                                                            clipboard: {
+                                                                matchVisual: false, // Prevent Quill from auto-inserting new lines
+                                                            },
                                                             toolbar: {
                                                                 container: `#toolbar-${item.id}-bg`,
                                                             },
@@ -576,6 +585,9 @@ const ProductsManager = () => {
                                                             handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
                                                         }
                                                         modules={{
+                                                            clipboard: {
+                                                                matchVisual: false, // Prevent Quill from auto-inserting new lines
+                                                            },
                                                             toolbar: {
                                                                 container: `#toolbar-${item.id}-en`,
                                                             },

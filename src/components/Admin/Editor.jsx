@@ -84,7 +84,6 @@ function Editor({ structure }) {
           );
           response.data.schema.schema.forEach((element) => {
             if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
-              console.log(element.content.textBg);
               element.content.textBg = element.content.textBg;
               element.content.textEn = element.content.textEn;
             }
@@ -1542,7 +1541,7 @@ function Editor({ structure }) {
                   <ReactQuill
                     value={element.content.textBg}
                     onChange={(newContent) =>
-                      updateElement(element.id, { textBg: console.log(newContent) || newContent }, "formated")
+                      updateElement(element.id, { textBg: newContent }, "formated")
                     }
                     modules={{
                       clipboard: {
@@ -1562,6 +1561,9 @@ function Editor({ structure }) {
                       updateElement(element.id, { textEn: newContent }, "formated")
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-en`,
                       },
@@ -1721,6 +1723,9 @@ function Editor({ structure }) {
                       updateElement(element.id, { textBg: newContent }, element.type)
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-bg`,
                       },
@@ -1735,6 +1740,9 @@ function Editor({ structure }) {
                       updateElement(element.id, { textEn: newContent }, element.type)
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-en`,
                       },
@@ -2083,6 +2091,9 @@ function Editor({ structure }) {
                       updateElement(element.id, { textBg: newContent }, element.type)
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-bg`,
                       },
@@ -2097,6 +2108,9 @@ function Editor({ structure }) {
                       updateElement(element.id, { textEn: newContent }, element.type)
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-en`,
                       },

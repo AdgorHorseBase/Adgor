@@ -84,8 +84,8 @@ function Editor({ structure }) {
           );
           response.data.schema.schema.forEach((element) => {
             if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
-              element.content.textBg = element.content.textBg.replace(/<p><br><\/p>/g, "\n");
-              element.content.textEn = element.content.textEn.replace(/<p><br><\/p>/g, "\n");
+              element.content.textBg = element.content.textBg.replace(/<p><br><\/p>/g, "\n").replace(/<\/p><ul>/g, '</p><p></p><ul>');
+              element.content.textEn = element.content.textEn.replace(/<p><br><\/p>/g, "\n").replace(/<\/p><ul>/g, '</p><p></p><ul>');
             }
           });
           setSchema(response.data.schema.schema);
@@ -431,11 +431,11 @@ function Editor({ structure }) {
           prevSchema.map((el) =>
             el.id === id
               ? {
-                ...el,
-                content: {
-                  textBg: newContent.textBg || el.content.textBg,
-                  textEn: newContent.textEn || el.content.textEn,
-                },
+          ...el,
+          content: {
+            textBg: newContent.textBg || (el.content.textBg ? el.content.textBg : ""),
+            textEn: newContent.textEn || (el.content.textEn ? el.content.textEn : ""),
+          },
               }
               : el
           )
@@ -1555,7 +1555,7 @@ function Editor({ structure }) {
                   <ReactQuill
                     value={element.content.textEn}
                     onChange={(newContent) =>
-                      updateElement(element.id, { textEn: console.log(element.content.textEn) || newContent }, "formated")
+                      updateElement(element.id, { textEn: newContent }, "formated")
                     }
                     modules={{
                       toolbar: {

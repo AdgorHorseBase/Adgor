@@ -82,12 +82,12 @@ function Editor({ structure }) {
           const response = await axios.get(
             `${URL}/page-get-schema?pagePath=${editPath}`
           );
-          response.data.schema.schema.forEach((element) => {
-            if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
-              element.content.textBg = element.content.textBg;
-              element.content.textEn = element.content.textEn;
-            }
-          });
+          // response.data.schema.schema.forEach((element) => {
+          //   if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
+          //     element.content.textBg = element.content.textBg;
+          //     element.content.textEn = element.content.textEn;
+          //   }
+          // });
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
           setTitleEn(response.data.schema.titleEn);

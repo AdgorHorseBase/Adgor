@@ -84,8 +84,9 @@ function Editor({ structure }) {
           );
           response.data.schema.schema.forEach((element) => {
             if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
-              element.content.textBg = element.content.textBg.replace(/<p><br><\/p>/g, "\n").replace(/<\/p><ul>/g, '</p><p></p><ul>');
-              element.content.textEn = element.content.textEn.replace(/<p><br><\/p>/g, "\n").replace(/<\/p><ul>/g, '</p><p></p><ul>');
+              console.log(element.content.textBg);
+              element.content.textBg = element.content.textBg;
+              element.content.textEn = element.content.textEn;
             }
           });
           setSchema(response.data.schema.schema);
@@ -1541,9 +1542,12 @@ function Editor({ structure }) {
                   <ReactQuill
                     value={element.content.textBg}
                     onChange={(newContent) =>
-                      updateElement(element.id, { textBg: newContent }, "formated")
+                      updateElement(element.id, { textBg: console.log(newContent) || newContent }, "formated")
                     }
                     modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
                       toolbar: {
                         container: `#toolbar-${element.id}-bg`,
                       },

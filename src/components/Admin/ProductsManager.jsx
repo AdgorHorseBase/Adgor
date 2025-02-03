@@ -397,7 +397,7 @@ const ProductsManager = () => {
                                                 <ReactQuill
                                                     value={item.descriptionBg}
                                                     onChange={(e) =>
-                                                        handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                        handleEditProductChange(index, {target: {name: "descriptionBg", value: e.replace(/ style="[^"]*"/g, '')}})
                                                     }
                                                     modules={{
                                                         clipboard: {
@@ -443,7 +443,7 @@ const ProductsManager = () => {
                                                 <ReactQuill
                                                     value={item.descriptionEn}
                                                     onChange={(e) =>
-                                                        handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                        handleEditProductChange(index, {target: {name: "descriptionEn", value: e.replace(/ style="[^"]*"/g, '')}})
                                                     }
                                                     modules={{
                                                         clipboard: {
@@ -536,7 +536,7 @@ const ProductsManager = () => {
                                                     <ReactQuill
                                                         value={item.descriptionBg}
                                                         onChange={(e) =>
-                                                            handleEditProductChange(index, {target: {name: "descriptionBg", value: e}})
+                                                            handleEditProductChange(index, {target: {name: "descriptionBg", value: e.replace(/ style="[^"]*"/g, '')}})
                                                         }
                                                         modules={{
                                                             clipboard: {
@@ -582,7 +582,7 @@ const ProductsManager = () => {
                                                     <ReactQuill
                                                         value={item.descriptionEn}
                                                         onChange={(e) =>
-                                                            handleEditProductChange(index, {target: {name: "descriptionEn", value: e}})
+                                                            handleEditProductChange(index, {target: {name: "descriptionEn", value: e.replace(/ style="[^"]*"/g, '')}})
                                                         }
                                                         modules={{
                                                             clipboard: {

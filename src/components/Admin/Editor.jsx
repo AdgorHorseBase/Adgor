@@ -433,8 +433,8 @@ function Editor({ structure }) {
               ? {
           ...el,
           content: {
-            textBg: newContent.textBg || (el.content.textBg ? el.content.textBg : ""),
-            textEn: newContent.textEn || (el.content.textEn ? el.content.textEn : ""),
+            textBg: newContent.textBg?.replace(/ style="[^"]*"/g, '') || (el.content.textBg ? el.content.textBg : ""),
+            textEn: newContent.textEn?.replace(/ style="[^"]*"/g, '') || (el.content.textEn ? el.content.textEn : ""),
           },
               }
               : el

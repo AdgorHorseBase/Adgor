@@ -135,7 +135,7 @@ const MenuSections = () => {
         <button
           id="menuButton"
           onClick={() => {
-            document.location.href = "/contacts";
+            document.location.href = "/page/contact-us";
           }}
         >
           {lang === "bg" ? "Контакти" : "Contacts"}

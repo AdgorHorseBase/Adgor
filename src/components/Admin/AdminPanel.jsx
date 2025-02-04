@@ -4,6 +4,9 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import ProductsManager from "./ProductsManager";
 import VouchersManager from "./VouchersManager";
+import { IoIosCreate } from "react-icons/io";
+import { FaCartShopping } from "react-icons/fa6";
+import { FaHome } from "react-icons/fa";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
@@ -169,10 +172,10 @@ function AdminPanel() {
 
     const Structure = () => {
         return (
-            <div style={{marginLeft: "10%", marginBottom: "72px"}}>
-                <button onClick={() => {document.location.href = "/admin/create"}}>Create</button>
-                <button onClick={() => {document.location.href = "/admin/products"}}>Products</button>
-                <button onClick={() => {document.location.href = "/"}}>Site</button>
+            <div id="adminNav" style={{marginLeft: "10%", marginBottom: "72px"}}>
+                <button title="Create" onClick={() => {document.location.href = "/admin/create"}}><IoIosCreate /></button>
+                <button title="Products" onClick={() => {document.location.href = "/admin/products"}}><FaCartShopping /></button>
+                <button title="Open Site" onClick={() => {document.location.href = "/"}}><FaHome /></button>
                 <h2 id="PageStructure" style={{marginLeft: "0"}}>Page Structure</h2>
                 {/* {structure == true ? renderStructure(structure) : <h3>Empty</h3>} */}
                 {renderStructure(structure)}

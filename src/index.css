@@ -629,7 +629,7 @@ margin-left: 11.3vw;
     transform: translateY(3px);
 }
 
-#Save_button > svg, #Preview_button > svg, #home_button > svg {
+#Save_button > svg, #Preview_button > svg, #home_button > svg, #adminNav > button > svg {
     transform: translateY(3px);
 }
 

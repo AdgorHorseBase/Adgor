@@ -2065,7 +2065,7 @@ function Editor({ structure }) {
             )}
             {element.type === "section" && (
               <div id="section">
-                <p style={{ marginLeft: "10%" }}>This is a section:</p>
+                <label className="labelElement">Section:</label>
                 <ContentEditable
                   html={element.content.titleBg}
                   onChange={(e) =>

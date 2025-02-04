@@ -98,36 +98,47 @@ function AdminPanel() {
             if (info.type === "directory") {
                 return (
                     <div key={cleanPath} style={{margin: "0", padding: "0", marginLeft: "16px"}}>
-                        {/* Display directory name */}
-                        <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
-                            handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
-                        }} />
-                        <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
-                        {/* <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button> */}
-                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                        <div class="structureNav">
+                            <div>
+                                <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
+                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
+                                }} />
+                                <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
+                            </div>
+
+                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                        </div>
                         <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
                             {info.contents && info.contents.sort((a, b) => a.place - b.place).map((content) => {
                                 if(content.directory) {
                                     return (
                                         <div key={content.directory}>
-                                            <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
-                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory]);
-                                            }} />
-                                            <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
-                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
+                                            <div className="structureNav">
+                                                <div>
+                                                    <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
+                                                        handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory]);
+                                                    }} />
+                                                    <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
+                                                </div>
+                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
+                                            </div>
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                                                 {content.contents && content.contents.sort((a, b) => a.place - b.place).map((page) => {
                                                     const fullPath = `${cleanPath}/${content.directory}/${page.page}`;
                                                     return (
-                                                        <div key={fullPath}>
-                                                            <input type="number" style={{width: "30px"}} value={page.place} onChange={(e) => {
-                                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page]);
-                                                            }} />
-                                                            <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
-                                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
-                                                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                                        <div key={fullPath} className="structureNav">
+                                                            <div>
+                                                                <input type="number" style={{width: "30px"}} value={page.place} onChange={(e) => {
+                                                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page]);
+                                                                }} />
+                                                                <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
+                                                            </div>
+                                                            <div>
+                                                                <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
+                                                                <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
+                                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                                            </div>
                                                         </div>
                                                     );
                                                 })}
@@ -137,14 +148,18 @@ function AdminPanel() {
                                 } else if(content.page) {
                                     const fullPath = `${cleanPath}/${content.page}`;
                                     return (
-                                        <div key={fullPath}>
-                                            <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
-                                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "page", content.page]);
-                                            }} />
-                                            <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
-                                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
-                                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                        <div key={fullPath} className="structureNav">
+                                            <div>
+                                                <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
+                                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "page", content.page]);
+                                                }} />
+                                                <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
+                                            </div>
+                                            <div>
+                                                <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
+                                                <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
+                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                            </div>
                                         </div>
                                     );
                                 }
@@ -155,14 +170,18 @@ function AdminPanel() {
                 );
             } else if (info.type === "file") {
                 return (
-                    <div key={cleanPath} style={{marginLeft: "16px"}}>
-                        <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
-                            handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
-                        }} />
-                        <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
-                        <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
-                        <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>
-                        <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                    <div key={cleanPath} style={{marginLeft: "16px"}} className="structureNav">
+                        <div>
+                            <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
+                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
+                            }} />
+                            <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
+                        </div>
+                        <div>
+                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
+                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>
+                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                        </div>
                     </div>
                 );
             }
@@ -172,7 +191,7 @@ function AdminPanel() {
 
     const Structure = () => {
         return (
-            <div id="adminNav" style={{marginLeft: "10%", marginBottom: "72px"}}>
+            <div id="adminNav" style={{margin: "0 10%", marginBottom: "72px"}}>
                 <button title="Create" onClick={() => {document.location.href = "/admin/create"}}><IoIosCreate /></button>
                 <button title="Products" onClick={() => {document.location.href = "/admin/products"}}><FaCartShopping /></button>
                 <button title="Open Site" onClick={() => {document.location.href = "/"}}><FaHome /></button>

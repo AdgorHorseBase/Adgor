@@ -633,6 +633,22 @@ margin-left: 11.3vw;
     transform: translateY(3px);
 }
 
+.structureNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    transition: all .3s ease;
+}
+
+.structureNav:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.structureNav > div:first-child {
+    align-content: center;
+}
+
 #Delete_button:hover {
     background-color: red;
     border-color: red;

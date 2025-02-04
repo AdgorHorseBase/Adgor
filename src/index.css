@@ -619,6 +619,12 @@ margin-left: 11.3vw;
     border-color: #3d5a80; 
 }
 
+#Added_Formated > .quill {
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-bottom: 2vh;
+}
+
 .ql-container {
     border: none !important; 
     outline: none;  

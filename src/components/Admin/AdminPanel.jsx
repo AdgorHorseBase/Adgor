@@ -6,7 +6,9 @@ import ProductsManager from "./ProductsManager";
 import VouchersManager from "./VouchersManager";
 import { IoIosCreate } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaRegTrashAlt } from "react-icons/fa";
+import { GrEdit } from "react-icons/gr";
+import { BiRename } from "react-icons/bi";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
@@ -106,7 +108,7 @@ function AdminPanel() {
                                 <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                             </div>
 
-                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                            <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>
                         </div>
                         <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
@@ -121,7 +123,7 @@ function AdminPanel() {
                                                     }} />
                                                     <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
                                                 </div>
-                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}>Delete</button>
+                                                <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}><FaRegTrashAlt /></button>
                                             </div>
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                                                 {content.contents && content.contents.sort((a, b) => a.place - b.place).map((page) => {
@@ -135,9 +137,9 @@ function AdminPanel() {
                                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
                                                             </div>
                                                             <div>
-                                                                <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
-                                                                <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                                                <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
+                                                                <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}><GrEdit /></button>
+                                                                <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}><FaRegTrashAlt /></button>
                                                             </div>
                                                         </div>
                                                     );
@@ -156,9 +158,9 @@ function AdminPanel() {
                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
                                             </div>
                                             <div>
-                                                <button style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}>Rename</button>
-                                                <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}>Edit</button>
-                                                <button style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}>Delete</button>
+                                                <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
+                                                <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}><GrEdit /></button>
+                                                <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}><FaRegTrashAlt /></button>
                                             </div>
                                         </div>
                                     );
@@ -178,9 +180,9 @@ function AdminPanel() {
                             <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
                         </div>
                         <div>
-                            <button style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}>Rename</button>
-                            <button style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}>Edit</button>
-                            <button style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}>Delete</button>
+                            <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}><BiRename /></button>
+                            <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}><GrEdit /></button>
+                            <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>
                         </div>
                     </div>
                 );

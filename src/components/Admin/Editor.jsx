@@ -93,6 +93,7 @@ function Editor({ structure }) {
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
           setTitleEn(response.data.schema.titleEn);
+          setFooterImage(response.data.schema.footerImage ?? "");
           if (response.data.schema.directoryBg)
             setDirectoryBg(response?.data?.schema?.directoryBg);
         } catch (error) {

@@ -8,7 +8,8 @@ import "react-quill/dist/quill.snow.css";
 import "../../index.css";
 import "../page.css";
 import { IoClose } from "react-icons/io5";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaExchangeAlt } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
@@ -2210,7 +2211,7 @@ function Editor({ structure }) {
                 id="Delete_button"
                 onClick={() => deleteElement(element.id)}
               >
-                Delete
+                <FaTrashCan />
               </button>
               <button
                 style={{ marginTop: "0" }}
@@ -2223,7 +2224,7 @@ function Editor({ structure }) {
                   }
                 }}
               >
-                <svg width="24px" height="24px" viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z" /></svg>
+                <FaChevronUp />
               </button>
               <button
                 style={{ marginTop: "0" }}
@@ -2236,7 +2237,7 @@ function Editor({ structure }) {
                   }
                 }}
               >
-                <svg width="24px" height="24px" style={{ transform: "rotate(180deg)" }} viewBox="0 0 115.4 122.88"><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z" /></svg>
+                <FaChevronDown />
               </button>
             </div>
           </div>

@@ -125,18 +125,11 @@ function Editor({ structure }) {
     return textArea.value;
   };
 
-  // Adds new element to schema (text, image, video, menu)
+  // Adds new element to schema (text, image, video)
   const addElement = (type) => {
     let newElement;
 
-    if (type === "menu") {
-      newElement = {
-        id: uuidv4(),
-        type,
-        content: [], // Will hold the directory's page names
-        selectedDirectory: "", // Stores the selected directory
-      };
-    } else if (type === "image_text") {
+    if (type === "image_text") {
       newElement = {
         id: uuidv4(),
         type,
@@ -874,18 +867,6 @@ function Editor({ structure }) {
     }
   }, [schema]);
 
-  // Handles the selection of a directory for the menu
-  const selectDirectory = (id, directory) => {
-    const contents = structure[directory]?.contents || [];
-    setSchema(
-      schema.map((el) =>
-        el.id === id
-          ? { ...el, selectedDirectory: directory, content: contents }
-          : el
-      )
-    );
-  };
-
   // Deletes an element from the schema
   const deleteElement = (id) => {
     setSchema(schema.filter((el) => el.id !== id));
@@ -947,17 +928,6 @@ function Editor({ structure }) {
       } else if (element.type === "video") {
         htmlContent += `<video id="pageVideo" ${element.content.autoplay ? "class='autoplay-video' muted" : ""} src="/server/files/videos/${element.content.url
           }" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
-      } else if (element.type === "menu") {
-        if (element.content.length > 0) {
-          htmlContent += `<select id="pageMenu" onchange="location.href=this.value;">`;
-          htmlContent += `<option value="">${element.selectedDirectory.slice(
-            1
-          )}</option>`;
-          element.content.forEach((page) => {
-            htmlContent += `<option value="/page${element.selectedDirectory}/${page}">${page}</option>`;
-          });
-          htmlContent += `</select>`;
-        }
       } else if (element.type === "formated") {
         htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
@@ -1218,7 +1188,6 @@ function Editor({ structure }) {
             Add Formated Text
           </button>
           <button onClick={() => addElement("youtube")}>YouTube video</button>
-          <button onClick={() => addElement("menu")}>Add Menu</button>
           <button onClick={() => addElement("image_text")}>
             Add Image with Text
           </button>
@@ -1506,34 +1475,6 @@ function Editor({ structure }) {
                   />
                   Autoplay
                 </label>
-              </div>
-            )}
-            {element.type === "menu" && (
-              <div id="Added_menu">
-                <label className="labelElement">Menu Dropdown:</label>
-                <label>Select Directory: </label>
-                <select
-                  id="Added_menu_select"
-                  value={element.selectedDirectory}
-                  onChange={(e) => selectDirectory(element.id, e.target.value)}
-                >
-                  <option value="">Select a directory</option>
-                  {Object.keys(structure).map(
-                    (dir) =>
-                      structure[dir].type === "directory" && (
-                        <option key={dir} value={dir}>
-                          {dir}
-                        </option>
-                      )
-                  )}
-                </select>
-                {element.content.length > 0 && (
-                  <ul>
-                    {element.content.map((page, index) => (
-                      <li key={index}>{page}</li>
-                    ))}
-                  </ul>
-                )}
               </div>
             )}
             {element.type === "formated" && (

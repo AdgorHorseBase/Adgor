@@ -629,6 +629,10 @@ margin-left: 11.3vw;
     transform: translateY(3px);
 }
 
+#Save_button > svg, #Preview_button > svg, #home_button > svg {
+    transform: translateY(3px);
+}
+
 #Delete_button:hover {
     background-color: red;
     border-color: red;

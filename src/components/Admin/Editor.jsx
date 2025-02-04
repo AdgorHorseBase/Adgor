@@ -8,8 +8,9 @@ import "react-quill/dist/quill.snow.css";
 import "../../index.css";
 import "../page.css";
 import { IoClose } from "react-icons/io5";
-import { FaChevronDown, FaChevronUp, FaExchangeAlt } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaExchangeAlt, FaHome, FaSave } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
+import { MdPreview } from "react-icons/md";
 
 const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
@@ -1232,19 +1233,20 @@ function Editor({ structure }) {
           <button onClick={() => addElement("section")}>Add Section</button>
           <button onClick={() => addElement("gallery")}>Add Gallery</button>
         </div>
-        <button id="Save_button" onClick={savePage}>
-          Save Page
+        <button id="Save_button" onClick={savePage} title="Save">
+          <FaSave />
         </button>
-        <button id="Preview_button" onClick={() => setShowPreview(!showPreview)}>
-          Preview
+        <button id="Preview_button" onClick={() => setShowPreview(!showPreview)} title="Preview">
+          <MdPreview />
         </button>
         <button
           id="home_button"
           onClick={() => {
             document.location.href = "/admin";
           }}
+          title="Home"
         >
-          Home
+          <FaHome />
         </button>
       </div>
 

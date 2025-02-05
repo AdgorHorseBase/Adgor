@@ -100,19 +100,16 @@ function AdminPanel() {
             if (info.type === "directory") {
                 return (
                     <div key={cleanPath} style={{margin: "0", padding: "0", marginLeft: "16px"}}>
-                        <div class="structureNav">
+                        <div className="structureNav">
                             <div>
-                                <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
-                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
-                                }} />
                                 <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                             </div>
 
                             <div>
-                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt((struct[path].place || 1) -  1), cleanPath.replace(/^\//, "\\")])}}>
                                     <FaChevronUp />
                                 </button>
-                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt(struct[path].place +  1), cleanPath.replace(/^\//, "\\")])}}>
                                     <FaChevronDown />
                                 </button>
                                 <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>
@@ -126,16 +123,13 @@ function AdminPanel() {
                                         <div key={content.directory}>
                                             <div className="structureNav">
                                                 <div>
-                                                    <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
-                                                        handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory]);
-                                                    }} />
                                                     <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
                                                 </div>
                                                 <div>
-                                                    <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                    <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt((content.place || 1) - 1), cleanPath.replace(/^\//, "\\"), "directory", content.directory])}}>
                                                         <FaChevronUp />
                                                     </button>
-                                                    <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                    <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt(content.place + 1), cleanPath.replace(/^\//, "\\"), "directory", content.directory])}}>
                                                         <FaChevronDown />
                                                     </button>
                                                     <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}><FaRegTrashAlt /></button>
@@ -147,16 +141,13 @@ function AdminPanel() {
                                                     return (
                                                         <div key={fullPath} className="structureNav">
                                                             <div>
-                                                                <input type="number" style={{width: "30px"}} value={page.place} onChange={(e) => {
-                                                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page]);
-                                                                }} />
                                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
                                                             </div>
                                                             <div>
-                                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt((page.place || 1) - 1), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page])}}>
                                                                     <FaChevronUp />
                                                                 </button>
-                                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt(page.place + 1), cleanPath.replace(/^\//, "\\"), "directory", content.directory, page.page])}}>
                                                                     <FaChevronDown />
                                                                 </button>
                                                                 <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
@@ -174,16 +165,13 @@ function AdminPanel() {
                                     return (
                                         <div key={fullPath} className="structureNav">
                                             <div>
-                                                <input type="number" style={{width: "30px"}} value={content.place} onChange={(e) => {
-                                                    handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\"), "page", content.page]);
-                                                }} />
                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
                                             </div>
                                             <div>
-                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt((content.place || 1) - 1), cleanPath.replace(/^\//, "\\"), "page", content.page])}}>
                                                     <FaChevronUp />
                                                 </button>
-                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt(content.place + 1), cleanPath.replace(/^\//, "\\"), "page", content.page])}}>
                                                     <FaChevronDown />
                                                 </button>
                                                 <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
@@ -202,16 +190,13 @@ function AdminPanel() {
                 return (
                     <div key={cleanPath} style={{marginLeft: "16px"}} className="structureNav">
                         <div>
-                            <input type="number" style={{width: "30px"}} value={struct[path].place} onChange={(e) => {
-                                handlePlaceChange([parseInt(e.target.value), cleanPath.replace(/^\//, "\\")]);
-                            }} />
                             <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
                         </div>
                         <div>
-                            <button className="adminArrow" style={{ marginTop: "0" }}>
+                            <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt((struct[path].place || 1) -  1), cleanPath.replace(/^\//, "\\")])}}>
                                 <FaChevronUp />
                             </button>
-                            <button className="adminArrow" style={{ marginTop: "0" }}>
+                            <button className="adminArrow" style={{ marginTop: "0" }} onClick={() => {handlePlaceChange([parseInt(struct[path].place + 1), cleanPath.replace(/^\//, "\\")])}}>
                                 <FaChevronDown />
                             </button>
                             <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}><BiRename /></button>

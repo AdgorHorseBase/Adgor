@@ -380,20 +380,32 @@ app.post("/place-change", async (req, res) => {
             const [newPlace, objectName] = state;
     
             if(structure[objectName]) {
+                const elementWithNewPlace = Object.values(structure).find(item => item.place === newPlace);
+                if (elementWithNewPlace) {
+                    elementWithNewPlace.place = structure[objectName].place;
+                }
                 structure[objectName].place = newPlace;
             }
         } else if(state.length === 4) {
             if(state[2] === 'directory') {
                 const [newPlace, objectName, type, subDirectory] = state;
                 structure[objectName].contents.forEach(content => {
-                    if(content.directory === subDirectory) {
+                    if(newPlace <= structure[objectName].contents.length && content.directory === subDirectory) {
+                        const contentWithNewPlace = structure[objectName].contents.find(content2 => content2.place === newPlace);
+                        if(contentWithNewPlace) {
+                            contentWithNewPlace.place = content.place;
+                        }
                         content.place = newPlace;
                     }
                 });
             } else if(state[2] === 'page') {
                 const [newPlace, objectName, type, page] = state;
                 structure[objectName].contents.forEach(content => {
-                    if(content.page === page) {
+                    if(newPlace <= structure[objectName].contents.length && content.page === page) {
+                        const contentWithNewPlace = structure[objectName].contents.find(content2 => content2.place === newPlace);
+                        if (contentWithNewPlace) {
+                            contentWithNewPlace.place = content.place;
+                        }
                         content.place = newPlace;
                     }
                 });
@@ -403,7 +415,11 @@ app.post("/place-change", async (req, res) => {
             structure[objectName].contents.forEach(content => {
                 if(content.directory === subDirectory) {
                     content.contents.forEach(subContent => {
-                        if(subContent.page === page) {
+                        if(newPlace <= content.contents.length && subContent.page === page) {
+                            const contentWithNewPlace = content.contents.find(content2 => content2.place === newPlace);
+                            if(contentWithNewPlace) {
+                                contentWithNewPlace.place = subContent.place;
+                            }
                             subContent.place = newPlace;
                         }
                     });

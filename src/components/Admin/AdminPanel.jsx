@@ -6,7 +6,7 @@ import ProductsManager from "./ProductsManager";
 import VouchersManager from "./VouchersManager";
 import { IoIosCreate } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
-import { FaHome, FaRegTrashAlt } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaHome, FaRegTrashAlt } from "react-icons/fa";
 import { GrEdit } from "react-icons/gr";
 import { BiRename } from "react-icons/bi";
 
@@ -108,7 +108,15 @@ function AdminPanel() {
                                 <strong style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}:</strong>
                             </div>
 
-                            <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>
+                            <div>
+                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                    <FaChevronUp />
+                                </button>
+                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                    <FaChevronDown />
+                                </button>
+                                <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>
+                            </div>
                         </div>
                         <div style={{ paddingLeft: "8px", marginLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                             {/* Render subdirectories and files */}
@@ -123,7 +131,15 @@ function AdminPanel() {
                                                     }} />
                                                     <strong style={{marginRight: "12px", fontSize: "20px"}}>{content.directory}:</strong>
                                                 </div>
-                                                <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}><FaRegTrashAlt /></button>
+                                                <div>
+                                                    <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                        <FaChevronUp />
+                                                    </button>
+                                                    <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                        <FaChevronDown />
+                                                    </button>
+                                                    <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(`${cleanPath}/${content.directory}`)}><FaRegTrashAlt /></button>
+                                                </div>
                                             </div>
                                             <div style={{ marginLeft: "8px", paddingLeft: "8px", borderLeft: "1px solid rgba(0, 0, 0, 0.2)" }}>
                                                 {content.contents && content.contents.sort((a, b) => a.place - b.place).map((page) => {
@@ -137,6 +153,12 @@ function AdminPanel() {
                                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{page.page}</a>
                                                             </div>
                                                             <div>
+                                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                                    <FaChevronUp />
+                                                                </button>
+                                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                                    <FaChevronDown />
+                                                                </button>
                                                                 <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
                                                                 <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}><GrEdit /></button>
                                                                 <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}><FaRegTrashAlt /></button>
@@ -158,6 +180,12 @@ function AdminPanel() {
                                                 <a href={`/page${fullPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{content.page}</a>
                                             </div>
                                             <div>
+                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                    <FaChevronUp />
+                                                </button>
+                                                <button className="adminArrow" style={{ marginTop: "0" }}>
+                                                    <FaChevronDown />
+                                                </button>
                                                 <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(fullPath)}><BiRename /></button>
                                                 <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${fullPath}`}}><GrEdit /></button>
                                                 <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(fullPath)}><FaRegTrashAlt /></button>
@@ -180,6 +208,12 @@ function AdminPanel() {
                             <a href={`/page${cleanPath}`} style={{marginRight: "12px", fontSize: "20px"}}>{cleanPath}</a>
                         </div>
                         <div>
+                            <button className="adminArrow" style={{ marginTop: "0" }}>
+                                <FaChevronUp />
+                            </button>
+                            <button className="adminArrow" style={{ marginTop: "0" }}>
+                                <FaChevronDown />
+                            </button>
                             <button className="adminRename" style={{margin: "4px 8px"}} onClick={() => handleRename(cleanPath)}><BiRename /></button>
                             <button className="adminEdit" style={{margin: "4px 8px"}} onClick={() => {document.location.href = `/admin/edit${cleanPath}`}}><GrEdit /></button>
                             <button className="adminDelete" style={{margin: "4px 8px"}} onClick={() => handleDelete(cleanPath)}><FaRegTrashAlt /></button>

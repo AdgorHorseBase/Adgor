@@ -629,8 +629,12 @@ margin-left: 11.3vw;
     transform: translateY(3px);
 }
 
-#Save_button > svg, #Preview_button > svg, #home_button > svg, #adminNav > button > svg, .adminRename > svg,.adminEdit > svg, .adminDelete > svg {
+#Save_button > svg, #Preview_button > svg, #home_button > svg, #adminNav > button > svg, .adminRename > svg, .adminEdit > svg, .adminDelete > svg, .adminArrow > svg {
     transform: translateY(3px);
+}
+
+#Save_button, #Preview_button, #home_button, #adminNav > button, .adminRename, .adminEdit, .adminDelete, .adminArrow {
+    cursor: pointer;
 }
 
 .structureNav {
@@ -638,8 +642,9 @@ margin-left: 11.3vw;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    transition: all .3s ease;
+    transition: all .1s ease;
     border-radius: 16px;
+    min-height: 51px;
 }
 
 .structureNav:hover {
@@ -648,6 +653,14 @@ margin-left: 11.3vw;
 
 .structureNav > div:first-child {
     align-content: center;
+}
+
+.structureNav > div:last-child {
+    display: none;
+}
+
+.structureNav:hover > div:last-child {
+    display: block;
 }
 
 #Delete_button:hover, .adminDelete:hover {

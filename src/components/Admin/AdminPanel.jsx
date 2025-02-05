@@ -33,6 +33,8 @@ function AdminPanel() {
             await axios.post(`${URL}/place-change`, {
                 state: e,
             });
+
+            document.location.reload();
         } catch (err) {
             alert("Error changing place:", err);
         }

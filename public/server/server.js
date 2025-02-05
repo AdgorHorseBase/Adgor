@@ -379,7 +379,7 @@ app.post("/place-change", async (req, res) => {
         if(state.length === 2) {
             const [newPlace, objectName] = state;
     
-            if(structure[objectName]) {
+            if(newPlace <= Object.values(structure).length && structure[objectName]) {
                 const elementWithNewPlace = Object.values(structure).find(item => item.place === newPlace);
                 if (elementWithNewPlace) {
                     elementWithNewPlace.place = structure[objectName].place;

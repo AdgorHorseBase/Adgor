@@ -604,12 +604,13 @@ function Page() {
           {Array.from(sections).map((section) => (
             <>
               <React.Fragment key={section.id}>
-                <div className="bg" onClick={() => {scrollToElement(section.id)}}>{section.getAttribute("data-title-bg")}
+                <div className="bg" style={{display: lang === "bg" ? "block" : "none"}} onClick={() => {scrollToElement(section.id)}}>
+                  {section.getAttribute("data-title-bg")}
                   <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
                     <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />
                   </svg>
                 </div>
-                <div className="en" onClick={() => {scrollToElement(section.id)}}>
+                <div className="en" style={{display: lang === "bg" ? "none" : "block"}} onClick={() => {scrollToElement(section.id)}}>
                   {section.getAttribute("data-title-en")}
                   <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
                     <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />

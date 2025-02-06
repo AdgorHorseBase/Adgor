@@ -1093,7 +1093,12 @@ function Editor({ structure }) {
   const memoizedConvertSchemaToHtml = useCallback(ConvertSchemaToHtml, []);
   useEffect(() => {
     if (showPreview) {
-      setPreviewContent(memoizedConvertSchemaToHtml(schema));
+      let previewRawHtml = memoizedConvertSchemaToHtml(schema);
+      previewRawHtml = previewRawHtml
+      .replace(/src="\/server\/files\/images\//g, `src="http://localhost:8080/image?name=`)
+      .replace(/src="\/server\/files\/videos\//g, `src="http://localhost:8080/video?name=`)
+      .replace(/url\('\/server\/files\/images\//g, `url('http://localhost:8080/image?name=`);
+      setPreviewContent(previewRawHtml);
     }
   }, [showPreview, schema, memoizedConvertSchemaToHtml]);
   const [lang, setLang] = useState("bg");

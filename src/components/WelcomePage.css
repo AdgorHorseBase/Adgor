@@ -140,7 +140,7 @@ li {
   width: 80%;
   max-width: 1280px;
   margin: 120px auto;
-  margin-bottom: 160px;
+  margin-bottom: 200px;
   align-items: center;
 }
 
@@ -254,6 +254,7 @@ li {
 
 #threeImagesSection a {
   width: 24%;
+  max-width: 300px;
 }
 
 #threeImagesSection > a > div {
@@ -304,8 +305,8 @@ li {
   width: 100%;
   text-align: center;
   font-family: 'Forum', serif;
-  font-size: 2vw;
-  padding-top: 24px;
+  font-size: clamp(15px, 2.4vw, 40px);
+  padding-top: clamp(15px, 2.4vw, 40px);
   letter-spacing: 1px;
 }
 

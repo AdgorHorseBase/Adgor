@@ -69,6 +69,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: left;
+  height: 100%;
   justify-content: end;
   margin-left: 10%;
 }
@@ -139,6 +140,7 @@ li {
   width: 80%;
   max-width: 1280px;
   margin: 120px auto;
+  margin-bottom: 160px;
   align-items: center;
 }
 
@@ -219,6 +221,49 @@ li {
   justify-content: center;
   text-decoration: none;
   height: 300px;
+}
+
+#threeImagesSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin: 72px auto;
+}
+
+#threeImagesSection a {
+  width: 24%;
+}
+
+#threeImagesSection > a > div {
+  width: 100%;
+  aspect-ratio: 400/480;
+  overflow: hidden;
+}
+
+#threeImagesSection > a > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+#threeImagesSection > a > p {
+  width: 100%;
+  text-align: center;
+  font-family: 'Forum', serif;
+  font-size: 24px;
+  padding-top: 12px;
+  letter-spacing: 1px;
+}
+
+#threeImagesSection > a:nth-child(2) {
+  transform: translateY(48px);
+}
+
+#threeImagesSection > a:hover > div > img {
+  filter: brightness(0.8);
+  transform: scale(1.1);
 }
 
 #TwoImagesOnTopOfEachOther {

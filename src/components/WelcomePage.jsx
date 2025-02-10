@@ -171,7 +171,7 @@ const WelcomePage = () => {
         </div>
       </div>
 
-      <div id="OneImageNextToTwoAlignment">
+      {/* <div id="OneImageNextToTwoAlignment">
         <div id="TwoImagesOnTopOfEachOther">
           <a href="/" className="threeLinkText">
             <div
@@ -204,6 +204,27 @@ const WelcomePage = () => {
           >
             <p className="threeTexts">{t("riding")}</p>
           </div>
+        </a>
+      </div> */}
+
+      <div id="threeImagesSection">
+        <a href="/" className="threeLinkText">
+          <div>
+            <img src={Pansion} alt="" />
+          </div>
+          <p>Boarding House</p>
+        </a>
+        <a href="/" className="threeLinkText">
+          <div>
+            <img src={TrenirovkiNaKone} alt="" />
+          </div>
+          <p>Riding</p>
+        </a>
+        <a href="/" className="threeLinkText">
+          <div>
+            <img src={Ezda} alt="" />
+          </div>
+          <p>Horse Training</p>
         </a>
       </div>
 

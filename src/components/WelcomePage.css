@@ -185,20 +185,40 @@ li {
   width: 70%;
 }
 
-@media screen and (max-width: 1200px) {
-  /* #forUs {
-    flex-direction: column;
+@media screen and (max-width: 1350px) {
+  #forUsNormalText {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  #forUs {
+    height: fit-content;
+    margin: 92px auto;
   }
 
   #forUsImage {
-    width: 100%;
+    width: 50%;
+    height: 100%;
+    transform: none;
+  }
+
+  #forUsImage img:first-child {
+    display: none;
+  }
+
+  #forUsImage img:last-child {
+    position: static;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    transform: none;
   }
 
   #forUsText {
-    width: 100%;
-    padding-left: 0;
-    padding-top: 36px;
-  } */
+    height: auto;
+  }
 }
 
 /* three */
@@ -290,7 +310,7 @@ li {
 }
 
 #threeImagesSection > a:nth-child(2) {
-  transform: translateY(48px);
+  transform: translateY(15%);
 }
 
 #threeImagesSection > a:hover > div > div > img {

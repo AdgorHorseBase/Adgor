@@ -210,19 +210,31 @@ const WelcomePage = () => {
       <div id="threeImagesSection">
         <a href="/" className="threeLinkText">
           <div>
-            <img src={Pansion} alt="" />
+            <div className="rightTopBorder"></div>
+            <div className="threeLinkImg">
+              <img src={Pansion} alt="" />
+            </div>
+            <div className="leftBottomBorder"></div>
           </div>
           <p>Boarding House</p>
         </a>
         <a href="/" className="threeLinkText">
           <div>
-            <img src={TrenirovkiNaKone} alt="" />
+            <div className="rightTopBorder"></div>
+            <div className="threeLinkImg">
+              <img src={TrenirovkiNaKone} alt="" />
+            </div>
+            <div className="leftBottomBorder"></div>
           </div>
           <p>Riding</p>
         </a>
         <a href="/" className="threeLinkText">
           <div>
-            <img src={Ezda} alt="" />
+            <div className="rightTopBorder"></div>
+            <div className="threeLinkImg">
+              <img src={Ezda} alt="" />
+            </div>
+            <div className="leftBottomBorder"></div>
           </div>
           <p>Horse Training</p>
         </a>

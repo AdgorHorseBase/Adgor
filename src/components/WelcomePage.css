@@ -393,14 +393,15 @@ li {
   display: flex;
   flex-direction: column;
   margin-bottom: 48px;
+  background-color: #ccb7a5;
 }
-
 
 #fourSectionsObject {
   width: 100%;
-  height: 400px;
+  height: 535px;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 /* @media screen and (max-width: 2200px) {
@@ -423,8 +424,11 @@ li {
 #foundationTitle {
   font-size: 36px;
   margin: 12px 36px;
+  margin-top: 72px;
   padding: 12px 0px;
-  border-bottom: 2px solid #29160f;
+  font-weight: bold;
+  font-family: "Forum", serif;
+  /* border-bottom: 2px solid #29160f; */
 }
 
 #foundationNormalText {
@@ -433,10 +437,17 @@ li {
 
 @media screen and (max-width: 1000px) {
   #fourSectionsObject {
+    height: 300px;
+  }
+
+  #foundationTitle {
+    margin-top: 12px;
+  }
+
+  /* #fourSectionsObject {
     flex-direction: column;
     height: auto;
     margin-top: 48px;
-    /* margin-bottom: 24px; */
   }
 
   #fourSectionsObject:first-child {
@@ -449,23 +460,23 @@ li {
 
   #fourSectionsText {
     width: 100%;
-  }
+  } */
 
-  #foundationImage {
+  /* #foundationImage {
     width: auto;
     margin: 0 36px;
   }
 
   #foundationImage img {
     width: 100%;
-  }
+  } */
 }
 
 @media screen and (max-width: 550px) {
-  #foundationImage {
+  /* #foundationImage {
     width: 100%;
     margin: 0;
-  }
+  } */
 }
 
 #Foundation {
@@ -667,43 +678,34 @@ li {
   }
 }
 
-/* services */
-#SixServices {
+.centerTitle {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 124px;
+  margin-bottom: 72px;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 34px;
+  border-bottom: 2px solid #29160f;
+}
+
+#servicesObjects {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   flex-wrap: wrap;
-  padding-bottom: 160px;
+  justify-content: space-between;
 }
 
-.serviceBox {
-  width: clamp(270px, 25vw, 800px);
-  margin: clamp(20px, 2.5vw, 80px);
-  text-align: center;
+.servicesObject {
+  width: 25%;
 }
 
-.serviceImage {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-}
-
-.serviceTitle {
-  color: white;
-  text-align: center;
-  font-size: 22px;
-}
-
-.serviceText {
-  color: white;
-  text-align: center;
-}
-
-.moreServicesButton {
-  background-color: #bda583;
-  color: #29160f;
-  font-weight: 200;
-  border: none;
+.servicesObject img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
 
 /* album like photoes */

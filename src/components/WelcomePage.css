@@ -681,31 +681,81 @@ li {
 .centerTitle {
   width: fit-content;
   margin: 0 auto;
-  margin-top: 124px;
   margin-bottom: 72px;
   padding: 0 24px;
   text-align: center;
-  font-size: 34px;
+  font-size: 42px;
   border-bottom: 2px solid #29160f;
+  font-family: "Forum", serif;
+  /* font-weight: bold; */
+}
+
+#servicesTitle {
+  margin-top: 124px;
 }
 
 #servicesObjects {
   width: 80%;
+  max-width: 1536px;
   margin: 0 auto;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .servicesObject {
-  width: 25%;
+  width: 28%;
+  min-width: 400px;
+  margin: 0 1%;
+  margin-bottom: 120px;
 }
 
 .servicesObject img {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
+}
+
+.serviceTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-family: "Forum", serif;
+  font-weight: bold;
+}
+
+.serviceDescription {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.servicesObject a {
+  margin: 0 auto;
+  margin-top: 24px;
+  padding: 6px 24px;
+}
+
+@media screen and (max-width: 1080px) {
+  .servicesObject {
+    width: 70%;
+    min-width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 72px;
+  }
+
+  .serviceDescription {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .serviceDescription {
+    width: 100%;
+  }
 }
 
 /* album like photoes */

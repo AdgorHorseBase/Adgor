@@ -62,6 +62,7 @@
           return;
         }
         const menuItems = [...menu.querySelector('.menuItemsContainer')?.children || [], ...menu.querySelector('.menuEndContainer')?.children || []];
+        menu.style.transition = 'background-color 0.3s ease-in-out';
         if (window.scrollY > 50) {
           // menu.classList.add('solid');
           menu.style.backgroundColor = 'white';
@@ -69,6 +70,7 @@
             return;
           }
           for(let i = 0; i < menuItems.length; i++) {
+            menuItems[i].style.transition = "all 0.3s ease-in-out";
             menuItems[i].style.color = 'black';
             menuItems[i].style.textShadow = 'none';
           }
@@ -79,6 +81,7 @@
             return;
           }
           for(let i = 0; i < menuItems.length; i++) {
+            menuItems[i].style.transition = "all 0.3s ease-in-out";
             menuItems[i].style.color = 'white';
             menuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
           }

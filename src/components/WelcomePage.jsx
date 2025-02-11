@@ -136,7 +136,12 @@ const WelcomePage = () => {
         <div id="fourSectionsObject">
           <div id="fourSectionsText">
             <p id="foundationTitle">Adgor for the horses</p>
-            <p id="foundationNormalText" className="normalText">Фондация „Адгор за конете“ дава възможност за осиновяване на кон. По този начин ще можете да подпомогнете отглеждането и обгрижването на избрано от вас животно, което се нуждае от верен приятел. Това ще ви позволи да се научите да общувате с него пълноценно и да вкусите както от удоволствието, така и от отговорността да притежавате кон.</p>
+            <p id="foundationNormalText" className="normalText">
+              Фондация „Адгор за конете“ дава възможност за осиновяване на кон. По този начин ще можете да подпомогнете отглеждането и обгрижването на избрано от вас животно, което се нуждае от верен приятел. Това ще ви позволи да се научите да общувате с него пълноценно и да вкусите както от удоволствието, така и от отговорността да притежавате кон.
+            </p>
+            <div className="foundationLink">
+              <a href="/" className="linkButton">See more</a>
+            </div>
           </div>
           <div id="foundationImage">
             <img src={fourSectionsTop} alt="" />
@@ -151,6 +156,9 @@ const WelcomePage = () => {
             <p id="foundationNormalText" className="normalText">
               Конете са символ на свобода и сила. Те са верни приятели и партньори в спорта и терапията. Връзката между човек и кон е уникална, изградена на доверие и уважение. Конете ни учат на търпение, грижа и отговорност. Те са не само средство за транспорт или спорт, но и източник на радост и вдъхновение. Всяка среща с кон е незабравимо преживяване, което оставя трайни спомени.
             </p>
+            <div className="foundationLink">
+              <a href="/" className="linkButton">See more</a>
+            </div>
           </div>
         </div>
       </div>
@@ -204,7 +212,7 @@ const WelcomePage = () => {
       </div>
 
       <div style={{margin: "48px"}}>
-        <p style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Поръчай ваучер" : "Order a voucher"}</p>
+        <p className="centerTitle" style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Поръчай ваучер" : "Order a voucher"}</p>
         <VoucherForm lang={i18n.language} />
       </div>
     </div>

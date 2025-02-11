@@ -415,6 +415,12 @@ li {
   height: 100%;
 }
 
+#fourSectionsText {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
 #foundationImage img {
   width: 100%;
   height: 100%;
@@ -423,8 +429,9 @@ li {
 
 #foundationTitle {
   font-size: 36px;
-  margin: 12px 36px;
-  margin-top: 72px;
+  width: 85%;
+  margin: 12px auto;
+  margin-top: 48px;
   padding: 12px 0px;
   font-weight: bold;
   font-family: "Forum", serif;
@@ -432,7 +439,18 @@ li {
 }
 
 #foundationNormalText {
-  margin: 16px 36px;
+  width: 85%;
+  margin: 16px auto;
+}
+
+.foundationLink {
+  margin-left: 7.5%;
+  flex-grow: 1;
+  align-content: center;
+}
+
+.foundationLink > a {
+  padding: 6px 24px;
 }
 
 @media screen and (max-width: 1000px) {

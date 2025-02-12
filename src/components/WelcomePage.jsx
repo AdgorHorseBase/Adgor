@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./WelcomePage.css";
 // import HeaderSnimka from "./images/HeaderSnimka.webp";
 // import Logo from "./images/AdgorLogo.webp";
@@ -31,15 +31,177 @@ import fourSectionsBottom from "./images/fourSectionsBottom.webp";
 import { MenuSections } from "./Page";
 import { useTranslation } from "react-i18next";
 import { VoucherForm } from "./Vouchers";
+import { IoClose } from "react-icons/io5";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay"
+      onClick={(e) => {
+        if(!e.target.closest(".modal-next") && !e.target.closest(".modal-prev") && !e.target.closest(".modal-close")) {
+          onClose();
+        }
+      }}
+    >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <img src={images[currentIndex]} alt="Gallery" className="modal-image" />
+      </div>
+      <button className="modal-close" onClick={onClose}><IoClose /></button>
+      <button className="modal-prev" onClick={onPrev}><FaChevronLeft /></button>
+      <button className="modal-next" onClick={onNext}><FaChevronRight /></button>
+    </div>
+  );
+};
 
 const WelcomePage = () => {
   const { t, i18n } = useTranslation();
+  const [openGallery, setOpenGallery] = useState({ isOpen: false, images: [], currentIndex: 0 });
+
+  useEffect(() => {
+    const GetGalleries = () => {
+      const galleries = document.querySelectorAll(".gallery-container");
+      galleries.forEach((gallery) => {
+        gallery.scrollLeft = gallery.scrollWidth / 2;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isAppending = false;
+        let isPrepending = false;
+
+        gallery.addEventListener('mousedown', (e) => {
+          isDown = true;
+          gallery.classList.add('active');
+          startX = e.pageX - gallery.offsetLeft;
+          scrollLeft = gallery.scrollLeft;
+        });
+
+        gallery.addEventListener('mouseleave', () => {
+          isDown = false;
+          gallery.classList.remove('active');
+        });
+
+        gallery.addEventListener('mouseup', () => {
+          isDown = false;
+          gallery.classList.remove('active');
+        });
+
+        gallery.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - gallery.offsetLeft;
+          const walk = (x - startX) * 3; //scroll-fast
+          gallery.scrollLeft = scrollLeft - walk;
+        });
+
+        gallery.addEventListener('scroll', debounce(() => {
+          if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth && !isAppending && !isPrepending) {
+            isAppending = true;
+            appendImages(gallery);
+            isAppending = false;
+          } else if (gallery.scrollLeft === 0 && !isPrepending && !isAppending) {
+            isPrepending = true;
+            if(isDown) {
+              isDown = false;
+            }
+            prependImages(gallery);
+            gallery.scrollLeft = gallery.scrollWidth / 2;
+            isDown = false;
+            isPrepending = false;
+          }
+        }), 500);
+
+        const images = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+        gallery.querySelectorAll("img").forEach((img, index) => {
+          img.parentElement.addEventListener("click", () => {
+            handleImageClick(gallery.id, images, index)
+          });
+        });
+      });
+    }
+
+    const appendImages = (gallery) => {
+      // Logic to append images to the end of the gallery
+      const images = gallery.querySelectorAll('.gallery-item');
+      images.forEach((image) => {
+        const clone = image.cloneNode(true);
+        gallery.appendChild(clone);
+      });
+  
+      const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+      gallery.querySelectorAll("img").forEach((img, index) => {
+        img.parentElement.addEventListener("click", () => {
+          handleImageClick(gallery.id, allImages, index)
+        });
+      });
+    };
+  
+    const prependImages = (gallery) => {
+      const images = gallery.querySelectorAll('.gallery-item');
+      Array.from(images).reverse().forEach((image) => {
+        const clone = image.cloneNode(true);
+        gallery.prepend(clone);
+      });
+  
+      const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
+      gallery.querySelectorAll("img").forEach((img, index) => {
+        img.parentElement.addEventListener("click", () => {
+          handleImageClick(gallery.id, allImages, index)
+        });
+      });
+    };
+    GetGalleries();
+  }, []);
+
+  const handleImageClick = (galleryId, images, index) => {
+    setOpenGallery({ isOpen: true, images, currentIndex: index });
+  };
+
+  const handleCloseModal = () => {
+    setOpenGallery({ ...openGallery, isOpen: false });
+  };
+
+  const handleNextImage = () => {
+    setOpenGallery((prevState) => ({
+      ...prevState,
+      currentIndex: (prevState.currentIndex + 1) % prevState.images.length,
+    }));
+  };
+
+  const handlePrevImage = () => {
+    setOpenGallery((prevState) => ({
+      ...prevState,
+      currentIndex: (prevState.currentIndex - 1 + prevState.images.length) % prevState.images.length,
+    }));
+  };
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
 
   return (
     <div>
       <div id="StickyMenu">
         <MenuSections />
       </div>
+
+      <ImageModal
+        isOpen={openGallery.isOpen}
+        images={openGallery.images}
+        currentIndex={openGallery.currentIndex}
+        onClose={handleCloseModal}
+        onNext={handleNextImage}
+        onPrev={handlePrevImage}
+      />
 
       <div id="Header">
         <video autoPlay muted playsInline id="HeaderVideo" onEnded={(e) => e.target.play()} preload="auto" onCanPlayThrough={(e) => e.target.play()}>

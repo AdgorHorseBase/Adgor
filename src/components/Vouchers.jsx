@@ -24,7 +24,7 @@ const VoucherForm = ({lang}) => {
                         </select>    
                     </label>
 
-                    <img src={voucherFormImage} />
+                    <img alt="" src={voucherFormImage} />
                 </div>
 
                 <label htmlFor="fromWho">

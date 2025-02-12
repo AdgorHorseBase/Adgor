@@ -969,6 +969,21 @@ border:none;
     flex-grow: 1;
 }
 
+#voucherTypeForm {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+#voucherTypeForm > label, #voucherTypeForm > img {
+    width: calc(50% - 6px);
+}
+
+#voucherTypeForm > label > select {
+    cursor: pointer;
+    padding: 12px;
+}
+
 #voucherForm select {
     flex-grow: 1;
 }
@@ -977,27 +992,8 @@ border:none;
     width: 100%;
 }
 
-#voucherForm label[for="voucherType"] > select {
-    height: 28px;
-    padding-left: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#voucherForm label[for="address"] {
-    width: 100%;
-}
-
-#voucherForm label[for="email"] {
-    width: 100%;
-}
-
 #voucherType {
-    border-radius: 50px;
-    flex-grow: 1;
-}
-
-#hours {
-    text-align: center;
+    width: 100%;
 }
 
 #voucherForm label {
@@ -1005,18 +1001,17 @@ border:none;
     width: fit-content;
 }
 
-#voucherForm > form > label > input {
-    height: 18px;
-    border-radius: 50px;
-    padding: 6px;
-    padding-left: 12px;
+#voucherForm > form > label > input, #voucherForm > form > label > textarea, #voucherType {
+    /* height: 30px; */
+    border-radius: 8px;
+    padding: 12px;
     font-size: 16px;
-    border: 1px solid rgb(118, 118, 118);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(27, 27, 27, 0.3);
+    background-color: rgba(217, 217, 217, 0.38);
 }
 
-#voucherForm > form > label > input:focus {
-    border: 1px solid rgb(118, 118, 118);
+#voucherForm > form > label > input:focus, #voucherForm > form > label > textarea:focus, #voucherType:focus {
+    border: 1px solid rgba(27, 27, 27, 0.3);
     outline: none;
 }
 
@@ -1025,10 +1020,8 @@ border:none;
     height: 72px;
     resize: none;
     padding: 12px;
-    padding-top: 6px;
     font-family: arial;
     font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #voucherForm label[for="note"] {
@@ -1037,30 +1030,12 @@ border:none;
 
 #voucherFormSubmit {
     width: 100%;
+    margin-top: 24px;
 }
 
 #voucherFormSubmit > input {
-    font-family: Source Serif Pro;
-    color: #fefefe;
-    font-weight: 600;
-    background-color: #876254;
-    border: 4px solid #876254;
-    border-radius: 30px;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 3px;
-    padding-bottom: 2px;
-    transition: 0.4s;
-    font-size: 24px;
-    margin-right: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    /* margin-top: 12px; */
-}
-
-#voucherFormSubmit > input:hover {
-    background-color: #29160F;
-    color: #fefefe;
-    border-color: #29160F;
+    margin: 0 auto;
+    padding: 6px 24px;
 }
 
 .cart {

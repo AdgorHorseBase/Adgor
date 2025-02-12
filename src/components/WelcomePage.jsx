@@ -215,6 +215,36 @@ const WelcomePage = () => {
         <p className="centerTitle" style={{textAlign: "center", fontSize: "36px", marginBottom: "16px"}}>{i18n.language === "bg" ? "Поръчай ваучер" : "Order a voucher"}</p>
         <VoucherForm lang={i18n.language} />
       </div>
+
+      <div id="gallery">
+        <p className="centerTitle">Gallery</p>
+
+        <div id="gallery-0db2c50e-f29e-4c25-b87a-4d6ee8e391b8" class="gallery-container">
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367835180.webp" alt="" />
+            </div>
+          
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367837482.webp" alt="" />
+            </div>
+          
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367853805.webp" alt="" />
+            </div>
+          
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367859904.webp" alt="" />
+            </div>
+          
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367867777.webp" alt="" />
+            </div>
+          
+            <div class="gallery-item">
+              <img src="/server/files/images/image-1739367878779.webp" alt="" />
+            </div>
+        </div>
+      </div>
     </div>
   );
 };

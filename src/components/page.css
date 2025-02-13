@@ -705,14 +705,16 @@ h1 {
 .modal-content {
   position: relative;
   background: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: clamp(6px, .8vw, 12px);
+  border-radius: 12px;
   text-align: center;
 }
 
 .modal-image {
   max-width: calc(100vw - 180px);
   max-height: 80vh;
+  margin-bottom: -4px;
+  border-radius: 8px;
 }
 
 .modal-close,

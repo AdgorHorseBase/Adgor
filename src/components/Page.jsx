@@ -5,6 +5,7 @@ import "./page.css";
 import logo from "./images/AdgorLogo.webp";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { BiSolidDownArrow } from "react-icons/bi";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
@@ -60,109 +61,110 @@ const MenuSections = () => {
           </button>
       </div>
       
-      <div className="menuItemsContainer">
+        <div className="menuItemsContainer">
           {titlesFetched.current &&
-              Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
-                  <React.Fragment key={dir}>
-                      {structure[dir].type === "directory"
-                          ? structure[dir].contents && (
-                              <div className="directory-menu">
-                                  <p id="menuButton" className="directory-name">
-                                      {lang === "bg"
-                                          ? structure[dir].directoryBg
-                                          : dir.slice(1, dir.length)}
-                                  </p>
-                                  <ul className="page-list">
-                                  {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
-                                        <li key={`${dir}-${page.page}-${index}`}>
-                                            <a href={`/page${dir}/${page.page}`}>
-                                                {lang === "bg" ? page.titleBg : page.titleEn}
-                                            </a>
-                                        </li>
-                                    ) : (page.directory && page.contents && page.contents.length > 0 && (
-                                        <div id="subDirectory" key={`${dir}-${page.directory}-${index}`}>
-                                            <p id="menuSubButton" className="subDirectory-name">
-                                                {lang === "bg" ? page.directoryBg : page.directory}
-                                            </p>
-                                            <ul className="subPage-list">
-                                                {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
-                                                    <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
-                                                        <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
-                                                            {lang === "bg" ? subPage.titleBg : subPage.titleEn}
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )))} 
-                                  </ul>
-                              </div>
-                          )
-                          : structure[dir].type === "file" && (
-                              <button
-                                  onClick={() => {
-                                      document.location.href = `/page${dir}`;
-                                  }}
-                              >
-                                  {lang === "bg"
-                                      ? structure[dir].titleBg
-                                      : structure[dir].titleEn}
-                              </button>
-                          )}
-                  </React.Fragment>
-              ))}
+            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
+              <React.Fragment key={dir}>
+                {structure[dir].type === "directory"
+                  ? structure[dir].contents && (
+                    <div className="directory-menu">
+                      <p id="menuButton" className="directory-name">
+                        {lang === "bg"
+                          ? structure[dir].directoryBg
+                          : dir.slice(1, dir.length)}
+                        <BiSolidDownArrow />
+                      </p>
+                      <ul className="page-list">
+                        {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
+                          <li key={`${dir}-${page.page}-${index}`}>
+                            <a href={`/page${dir}/${page.page}`}>
+                              {lang === "bg" ? page.titleBg : page.titleEn}
+                            </a>
+                          </li>
+                        ) : (page.directory && page.contents && page.contents.length > 0 && (
+                          <div id="subDirectory" key={`${dir}-${page.directory}-${index}`}>
+                            <p id="menuSubButton" className="subDirectory-name">
+                              {lang === "bg" ? page.directoryBg : page.directory}
+                            </p>
+                            <ul className="subPage-list">
+                              {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
+                                <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
+                                  <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                    {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )))}
+                      </ul>
+                    </div>
+                  )
+                  : structure[dir].type === "file" && (
+                    <button
+                      onClick={() => {
+                        document.location.href = `/page${dir}`;
+                      }}
+                    >
+                      {lang === "bg"
+                        ? structure[dir].titleBg
+                        : structure[dir].titleEn}
+                    </button>
+                  )}
+              </React.Fragment>
+            ))}
           <button
-              id="menuButton"
-              onClick={() => {
-                  document.location.href = "/vouchers";
-              }}
+            id="menuButton"
+            onClick={() => {
+              document.location.href = "/vouchers";
+            }}
           >
-              {lang === "bg" ? "Ваучери" : "Vouchers"}
+            {lang === "bg" ? "Ваучери" : "Vouchers"}
           </button>
           <button
-              id="menuButton"
-              className="dot"
-              onClick={() => {
-                  document.location.href = "/products";
-              }}
+            id="menuButton"
+            className="dot"
+            onClick={() => {
+              document.location.href = "/products";
+            }}
           >
-              {lang === "bg" ? "Подаръци" : "Gifts"}
+            {lang === "bg" ? "Подаръци" : "Gifts"}
           </button>
-      </div>
+        </div>
       
-      <div className="menuEndContainer">
-        {/* Button for contact us */}
-        <button
-          id="menuButton"
-          onClick={() => {
-            document.location.href = "/page/contact-us";
-          }}
-        >
-          {lang === "bg" ? "Контакти" : "Contacts"}
-        </button><br></br>
-        {lang === "bg" ? (
+        <div className="menuEndContainer">
+          {/* Button for contact us */}
+          <button
+            id="menuButton"
+            onClick={() => {
+              document.location.href = "/page/contact-us";
+            }}
+          >
+            {lang === "bg" ? "Контакти" : "Contacts"}
+          </button><br></br>
+          {lang === "bg" ? (
             <button
-                id="menuButton"
-                onClick={() => {
-                    localStorage.setItem("lang", "en");
-                    window.location.reload();
-                }}
+              id="menuButton"
+              onClick={() => {
+                localStorage.setItem("lang", "en");
+                window.location.reload();
+              }}
             >
-                BG/EN
+              BG/EN
             </button>
-        ) : (
+          ) : (
             <button
-                id="menuButton"
-                onClick={() => {
-                    localStorage.setItem("lang", "bg");
-                    window.location.reload();
-                }}
+              id="menuButton"
+              onClick={() => {
+                localStorage.setItem("lang", "bg");
+                window.location.reload();
+              }}
             >
-                BG/EN
+              BG/EN
             </button>
-        )}
+          )}
+        </div>
       </div>
-  </div>
   ) : (
     <div id="StickyMenu">
       <MenuMobile

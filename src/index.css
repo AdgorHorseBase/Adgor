@@ -131,17 +131,23 @@
     align-items: center;
 }
 
-.directory-menu > p::after {
+.directory-menu > p > svg {
     display: inline;
-    content: "▼";
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    margin-left: 2px;
+    font-size: .8rem;
+    margin-left: 4px;
+    stroke: currentColor;
+    stroke-width: 3px;
+    fill: transparent;
     width: fit-content;
     height: fit-content;
     padding-top: 3px;
+    transition: all 0.15s ease-in-out;
 }
-  
+
+.directory-menu:hover > p > svg {
+    fill: currentColor;
+}
+
 .page-list {
     display: none;
     position: absolute;

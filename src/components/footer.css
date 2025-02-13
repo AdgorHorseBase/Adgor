@@ -16,6 +16,7 @@
   padding: 48px 24px;
   background-color: #1B1B1B;
   overflow: hidden;
+  position: relative;
 }
 
 .footer-container h1, .footer-container p {
@@ -223,4 +224,13 @@
 
 .footerPageList > li {
   list-style: none;
+}
+
+#footerSvg {
+  position: absolute;
+  bottom: 0;
+  height: auto;
+  max-width: 100%;
+  max-height: 60%;
+  transform: translateX(-24px);
 }

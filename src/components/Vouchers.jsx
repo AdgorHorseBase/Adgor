@@ -12,8 +12,8 @@ const VoucherForm = ({lang}) => {
 
                 <div id="voucherTypeForm">
                     <label htmlFor="voucherType">
-                        <select id="voucherType" name="voucherType" required>
-                            <option value="" disabled selected>Voucher Type</option>
+                        <select id="voucherType" name="voucherType" required defaultValue="">
+                            <option value="" disabled>Voucher Type</option>
                             <option value="ride">{lang === "bg" ? "Езда" : "Ride"}</option>
                             <option value="meeting_with_falabela">{lang === "bg" ? "Среща с Фалабела" : "Meeting with Falabela"}</option>
                             <option value="photoshoot_with_horses">{lang === "bg" ? "Фотосесия с коне" : "Photoshoot with Horses"}</option>

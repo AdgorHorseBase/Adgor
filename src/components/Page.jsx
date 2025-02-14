@@ -278,6 +278,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                       {lang === "bg"
                         ? structure[dir].directoryBg
                         : dir.slice(1)}
+                      <BiSolidDownArrow />
                     </p>
                     {expandedDirectories[dir] && ( // Check expanded state
                       <ul className="page-list-mobile">
@@ -325,7 +326,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           ))}
 
         <button
-          id="menuButton"
+          className="file-button"
           onClick={() => {
             document.location.href = "/products";
           }}
@@ -333,34 +334,13 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           {lang === "bg" ? "Продукти" : "Products"}
         </button>
         <button
-          id="menuButton"
+          className="file-button"
           onClick={() => {
             document.location.href = "/vouchers";
           }}
         >
           {lang === "bg" ? "Ваучери" : "Vouchers"}
         </button>
-        {lang === "bg" ? (
-          <button
-            id="menuButton"
-            onClick={() => {
-              localStorage.setItem("lang", "en");
-              window.location.reload();
-            }}
-          >
-            Switch to English
-          </button>
-        ) : (
-          <button
-            id="menuButton"
-            onClick={() => {
-              localStorage.setItem("lang", "bg");
-              window.location.reload();
-            }}
-          >
-            Смени на български
-          </button>
-        )}
       </div>
     </div>
   );

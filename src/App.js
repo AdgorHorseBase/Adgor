@@ -30,7 +30,7 @@ const ReturnToTop = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 150) {
+      if (window.scrollY > 150) {
         setIsVisible(true);
       } else {
         setIsVisible(false);

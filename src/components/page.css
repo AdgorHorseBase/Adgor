@@ -778,6 +778,7 @@ h1 {
 .expand-button > svg {
   margin-top: 5px;
   font-size: 24px;
+  transform: translateY(2px);
 }
 
 .menuEndContainerMobile {

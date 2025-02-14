@@ -44,10 +44,11 @@
   
 .directory {
     margin-bottom: 10px;
+    font-family: 'Forum', serif;
 }
   
 .directory-name-mobile {
-    font-family: 'VinnytsiaSerif', serif;
+    font-family: inherit;
     letter-spacing: normal;
     font-size: 24px;
     cursor: pointer;
@@ -57,7 +58,19 @@
     padding-right: 12px;
     padding-top: 3px;
     padding-bottom: 2px;
-    font-weight: 600;
+}
+
+.directory > p > svg {
+    display: inline;
+    font-size: .8rem;
+    margin-left: 12px;
+    stroke: currentColor;
+    stroke-width: 3px;
+    fill: transparent;
+    width: fit-content;
+    height: fit-content;
+    transform: translateY(1px);
+    transition: all 0.15s ease-in-out;
 }
   
 .page-list-mobile {
@@ -75,10 +88,43 @@
     color: #e2d9c6;
     font-size: 22px;
 }
+
+.directory, .file-button {
+    padding-left: 36px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    font-weight: normal;
+}
+
+.page-list-mobile {
+    padding-left: 36px;
+    margin-left: 0;
+}
+
+.page-list-mobile a {
+    font-size: 24px;
+    font-family: 'Forum', serif;
+}
+
+#subDirectoryMobile p {
+    padding-left: 0;
+}
   
 .file-button {
-    margin: 10px 0;
     display: block;
+    font-family: 'Forum', serif;
+    color: #e2d9c6;
+    letter-spacing: normal;
+}
+
+.file-button:hover {
+    background-color: transparent;
+    color: #e2d9c6;
+    cursor: pointer;
+}
+
+.directory > p {
+    padding-left: 0;
 }
 
 #menuButton, Menu button {
@@ -117,7 +163,7 @@
 
 .directory-name {
     cursor: pointer;
-    font-family: 'Georgia', serif;
+    font-family: inherit;
     color: #e5d5c0;
     font-size: 16px;
     /* letter-spacing: 1px; */
@@ -205,7 +251,7 @@
 .subDirectory-name::after {
     display: inline;
     content: "▶";
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: inherit;
     font-size: 12px;
     margin-left: 2px;
     width: fit-content;

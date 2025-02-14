@@ -239,7 +239,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
         </div>
       </div>
 
-      <div className="menu-content" style={{ transform: menuExpanded ? "translateX(0)" : "translateX(-100%)", transition: "all .3s ease-out" }}>
+      <div className="menu-content" style={{ transform: menuExpanded ? "translateX(0)" : "translateX(-100%)", transition: "transform .3s ease-out" }}>
         <div className="insideMenuTopMobile">
           <button
             id="menuButton"
@@ -344,6 +344,8 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
         >
           {lang === "bg" ? "Ваучери" : "Vouchers"}
         </button>
+
+        <div style={{height: "25%"}}></div>
       </div>
     </div>
   );

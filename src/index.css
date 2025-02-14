@@ -28,6 +28,7 @@
     left: 0;
     width: 100%;
     height: 100dvh;
+    overflow: hidden;
     overflow-y: auto;
     background: #243d30;
     color: #E6DED1;
@@ -57,19 +58,6 @@
     padding-right: 12px;
     padding-top: 3px;
     padding-bottom: 2px;
-}
-
-.directory > p > svg {
-    display: inline;
-    font-size: .8rem;
-    margin-left: 12px;
-    stroke: currentColor;
-    stroke-width: 3px;
-    fill: transparent;
-    width: fit-content;
-    height: fit-content;
-    transform: translateY(1px);
-    transition: all 0.15s ease-in-out;
 }
   
 .page-list-mobile {
@@ -189,13 +177,12 @@
 
 .directory-menu > p > svg, .directory-name-mobile > svg {
     display: inline;
-    font-size: .8rem;
+    font-size: 12px !important;
+    width: 12px !important;
     margin-left: 12px;
     stroke: currentColor;
     stroke-width: 3px;
     fill: transparent;
-    width: fit-content;
-    height: fit-content;
     padding-top: 3px;
     transition: all 0.15s ease-in-out;
 }

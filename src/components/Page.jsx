@@ -7,12 +7,14 @@ import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { TbMenu2 } from "react-icons/tb";
+import useMediaQuery from "@mui/material/useMediaQuery";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
   const [loadingMenu, setLoadingMenu] = useState(true);
   const [structure, setStruct] = useState(false);
   const [lang, setLang] = useState("bg");
+  const desktopMenu = useMediaQuery("(min-width: 750px)");
   const titlesFetched = useRef(false);
 
   useEffect(() => {
@@ -44,11 +46,11 @@ const MenuSections = () => {
     }
   }, [storedLang]);
 
-  return window.innerWidth > 750 ? loadingMenu === true ? (
+  return loadingMenu === true ? (
     <div className="Menu">
       <button id="menuButton">Loading...</button>
     </div>
-  ) : (
+  ) : desktopMenu ? (
     <div className="Menu">
       <div className="menuLogoContainer">
           <button
@@ -167,13 +169,11 @@ const MenuSections = () => {
         </div>
       </div>
   ) : (
-    <div id="StickyMenu">
-      <MenuMobile
-        lang={lang}
-        structure={structure}
-        titlesFetched={titlesFetched}
-      />
-    </div>
+    <MenuMobile
+      lang={lang}
+      structure={structure}
+      titlesFetched={titlesFetched}
+    />
   );
 };
 

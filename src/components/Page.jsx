@@ -273,14 +273,14 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                   <div className="directory">
                     <p
                       className="directory-name-mobile"
-                      onClick={() => toggleDirectory(dir)} // Toggle directory on click
+                      onClick={() => toggleDirectory(dir)}
                     >
                       {lang === "bg"
                         ? structure[dir].directoryBg
                         : dir.slice(1)}
                       <BiSolidDownArrow />
                     </p>
-                    {expandedDirectories[dir] && ( // Check expanded state
+                    {expandedDirectories[dir] && (
                       <ul className="page-list-mobile">
                         {structure[dir].contents.map((page, index) => page.page ? (
                           <li key={`${dir}-${index}`}>
@@ -290,20 +290,23 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                           </li>
                         ) : (
                           <div id="subDirectoryMobile">
-                            <p className="directory-name-mobile">
+                            <p className="directory-name-mobile" onClick={() => toggleDirectory(`${dir}-${page.directory}`)}>
                               {lang === "bg"
                                 ? page.directoryBg
                                 : page.directory}
+                                <BiSolidDownArrow />
                             </p>
-                            <ul>
-                              {page.contents.map((subPage, subIndex) => (
-                                <li key={`${dir}-${index}-${subIndex}`}>
-                                  <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
-                                    {lang === "bg" ? subPage.titleBg : subPage.titleEn}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            {expandedDirectories[`${dir}-${page.directory}`] && (
+                              <ul>
+                                {page.contents.map((subPage, subIndex) => (
+                                  <li key={`${dir}-${index}-${subIndex}`}>
+                                    <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                      {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         ))}
                       </ul>

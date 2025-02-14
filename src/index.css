@@ -49,7 +49,6 @@
   
 .directory-name-mobile {
     font-family: inherit;
-    letter-spacing: normal;
     font-size: 24px;
     cursor: pointer;
     color: #e2d9c6;
@@ -80,7 +79,11 @@
 }
 
 .page-list-mobile li {
-    margin: 5px 0;
+    margin: 12px 0;
+}
+
+.page-list-mobile li:first-child {
+    margin-top: 6px;
 }
 
 .page-list-mobile a {
@@ -108,6 +111,15 @@
 
 #subDirectoryMobile p {
     padding-left: 0;
+    margin-bottom: 12px;
+}
+
+#subDirectoryMobile > ul {
+    margin-bottom: 24px;
+}
+
+#subDirectoryMobile > ul > li {
+    list-style-type: none;
 }
   
 .file-button {
@@ -175,10 +187,10 @@
     align-items: center;
 }
 
-.directory-menu > p > svg {
+.directory-menu > p > svg, .directory-name-mobile > svg {
     display: inline;
     font-size: .8rem;
-    margin-left: 4px;
+    margin-left: 12px;
     stroke: currentColor;
     stroke-width: 3px;
     fill: transparent;
@@ -186,10 +198,6 @@
     height: fit-content;
     padding-top: 3px;
     transition: all 0.15s ease-in-out;
-}
-
-.directory-menu:hover > p > svg {
-    fill: currentColor;
 }
 
 .page-list {

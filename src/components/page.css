@@ -759,3 +759,60 @@ h1 {
 .modal-overlay > button:active {
   background: transparent;
 }
+
+.menuTopMobile {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menuTopMobile button {
+  margin: 0;
+}
+
+.menuLogoButtonMobile {
+  margin: 0;
+}
+
+.expand-button > svg {
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+.menuEndContainerMobile {
+  align-content: center;
+}
+
+.menuEndContainerMobile button {
+  font-size: 1rem;
+  padding: 3px 12px;
+  background-color: transparent;
+}
+
+.insideMenuTopMobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 36px 0;
+  padding: 0 36px
+}
+
+.insideMenuTopMobile button {
+  margin: 0;
+}
+
+.insideMenuTopMobile .expand-button {
+  padding-left: 0;
+}
+
+.insideMenuTopMobile .linkButton {
+  color: #E6DED1;
+  border-color: #E6DED1;
+}
+
+.insideMenuTopMobile .linkButton:hover {
+  color: #243d30;
+  border-color: #243d30;
+  background-color: #E6DED1;
+}

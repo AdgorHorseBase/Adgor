@@ -21,18 +21,16 @@
     /* background-color: #2e1a11; */
     background-color: transparent;
 }
-
-.expand-button {
-    margin-left: auto;
-}
   
 .menu-content {
     position: absolute;
-    top: 100%;
+    top: 0;
     left: 0;
     width: 100%;
-    background: #29160F;
-    color: #e2d9c6;
+    height: 100dvh;
+    overflow-y: auto;
+    background: #243d30;
+    color: #E6DED1;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     /* padding: 10px; */
     z-index: 1000;

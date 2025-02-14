@@ -6,6 +6,7 @@ import logo from "./images/AdgorLogo.webp";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { TbMenu2 } from "react-icons/tb";
 // const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const MenuSections = () => {
@@ -206,128 +207,161 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
 
   return (
     <div className="menu-container">
-      <button
-        id="menuButton"
-        onClick={() => {
-          document.location.href = "/";
-        }}
-      >
-        {lang === "bg" ? "Начало" : "Home"}
-      </button>
-      <button
-        id="menuButton"
-        className="expand-button"
-        onClick={() => setMenuExpanded(!menuExpanded)}
-      >
-        {menuExpanded
-          ? lang === "bg"
-            ? "Затвори"
-            : "Close"
-          : lang === "bg"
-          ? "Меню"
-          : "Menu"}
-      </button>
+      <div className="menuTopMobile">
+        <button
+          id="menuButton"
+          className="expand-button"
+          onClick={() => setMenuExpanded(!menuExpanded)}
+        >
+          <TbMenu2 />
+        </button>
 
-      {menuExpanded && (
-        <div className="menu-content">
-          {titlesFetched.current &&
-            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
-              <React.Fragment key={dir}>
-                {structure[dir].type === "directory" &&
-                  structure[dir].contents && (
-                    <div className="directory">
-                      <p
-                        className="directory-name-mobile"
-                        onClick={() => toggleDirectory(dir)} // Toggle directory on click
-                      >
-                        {lang === "bg"
-                          ? structure[dir].directoryBg
-                          : dir.slice(1)}
-                      </p>
-                      {expandedDirectories[dir] && ( // Check expanded state
-                        <ul className="page-list-mobile">
-                          {structure[dir].contents.map((page, index) => page.page ? (
-                            <li key={`${dir}-${index}`}>
-                              <a href={`/page${dir}/${page.page}`}>
-                                {lang === "bg" ? page.titleBg : page.titleEn}
-                              </a>
-                            </li>
-                          ) : (
-                            <div id="subDirectoryMobile">
-                              <p className="directory-name-mobile">
-                                {lang === "bg"
-                                  ? page.directoryBg
-                                  : page.directory}
-                              </p>
-                              <ul>
-                                {page.contents.map((subPage, subIndex) => (
-                                  <li key={`${dir}-${index}-${subIndex}`}>
-                                    <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
-                                      {lang === "bg" ? subPage.titleBg : subPage.titleEn}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  )}
-                {structure[dir].type === "file" && (
-                  <button
-                    onClick={() => {
-                      document.location.href = `/page${dir}`;
-                    }}
-                    className="file-button"
-                  >
-                    {lang === "bg"
-                      ? structure[dir].titleBg
-                      : structure[dir].titleEn}
-                  </button>
-                )}
-              </React.Fragment>
-            ))}
+        <button
+          id="menuButton"
+          className="menuLogoButtonMobile"
+          onClick={() => {
+              document.location.href = "/";
+          }}
+        >
+          <img id="menuLogo" alt="" src={logo} />  
+        </button>
 
+        <div className="menuEndContainerMobile">
           <button
-            id="menuButton"
+            className="linkButton"
             onClick={() => {
-              document.location.href = "/products";
+              localStorage.setItem("lang", lang === "bg" ? "en" : "bg");
+              window.location.reload();
             }}
           >
-            {lang === "bg" ? "Продукти" : "Products"}
+            { lang === "bg" ? "EN" : "BG" }
           </button>
-          <button
-            id="menuButton"
-            onClick={() => {
-              document.location.href = "/vouchers";
-            }}
-          >
-            {lang === "bg" ? "Ваучери" : "Vouchers"}
-          </button>
-          {lang === "bg" ? (
-            <button
-              id="menuButton"
-              onClick={() => {
-                localStorage.setItem("lang", "en");
-                window.location.reload();
-              }}
-            >
-              Switch to English
-            </button>
-          ) : (
-            <button
-              id="menuButton"
-              onClick={() => {
-                localStorage.setItem("lang", "bg");
-                window.location.reload();
-              }}
-            >
-              Смени на български
-            </button>
-          )}
         </div>
-      )}
+      </div>
+
+      <div className="menu-content" style={{ transform: menuExpanded ? "translateX(0)" : "translateX(-100%)", transition: "all .3s ease-out" }}>
+        <div className="insideMenuTopMobile">
+          <button
+            id="menuButton"
+            className="expand-button"
+            onClick={() => setMenuExpanded(!menuExpanded)}
+          >
+            <svg width="20" height="21" viewBox="0 0 40 41" fill="none">
+            <rect x="3.2832" y="-1" width="53" height="5.98387" rx="2.99193" transform="rotate(45 3.2832 -1)" fill="#E6DED1"/>
+            <rect x="-1" y="37.4895" width="53" height="5.12903" rx="2.56452" transform="rotate(-45 -1 37.4895)" fill="#E6DED1"/>
+            </svg>
+          </button>
+
+          <div className="menuEndContainerMobile">
+            <button
+              className="linkButton"
+              onClick={() => {
+                localStorage.setItem("lang", lang === "bg" ? "en" : "bg");
+                window.location.reload();
+              }}
+            >
+              { lang === "bg" ? "EN" : "BG" }
+            </button>
+          </div>
+        </div>
+
+        {titlesFetched.current &&
+          Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
+            <React.Fragment key={dir}>
+              {structure[dir].type === "directory" &&
+                structure[dir].contents && (
+                  <div className="directory">
+                    <p
+                      className="directory-name-mobile"
+                      onClick={() => toggleDirectory(dir)} // Toggle directory on click
+                    >
+                      {lang === "bg"
+                        ? structure[dir].directoryBg
+                        : dir.slice(1)}
+                    </p>
+                    {expandedDirectories[dir] && ( // Check expanded state
+                      <ul className="page-list-mobile">
+                        {structure[dir].contents.map((page, index) => page.page ? (
+                          <li key={`${dir}-${index}`}>
+                            <a href={`/page${dir}/${page.page}`}>
+                              {lang === "bg" ? page.titleBg : page.titleEn}
+                            </a>
+                          </li>
+                        ) : (
+                          <div id="subDirectoryMobile">
+                            <p className="directory-name-mobile">
+                              {lang === "bg"
+                                ? page.directoryBg
+                                : page.directory}
+                            </p>
+                            <ul>
+                              {page.contents.map((subPage, subIndex) => (
+                                <li key={`${dir}-${index}-${subIndex}`}>
+                                  <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                    {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+              {structure[dir].type === "file" && (
+                <button
+                  onClick={() => {
+                    document.location.href = `/page${dir}`;
+                  }}
+                  className="file-button"
+                >
+                  {lang === "bg"
+                    ? structure[dir].titleBg
+                    : structure[dir].titleEn}
+                </button>
+              )}
+            </React.Fragment>
+          ))}
+
+        <button
+          id="menuButton"
+          onClick={() => {
+            document.location.href = "/products";
+          }}
+        >
+          {lang === "bg" ? "Продукти" : "Products"}
+        </button>
+        <button
+          id="menuButton"
+          onClick={() => {
+            document.location.href = "/vouchers";
+          }}
+        >
+          {lang === "bg" ? "Ваучери" : "Vouchers"}
+        </button>
+        {lang === "bg" ? (
+          <button
+            id="menuButton"
+            onClick={() => {
+              localStorage.setItem("lang", "en");
+              window.location.reload();
+            }}
+          >
+            Switch to English
+          </button>
+        ) : (
+          <button
+            id="menuButton"
+            onClick={() => {
+              localStorage.setItem("lang", "bg");
+              window.location.reload();
+            }}
+          >
+            Смени на български
+          </button>
+        )}
+      </div>
     </div>
   );
 };

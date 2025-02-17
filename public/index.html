@@ -61,12 +61,49 @@
         if(!menu) {
           return;
         }
-        const menuItems = [...menu.querySelector('.menuItemsContainer')?.children || [], ...menu.querySelector('.menuEndContainer')?.children || []];
+        const menuItems = [
+          ...menu.querySelector('.menuItemsContainer')?.children || [],
+          ...menu.querySelector('.menuEndContainer')?.children || []
+        ];
+        const mobileMenuItems = [
+          menu.querySelector('.expand-button') || [],
+          menu.querySelector('.linkButton') || []
+        ]
         menu.style.transition = 'background-color 0.3s ease-in-out';
         if (window.scrollY > 50) {
           // menu.classList.add('solid');
           menu.style.backgroundColor = 'white';
+
           if(menuItems.length === 0) {
+            if(mobileMenuItems.length === 0) {
+              return;
+            }
+
+            for(let i = 0; i < mobileMenuItems.length; i++) {
+              mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
+              mobileMenuItems[i].style.color = 'black';
+              mobileMenuItems[i].style.borderColor = 'black';
+              mobileMenuItems[i].style.textShadow = 'none';
+              mobileMenuItems[i].style.boxShadow = 'none';
+              const svg = mobileMenuItems[i].querySelector('svg');
+              if (svg) {
+                svg.style.filter = 'none';
+              }
+
+              if(mobileMenuItems[i].className == 'linkButton') {
+                mobileMenuItems[i].addEventListener('mouseover', function() {
+                  this.style.backgroundColor = 'black';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'transparent'
+                });
+                mobileMenuItems[i].addEventListener('mouseout', function() {
+                  this.style.backgroundColor = 'transparent';
+                  this.style.color = 'black';
+                  this.style.borderColor = 'black';
+                });
+              }
+            }
+            
             return;
           }
           for(let i = 0; i < menuItems.length; i++) {
@@ -78,6 +115,34 @@
           // menu.classList.remove('solid');
           menu.style.backgroundColor = 'transparent';
           if(menuItems.length === 0) {
+            if(mobileMenuItems.length === 0) {
+              return;
+            }
+
+            for(let i = 0; i < mobileMenuItems.length; i++) {
+              mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
+              mobileMenuItems[i].style.color = 'white';
+              mobileMenuItems[i].style.borderColor = 'white';
+              mobileMenuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+              if(mobileMenuItems[i].className == 'linkButton') {
+                mobileMenuItems[i].style.boxShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+                mobileMenuItems[i].addEventListener('mouseover', function() {
+                  this.style.backgroundColor = 'black';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'transparent'
+                });
+                mobileMenuItems[i].addEventListener('mouseout', function() {
+                  this.style.backgroundColor = 'transparent';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'white';
+                });
+              }
+              const svg = mobileMenuItems[i].querySelector('svg');
+              if (svg) {
+                svg.style.filter = 'drop-shadow(0px 2px 6px rgba(0, 0, 0, .8))';
+              }
+            }
+
             return;
           }
           for(let i = 0; i < menuItems.length; i++) {

@@ -1083,6 +1083,10 @@ border:none;
     padding: 6px 24px;
 }
 
+#voucherFormSubmit > .linkButton {
+    background-color: transparent;
+}
+
 .cart {
     position: fixed;
     top: 82px;

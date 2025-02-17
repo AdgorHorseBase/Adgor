@@ -771,11 +771,16 @@ h1 {
   margin: 0;
 }
 
+.menuTopMobile #menuButton {
+  color: white;
+}
+
 .menuLogoButtonMobile {
   margin: 0;
 }
 
 .expand-button > svg {
+  filter: drop-shadow(2px 4px 6px black);
   margin-top: 5px;
   font-size: 24px;
   transform: translateY(2px);
@@ -789,6 +794,9 @@ h1 {
   font-size: 1rem;
   padding: 3px 12px;
   background-color: transparent;
+  color: white;
+  border-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .insideMenuTopMobile {

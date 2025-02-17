@@ -219,7 +219,7 @@ const WelcomePage = () => {
           <img src={forUsFront} alt="" />
         </div>
         <div id="forUsText">
-          <p id="forUsTitle">За Нас Заглавие</p>
+          <p id="forUsTitle">За Нас</p>
           <p id="forUsNormalText" className="normalText">Конна база „Адгор" се намира в непосредствена близост до София, в изключително красив екологично чист район с вълнуваща панорама към четири планини – Рила, Верила, Витоша и Плана.</p>
           <a id="forUsButton" href="/page/About/our-team" className="linkButton">Вижте повече</a>
         </div>

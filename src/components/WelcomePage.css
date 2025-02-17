@@ -218,6 +218,42 @@ li {
 
   #forUsText {
     height: auto;
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  #forUsTitle {
+    font-size: 5vw;
+  }
+
+  #forUsNormalText {
+    font-size: 2vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #forUs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #forUsImage {
+    width: fit-content;
+  }
+
+  #forUsText {
+    padding: 0;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  #forUsTitle {
+    font-size: 32px;
+  }
+
+  #forUsNormalText {
+    font-size: 16px;
   }
 }
 

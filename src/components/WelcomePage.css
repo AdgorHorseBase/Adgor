@@ -546,48 +546,59 @@ li {
   padding: 6px 24px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1070px) {
   #fourSectionsObject {
-    height: 300px;
+    height: 400px;
   }
 
   #foundationTitle {
     margin-top: 12px;
   }
 
-  /* #fourSectionsObject {
-    flex-direction: column;
-    height: auto;
-    margin-top: 48px;
+  #foundationNormalText {
+    font-size: 1.5vw;
   }
+}
 
-  #fourSectionsObject:first-child {
-    flex-direction: column-reverse;
+@media screen and (max-width: 850px) {
+  #fourSectionsObject {
+    flex-direction: column;
+    height: fit-content;
   }
 
   #fourSectionsObject:last-child {
+    flex-direction: column-reverse;
+  }
+
+  #foundationTitle {
     margin-top: 24px;
   }
 
-  #fourSectionsText {
+  #fourSectionsText, #foundationImage {
     width: 100%;
-  } */
-
-  /* #foundationImage {
-    width: auto;
-    margin: 0 36px;
   }
 
-  #foundationImage img {
-    width: 100%;
-  } */
-}
+  #fourSectionsText {
+    min-height: 350px;
+    max-height: 100%;
+  }
 
-@media screen and (max-width: 550px) {
-  /* #foundationImage {
-    width: 100%;
-    margin: 0;
-  } */
+  #foundationNormalText {
+    font-size: clamp(17px, 2.4vw, 40px);
+  }
+
+  .foundationLink {
+    margin-top: 12px;
+    margin-bottom: 24px;
+  }
+
+  #foundationImage {
+    height: 400px;
+  }
+
+  #foundationImage > img {
+    height: 100%;
+  }
 }
 
 #Foundation {

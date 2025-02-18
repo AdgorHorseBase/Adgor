@@ -1029,6 +1029,16 @@ border:none;
     padding: 12px;
 }
 
+@media screen and (max-width: 585px) {
+    #voucherTypeForm {
+        flex-direction: column-reverse;
+    }
+
+    #voucherTypeForm > img {
+        width: 100%;
+    }
+}
+
 #voucherForm select {
     flex-grow: 1;
 }

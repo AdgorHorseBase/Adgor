@@ -7,6 +7,8 @@ const Footer = () => {
   const [structure, setStruct] = useState({});
   const [lang, setLang] = useState("bg");
 
+  const isHomePage = window.location.pathname === "/";
+
   useEffect(() => {
     const fetchImage = async () => {
       if (!window.location.pathname.startsWith("/page")) {
@@ -48,13 +50,15 @@ const Footer = () => {
 
   return (
     <>
-      <div className="image-footer">
-        <img
-          src={imageSrc ? imageSrc : "/footerImage.png"}
-          alt=""
-          className="image"
-        />
-      </div>
+      {!isHomePage && (
+        <div className="image-footer">
+          <img
+            src={imageSrc ? imageSrc : "/footerImage.png"}
+            alt=""
+            className="image"
+          />
+        </div>
+      )}
 
       <div className="footer-container">
         <svg id="footerSvg" viewBox="0 0 726.62 323.82">

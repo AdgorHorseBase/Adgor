@@ -239,7 +239,12 @@ li {
   }
 
   #forUsImage {
-    width: fit-content;
+    width: 100%;
+  }
+
+  #forUsImage > img {
+    width: 100% !important;
+    height: auto;
   }
 
   #forUsText {

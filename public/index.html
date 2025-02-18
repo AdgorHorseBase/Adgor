@@ -80,14 +80,16 @@
             }
 
             for(let i = 0; i < mobileMenuItems.length; i++) {
-              mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
-              mobileMenuItems[i].style.color = 'black';
-              mobileMenuItems[i].style.borderColor = 'black';
-              mobileMenuItems[i].style.textShadow = 'none';
-              mobileMenuItems[i].style.boxShadow = 'none';
-              const svg = mobileMenuItems[i].querySelector('svg');
-              if (svg) {
-                svg.style.filter = 'none';
+              if(mobileMenuItems[i].style) {
+                mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
+                mobileMenuItems[i].style.color = 'black';
+                mobileMenuItems[i].style.borderColor = 'black';
+                mobileMenuItems[i].style.textShadow = 'none';
+                mobileMenuItems[i].style.boxShadow = 'none';
+                const svg = mobileMenuItems[i].querySelector('svg');
+                if (svg) {
+                  svg.style.filter = 'none';
+                }
               }
 
               if(mobileMenuItems[i].className == 'linkButton') {

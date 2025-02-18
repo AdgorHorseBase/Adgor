@@ -879,7 +879,11 @@ li {
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
+  .servicesObject {
+    width: 100%;
+  }
+
   .serviceDescription {
     width: 100%;
   }

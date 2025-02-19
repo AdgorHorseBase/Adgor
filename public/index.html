@@ -58,6 +58,8 @@
 
       window.addEventListener('scroll', updateMenu);
 
+      window.addEventListener('resize', updateMenu);
+
       function updateMenu() {
         const menu = document.querySelector('.Menu') || document.querySelector('.menu-container');
         if(!menu) {
@@ -67,70 +69,32 @@
           ...menu.querySelector('.menuItemsContainer')?.children || [],
           ...menu.querySelector('.menuEndContainer')?.children || []
         ];
-        const mobileMenuItems = [
+        const mobileMenuItems = menuItems.length === 0 && [
           menu.querySelector('.expand-button') || [],
           menu.querySelector('.linkButton') || []
         ]
+
         menu.style.transition = 'background-color 0.3s ease-in-out';
         if (window.scrollY > 50) {
           // menu.classList.add('solid');
           menu.style.backgroundColor = 'white';
 
           if(menuItems.length === 0) {
-            if(mobileMenuItems.length === 0) {
-              return;
-            }
-
-            for(let i = 0; i < mobileMenuItems.length; i++) {
-              if(mobileMenuItems[i].style) {
-                mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
-                mobileMenuItems[i].style.color = 'black';
-                mobileMenuItems[i].style.borderColor = 'black';
-                mobileMenuItems[i].style.textShadow = 'none';
-                mobileMenuItems[i].style.boxShadow = 'none';
-                const svg = mobileMenuItems[i].querySelector('svg');
-                if (svg) {
-                  svg.style.filter = 'none';
+            if(mobileMenuItems.length > 0) {
+              for(let i = 0; i < mobileMenuItems.length; i++) {
+                if(mobileMenuItems[i].style) {
+                  mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
+                  mobileMenuItems[i].style.color = 'black';
+                  mobileMenuItems[i].style.borderColor = 'black';
+                  mobileMenuItems[i].style.textShadow = 'none';
+                  mobileMenuItems[i].style.boxShadow = 'none';
+                  const svg = mobileMenuItems[i].querySelector('svg');
+                  if (svg) {
+                    svg.style.filter = 'none';
+                  }
                 }
-              }
-
-              if(mobileMenuItems[i].className == 'linkButton') {
-                mobileMenuItems[i].addEventListener('mouseover', function() {
-                  this.style.backgroundColor = 'black';
-                  this.style.color = 'white';
-                  this.style.borderColor = 'transparent'
-                });
-                mobileMenuItems[i].addEventListener('mouseout', function() {
-                  this.style.backgroundColor = 'transparent';
-                  this.style.color = 'black';
-                  this.style.borderColor = 'black';
-                });
-              }
-            }
-            
-            return;
-          }
-          for(let i = 0; i < menuItems.length; i++) {
-            menuItems[i].style.transition = "all 0.3s ease-in-out";
-            menuItems[i].style.color = 'black';
-            menuItems[i].style.textShadow = 'none';
-          }
-        } else {
-          // menu.classList.remove('solid');
-          menu.style.backgroundColor = 'transparent';
-          if(menuItems.length === 0) {
-            if(mobileMenuItems.length === 0) {
-              return;
-            }
-
-            for(let i = 0; i < mobileMenuItems.length; i++) {
-              if(mobileMenuItems[i].style) {
-                mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
-                mobileMenuItems[i].style.color = 'white';
-                mobileMenuItems[i].style.borderColor = 'white';
-                mobileMenuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+  
                 if(mobileMenuItems[i].className == 'linkButton') {
-                  mobileMenuItems[i].style.boxShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
                   mobileMenuItems[i].addEventListener('mouseover', function() {
                     this.style.backgroundColor = 'black';
                     this.style.color = 'white';
@@ -138,23 +102,58 @@
                   });
                   mobileMenuItems[i].addEventListener('mouseout', function() {
                     this.style.backgroundColor = 'transparent';
-                    this.style.color = 'white';
-                    this.style.borderColor = 'white';
+                    this.style.color = 'black';
+                    this.style.borderColor = 'black';
                   });
-                }
-                const svg = mobileMenuItems[i].querySelector('svg');
-                if (svg) {
-                  svg.style.filter = 'drop-shadow(0px 2px 6px rgba(0, 0, 0, .8))';
                 }
               }
             }
 
-            return;
+          } else {
+            for(let i = 0; i < menuItems.length; i++) {
+              menuItems[i].style.transition = "all 0.3s ease-in-out";
+              menuItems[i].style.color = 'black';
+              menuItems[i].style.textShadow = 'none';
+            }
           }
-          for(let i = 0; i < menuItems.length; i++) {
-            menuItems[i].style.transition = "all 0.3s ease-in-out";
-            menuItems[i].style.color = 'white';
-            menuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+        } else {
+          // menu.classList.remove('solid');
+          menu.style.backgroundColor = 'transparent';
+          if(menuItems.length === 0) {
+            if(mobileMenuItems.length > 0) {
+              for(let i = 0; i < mobileMenuItems.length; i++) {
+                if(mobileMenuItems[i].style) {
+                  mobileMenuItems[i].style.transition = "all 0.3s ease-in-out";
+                  mobileMenuItems[i].style.color = 'white';
+                  mobileMenuItems[i].style.borderColor = 'white';
+                  mobileMenuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+                  if(mobileMenuItems[i].className == 'linkButton') {
+                    mobileMenuItems[i].style.boxShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+                    mobileMenuItems[i].addEventListener('mouseover', function() {
+                      this.style.backgroundColor = 'black';
+                      this.style.color = 'white';
+                      this.style.borderColor = 'transparent'
+                    });
+                    mobileMenuItems[i].addEventListener('mouseout', function() {
+                      this.style.backgroundColor = 'transparent';
+                      this.style.color = 'white';
+                      this.style.borderColor = 'white';
+                    });
+                  }
+                  const svg = mobileMenuItems[i].querySelector('svg');
+                  if (svg) {
+                    svg.style.filter = 'drop-shadow(0px 2px 6px rgba(0, 0, 0, .8))';
+                  }
+                }
+              }
+            }
+
+          } else {
+            for(let i = 0; i < menuItems.length; i++) {
+              menuItems[i].style.transition = "all 0.3s ease-in-out";
+              menuItems[i].style.color = 'white';
+              menuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+            }
           }
         }
       }

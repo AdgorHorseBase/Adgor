@@ -13,7 +13,7 @@
 .footer-container {
   display: flex;
   flex-direction: row;
-  padding: 48px 24px;
+  padding: 72px 24px;
   background-color: #1B1B1B;
   overflow: hidden;
   position: relative;

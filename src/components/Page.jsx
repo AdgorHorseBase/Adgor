@@ -14,7 +14,7 @@ const MenuSections = () => {
   const [loadingMenu, setLoadingMenu] = useState(true);
   const [structure, setStruct] = useState(false);
   const [lang, setLang] = useState("bg");
-  const desktopMenu = useMediaQuery("(min-width: 750px)");
+  const desktopMenu = useMediaQuery("(min-width: 1400px)");
   const titlesFetched = useRef(false);
 
   useEffect(() => {

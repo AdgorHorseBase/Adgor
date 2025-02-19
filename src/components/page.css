@@ -577,6 +577,16 @@ h1 {
   text-align: left;
 }
 
+@media screen and (max-width: 800px) {
+  .menu-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+}
+
 .menuLogoButton {
   height: 70px;
 }

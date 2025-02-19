@@ -571,8 +571,9 @@ li {
     height: fit-content;
   }
 
-  #fourSectionsObject:last-child {
+  #fourSectionsObject:first-child {
     flex-direction: column-reverse;
+    padding: 10vw 0;
   }
 
   #foundationTitle {
@@ -602,7 +603,11 @@ li {
   }
 
   #foundationImage > img {
+    width: 85%;
     height: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
   }
 }
 

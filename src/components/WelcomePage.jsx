@@ -11,7 +11,7 @@ import StepsEn from "./images/StepsEn.webp";
 // import StepsSmall from "./images/StepsSmall.webp";
 import StepsSmallEn from "./images/StepsSmallEn.webp";
 import StepsMobile from "./images/StepsMobile.webp";
-import LineHores from "./images/twohorses.webp";
+// import LineHores from "./images/twohorses.webp";
 // import Foundation from "./images/Foundation.webp";
 // import FoundationCutUp from "./images/FoundationCutUp.png";
 // import FoundationCutDown from "./images/FoundatonCutDown.png";

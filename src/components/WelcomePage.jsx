@@ -278,7 +278,7 @@ const WelcomePage = () => {
           ) : (
             <img
               // src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
-              src={StepsSmallEn}
+              src={StepsMobile}
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}

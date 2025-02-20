@@ -6,10 +6,11 @@ import AdgorVideo from "./images/adgorStartingVideo.webm";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.webp";
 import Pansion from "./images/PansionIMG.webp";
 import Ezda from "./images/EzdaIMG.webp";
-import Steps from "./images/Steps.webp";
+// import Steps from "./images/Steps.webp";
 import StepsEn from "./images/StepsEn.webp";
-import StepsSmall from "./images/StepsSmall.webp";
+// import StepsSmall from "./images/StepsSmall.webp";
 import StepsSmallEn from "./images/StepsSmallEn.webp";
+import StepsMobile from "./images/StepsMobile.webp";
 import LineHores from "./images/twohorses.webp";
 // import Foundation from "./images/Foundation.webp";
 // import FoundationCutUp from "./images/FoundationCutUp.png";
@@ -33,6 +34,7 @@ import { useTranslation } from "react-i18next";
 import { VoucherForm } from "./Vouchers";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useMediaQuery } from "@mui/material";
 
 const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) => {
   if (!isOpen) return null;
@@ -58,6 +60,8 @@ const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) =
 const WelcomePage = () => {
   const { t, i18n } = useTranslation();
   const [openGallery, setOpenGallery] = useState({ isOpen: false, images: [], currentIndex: 0 });
+  const isDesktop = useMediaQuery('(min-width: 800px)');
+  const isTablet = useMediaQuery('(min-width: 500px)');
 
   useEffect(() => {
     const GetGalleries = () => {
@@ -258,38 +262,27 @@ const WelcomePage = () => {
         </a>
       </div>
 
-      {window.innerWidth > 800 ? (
-        <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+      {isDesktop ? (
+        // <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+        <img src={StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
       ) : (
         <>
-          {window.innerWidth > 500 ? (
+          {isTablet ? (
             <img
-              src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
+              // src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
+              src={StepsSmallEn}
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}
             />
           ) : (
-            <div>
-              <div className="alignCenter">
-                <p id="WantToRide">{t("youWantToRide")}</p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontSize: "6vw",
-                }}
-              >
-                <ul>
-                  <li>{t("callUs")}</li>
-                  <li>{t("makeAnAppointment")}</li>
-                  <li>{t("enjoyTheRide")}</li>
-                </ul>
-              </div>
-              <img src={LineHores} alt="" width={"100%"} />
-            </div>
+            <img
+              // src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
+              src={StepsSmallEn}
+              alt=""
+              width={"100%"}
+              style={{ margin: "25px 0px" }}
+            />
           )}
         </>
       )}

@@ -263,7 +263,7 @@ const WelcomePage = () => {
         </a>
       </div>
 
-      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px"}}>{i18n.language === "bg" ? "Искаш да язадиш?" : "Want to ride?"}</p>
+      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px"}}>{i18n.language === "bg" ? "Искате да язадите?" : "Want to ride?"}</p>
       {isDesktop ? (
         <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
       ) : (

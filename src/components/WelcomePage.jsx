@@ -6,11 +6,12 @@ import AdgorVideo from "./images/adgorStartingVideo.webm";
 import TrenirovkiNaKone from "./images/TrenirovkiNaKoneIMG.webp";
 import Pansion from "./images/PansionIMG.webp";
 import Ezda from "./images/EzdaIMG.webp";
-// import Steps from "./images/Steps.webp";
+import Steps from "./images/Steps.webp";
 import StepsEn from "./images/StepsEn.webp";
-// import StepsSmall from "./images/StepsSmall.webp";
+import StepsSmall from "./images/StepsSmall.webp";
 import StepsSmallEn from "./images/StepsSmallEn.webp";
 import StepsMobile from "./images/StepsMobile.webp";
+import StepsMobileEn from "./images/StepsMobileEn.webp";
 // import LineHores from "./images/twohorses.webp";
 // import Foundation from "./images/Foundation.webp";
 // import FoundationCutUp from "./images/FoundationCutUp.png";
@@ -262,24 +263,21 @@ const WelcomePage = () => {
         </a>
       </div>
 
-      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px"}}>Want to ride?</p>
+      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px"}}>{i18n.language === "bg" ? "Искаш да язадиш?" : "Want to ride?"}</p>
       {isDesktop ? (
-        // <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
-        <img src={StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+        <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
       ) : (
         <>
           {isTablet ? (
             <img
-              // src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
-              src={StepsSmallEn}
+              src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}
             />
           ) : (
             <img
-              // src={i18n.language === "bg" ? StepsSmall : StepsSmallEn}
-              src={StepsMobile}
+              src={i18n.language === "bg" ? StepsMobile : StepsMobileEn}
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}

@@ -477,7 +477,7 @@ function Page() {
             isAppending = true;
             appendImages(gallery);
             isAppending = false;
-          } else if (gallery.scrollLeft === 0 && !isPrepending && !isAppending) {
+          } else if (gallery.scrollLeft <= 0 && !isAppending) {
             isPrepending = true;
             if(isDown) {
               isDown = false;

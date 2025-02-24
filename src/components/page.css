@@ -665,7 +665,7 @@ h1 {
 }
 
 .gallery-item {
-  width: 25%;
+  min-width: 25%;
   aspect-ratio: 1/1;
   user-select: none;
   /* pointer-events: none; */
@@ -673,21 +673,21 @@ h1 {
 
 @media screen and (max-width: 1000px) {
   .gallery-container {
-    height: 33.33vw;
+    min-height: 33.33vw;
   }
 
   .gallery-item {
-    width: 33.33%;
+    min-width: 33.33%;
   }
 }
 
 @media screen and (max-width: 700px) {
   .gallery-container {
-    height: 50vw;
+    min-height: 50vw;
   }
 
   .gallery-item {
-    width: 50%;
+    min-width: 50%;
   }
 }
 

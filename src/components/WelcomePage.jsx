@@ -209,7 +209,7 @@ const WelcomePage = () => {
       />
 
       <div id="Header">
-        <video autoPlay muted playsInline id="HeaderVideo" preload="metadata" onEnded={(e) => e.target.play()} onCanPlayThrough={(e) => e.target.play()}>
+        <video autoPlay muted playsInline loop id="HeaderVideo" preload="metadata" onEnded={(e) => e.target.play()} onCanPlayThrough={(e) => e.target.play()} disablePictureInPicture>
           <source src={AdgorVideo} type="video/webm" />
         </video>
         <div id="Titles">
@@ -263,9 +263,9 @@ const WelcomePage = () => {
         </a>
       </div>
 
-      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px"}}>{i18n.language === "bg" ? "Искате да язадите?" : "Want to ride?"}</p>
+      <p className="centerTitle" style={{marginBottom: "0", marginTop: isDesktop ? "10vw" : "100px", maxWidth: "60%"}}>{i18n.language === "bg" ? "Искате да яздите?" : "Want to ride?"}</p>
       {isDesktop ? (
-        <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} />
+        <img src={i18n.language === "bg" ? Steps : StepsEn} alt="" width={"100%"} style={{ margin: "50px 0px" }} draggable={false} />
       ) : (
         <>
           {isTablet ? (
@@ -274,6 +274,7 @@ const WelcomePage = () => {
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}
+              draggable={false}
             />
           ) : (
             <img
@@ -281,6 +282,7 @@ const WelcomePage = () => {
               alt=""
               width={"100%"}
               style={{ margin: "25px 0px" }}
+              draggable={false}
             />
           )}
         </>

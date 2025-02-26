@@ -1097,6 +1097,10 @@ border:none;
     background-color: transparent;
 }
 
+#voucherFormSubmit > .linkButton:hover {
+    background-color: black;
+}
+
 .cart {
     position: fixed;
     top: 82px;

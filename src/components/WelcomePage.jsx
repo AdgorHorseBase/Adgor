@@ -209,7 +209,7 @@ const WelcomePage = () => {
       />
 
       <div id="Header">
-        <video autoPlay muted playsInline id="HeaderVideo" onEnded={(e) => e.target.play()} preload="auto" onCanPlayThrough={(e) => e.target.play()}>
+        <video autoPlay muted playsInline id="HeaderVideo" preload="metadata" onEnded={(e) => e.target.play()} onCanPlayThrough={(e) => e.target.play()}>
           <source src={AdgorVideo} type="video/webm" />
         </video>
         <div id="Titles">

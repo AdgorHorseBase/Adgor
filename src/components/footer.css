@@ -132,11 +132,8 @@
   .contacts {
     flex-direction: column;
     justify-content: center;
-  }
-
-  .contacts > div {
-    /* width: 100%; */
-    margin: 0 auto
+    width: fit-content;
+    margin: 0 auto;
   }
 
   .contacts > div:first-child {
@@ -240,4 +237,8 @@
   #footerSvg {
     transform: translateX(calc(-50vw + 50%));
   }
+}
+
+#footerEmail {
+  margin-top: 31px;
 }

@@ -89,7 +89,7 @@ const Footer = () => {
               <p>0887 467 527</p>
               <p>0888 877 056</p>
               <p>0888 014 425</p>
-              <p className="darker">Email:</p>
+              <p id="footerEmail" className="darker">Email:</p>
               <p className="email">adgor@abv.bg</p>
             </div>
           </div>

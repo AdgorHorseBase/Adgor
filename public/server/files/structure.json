@@ -35,6 +35,12 @@
     "place": 1,
     "directoryBg": "За нас"
   },
+  "\\asdf": {
+    "type": "file",
+    "titleBg": "Стефанеее тази страница е за теб",
+    "titleEn": "Стефанеее тази страница е за теб",
+    "place": 1
+  },
   "\\blog": {
     "type": "file",
     "titleBg": "Блог",

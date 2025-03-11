@@ -1,5 +1,5 @@
 .product {
-    width: 80%;
+    width: 80vw;
     margin: 0 auto;
 }
 
@@ -33,8 +33,11 @@
 }
 
 .productTitle {
-    text-align: left;
+    float: left;
+    margin-left: 8.5vw;
     margin-bottom: 12px;
+    margin-top: 100px;
+
 }
 
 .productDescription {
@@ -45,6 +48,8 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 12px;
+    margin-left: 8.5vw;
+    margin-top: 60px;
 }
 
 .productButtons button {
@@ -56,3 +61,173 @@
     border-color: #29160F;
     color: white;
 }
+
+#productImgPage{
+    margin-top: 50px;
+margin-left: 160px;
+
+}
+
+.productDescription{
+    margin-top: 210px;
+    width: 30vw;
+    margin-left: 8.5vw;
+    font-size: 18px;
+}
+
+.productQuantity{
+    margin-left: 8.5vw;
+}
+
+#number{
+padding-left: 0px;
+padding-right: 10px;
+}
+
+.productAddToCart{
+    float: left;
+    margin-left: 25vw;
+    margin-top: -40px;
+    z-index: 1;
+    position: relative;
+}
+
+#youMay{
+    width: 100%;
+    text-align: center;
+
+    margin-top: 170px;
+    font-size: 28px;
+    
+}
+
+#underlineYouMay{
+    width: 320px;
+    height: 2px;
+    background-color: #1f1f1f;
+
+    margin-top:-15px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.relatedProductsTitle{
+    padding-bottom: 50px;
+}
+
+.plane{
+    width: 30px;
+    margin-top: -30px;
+    margin-left: -130px;
+    position: absolute;
+    z-index: 0;
+}
+
+.fly {
+    animation: flyToCart 2s linear;
+  }
+
+  #youMayImg{
+    width: 300px;
+    height: 400px;
+
+  }
+  
+  @keyframes flyToCart {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    10%{
+        transform: translate(50px, -50px) rotate(20deg) scale(1);
+    }
+    20%{
+        transform: translate(150px, -90px) rotate(40deg) scale(1.2);
+    }
+    30%{
+        transform: translate(250px, -50px) rotate(60deg) scale(1.4);
+    }
+    40%{
+        transform: translate(350px, -10px) rotate(80deg) scale(1.6);
+    }
+    50%{
+        transform: translate(250px, 40px) rotate(180deg) scale(1.8);
+    }
+    60%{
+        transform: translate(200px, -10px) rotate(250deg) scale(1.6);
+    }
+    70%{
+        transform: translate(150px, -30px) rotate(300deg) scale(1.4);
+    }
+    80%{
+        transform: translate(120px, -50px) rotate(320deg) scale(1.2);
+    }
+    90%{
+        transform: translate(300px, -250px) rotate(350deg) scale(1);
+    }
+    100% {
+        transform: translate(420px, -430px) rotate(380deg) scale(1);
+    }
+  }
+  
+
+  .productTypes{
+    margin-left: 8.5vw;
+    margin-top: -10px;
+  }
+
+  @media (max-width: 768px) {
+
+#productImgPage{
+    width: 50vw;
+    margin-left: 16.5vw;
+    margin-top: 0px;
+}
+
+.productTitle{
+    width: 250px;
+    font-size: 25px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.productDescription{
+    width: 300px;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-top: 55px;
+}
+
+.productAddToCart{
+    margin-left: 42vw;
+    margin-top: -75px;
+    width: 140px;
+    margin-right: 0;
+    transition: transform 4s;
+}
+
+.productAddToCart.clicked {
+    background-color: blue;
+}
+
+.productPrice{
+    margin-left: 6vw;
+}
+
+.productQuantity{
+    margin-left: 5vw;
+}
+
+#youMayImg{
+    width: 150px;
+    height: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3px;
+
+  }
+
+  }
+
+ 

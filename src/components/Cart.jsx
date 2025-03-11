@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaShoppingCart, FaTimes } from 'react-icons/fa';
+import './Cart.css';
 
 const Cart = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -61,16 +62,16 @@ const Cart = () => {
                         {!Array.isArray(cartItems) ? (Object.keys(cartItems).map(key => cartItems[key]).map((item) => {
                             return (
                                 <div key={item.id} className="cartItem">
-                                    <img src={`/server/files/images/${item.imagePath}`} alt={item.name} />
-                                    <div>
-                                        <h4>{lang === "bg" ? item.parentNameBg ? item.parentNameBg + " - " + item.nameBg : item.nameBg : item.parentNameEn ? item.parentNameEn + " - " + item.nameEn : item.nameEn}</h4>
-                                        <p>{item.price} лв</p>
-                                        <p>Quantity: {item.quantity}</p>
+                                    <img id='cartProductImg' src={`/server/files/images/${item.imagePath}`} alt={item.name} />
+                                    <div id='cartItemDesc'>
+                                        <h4 id='cartProductName'>{lang === "bg" ? item.parentNameBg ? item.parentNameBg + " - " + item.nameBg : item.nameBg : item.parentNameEn ? item.parentNameEn + " - " + item.nameEn : item.nameEn}</h4>
+                                        <p id='cartProductPrice'>{item.price} лв</p>
+                                        <p id='cartProductQuantity'>Quantity: {item.quantity}</p>
                                     </div>
                                 </div>
                             )
                         })) : (
-                            <p>{lang === "bg" ? "Количката е празна" : "Cart is empty"}</p>
+                            <p id='CartEmpty'>{lang === "bg" ? "Количката е празна" : "Cart is empty"}</p>
                         )}
                     </div>
                     <p className='total'>
@@ -86,7 +87,7 @@ const Cart = () => {
 
             {showForm && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <div style={{ backgroundColor: '#e5d5c0', padding: '20px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative', maxHeight: '80%', overflowY: 'auto' }}>
+                    <div style={{ backgroundColor: '#e5d5c0', padding: '25px', borderRadius: '8px', width: '80%', maxWidth: '500px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', position: 'relative', maxHeight: '80%', overflowY: 'auto' }}>
                         <button 
                             onClick={handleCloseForm} 
                             style={{ 

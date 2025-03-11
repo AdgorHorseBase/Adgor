@@ -1,0 +1,112 @@
+#title{
+   margin-top: 10vw;
+   text-align: center;
+   margin-left: 0;
+   padding-bottom: 2vw;
+}
+
+#productVoucher{
+    background-color: rgba(212, 177, 131, 0.1);
+    padding: 45px;
+    padding-bottom: 0px;
+    gap: 50px;
+    border: solid black 1px;
+    text-align: left;
+    transform: scale(1);
+    transition: 0.25s;
+}
+
+#productVoucher:hover{
+    transform: scale(1.01);
+}
+
+
+
+
+#productImg{
+    width: 300px;
+    height: 400px;
+    padding-left: 10px;
+    padding-right: 30px;
+    padding-bottom: 35px;
+}
+
+.productBottom{
+    margin-left: -45px;
+    width: 100%;
+
+    background-color: #CCB7A5;
+    padding-right: 90px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+
+#productName{
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 25px;
+    margin-left: 40px;
+    padding-top: 10px;
+
+}
+
+#productPrice{
+    margin-top: 50px;
+    padding-bottom: 0;
+    font-size: 18px;
+    margin-left: 40px;
+    bottom: 0;
+}
+
+
+#seeMoreProduct{
+    
+    float: right;
+    margin-top: -45px;
+    font-size: 12px;
+    margin-right: -50px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 6px;
+    padding-top: 8px;
+    border-radius: 15px;
+    border: solid 1.8px black;
+}
+
+#seeMoreProduct:hover{
+transition: 0.2s ease-in-out;
+color: #FAFAFA;
+background-color: #26190D;
+
+}
+
+
+@media (max-width: 768px) {
+   #title{
+    margin-top: 120px;
+    padding-bottom: 30px;
+   }
+
+   #productVoucher{
+    width: 50vw;
+
+   }
+
+   #productImg{
+        width: 150px;
+        height: 200px;
+        margin-left: -10px;
+   }
+
+   .productBottom{
+    width: 77%;
+   }
+
+   #seeMoreProduct{
+    margin-right: -70px;
+   }
+}
+

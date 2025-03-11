@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 import Cart from './Cart';
+import './Products.css';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -41,19 +42,23 @@ const Products = () => {
             <div id="StickyMenu">
                 <MenuSections />
             </div>
-            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Подаръци" : "Gifts"}</h1>
-            <div style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '20px', width: "80%", margin: "auto", marginBottom: "72px" }}>
+            <h1 id='title' >{lang === "bg" ? "Подаръци" : "Gifts"}</h1>
+            <div className='holder' style={{ display: 'flex', justifyContent: "center", flexWrap: 'wrap', gap: '100px', width: "80%", margin: "auto", marginBottom: "72px" }}>
                 {products.length === 0 ? <div>{lang === "bg" ? "Подаръците идват скоро" : "Gifts coming soon"}</div> : products.map((item) => (
                     <div id='productVoucher' key={item.id} className='item cursorPointer' onClick={() => document.location.href = `/product/${item.id}`}>
                         {item.imagePath && (
-                            <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={"/server/files/images/"+item.imagePath} width="100%" />
+                            <img id='productImg' alt=""  src={"/server/files/images/"+item.imagePath}  />
                         )}
+                        <div className="productBottom">
                         {(item.nameBg || item.nameEn) && (
-                            <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? item.nameBg : item.nameEn}</h2>
+                            <h2 id='productName' >{lang === "bg" ? item.nameBg : item.nameEn}</h2>
                         )}
                         {item.price && (
-                            <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{item.price} лв</h3>
+                            <h3 id='productPrice' >{item.price} лв</h3>
                         )}
+                        <a id='seeMoreProduct'>{lang === "bg" ? "Виж повече" : "See more"}</a>
+                        </div>
+                        
                     </div>
                 ))}
             </div>

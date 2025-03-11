@@ -1,0 +1,43 @@
+#title{
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+
+#voucherForm{
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+#voucherType{
+    margin-left: 0;
+    color: blue;
+}
+
+#prods{
+    margin-top: 50px;
+}
+
+#youMayImg{
+    width: 300px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+#productVoucher{
+    padding-right: 0;
+    padding-top: 30px;
+}
+
+#youMayImg{
+    width: 150px;
+    height: 200px;
+    padding-left: 3px;
+}
+
+}

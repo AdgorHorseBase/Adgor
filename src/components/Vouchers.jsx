@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 import Cart from './Cart';
 import voucherFormImage from './images/forUsBack.webp';
+import './Vouchers.css'
 
 const VoucherForm = ({lang}) => {
     return (
@@ -93,22 +94,18 @@ const Vouchers = () => {
             <div id="StickyMenu">
                 <MenuSections />
             </div>
-            <h1 id='title' style={{textAlign: "left", marginBottom: "24px"}}>{lang === "bg" ? "Ваучери" : "Vouchers"}</h1>
+            
+            <h1 id='title'>{lang === "bg" ? "Ваучери" : "Vouchers"}</h1>
 
             <VoucherForm lang={lang} />
 
-            <h2 id='title' style={{fontSize: "30px", marginTop: "22px", marginBottom: "20px"}}>{lang === "bg" ? "Може да ви хареса" : "You will also like"}:</h2>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "20px", width: "80%", margin: "auto", marginBottom: "72px" }}>
+            <h2 id='youMay' >{lang === "bg" ? "Може да ви хареса" : "You may also like"}:</h2>
+            <div id='underlineYouMay'></div>
+            <div id='prods' style={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "50px", marginBottom: "24px" }}>
             {products.map((product) => (
                 <div key={product.id} className='item cursorPointer' id="productVoucher" onClick={() => document.location.href = `/product/${product.id}`}>
                     {product.imagePath && (
-                        <img alt="" style={{width: "300px", height: "400px", padding: "0", margin: "0"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
-                    )}
-                    {(product.nameBg || product.nameEn) && (
-                        <h2 style={{margin: "0", textAlign: "left", fontSize: "26px"}}>{lang === "bg" ? product.nameBg : product.nameEn}</h2>
-                    )}
-                    {product.price && (
-                        <h3 style={{margin: "0", textAlign: "left", fontSize: "20px"}}>{product.price} лв</h3>
+                        <img id='youMayImg' alt="" src={`/server/files/images/${product.imagePath}`} width="100%" />
                     )}
                 </div>
             ))}

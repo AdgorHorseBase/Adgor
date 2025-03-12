@@ -56,7 +56,7 @@ const Products = () => {
                         {item.price && (
                             <h3 id='productPrice' >{item.price} лв</h3>
                         )}
-                        <a id='seeMoreProduct'>{lang === "bg" ? "Виж повече" : "See more"}</a>
+                        <a id='seeMoreProduct' href='/'>{lang === "bg" ? "Виж повече" : "See more"}</a>
                         </div>
                         
                     </div>

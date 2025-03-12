@@ -4,7 +4,7 @@ import axios from 'axios';
 import { MenuSections } from './Page';
 import "./productPage.css";
 import Cart from './Cart';
-import planeImg from './images/plane.svg'
+// import planeImg from './images/plane.svg'
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -37,7 +37,7 @@ const ProductPage = () => {
         }
     }, [products, id]);
 
-    const [animation, setAnimation] = useState(false);
+    // const [animation, setAnimation] = useState(false);
  
 
     const addToCart = () => {

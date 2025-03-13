@@ -17,33 +17,38 @@ body {
 
 h1 {
   font-family: Source Serif Pro;
-  margin-bottom: 50px;
-  font-size: 2.5em;
+  margin-bottom: 1.5vw;
+  font-size: 3em;
   text-align: center;
   color: #29160f;
 }
 
 #pageTitle {
   font-family: Source Serif Pro;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  padding-top: 4vw;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 3vw;
   text-align: left;
-  font-size: 2em;
+  font-size: 4em;
   text-align: center;
   color: #29160f;
 }
 
 #pageText {
-  margin: 12px 10%;
-  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
   text-align: center;
   font-style: italic;
+  margin-top: 0;
 }
 
 #pageOneImg {
-  margin: 18px 0;
-  margin-left: 10%;
-  width: 80%;
+  margin-top: 2vw;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  width: 70vw;
   border-radius: 10px;
 }
 
@@ -54,20 +59,20 @@ h1 {
 }
 
 #pageTwoImgFirst {
-  margin-top: 2vh;
+  margin-top: 2vw;
   margin-bottom: 2vh;
-  width: 38vw;
-  width: 38vw;
+  width: 34vw;
   border-radius: 10px;
+  margin-left: 5vw;
 }
 
 #pageTwoImgSecond {
-  margin-top: 2vh;
+  margin-left: 2vw;
+  margin-top: 2vw;
   margin-bottom: 2vh;
-  width: 38vw;
-  margin-left: 2.5vw;
-  width: 38vw;
+  width: 34vw;
   border-radius: 10px;
+
 }
 
 .pageFourImg {
@@ -78,36 +83,37 @@ h1 {
 }
 
 #pageFourImgFirst {
-  margin-top: 2vh;
-  margin-bottom: 6px;
-  width: 38vw;
-  width: 38vw;
+  margin-left: 5vw;
+  margin-top: 2vw;
+  width: 34vw;
   border-radius: 10px;
 }
 
 #pageFourImgSecond {
-  margin-top: 2vh;
-  margin-bottom: 6px;
-  width: 38vw;
-  margin-left: 2.5vw;
-  width: 38vw;
+  margin-top: 2vw;
+  width: 34vw;
+  margin-left: 2vw;
   border-radius: 10px;
+  height: auto;
+  max-height: calc(32vw * 3/4);
+  object-fit: contain;
+
 }
 
 #pageFourImgThird {
-  margin-top: 6px;
-  margin-bottom: 2vh;
-  width: 38vw;
-  width: 38vw;
+  margin-bottom: 2vw;
+  margin-left: 5vw;
+  margin-top: 0vw;
+  width: 34vw;
   border-radius: 10px;
+  margin-top: 1vw;
 }
 
 #pageFourImgFourth {
-  margin-top: 6px;
-  margin-bottom: 2vh;
-  width: 38vw;
-  margin-left: 2.5vw;
-  width: 38vw;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
+  width: 34vw;
+  margin-left: 2vw;
   border-radius: 10px;
 }
 
@@ -119,28 +125,27 @@ h1 {
 }
 
 #pageVideo {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  width: 80%;
-  margin: 12px 10%;
+  width: 70vw;
+  margin-left: 15vw;
+  margin-right: 15vw;
   height: auto;
   border-radius: 10px;
+  margin-bottom: 2vw;
 }
 
 #pageYouTube {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  width: 80%;
+  margin-left: 15vw;
+  margin-top: 2vw;
+  width: 70vw;
   height: calc(80vw * 0.5625);
-  margin: 12px 10%;
   border-radius: 10px;
   border: none;
 }
 
 #pageImageText {
   position: relative;
-  width: 80%;
-  margin-left: 10%;
+  width: 70vw;
+  margin-left: 15vw;
 }
 
 #pageImageText img {
@@ -158,40 +163,54 @@ h1 {
   word-wrap: break-word;
   text-align: center;
   color: white;
-  font-size: 30px;
+  font-size: 2.5em;
   font-weight: bold;
   padding: 10px;
 }
 
 #pageLine {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  width: 80vw;
+  margin-top: 1vw;
+  width: 70vw;
   height: 0.3vh;
   background-color: #29160f;
-  margin-left: 10vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pageFormated {
-  margin: 0 10%;
-  width: 80%;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  width: 70vw;
 }
 
 .pageHtml {
-  margin-left: 10vw;
-  width: 80vw;
+  padding-top: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
 }
 
 @media screen and (min-width: 750px) {
   #pageTextImageLeft {
-    margin: 12px 10%;
+    margin-left: 15vw;
     overflow: hidden;
+    margin-top: 2vw;
   }
   
   #pageTextImageLeft .imageContainer {
     float: left;
-    margin: 0 10px 0px 0;
-    width: 40%;
+    margin-top: 2vw;
+    width: 35vw;
+
+  }
+
+  #pageTextImageLeft  span{
+    float: left;
+    margin-top: 5vw;
+    width: 33vw;
+    margin-left: 2vw;
+    color: blue;
+
   }
   
   #pageTextImageLeft .imageContainer img {
@@ -200,19 +219,31 @@ h1 {
   }
   
   #pageTextImageRight {
-    margin: 12px 0;
+    margin-right: 15vw;
     overflow: hidden;
   }
   
   #pageTextImageRight .imageContainer {
     float: right;
-    margin: 10px 0 0 0;
-    width: 40%;
+    width: 35vw;
   }
   
   #pageTextImageRight .imageContainer img {
     width: 100%;
     margin: 0;
+    height: auto;
+    max-height: calc(34vw * 3 / 4);
+    object-fit: contain;
+    margin-bottom: 3vw;
+  }
+
+  #pageTextImageRight  span{
+    float: right;
+    margin-top: 5vw;
+    width: 33vw;
+    margin-right: 2vw;
+    color: blue;
+
   }
 }
 

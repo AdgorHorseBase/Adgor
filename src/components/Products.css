@@ -74,6 +74,8 @@
     padding-top: 8px;
     border-radius: 15px;
     border: solid 1.8px black;
+    text-decoration: none;
+    color: black;
 }
 
 #seeMoreProduct:hover{

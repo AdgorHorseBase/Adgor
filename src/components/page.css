@@ -39,6 +39,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   width: 70vw;
+  font-size: 1em;
   text-align: center;
   font-style: italic;
   margin-top: 0;
@@ -163,7 +164,7 @@ h1 {
   word-wrap: break-word;
   text-align: center;
   color: white;
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: bold;
   padding: 10px;
 }
@@ -254,6 +255,7 @@ h1 {
   
   #pageTextImageLeft img, #pageTextImageRight img {
     width: 100%;
+    
   }
 }
 
@@ -579,12 +581,21 @@ h1 {
 .next { right: 0; }
 
 #sections {
+  width: 15vw;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
   right: 0;
   margin-top: 0;
   z-index: 10000;
+  background-color: rgba(242, 241, 235, 0.4);
+  filter: drop-shadow(0px 0px 15px rgb(255, 255, 255));
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+
+#sections:hover{
+  transform: scale(1.1) translateX(-1vw) translateY(-1.2vw);
 }
 
 #sections div {
@@ -593,11 +604,8 @@ h1 {
   margin: 18px;
   text-align: right;
   transition: all 0.3s ease;
-  color: black;
-}
-
-#sections div:hover {
-  transform: scale(1.5) translateX(-18px);
+  color: rgba(0, 0, 0, 0.8);
+  
 }
 
 #menuLogo {
@@ -867,3 +875,47 @@ h1 {
   border-color: #243d30;
   background-color: #E6DED1;
 }
+
+@media (max-width: 768px) {
+#pageTitle{
+  font-size: 2.5em;
+}
+
+#pageText{
+width: 75vw;
+font-size: 0.8em;
+}
+
+#pageOneImg{
+  width: 75vw;
+  margin-left: 12.5vw;
+  margin-right: 12.5vw;
+}
+
+#sections{
+  margin-right: 0vw;
+  width: 20vw;
+
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+}
+
+#sections div{
+  font-size: 0.7em;
+  margin-right: 5vw;
+}
+
+#pageLine{
+  width: 78vw;
+}
+
+#pageVideo{
+  width: 75vw;
+  margin-left: 12.5vw;
+}
+
+#pageOneImg{
+  width: 75vw;
+  margin-left: 12.5vw;
+}
+
+} 

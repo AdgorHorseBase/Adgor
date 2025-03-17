@@ -39,10 +39,12 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   width: 70vw;
-  font-size: 1em;
+  font-size: 1.2em;
   text-align: center;
   font-style: italic;
   margin-top: 0;
+  padding-top: 2vw;
+  padding-bottom: 2vw;
 }
 
 #pageOneImg {
@@ -141,6 +143,7 @@ h1 {
   height: calc(80vw * 0.5625);
   border-radius: 10px;
   border: none;
+ margin-bottom: 2vw;
 }
 
 #pageImageText {
@@ -151,11 +154,11 @@ h1 {
 
 #pageImageText img {
   width: 100%;
+  border-radius: 10px;
 }
 
 #pageImageText p {
   font-family: 'Source Serif Pro';
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -164,6 +167,7 @@ h1 {
   word-wrap: break-word;
   text-align: center;
   color: white;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, .8);
   font-size: 3em;
   font-weight: bold;
   padding: 10px;
@@ -210,8 +214,6 @@ h1 {
     margin-top: 5vw;
     width: 33vw;
     margin-left: 2vw;
-    color: blue;
-
   }
   
   #pageTextImageLeft .imageContainer img {
@@ -243,7 +245,6 @@ h1 {
     margin-top: 5vw;
     width: 33vw;
     margin-right: 2vw;
-    color: blue;
 
   }
 }
@@ -266,8 +267,15 @@ h1 {
   overflow: hidden;
 }
 
+#pageTextImageBehind p {
+  color: white;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, .8);
+  font-size: 34px;
+}
+
 #pageTextImageBehind img {
   width: 100%;
+  padding-bottom: 2vw;
 }
 
 #pageTextImageBehind .content {
@@ -328,6 +336,7 @@ h1 {
 }
 
 #pageStartingFrontImg {
+  display: none;
   width: 50%;
   max-width: 600px;
   max-height: 400px;
@@ -349,11 +358,9 @@ h1 {
 }
 
 .pagePersonImages img:first-of-type {
-  width: 80%;
-  /* max-height: 100%; */
+  width: 30vw;
   position: absolute;
-  top: 0;
-  left: 0;
+  margin-left: 10vw;
   z-index: 1;
 }
 
@@ -369,7 +376,7 @@ h1 {
 }
 
 .pagePersonText {
-  width: 30%;
+  width: 30vw;
   z-index: 3;
   position: relative;
 }
@@ -390,7 +397,8 @@ h1 {
 
 .pagePersonText button {
   display: block;
-  margin-top: 10px;
+  float: right;
+  margin-top: 40px;
   padding: 10px 20px;
   font-size: 14px;
   border: 1px solid black;
@@ -562,6 +570,7 @@ h1 {
   height: 600px;
   width: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .prev,
@@ -693,6 +702,8 @@ h1 {
   overflow-x: scroll;
   cursor: pointer;
   scrollbar-width: none;
+  margin-top: 2vw;
+  margin-bottom: 0vw;
 }
 
 .gallery-container::-webkit-scrollbar {
@@ -881,6 +892,18 @@ h1 {
   font-size: 2.5em;
 }
 
+#pageTwoImgFirst{
+  width: 75vw;
+
+}
+
+#pageTwoImgSecond{
+  width: 75vw;
+}
+
+#pageTwoImg{
+  margin-left: 12.5vw;
+}
 #pageText{
 width: 75vw;
 font-size: 0.8em;
@@ -893,6 +916,7 @@ font-size: 0.8em;
 }
 
 #sections{
+  display: none;
   margin-right: 0vw;
   width: 20vw;
 
@@ -911,6 +935,7 @@ font-size: 0.8em;
 #pageVideo{
   width: 75vw;
   margin-left: 12.5vw;
+  margin-right: 12.5vw;
 }
 
 #pageOneImg{
@@ -918,4 +943,114 @@ font-size: 0.8em;
   margin-left: 12.5vw;
 }
 
+.pageTwoImg{
+  margin: 0 12.5%;
+}
+
+.pageFourImg{
+  margin: 0 12.5%;
+}
+
+
+#pageFourImgSecond{
+  border-radius: 10px;
+  height: auto;
+  max-height: calc(70vw*3);
+  object-fit: contain;
+}
+
+#pageImageText{
+  padding-top: 2vw;
+  margin-left: 12.5vw;
+
+}
+
+#pageImageText img{
+  width: 75vw;
+}
+
+#pageImageText p {
+  font-size: 1.5em;
+  width: 80%;
+
+}
+
+#pageYouTube{
+  width: 75vw;
+  margin-left: 12.5vw;
+  margin-right: 12.5vw;
+}
+
+
+#pageTextImageLeft  span{
+  float: left;
+  margin-top: 3.5vw;
+  width: 85vw;
+  margin-left: 7.5vw;
+  margin-right: 7.5vw;
+  text-align: center;
+  padding-bottom: 5vw;
+}
+
+#pageTextImageRight  span{
+  float: left;
+  margin-top: 3.5vw;
+  width: 85vw;
+  margin-left: 7.5vw;
+  margin-right: 7.5vw;
+  text-align: center;
+  padding-bottom: 5vw;
+}
+
+
+
+#pageTextImageBehind p {
+  font-size: 26px;
+}
+
+#pagePerson{
+  width: 75vw;
+  margin-left: 12.5vw;
+  margin-right: 12.5vw;
+}
+
+.pagePersonImages img:first-of-type {
+  width: 60vw;
+  position: absolute;
+  z-index: 1;
+  margin-left: 0vw;
+}
+
+.pagePersonImages img:last-of-type {
+  width: 30vw;
+  margin-left: 45vw;
+  margin-top: 10vw;
+}
+
+.pagePersonText{
+  margin-top: -4vw;
+  margin-bottom: 5vw;
+}
+
+.slideshow{
+  margin: 0;
+  margin-top: 5vw;
+  width: 75vw;
+  margin-left: 12.5vw;
+  margin-right: 12.5vw;
+}
+
+.slide img{
+  width: 78vw;
+}
+
+.donation{
+
+  margin: 0;
+  margin-left: 12.5vw;
+  margin-right: 12.5vw;
+  margin-top: 4vw;
+  width: 72vw;
+  padding: 3vw;
+}
 } 

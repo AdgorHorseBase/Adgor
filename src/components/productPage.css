@@ -207,9 +207,6 @@ padding-right: 10px;
     transition: transform 4s;
 }
 
-.productAddToCart.clicked {
-    background-color: blue;
-}
 
 .productPrice{
     margin-left: 6vw;

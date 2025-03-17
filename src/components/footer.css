@@ -8,6 +8,17 @@
     height: 100%;
     margin-bottom: 0px;
     object-fit: cover;
+
+}
+
+@media (max-width: 768px) {
+  .image-footer img{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0px;
+    object-fit: cover;
+    object-position: unset;
+}
 }
 
 .footer-container {

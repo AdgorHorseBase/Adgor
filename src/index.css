@@ -21,6 +21,8 @@
     /* background-color: #2e1a11; */
     background-color: transparent;
 }
+
+
   
 .menu-content {
     position: absolute;
@@ -997,7 +999,8 @@ border:none;
 }
 
 #voucherForm {
-    margin: 0 10%;
+    margin-left: 15vw;
+
 }
 
 #voucherForm > form {
@@ -1023,7 +1026,7 @@ border:none;
 #voucherTypeForm > label, #voucherTypeForm > img {
     width: calc(50% - 6px);
 }
-
+git pull --no-rebase
 #voucherTypeForm > label > select {
     cursor: pointer;
     padding: 12px;
@@ -1253,3 +1256,7 @@ button[name="descriptionBg"] > svg, button[name="descriptionEn"] > svg {
     background-color: black;
     color: white;
 }
+
+
+  
+  

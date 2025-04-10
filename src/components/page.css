@@ -187,7 +187,16 @@ h1 {
   margin-left: 15vw;
   margin-right: 15vw;
   width: 70vw;
+  padding-top: 36px;
+  padding-bottom: 36px;
 }
+
+.pageFormated p{
+  margin-top: 16px;
+  line-height: 1.4;
+  font-size: 1.5em;
+}
+
 
 .pageHtml {
   padding-top: 2vw;
@@ -900,6 +909,10 @@ h1 {
   font-size: 2.5em;
 }
 
+.pageFormated p{
+  font-size: 1.1em !important;
+}
+
 #pageTwoImgFirst{
   width: 75vw;
 
@@ -915,6 +928,7 @@ h1 {
 #pageText{
 width: 75vw;
 font-size: 0.8em;
+
 }
 
 #pageOneImg{

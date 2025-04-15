@@ -264,6 +264,19 @@ function Editor({ structure }) {
           url: ""
         }
       }
+    } else if (type === "twoTitlesText") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          titleSmallBg: "Напиши малко заглавие",
+          titleSmallEn: "Write a small title",
+          titleBg: "Напиши заглавие",
+          titleEn: "Write a title",
+          textBg: "Въведи текст на български",
+          textEn: "Enter your text"
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -728,6 +741,25 @@ function Editor({ structure }) {
           );
         }
         break;
+      case "twoTitlesText":
+        setSchema((prevSchema) =>
+          prevSchema.map((el) =>
+            el.id === id
+              ? {
+                ...el,
+                content: {
+                  titleSmallBg: newContent.titleSmallBg || el.content.titleSmallBg,
+                  titleSmallEn: newContent.titleSmallEn || el.content.titleSmallEn,
+                  titleBg: newContent.titleBg || el.content.titleBg,
+                  titleEn: newContent.titleEn || el.content.titleEn,
+                  textBg: newContent.textBg || el.content.textBg,
+                  textEn: newContent.textEn || el.content.textEn
+                },
+              }
+              : el
+          )
+        );
+        break;
       default:
         if (type === "two_images" || type === "four_images") {
           const image = await uploadImage(newContent.file);
@@ -971,6 +1003,21 @@ function Editor({ structure }) {
             <h2 class="en">${element.content.titleEn}</h2>
           </div>
         `
+      } else if (element.type === "twoTitlesText") {
+        htmlContent += `
+          <div id="pageTwoTitlesText">
+            <div class="pageTwoTitlesTextTitles">
+              <h3 class="bg">${element.content.titleSmallBg}</h3>
+              <h3 class="en">${element.content.titleSmallEn}</h3>
+              <h2 class="bg">${element.content.titleBg}</h2>
+              <h2 class="en">${element.content.titleEn}</h2>
+            </div>
+            <div class="pageTwoTitlesTextText">
+              <div class="bg">${element.content.textBg}</div>
+              <div class="en">${element.content.textEn}</div>
+            </div>
+          </div>
+        `;
       }
     });
 
@@ -1129,6 +1176,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("gallery")}>Gallery</button>
           <button onClick={() => addElement("imageLinkList")}>Image Link LIst</button>
           <button onClick={() => addElement("titleImage")}>Title Image</button>
+          <button onClick={() => addElement("twoTitlesText")}>Two Titles and Text</button>
         </div>
         <button id="Save_button" onClick={savePage} title="Save">
           <FaSave />
@@ -2163,6 +2211,87 @@ function Editor({ structure }) {
                   tagName="p"
                   id="Added_Text"
                 />
+              </div>
+            )}
+            {element.type === "twoTitlesText" && (
+              <div>
+                <label className="labelElement">Two Titles and Text:</label>
+                <ContentEditable
+                  html={element.content.titleSmallBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleSmallBg: e.target.value }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.titleSmallEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleSmallEn: e.target.value }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  style={{ marginBottom: "36px" }}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.titleBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleBg: e.target.value }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.titleEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleEn: e.target.value }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  style={{ marginBottom: "36px" }}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-bg`} />
+                  <ReactQuill
+                    value={element.content.textBg}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textBg: newContent }, element.type)
+                    }
+                    modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
+                      toolbar: {
+                        container: `#toolbar-${element.id}-bg`,
+                      },
+                    }}
+                  />
+                </div>
+                <div id="Added_Formated">
+                  <MyCustomToolbar id={`toolbar-${element.id}-en`} />
+                  <ReactQuill
+                    value={element.content.textEn}
+                    onChange={(newContent) =>
+                      updateElement(element.id, { textEn: newContent }, element.type)
+                    }
+                    modules={{
+                      clipboard: {
+                        matchVisual: false, // Prevent Quill from auto-inserting new lines
+                      },
+                      toolbar: {
+                        container: `#toolbar-${element.id}-en`,
+                      },
+                    }}
+                  />
+                </div>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

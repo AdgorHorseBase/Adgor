@@ -254,6 +254,12 @@ function Editor({ structure }) {
           titleEn: "Write the name of this section"
         }
       }
+    } else if (type === "imageLinkList") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: []
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -1178,37 +1184,38 @@ function Editor({ structure }) {
           style={{ display: "block" }}
         />
         <div className="Add_buttons">
-          <button onClick={() => addElement("title")}>Add Title</button>
-          <button onClick={() => addElement("text")}>Add Text</button>
-          <button onClick={() => addElement("html")}>Add html</button>
+          <button onClick={() => addElement("title")}>Title</button>
+          <button onClick={() => addElement("text")}>Text</button>
+          <button onClick={() => addElement("html")}>html</button>
           <button onClick={() => addElement("separation")}>
-            Add separation line
+            separation line
           </button>
-          <button onClick={() => addElement("image")}>Add Image</button>
+          <button onClick={() => addElement("image")}>Image</button>
           <button onClick={() => addElement("two_images")}>
-            Add Two Images
+            Two Images
           </button>
           <button onClick={() => addElement("four_images")}>
-            Add Four Images
+            Four Images
           </button>
-          <button onClick={() => addElement("video")}>Add Video</button>
+          <button onClick={() => addElement("video")}>Video</button>
           <button onClick={() => addElement("formated")}>
-            Add Formated Text
+            Formated Text
           </button>
           <button onClick={() => addElement("youtube")}>YouTube video</button>
           <button onClick={() => addElement("image_text")}>
-            Add Image with Text
+            Image with Text
           </button>
-          <button onClick={() => addElement("textImageLeft")}>Add Text with Image Left</button>
-          <button onClick={() => addElement("textImageRight")}>Add Text with Image Right</button>
-          <button onClick={() => addElement("textImageBehind")}>Add Text with Image Behind</button>
-          <button onClick={() => addElement("starting")}>Add Initial Vision</button>
-          <button onClick={() => addElement("person")}>Add Person</button>
-          <button onClick={() => addElement("slideshow")}>Add Slideshow</button>
-          <button onClick={() => addElement("donation")}>Add Donation</button>
-          <button onClick={() => addElement("overlap")}>Add Overlap</button>
-          <button onClick={() => addElement("section")}>Add Section</button>
-          <button onClick={() => addElement("gallery")}>Add Gallery</button>
+          <button onClick={() => addElement("textImageLeft")}>Text with Image Left</button>
+          <button onClick={() => addElement("textImageRight")}>Text with Image Right</button>
+          <button onClick={() => addElement("textImageBehind")}>Text with Image Behind</button>
+          <button onClick={() => addElement("starting")}>Initial Vision</button>
+          <button onClick={() => addElement("person")}>Person</button>
+          <button onClick={() => addElement("slideshow")}>Slideshow</button>
+          <button onClick={() => addElement("donation")}>Donation</button>
+          <button onClick={() => addElement("overlap")}>Overlap</button>
+          <button onClick={() => addElement("section")}>Section</button>
+          <button onClick={() => addElement("gallery")}>Gallery</button>
+          <button onClick={() => addElement("imageLinkList")}>Image Link LIst</button>
         </div>
         <button id="Save_button" onClick={savePage} title="Save">
           <FaSave />
@@ -2153,6 +2160,45 @@ function Editor({ structure }) {
                     placeholder="Choose Image"
                   />
                 </label>
+              </div>
+            )}
+            {element.type === "imageLinkList" && (
+              <div>
+                <label className="labelElement">Image Link List:</label>
+                {element.content.map((image, index) => (
+                  <div key={index}>
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + image.url}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { index, file: e.target.files[0] },
+                          element.type
+                        )
+                      }
+                      placeholder="Choose Image"
+                    />
+                    <input
+                      type="text"
+                      value={image.link}
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { index, link: e.target.value },
+                          element.type
+                        )
+                      }
+                      placeholder="Enter Link"
+                    />
+                  </div>
+                ))}
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

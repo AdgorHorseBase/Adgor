@@ -85,12 +85,6 @@ function Editor({ structure }) {
           const response = await axios.get(
             `${URL}/page-get-schema?pagePath=${editPath}`
           );
-          // response.data.schema.schema.forEach((element) => {
-          //   if(element.type === "formated" || element.type === "textImageLeft" || element.type === "textImageRight" || element.type === "textImageBehind" || element.type === "overlap") {
-          //     element.content.textBg = element.content.textBg;
-          //     element.content.textEn = element.content.textEn;
-          //   }
-          // });
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
           setTitleEn(response.data.schema.titleEn);
@@ -274,57 +268,66 @@ function Editor({ structure }) {
     setSchema([...schema, newElement]);
   };
 
+  // Helper function for uploading images
+  const uploadImage = useCallback(async (imageFile) => {
+    if (!imageFile) return null;
+    
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    
+    try {
+      const response = await axios.post(URL + "/image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data.image;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  }, []);
+
   // Updates the content of an element in the schema
   const updateElement = useCallback(async (id, newContent, type) => {
-    const formData = new FormData();
     switch (type) {
       case "image":
-        formData.append("image", newContent);
-
-        await axios
-          .post(URL + "/image", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
-            const image = response.data.image;
+        if (newContent) {
+          const image = await uploadImage(newContent);
+          if (image) {
             setSchema(
               schema.map((el) =>
                 el.id === id ? { ...el, content: image } : el
               )
             );
-          })
-          .catch((error) => {
-            console.error("Error uploading image:", error);
-          });
+          }
+        }
         break;
       case "video":
         if (newContent.url) {
+          const formData = new FormData();
           formData.append("video", newContent.url);
 
-          await axios
-            .post(URL + "/video", formData, {
+          try {
+            const response = await axios.post(URL + "/video", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
-            })
-            .then((response) => {
-              const video = response.data.video;
-              setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: { url: video, autoplay: el.content.autoplay },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              console.error("Error uploading video:", error);
             });
+            const video = response.data.video;
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: { url: video, autoplay: el.content.autoplay },
+                  }
+                  : el
+              )
+            );
+          } catch (error) {
+            console.error("Error uploading video:", error);
+          }
         } else {
           setSchema(
             schema.map((el) =>
@@ -352,7 +355,6 @@ function Editor({ structure }) {
             ? videoIdMatch[1] || videoIdMatch[2]
             : null;
 
-          schema.map((el) => el.id === id);
           setSchema(
             schema.map((el) =>
               el.id === id
@@ -385,34 +387,23 @@ function Editor({ structure }) {
         break;
       case "image_text":
         if (newContent.url !== schema.find((el) => el.id === id).content.url) {
-          formData.append("image", newContent.url);
-
-          axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        textBg: el.content.textBg,
-                        textEn: el.content.textEn,
-                        url: image,
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.url);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      textBg: el.content.textBg,
+                      textEn: el.content.textEn,
+                      url: image,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else {
           setSchema(
             schema.map((el) =>
@@ -435,11 +426,11 @@ function Editor({ structure }) {
           prevSchema.map((el) =>
             el.id === id
               ? {
-          ...el,
-          content: {
-            textBg: newContent.textBg?.replace(/ style="[^"]*"/g, '') || (el.content.textBg ? el.content.textBg : ""),
-            textEn: newContent.textEn?.replace(/ style="[^"]*"/g, '') || (el.content.textEn ? el.content.textEn : ""),
-          },
+                ...el,
+                content: {
+                  textBg: newContent.textBg?.replace(/ style="[^"]*"/g, '') || (el.content.textBg ? el.content.textBg : ""),
+                  textEn: newContent.textEn?.replace(/ style="[^"]*"/g, '') || (el.content.textEn ? el.content.textEn : ""),
+                },
               }
               : el
           )
@@ -447,69 +438,47 @@ function Editor({ structure }) {
         break;
       case "starting":
         if (newContent.imageBackUrl) {
-          formData.append("image", newContent.imageBackUrl);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        titleBg: newContent.titleBg || el.content.titleBg,
-                        titleEn: newContent.titleEn || el.content.titleEn,
-                        quoteBg: newContent.quoteBg || el.content.quoteBg,
-                        quoteEn: newContent.quoteEn || el.content.quoteEn,
-                        imageBackUrl: image,
-                        imageFrontUrl: el.content.imageFrontUrl,
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.imageBackUrl);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      titleBg: newContent.titleBg || el.content.titleBg,
+                      titleEn: newContent.titleEn || el.content.titleEn,
+                      quoteBg: newContent.quoteBg || el.content.quoteBg,
+                      quoteEn: newContent.quoteEn || el.content.quoteEn,
+                      imageBackUrl: image,
+                      imageFrontUrl: el.content.imageFrontUrl,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.imageFrontUrl) {
-          formData.append("image", newContent.imageFrontUrl);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        titleBg: newContent.titleBg || el.content.titleBg,
-                        titleEn: newContent.titleEn || el.content.titleEn,
-                        quoteBg: newContent.quoteBg || el.content.quoteBg,
-                        quoteEn: newContent.quoteEn || el.content.quoteEn,
-                        imageBackUrl: el.content.imageBackUrl,
-                        imageFrontUrl: image,
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.imageFrontUrl);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      titleBg: newContent.titleBg || el.content.titleBg,
+                      titleEn: newContent.titleEn || el.content.titleEn,
+                      quoteBg: newContent.quoteBg || el.content.quoteBg,
+                      quoteEn: newContent.quoteEn || el.content.quoteEn,
+                      imageBackUrl: el.content.imageBackUrl,
+                      imageFrontUrl: image,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else {
           setSchema((prevSchema) =>
             prevSchema.map((el) =>
@@ -532,65 +501,43 @@ function Editor({ structure }) {
         break;
       case "person":
         if (newContent.imageBack) {
-          formData.append("image", newContent.imageBack);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        textBg: el.content.textBg,
-                        textEn: el.content.textEn,
-                        imageBack: image,
-                        imageFront: el.content.imageFront,
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.imageBack);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      textBg: el.content.textBg,
+                      textEn: el.content.textEn,
+                      imageBack: image,
+                      imageFront: el.content.imageFront,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.imageFront) {
-          formData.append("image", newContent.imageFront);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        textBg: el.content.textBg,
-                        textEn: el.content.textEn,
-                        imageBack: el.content.imageBack,
-                        imageFront: image,
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.imageFront);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      textBg: el.content.textBg,
+                      textEn: el.content.textEn,
+                      imageBack: el.content.imageBack,
+                      imageFront: image,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else {
           setSchema((prevSchema) =>
             prevSchema.map((el) =>
@@ -611,59 +558,37 @@ function Editor({ structure }) {
         break;
       case "slideshow":
         if (newContent.image) {
-          formData.append("image", newContent.image);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema((prevSchema) =>
-                prevSchema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: [...el.content, image],
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema((prevSchema) =>
+              prevSchema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: [...el.content, image],
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.file) {
-          formData.append("image", newContent.file);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: el.content.map((img, idx) =>
-                        idx === newContent.index ? image : img
-                      ),
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.file);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: el.content.map((img, idx) =>
+                      idx === newContent.index ? image : img
+                    ),
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.delete) {
-          return setSchema(
+          setSchema(
             schema.map((el) =>
               el.id === id
                 ? {
@@ -677,59 +602,37 @@ function Editor({ structure }) {
         break;
       case "gallery":
         if (newContent.image) {
-          formData.append("image", newContent.image);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema((prevSchema) =>
-                prevSchema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: [...el.content, image],
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema((prevSchema) =>
+              prevSchema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: [...el.content, image],
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.file) {
-          formData.append("image", newContent.file);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: el.content.map((img, idx) =>
-                        idx === newContent.index ? image : img
-                      ),
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.file);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: el.content.map((img, idx) =>
+                      idx === newContent.index ? image : img
+                    ),
+                  }
+                  : el
+              )
+            );
+          }
         } else if (newContent.delete) {
-          return setSchema(
+          setSchema(
             schema.map((el) =>
               el.id === id
                 ? {
@@ -743,36 +646,25 @@ function Editor({ structure }) {
         break;
       case "overlap":
         if (newContent.imageBack || newContent.imageLeft || newContent.imageRight) {
-          formData.append("image", newContent.image);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
-                schema.map((el) =>
-                  el.id === id
-                    ? {
-                      ...el,
-                      content: {
-                        textBg: el.content.textBg,
-                        textEn: el.content.textEn,
-                        imageBack: newContent.imageBack ? image : el.content.imageBack,
-                        imageLeft: newContent.imageLeft ? image : el.content.imageLeft,
-                        imageRight: newContent.imageRight ? image : el.content.imageRight
-                      },
-                    }
-                    : el
-                )
-              );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      textBg: el.content.textBg,
+                      textEn: el.content.textEn,
+                      imageBack: newContent.imageBack ? image : el.content.imageBack,
+                      imageLeft: newContent.imageLeft ? image : el.content.imageLeft,
+                      imageRight: newContent.imageRight ? image : el.content.imageRight
+                    },
+                  }
+                  : el
+              )
+            );
+          }
         } else {
           setSchema((prevSchema) =>
             prevSchema.map((el) =>
@@ -794,61 +686,38 @@ function Editor({ structure }) {
         break;
       default:
         if (type === "two_images" || type === "four_images") {
-          formData.append("image", newContent.file);
-
-          await axios
-            .post(URL + "/image", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              const image = response.data.image;
-              return setSchema(
+          const image = await uploadImage(newContent.file);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: { ...el.content, [newContent.id]: image },
+                  }
+                  : el
+              )
+            );
+          }
+        } else if (type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
+          if (newContent.url) {
+            const image = await uploadImage(newContent.url);
+            if (image) {
+              setSchema(
                 schema.map((el) =>
                   el.id === id
                     ? {
                       ...el,
-                      content: { ...el.content, [newContent.id]: image },
+                      content: {
+                        textBg: el.content.textBg,
+                        textEn: el.content.textEn,
+                        url: image,
+                      },
                     }
                     : el
                 )
               );
-            })
-            .catch((error) => {
-              return console.error("Error uploading image:", error);
-            });
-        } else if (type === "textImageLeft" || type === "textImageRight" || type === "textImageBehind") {
-          if (newContent.url) {
-            formData.append("image", newContent.url);
-
-            await axios
-              .post(URL + "/image", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              })
-              .then((response) => {
-                const image = response.data.image;
-                return setSchema(
-                  schema.map((el) =>
-                    el.id === id
-                      ? {
-                        ...el,
-                        content: {
-                          textBg: el.content.textBg,
-                          textEn: el.content.textEn,
-                          url: image,
-                        },
-                      }
-                      : el
-                  )
-                );
-              })
-              .catch((error) => {
-                return console.error("Error uploading image:", error);
-              }
-              );
+            }
           } else {
             setSchema((prevSchema) =>
               prevSchema.map((el) =>
@@ -874,7 +743,7 @@ function Editor({ structure }) {
         }
         break;
     }
-  }, [schema]);
+  }, [schema, uploadImage]);
 
   // Deletes an element from the schema
   const deleteElement = (id) => {
@@ -888,18 +757,9 @@ function Editor({ structure }) {
   };
 
   const uploadFooterImage = async (e) => {
-    const formData = new FormData();
-    formData.append("image", e);
-
-    try {
-      const response = await axios.post(URL + "/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      setFooterImage(response.data.image);
-    } catch (error) {
-      console.error("Error uploading image:", error);
+    const image = await uploadImage(e);
+    if (image) {
+      setFooterImage(image);
     }
   }
 

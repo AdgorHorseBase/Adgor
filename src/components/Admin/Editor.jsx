@@ -252,7 +252,16 @@ function Editor({ structure }) {
       newElement = {
         id: uuidv4(),
         type,
-        content: []
+        content: {
+          links: [],
+          newLink: {
+            id: uuidv4(),
+            titleBg: "Напиши заглавие",
+            titleEn: "Write a title",
+            image: "",
+            url: "page/About/our-team"
+          }
+        }
       }
     } else if (type === "titleImage") {
       newElement = {
@@ -760,6 +769,136 @@ function Editor({ structure }) {
           )
         );
         break;
+      case "imageLinkList-new":
+        if(newContent.add){
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    links: [...el.content.links, el.content.newLink],
+                    newLink: {
+                      id: uuidv4(),
+                      titleBg: "Напиши заглавие",
+                      titleEn: "Write a title",
+                      image: "",
+                      url: "page/About/our-team",
+                    }
+                  },
+                }
+                : el
+            )
+          );
+        } else if(newContent.image) {
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      newLink: {
+                        ...el.content.newLink,
+                        image: image
+                      }
+                    },
+                  }
+                  : el
+              )
+            );
+          }
+        } else {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    newLink: {
+                      ...el.content.newLink,
+                      titleBg: newContent.titleBg || el.content.newLink.titleBg,
+                      titleEn: newContent.titleEn || el.content.newLink.titleEn,
+                      url: newContent.url || el.content.newLink.url
+                    }
+                  },
+                }
+                : el
+            )
+          );
+        }
+        break;
+      case "imageLinkList":
+        if (newContent.image) {
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      links: el.content.links.map((link) =>
+                        link.id === newContent.id
+                          ? {
+                            ...link,
+                            image,
+                          }
+                          : link
+                      ),
+                      newLink: el.content.newLink,
+                    },
+                  }
+                  : el
+              )
+            );
+          }
+        } else if (newContent.delete) {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    links: el.content.links.filter(
+                      (link) => link.id !== newContent.id
+                    ),
+                  },
+                }
+                : el
+            )
+          );
+        } else {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    links: el.content.links?.map((link) =>
+                      link.id === newContent.id
+                        ? {
+                          ...link,
+                          titleBg: newContent.titleBg || link.titleBg,
+                          titleEn: newContent.titleEn || link.titleEn,
+                          url: newContent.url || link.url,
+                        }
+                        : link
+                    ),
+                  },
+                }
+                : el
+            )
+          );
+        }
+        break;
       default:
         if (type === "two_images" || type === "four_images") {
           const image = await uploadImage(newContent.file);
@@ -1018,6 +1157,18 @@ function Editor({ structure }) {
             </div>
           </div>
         `;
+      } else if (element.type === "imageLinkList") {
+        htmlContent += `
+          <div id="pageImageLinkList">
+            ${element.content.links.map((link) => `
+              <a class="pageImageLinkListItem">
+                <img src="/server/files/images/${link.image}" alt="image" />
+                <h3 class="bg">${link.titleBg}</h3>
+                <h3 class="en">${link.titleEn}</h3>
+              </a>
+            `)}
+          </div>
+        `;
       }
     });
 
@@ -1174,7 +1325,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("overlap")}>Overlap</button>
           <button onClick={() => addElement("section")}>Section</button>
           <button onClick={() => addElement("gallery")}>Gallery</button>
-          <button onClick={() => addElement("imageLinkList")}>Image Link LIst</button>
+          <button onClick={() => addElement("imageLinkList")}>Image Link List</button>
           <button onClick={() => addElement("titleImage")}>Title Image</button>
           <button onClick={() => addElement("twoTitlesText")}>Two Titles and Text</button>
         </div>
@@ -1733,6 +1884,7 @@ function Editor({ structure }) {
                       )
                     }
                     onPaste={handlePaste}
+                    className="contentEditable"
                     placeholder="Enter your text"
                   />
                   <ContentEditable
@@ -1749,6 +1901,7 @@ function Editor({ structure }) {
                       )
                     }
                     onPaste={handlePaste}
+                    className="contentEditable"
                     placeholder="Enter your text"
                   />
                   <label className="labelElementSmall">Quote</label>
@@ -1766,6 +1919,7 @@ function Editor({ structure }) {
                       )
                     }
                     onPaste={handlePaste}
+                    className="contentEditable"
                     placeholder="Enter your text"
                   />
                   <ContentEditable
@@ -1782,6 +1936,7 @@ function Editor({ structure }) {
                       )
                     }
                     onPaste={handlePaste}
+                    className="contentEditable"
                     placeholder="Enter your text"
                   />
                 </div>
@@ -2126,11 +2281,11 @@ function Editor({ structure }) {
             {element.type === "imageLinkList" && (
               <div>
                 <label className="labelElement">Image Link List:</label>
-                {element.content.map((image, index) => (
-                  <div key={index}>
+                {element.content.links.map((link, index) => (
+                  <div key={index} style={{ marginBottom: "18px" }}>
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + image.url}
+                      src={URL + "/image?name=" + link.image}
                       alt=""
                     />
                     <br></br>
@@ -2140,26 +2295,107 @@ function Editor({ structure }) {
                       onChange={(e) =>
                         updateElement(
                           element.id,
-                          { index, file: e.target.files[0] },
+                          { id: link.id, image: e.target.files[0] },
                           element.type
                         )
                       }
                       placeholder="Choose Image"
                     />
-                    <input
-                      type="text"
-                      value={image.link}
+                    <ContentEditable
+                      html={link.titleBg}
                       onChange={(e) =>
+                        updateElement(element.id, { id: link.id, titleBg: e.target.value }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <ContentEditable
+                      html={link.titleEn}
+                      onChange={(e) =>
+                        updateElement(element.id, { id: link.id, titleEn: e.target.value }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <ContentEditable
+                      html={link.url}
+                      onChange={(e) =>
+                        updateElement(element.id, { id: link.id, url: e.target.value }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <button
+                      style={{ display: "block", marginTop: "0" }}
+                      onClick={() =>
                         updateElement(
                           element.id,
-                          { index, link: e.target.value },
+                          { id: link.id, delete: true },
                           element.type
                         )
                       }
-                      placeholder="Enter Link"
-                    />
+                    >Delete</button>
                   </div>
                 ))}
+
+                <label style={{ display: "block", fontWeight: "bold", marginTop: "36px", fontSize: "1.5rem" }}>New:</label>
+                <img
+                  id="Added_One_Image_img"
+                  src={URL + "/image?name=" + element.content.newLink.image}
+                  alt=""
+                />
+                <input
+                  type="file"
+                  onChange={(e) =>
+                    updateElement(
+                      element.id,
+                      { image: e.target.files[0] },
+                      element.type + "-new"
+                    )
+                  }
+                  style={{ marginLeft: "8px" }}
+                  placeholder="Choose Image"
+                />
+                <ContentEditable
+                  html={element.content.newLink.titleBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleBg: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.newLink.titleEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { titleEn: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.newLink.url}
+                  onChange={(e) =>
+                    updateElement(element.id, { url: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <button
+                  style={{ display: "block", marginTop: "0" }}
+                  onClick={() =>
+                    updateElement(
+                      element.id,
+                      { add: true },
+                      element.type + "-new"
+                    )
+                  }
+                >Add</button>
               </div>
             )}
             {element.type === "titleImage" && (
@@ -2196,6 +2432,7 @@ function Editor({ structure }) {
                   }
                   onPaste={handlePaste}
                   tagName="p"
+                  className="contentEditable"
                   id="Added_Text"
                 />
                 <ContentEditable
@@ -2209,6 +2446,7 @@ function Editor({ structure }) {
                   }
                   onPaste={handlePaste}
                   tagName="p"
+                  className="contentEditable"
                   id="Added_Text"
                 />
               </div>

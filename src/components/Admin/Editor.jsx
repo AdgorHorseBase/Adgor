@@ -74,6 +74,7 @@ function Editor({ structure }) {
   const [directoryBg, setDirectoryBg] = useState("");
   const [page, setPage] = useState("");
   const [footerImage, setFooterImage] = useState("");
+  const [footerImageEnable, setFooterImageEnable] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
   const [previewContent, setPreviewContent] = useState("");
 
@@ -93,6 +94,7 @@ function Editor({ structure }) {
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
           setTitleEn(response.data.schema.titleEn);
+          setFooterImageEnable(response.data.schema.footerImageEnable === undefined ? true : response.data.schema.footerImageEnable);
           setFooterImage(response.data.schema.footerImage ?? "");
           if (response.data.schema.directoryBg)
             setDirectoryBg(response?.data?.schema?.directoryBg);
@@ -1065,7 +1067,7 @@ function Editor({ structure }) {
 
     const htmlContent = ConvertSchemaToHtml(schema);
 
-    const schemaContent = { titleBg, titleEn, directoryBg, footerImage, schema };
+    const schemaContent = { titleBg, titleEn, directoryBg, footerImageEnable, footerImage, schema };
 
     // Send request to the backend to save the page
     try {
@@ -2194,7 +2196,7 @@ function Editor({ structure }) {
 
         <div className="element" >
           <label className="labelElement">{footerImage ? "Footer Image:" : "Choose image for the footer:"}</label>
-          {footerImage && (
+          {footerImageEnable && footerImage && (
             <img
               id="Added_One_Image_img"
               src={URL + "/image?name=" + footerImage}
@@ -2203,6 +2205,14 @@ function Editor({ structure }) {
             />
           )}
           <br></br>
+          <label style={{marginRight: "12px"}}>
+            <input
+              type="checkbox"
+              checked={footerImageEnable}
+              onChange={(e) => setFooterImageEnable(e.target.checked)}
+            />
+            Enable Footer Image
+          </label>
           <input
             type="file"
             onChange={(e) => uploadFooterImage(e.target.files[0])}

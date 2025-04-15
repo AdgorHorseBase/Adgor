@@ -3,6 +3,7 @@ import "./footer.css";
 import axios from "axios";
 
 const Footer = () => {
+  const [imageEnable, setImageEnable] = useState(true);
   const [imageSrc, setImageSrc] = useState("");
   const [structure, setStruct] = useState({});
   const [lang, setLang] = useState("bg");
@@ -20,6 +21,9 @@ const Footer = () => {
           "/server/uploads/" + pagePath + "/schema.json"
         );
         if (schema && schema.data && schema.data.footerImage) {
+          if(schema.data.footerImageEnable !== undefined) {
+            setImageEnable(schema.data.footerImageEnable);
+          }
           setImageSrc("/server/files/images/" + schema.data.footerImage);
         }
       } catch (err) {
@@ -50,7 +54,7 @@ const Footer = () => {
 
   return (
     <>
-      {!isHomePage && (
+      {!isHomePage && imageEnable && (
         <div className="image-footer">
           <img
             src={imageSrc ? imageSrc : "/footerImage.png"}

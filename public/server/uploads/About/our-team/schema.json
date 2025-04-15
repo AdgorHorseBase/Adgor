@@ -6,41 +6,43 @@
   "footerImage": "",
   "schema": [
     {
-      "id": "c6c3af6d-ca76-425f-a5bf-b846c177138c",
-      "type": "starting",
+      "id": "f0a0a5c7-5bb4-4651-a33c-4562de081075",
+      "type": "titleImage",
       "content": {
-        "titleBg": "Български",
-        "titleEn": "English",
-        "quoteBg": "Български",
-        "quoteEn": "English",
-        "imageBackUrl": "image-1744696549022.webp",
-        "imageFrontUrl": "image-1744696561224.webp"
+        "titleBg": "Нашият Екип",
+        "titleEn": "Our Team",
+        "url": "image-1744740970933.webp"
       }
     },
     {
-      "id": "8fc67135-856d-43da-abfb-a849145df9f0",
-      "type": "title",
+      "id": "3fd76f4a-e102-4697-8451-7f0bca8edfe7",
+      "type": "twoTitlesText",
       "content": {
-        "textBg": "Заглавие/текст секция",
-        "textEn": "Titles/text section"
+        "titleSmallBg": "ЗА НАС",
+        "titleSmallEn": "ABOUT US",
+        "titleBg": "Какво значи Адгор",
+        "titleEn": "What Does Adgor Mean",
+        "textBg": "<p>Адгор е конна база, разположена в близост до София, предлагаща възможност за връзка с природата чрез езда и грижа за коне. Името \"Адгор\" носи усещане за приключение и свобода, свързано с духа на ездата. Базата е популярна сред любителите на конете и спокойствието извън града – място, където се съчетават спорт, отдих и любов към животните.</p>",
+        "textEn": "<p>Adgor is a horse riding base located near Sofia, offering a chance to connect with nature through horseback riding and caring for horses. The name “Adgor” evokes a sense of adventure and freedom, closely tied to the spirit of riding. The base is popular among horse lovers and those seeking peace outside the city—a place where sport, relaxation, and love for animals come together.</p>"
       }
     },
     {
       "id": "b4eb4d24-caff-4f4b-a0a1-36e54f6817c2",
       "type": "gallery",
       "content": [
-        "image-1744696514905.webp",
-        "image-1744696520557.webp",
-        "image-1744696524539.webp",
-        "image-1744696530163.webp"
+        "image-1744750492194.webp",
+        "image-1744750495372.webp",
+        "image-1744750497635.webp",
+        "image-1744750508948.webp",
+        "image-1744750511654.webp"
       ]
     },
     {
       "id": "fee2860d-4dd5-46e8-928a-539f9d5011bc",
       "type": "formated",
       "content": {
-        "textBg": "<h2>Цитат</h2>",
-        "textEn": "<h2>Quote</h2>"
+        "textBg": "<h2 class=\"ql-align-center\">Цитат</h2>",
+        "textEn": "<h2 class=\"ql-align-center\">Quote</h2>"
       }
     },
     {
@@ -49,9 +51,47 @@
       "content": "&lt;h2 class=\"bg\"&gt;Панели нашият екип&lt;/h2&gt;<div>&lt;h2 class=\"en\"&gt;Panel Our Team&lt;/h2&gt;</div>"
     },
     {
-      "id": "771490ab-389f-4b2f-90a6-014cdc4eb491",
-      "type": "html",
-      "content": "&lt;h2 class=\"bg\"&gt;Панел с линкове към други страници&lt;/h2&gt;<div>&lt;h2 class=\"bg\"&gt;Panel with links to other pages&lt;/h2&gt;</div>"
+      "id": "e53850fe-3012-4f34-9f13-ca9ac613fed9",
+      "type": "imageLinkList",
+      "content": {
+        "links": [
+          {
+            "id": "f8c9cdd4-cc9f-4c3e-92f8-3cec36814854",
+            "titleBg": "Нашият Екип",
+            "titleEn": "Our Team",
+            "image": "image-1744750539240.webp",
+            "url": "page/About/our-team"
+          },
+          {
+            "id": "01c62342-decc-450b-957d-db97576492fa",
+            "titleBg": "Ваучери",
+            "titleEn": "Vouchers",
+            "image": "image-1744750567774.webp",
+            "url": "vouchers"
+          },
+          {
+            "id": "837dc421-f493-4b36-8e1b-c64abbb5c0bc",
+            "titleBg": "Езда за деца",
+            "titleEn": "Riding for children",
+            "image": "image-1744750591213.webp",
+            "url": "page/Training/Rider%20training/riding-for-children"
+          },
+          {
+            "id": "9c28adbb-533a-42b6-bcd3-366f4bfd33e6",
+            "titleBg": "Пансион за коне",
+            "titleEn": "Horse boarding",
+            "image": "image-1744750642770.webp",
+            "url": "page/Horse%20boarding"
+          }
+        ],
+        "newLink": {
+          "id": "63397754-bd98-4f9f-982b-94de90c7d47d",
+          "titleBg": "Напиши заглавие",
+          "titleEn": "Write a title",
+          "image": "",
+          "url": "page/About/our-team"
+        }
+      }
     },
     {
       "id": "d8ae9c32-0a54-48e0-beb8-b1c82fb1f5c7",

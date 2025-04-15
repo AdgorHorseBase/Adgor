@@ -13,8 +13,8 @@
         "titleEn": "English",
         "quoteBg": "Български",
         "quoteEn": "English",
-        "imageBackUrl": "",
-        "imageFrontUrl": ""
+        "imageBackUrl": "image-1744696549022.webp",
+        "imageFrontUrl": "image-1744696561224.webp"
       }
     },
     {
@@ -28,7 +28,12 @@
     {
       "id": "b4eb4d24-caff-4f4b-a0a1-36e54f6817c2",
       "type": "gallery",
-      "content": []
+      "content": [
+        "image-1744696514905.webp",
+        "image-1744696520557.webp",
+        "image-1744696524539.webp",
+        "image-1744696530163.webp"
+      ]
     },
     {
       "id": "fee2860d-4dd5-46e8-928a-539f9d5011bc",
@@ -51,7 +56,12 @@
     {
       "id": "d8ae9c32-0a54-48e0-beb8-b1c82fb1f5c7",
       "type": "gallery",
-      "content": []
+      "content": [
+        "image-1744696455134.webp",
+        "image-1744696465324.webp",
+        "image-1744696472876.webp",
+        "image-1744696481297.webp"
+      ]
     }
   ]
 }

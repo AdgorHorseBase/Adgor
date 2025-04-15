@@ -1160,13 +1160,17 @@ function Editor({ structure }) {
       } else if (element.type === "imageLinkList") {
         htmlContent += `
           <div id="pageImageLinkList">
-            ${element.content.links.map((link) => `
-              <a class="pageImageLinkListItem">
+            <div class="arrow-nav arrow-left">&lt;</div>
+            ${element.content.links.map((link) => {
+                const linkUrl = link.url.startsWith("http") ? link.url : (link.url.startsWith("/") ? link.url : `/${link.url}`);
+              return `
+              <a href="${linkUrl}" class="pageImageLinkListItem">
                 <img src="/server/files/images/${link.image}" alt="image" />
                 <h3 class="bg">${link.titleBg}</h3>
                 <h3 class="en">${link.titleEn}</h3>
               </a>
-            `)}
+            `}).join("")}
+            <div class="arrow-nav arrow-right">&gt;</div>
           </div>
         `;
       }

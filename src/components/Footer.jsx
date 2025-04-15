@@ -20,7 +20,6 @@ const Footer = () => {
         const schema = await axios.get(
           "/server/uploads/" + pagePath + "/schema.json"
         );
-        console.log(schema.data.footerImageEnable);
         if(schema.data.footerImageEnable !== undefined) {
           setImageEnable(schema.data.footerImageEnable);
         }

@@ -254,6 +254,16 @@ function Editor({ structure }) {
         type,
         content: []
       }
+    } else if (type === "titleImage") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          titleBg: "Напиши заглавие",
+          titleEn: "Write a title",
+          url: ""
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -395,8 +405,7 @@ function Editor({ structure }) {
                   ? {
                     ...el,
                     content: {
-                      textBg: el.content.textBg,
-                      textEn: el.content.textEn,
+                      ...el.content,
                       url: image,
                     },
                   }
@@ -411,10 +420,45 @@ function Editor({ structure }) {
                 ? {
                   ...el,
                   content: {
-                    textBg: newContent.textBg,
-                    textEn: newContent.textEn,
-                    url: el.content.url,
+                    ...el.content,
+                    textBg: newContent.textBg || el.content.textBg,
+                    textEn: newContent.textEn || el.content.textEn,
                   },
+                }
+                : el
+            )
+          );
+        }
+        break;
+      case "titleImage":
+        if (newContent.url && newContent.url !== schema.find((el) => el.id === id).content.url) {
+          const image = await uploadImage(newContent.url);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      url: image,
+                    }
+                  }
+                  : el
+              )
+            );
+          }
+        } else {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    titleBg: newContent.titleBg || el.content.titleBg,
+                    titleEn: newContent.titleEn || el.content.titleEn,
+                  }
                 }
                 : el
             )
@@ -919,6 +963,14 @@ function Editor({ structure }) {
           <section id="${element.id}" data-title-bg="${element.content.titleBg}" data-title-en="${element.content.titleEn}">
           </section>
         `;
+      } else if (element.type === "titleImage") {
+        htmlContent += `
+          <div id="pageTitleImage">
+            <img src="/server/files/images/${element.content.url}" alt="image" />
+            <h2 class="bg">${element.content.titleBg}</h2>
+            <h2 class="en">${element.content.titleEn}</h2>
+          </div>
+        `
       }
     });
 
@@ -1076,6 +1128,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("section")}>Section</button>
           <button onClick={() => addElement("gallery")}>Gallery</button>
           <button onClick={() => addElement("imageLinkList")}>Image Link LIst</button>
+          <button onClick={() => addElement("titleImage")}>Title Image</button>
         </div>
         <button id="Save_button" onClick={savePage} title="Save">
           <FaSave />
@@ -2059,6 +2112,57 @@ function Editor({ structure }) {
                     />
                   </div>
                 ))}
+              </div>
+            )}
+            {element.type === "titleImage" && (
+              <div>
+                <label className="labelElement">Title with Image:</label>
+                <img
+                  id="Added_One_Image_img"
+                  src={URL + "/image?name=" + element.content.url}
+                  alt=""
+                />
+                <br></br>
+                <input
+                  id=""
+                  type="file"
+                  onChange={(e) =>
+                    updateElement(
+                      element.id,
+                      { 
+                        url: e.target.files[0],
+                      },
+                      element.type
+                    )
+                  }
+                  placeholder="Choose Image"
+                />
+                <ContentEditable
+                  html={element.content.titleBg}
+                  onChange={(e) =>
+                    updateElement(element.id, {
+                      titleBg: e.target.value,
+                      titleEn: element.content.titleEn,
+                      url: element.content.url
+                    })
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.titleEn}
+                  onChange={(e) =>
+                    updateElement(element.id, {
+                      titleBg: element.content.titleBg,
+                      titleEn: e.target.value,
+                      url: element.content.url
+                    })
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

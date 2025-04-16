@@ -1327,23 +1327,32 @@ font-size: 0.8em;
   width: 100%;
   height: 350px;
   display: flex;
-  justify-content: start;
   flex-direction: row;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   
-  /* Add these scroll snap properties */
+  /* Improve scroll snap */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   overflow-x: auto;
   overflow-y: hidden;
   touch-action: pan-x;
-
   cursor: grab;
+}
+
+.pagePeopleListImgs img {
+  flex-shrink: 0;
+  min-width: 100%;
+  max-width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  
+  /* Make each image a strong snap point */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .pagePeopleListImgs:active {
@@ -1357,17 +1366,6 @@ font-size: 0.8em;
 
 .pagePeopleListImgs::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
-}
-
-.pagePeopleListImgs img {
-  flex-shrink: 0;
-  min-width: 100%;
-  max-width: 100%;
-  height: 350px;
-  object-fit: cover;
-  
-  /* Add this to make each image a snap point */
-  scroll-snap-align: start;
 }
 
 .pagePeopleListDots {
@@ -1385,8 +1383,16 @@ font-size: 0.8em;
   height: 10px;
   background-color: #e2e2e2;
   border-radius: 50%;
-  /* cursor: pointer; */
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 4px;
+}
+
+.pagePeopleListDot.active {
+  border: 2px solid #29160f;
+  box-sizing: border-box;
+  transform: scale(1.2);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .pagePeopleListName h3 {

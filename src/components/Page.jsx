@@ -531,8 +531,13 @@ function Page() {
 
     const setupPeopleListImgs = () => {
       const containers = document.querySelectorAll('.pagePeopleListImgs');
-  
-      containers.forEach(container => {
+    
+      containers.forEach((container, idx) => {
+        // Set container ID if not already set
+        if (!container.id) {
+          container.id = `peopleImgs-${idx}`;
+        }
+        
         let isDown = false;
         let startX;
         let scrollLeft;
@@ -595,6 +600,56 @@ function Page() {
           const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
           container.scrollLeft = newScrollLeft;
         }, { passive: true });
+    
+        // Set dots container ID and add functionality
+        const dotsContainer = container.nextElementSibling;
+        if (!dotsContainer.id) {
+          dotsContainer.id = `peopleDots-${idx}`;
+        }
+        
+        const dots = dotsContainer.querySelectorAll('.pagePeopleListDot');
+        
+        // Make sure dataset attributes are set correctly
+        dots.forEach((dot, dotIdx) => {
+          dot.setAttribute('data-index', dotIdx.toString());
+          dot.setAttribute('data-container', idx.toString());
+          
+          // Add click handler directly to make sure it works
+          dot.addEventListener('click', function() {
+            // Get image width for scrolling
+            const imageWidth = container.clientWidth;
+            
+            // Scroll to the selected image smoothly
+            container.scrollTo({
+              left: dotIdx * imageWidth,
+              behavior: 'smooth'
+            });
+            
+            // Update active dot state
+            for (let i = 0; i < dots.length; i++) {
+              dots[i].classList.remove('active');
+            }
+            this.classList.add('active');
+          });
+        });
+        
+        // Set first dot as active initially
+        if (dots.length > 0) {
+          dots[0].classList.add('active');
+        }
+        
+        // Update dots on scroll
+        container.addEventListener('scroll', function() {
+          if (!isDown) {
+            const imageWidth = container.clientWidth;
+            const currentIndex = Math.round(container.scrollLeft / imageWidth);
+            
+            // Update active dot
+            dots.forEach((dot, idx) => {
+              dot.classList.toggle('active', idx === currentIndex);
+            });
+          }
+        });
       });
     };
 

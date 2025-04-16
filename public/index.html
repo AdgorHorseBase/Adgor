@@ -34,6 +34,35 @@
     <div id="root"></div>
     <script>
       let slideIndex = {};
+      
+      function navigateToImage(dotElement) {
+        // Get the index of the image to show
+        const index = parseInt(dotElement.dataset.index);
+        const containerId = dotElement.dataset.container;
+        
+        // Get the image container and dots container
+        const dotsContainer = document.getElementById(`peopleDots-${containerId}`);
+        const imgsContainer = document.getElementById(`peopleImgs-${containerId}`);
+        
+        if (!imgsContainer || !dotsContainer) {
+          console.error("Container not found:", containerId);
+          return;
+        }
+        
+        // Scroll to the selected image
+        const imageWidth = imgsContainer.clientWidth;
+        imgsContainer.scrollTo({
+          left: index * imageWidth,
+          behavior: 'smooth'
+        });
+        
+        // Update active dot
+        const dots = dotsContainer.querySelectorAll('.pagePeopleListDot');
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].classList.remove('active');
+        }
+        dotElement.classList.add('active');
+      }
 
       function showSlides(n, slideshowId) {
         let i;

@@ -1430,16 +1430,19 @@ function Editor({ structure }) {
       } else if (element.type === "peopleList") {
         htmlContent += `
           <div id="pagePeopleList">
-            ${element.content.people.map((person) => `
+            ${element.content.people.map((person, personIndex) => `
               <div class="pagePeopleListItem">
-                <div class="pagePeopleListImgs">
+                <div class="pagePeopleListImgs" id="peopleImgs-${personIndex}">
                   ${person.images.map((img) => `
                     <img src="/server/files/images/${img}" alt="image" />
                   `).join("")}
                 </div>
-                <div class="pagePeopleListDots">
-                  ${person.images.map(() => `
-                    <div class="pagePeopleListDot"></div>
+                <div class="pagePeopleListDots" id="peopleDots-${personIndex}">
+                  ${person.images.map((_, dotIndex) => `
+                    <div class="pagePeopleListDot ${dotIndex === 0 ? 'active' : ''}" 
+                         data-index="${dotIndex}" 
+                         data-container="${personIndex}" 
+                         onclick="navigateToImage(this)"></div>
                   `).join("")}
                 </div>
                 <div class="pagePeopleListName">

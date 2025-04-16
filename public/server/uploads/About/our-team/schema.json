@@ -38,17 +38,17 @@
       ]
     },
     {
-      "id": "fee2860d-4dd5-46e8-928a-539f9d5011bc",
-      "type": "formated",
-      "content": {
-        "textBg": "<h2 class=\"ql-align-center\">Цитат</h2>",
-        "textEn": "<h2 class=\"ql-align-center\">Quote</h2>"
-      }
+      "id": "d93206fd-88dd-48ad-bea8-7a2b3969dfaa",
+      "type": "image",
+      "content": "image-1744791319887.webp"
     },
     {
-      "id": "fd4e0374-366f-4300-9b4d-17395128b7ba",
-      "type": "html",
-      "content": "&lt;h2 class=\"bg\"&gt;Панели нашият екип&lt;/h2&gt;<div>&lt;h2 class=\"en\"&gt;Panel Our Team&lt;/h2&gt;</div>"
+      "id": "2c4d3c9d-dfd8-40d5-8043-a0d9bacc6f82",
+      "type": "quote",
+      "content": {
+        "quoteEn": "Random Quote",
+        "quoteBg": "Някакъв Цитат"
+      }
     },
     {
       "id": "e53850fe-3012-4f34-9f13-ca9ac613fed9",

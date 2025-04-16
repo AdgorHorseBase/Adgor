@@ -1259,3 +1259,13 @@ font-size: 0.8em;
     font-size: 20px;
   }
 }
+
+#pageQuote {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.6rem;
+  font-family: "VinnytsiaSerif";
+  color: #7c766d;
+  font-style: italic;
+}

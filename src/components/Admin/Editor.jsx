@@ -286,6 +286,15 @@ function Editor({ structure }) {
           textEn: "Enter your text"
         }
       }
+    } else if (type === "quote") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          quoteBg: "Въведи цитат на български",
+          quoteEn: "Enter your quote",
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -1173,6 +1182,13 @@ function Editor({ structure }) {
             <div class="arrow-nav arrow-right">&gt;</div>
           </div>
         `;
+      } else if (element.type === "quote") {
+        htmlContent += `
+          <div id="pageQuote">
+            <h2 class="bg">${element.content.quoteBg}</h2>
+            <h2 class="en">${element.content.quoteEn}</h2>
+          </div>
+        `;
       }
     });
 
@@ -1332,6 +1348,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("imageLinkList")}>Image Link List</button>
           <button onClick={() => addElement("titleImage")}>Title Image</button>
           <button onClick={() => addElement("twoTitlesText")}>Two Titles and Text</button>
+          <button onClick={() => addElement("quote")}>Quote</button>
         </div>
         <button id="Save_button" onClick={savePage} title="Save">
           <FaSave />
@@ -2534,6 +2551,31 @@ function Editor({ structure }) {
                     }}
                   />
                 </div>
+              </div>
+            )}
+            {element.type === "quote" && (
+              <div>
+                <label className="labelElement">Quote:</label>
+                <ContentEditable
+                  html={element.content.quoteBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { quoteBg: e.target.value, quoteEn: element.content.quoteEn }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.quoteEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { quoteEn: e.target.value, quoteBg: element.content.quoteBg }, element.type)
+                  }
+                  onPaste={handlePaste}
+                  className="contentEditable"
+                  tagName="p"
+                  id="Added_Text"
+                />
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

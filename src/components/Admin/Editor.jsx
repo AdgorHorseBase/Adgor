@@ -1437,15 +1437,20 @@ function Editor({ structure }) {
                     <img src="/server/files/images/${img}" alt="image" />
                   `).join("")}
                 </div>
-              </div>
-              <div class="pagePeopleListName">
-                <h3 class="bg">${person.nameBg}</h3>
-                <h3 class="en">${person.nameEn}</h3>
-              </div>
-              <div class="pagePeopleListSeparation"></div>
-              <div class="pagePeopleListText">
-                <p class="bg">${person.textBg}</p>
-                <p class="en">${person.textEn}</p>
+                <div class="pagePeopleListDots">
+                  ${person.images.map(() => `
+                    <div class="pagePeopleListDot"></div>
+                  `).join("")}
+                </div>
+                <div class="pagePeopleListName">
+                  <h3 class="bg">${person.nameBg}</h3>
+                  <h3 class="en">${person.nameEn}</h3>
+                </div>
+                <div class="pagePeopleListSeparation"></div>
+                <div class="pagePeopleListText">
+                  <p class="bg">${person.textBg}</p>
+                  <p class="en">${person.textEn}</p>
+                </div>
               </div>
             `).join("")}
           </div>

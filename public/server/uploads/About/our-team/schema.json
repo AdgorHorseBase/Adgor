@@ -27,17 +27,6 @@
       }
     },
     {
-      "id": "b4eb4d24-caff-4f4b-a0a1-36e54f6817c2",
-      "type": "gallery",
-      "content": [
-        "image-1744750492194.webp",
-        "image-1744750495372.webp",
-        "image-1744750497635.webp",
-        "image-1744750508948.webp",
-        "image-1744750511654.webp"
-      ]
-    },
-    {
       "id": "d93206fd-88dd-48ad-bea8-7a2b3969dfaa",
       "type": "image",
       "content": "image-1744791319887.webp"
@@ -48,6 +37,125 @@
       "content": {
         "quoteEn": "Random Quote",
         "quoteBg": "Някакъв Цитат"
+      }
+    },
+    {
+      "id": "5f8bf60f-e14e-44f4-bba7-a54a2d971a63",
+      "type": "peopleList",
+      "content": {
+        "people": [
+          {
+            "id": "b1924c1d-bdfb-4be2-b4b7-f17dfdca2051",
+            "images": [
+              "image-1744822138601.webp",
+              "image-1744822275260.webp",
+              "image-1744822278801.webp"
+            ],
+            "nameBg": "Елара",
+            "nameEn": "Elara",
+            "textBg": "Елара беше любопитно момиче, което живееше в спокойно селце близо до планините. Един ден тя последва светеща пеперуда дълбоко в гората и откри древно дърво, което шепнеше тайни от миналото. От този ден нататък, Елара стана разказвачката на селото, споделяйки магически истории, които никой досега не беше чувал.",
+            "textEn": "Elara was a curious girl who lived in a quiet village near the mountains. One day, she followed a glowing butterfly deep into the forest and discovered an ancient tree that whispered secrets from the past. From that day on, Elara became the village storyteller, sharing magical tales no one had ever heard before."
+          },
+          {
+            "id": "3965e3bd-bf7b-4f73-a9f7-c2bccfbd61bf",
+            "images": [
+              "image-1744822149612.webp",
+              "image-1744822284528.webp",
+              "image-1744822288700.webp",
+              "image-1744822296878.webp"
+            ],
+            "nameBg": "Мило",
+            "nameEn": "Milo",
+            "textBg": "Мило беше срамежлив пекар в оживен град. Всяка сутрин преди изгрев той приготвяше печива и оставяше малки сладкиши по пейките в парка с ръчно написани бележки: “Приятен ден.” С времето неговите лакомства станаха легендарни, и макар че никой не знаеше кой стои зад тях, градът стана малко по-добро място заради Мило.",
+            "textEn": "Milo was a shy baker in a busy city. He baked every morning before sunrise and left small pastries on park benches with handwritten notes that simply said, “Have a sweet day.” Over time, his treats became legendary, and though no one knew who was behind them, the city felt a little kinder because of Milo."
+          },
+          {
+            "id": "0feb4963-a5ff-4f5a-844b-066763730516",
+            "images": [
+              "image-1744822157015.webp",
+              "image-1744822305913.webp"
+            ],
+            "nameBg": "Ния",
+            "nameEn": "Nia",
+            "textBg": "Ния обожаваше дъжда. Докато другите се криеха вътре, тя танцуваше боса в локвите. Една дъждовна вечер намери изгубено кученце, което трепереше под пейка. Прибра го у дома и станаха неразделни — сгряваха си дъждовните дни взаимно.",
+            "textEn": "Nia loved rain. While others stayed indoors, she would dance barefoot in puddles. One rainy evening, she found a lost puppy shivering under a bench. She took him home, and they became inseparable, brightening each other’s stormy days."
+          },
+          {
+            "id": "f50738d4-b5bf-495a-996a-6263be76a5f0",
+            "images": [
+              "image-1744822168569.webp"
+            ],
+            "nameBg": "Каспър",
+            "nameEn": "Kasper",
+            "textBg": "Каспър беше изобретател, който никога не създаваше едно и също нещо два пъти. Гаражът му приличаше на джунгла от мигащи светлини и въртящи се зъбни колела. Един ден случайно създаде робот, който можеше да рисува сънища — и така животът му се превърна в приключение, пълно с цветове и чудеса.",
+            "textEn": "Kasper was an inventor who never built the same thing twice. His garage was a jungle of blinking lights and spinning gears. One day, he accidentally created a robot that could paint dreams, and his quiet life turned into an adventure of color and wonder."
+          },
+          {
+            "id": "447ed1f0-4375-465f-af8b-fe1468c60ef1",
+            "images": [
+              "image-1744822182014.webp",
+              "image-1744822318103.webp",
+              "image-1744822327970.webp"
+            ],
+            "nameBg": "Лиора",
+            "nameEn": "Liora",
+            "textBg": "Лиора свиреше на цигулка на ъгъла на улицата всяка неделя. Хората казваха, че музиката ѝ успокоява дори най-гневното сърце. Един ден мъж със сълзи в очите ѝ остави роза и прошепна: “Благодаря ти, че ми напомни какво е да чувстваш.”",
+            "textEn": "Liora played violin on a street corner every Sunday. People said her music could calm even the angriest heart. One day, a man with tears in his eyes left her a rose and whispered, “Thank you for reminding me how to feel.”"
+          },
+          {
+            "id": "ddee477c-d635-4770-a10b-b162bae12733",
+            "images": [
+              "image-1744822191872.webp",
+              "image-1744822340846.webp"
+            ],
+            "nameBg": "Тео",
+            "nameEn": "Theo",
+            "textBg": "Тео пътуваше само с раница и фотоапарат. Заснемаше лица, смях и скрити улички във всяка държава, която посещаваше. Блогът му се превърна в мозайка от човешки истории, които напомняха на хората колко голям и красиво свързан е светът.",
+            "textEn": "Theo traveled with only a backpack and a camera. He captured faces, laughter, and hidden alleyways in every country he visited. His blog became a patchwork of human stories, reminding people everywhere that the world is both big and beautifully connected."
+          },
+          {
+            "id": "503efc96-7602-427b-bff3-0d405636c634",
+            "images": [
+              "image-1744822200808.webp",
+              "image-1744822378034.webp",
+              "image-1744822383823.webp"
+            ],
+            "nameBg": "Мира",
+            "nameEn": "Mira",
+            "textBg": "Мира управляваше малка книжарничка, скрита между две сгради. Тя вярваше, че правилната книга намира теб точно когато имаш нужда. Рафтовете ѝ не бяха подредени по жанр, а по настроение — и някак винаги клиентите ѝ излизаха с точно това, което не са знаели, че търсят.",
+            "textEn": "Mira ran a tiny bookshop tucked between two buildings. She believed the right book found you when you needed it most. Her shelves weren’t sorted by genre but by mood, and somehow, her customers always left with exactly what they didn’t know they needed."
+          },
+          {
+            "id": "ba9018ff-fc64-4e1b-af8c-3a8e944868a0",
+            "images": [
+              "image-1744822212171.webp",
+              "image-1744822391573.webp",
+              "image-1744822396459.webp"
+            ],
+            "nameBg": "Орион",
+            "nameEn": "Orion",
+            "textBg": "Орион беше запленен от звездите. Като дете се промъкваше на покрива и рисуваше съзвездията. Години по-късно стана астроном и откри комета, която кръсти на баба си — първата, която му подари телескоп.",
+            "textEn": "Orion was fascinated by the stars. As a kid, he’d sneak out to lie on the roof and map constellations. Years later, he became an astronomer and discovered a comet, which he named after his grandmother who first gave him a telescope."
+          },
+          {
+            "id": "16e05c44-3548-4639-be4c-dada9ed9b52b",
+            "images": [
+              "image-1744822252573.webp"
+            ],
+            "nameBg": "Талия",
+            "nameEn": "Talia",
+            "textBg": "Талия обичаше да пише бележки до непознати. Слагаше ги в библиотечни книги или ги закачаше по стените на кафенета. Пишеше неща като: “Ти си важен” или “Светът има нужда от твоята светлина.” Хората започнаха да ги събират, и скоро се зароди вълна от добрина, която тихо се разрасна.",
+            "textEn": "Talia loved to write notes to strangers. She’d slip them into library books or pin them to coffee shop walls. Her notes said things like, “You matter,” or “The world needs your light.” People started collecting them, and soon a movement of kindness quietly bloomed."
+          }
+        ],
+        "newPerson": {
+          "id": "6f6d03a6-db70-4c67-abaf-6e17485fc4ec",
+          "images": [],
+          "nameBg": "Име на български",
+          "nameEn": "Name in English",
+          "textBg": "Въведи текст на български",
+          "textEn": "Enter your text"
+        }
       }
     },
     {

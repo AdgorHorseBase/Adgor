@@ -295,6 +295,22 @@ function Editor({ structure }) {
           quoteEn: "Enter your quote",
         }
       }
+    } else if (type === "peopleList") {
+      newElement = {
+        id: uuidv4(),
+        type,
+        content: {
+          people: [],
+          newPerson: {
+            id: uuidv4(),
+            images: [],
+            nameBg: "Име на български",
+            nameEn: "Name in English",
+            textBg: "Въведи текст на български",
+            textEn: "Enter your text"
+          }
+        }
+      }
     } else {
       newElement = {
         id: uuidv4(),
@@ -908,6 +924,228 @@ function Editor({ structure }) {
           );
         }
         break;
+      case "peopleList":
+        if(newContent.index || newContent.index === 0) {
+          if(newContent.imgIndex || newContent.imgIndex === 0) {
+            if(newContent.deleteImg) {
+              return setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: {
+                        ...el.content,
+                        people: el.content.people.map((person, i) =>
+                          i === newContent.index
+                            ? {
+                              ...person,
+                              images: person.images.filter((_, idx) => idx !== newContent.imgIndex)
+                            }
+                            : person
+                        ),
+                      },
+                    }
+                    : el
+                )
+              );
+            }
+            const image = await uploadImage(newContent.image);
+            if (image) {
+              setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: {
+                        ...el.content,
+                        people: el.content.people.map((person, i) =>
+                          i === newContent.index
+                            ? {
+                              ...person,
+                              images: person.images.map((img, idx) =>
+                                idx === newContent.imgIndex ? image : img
+                              ),
+                            }
+                            : person
+                        ),
+                      },
+                    }
+                    : el
+                )
+              );
+            }
+          } else if(newContent.image) {
+            const image = await uploadImage(newContent.image);
+            if (image) {
+              setSchema(
+                schema.map((el) =>
+                  el.id === id
+                    ? {
+                      ...el,
+                      content: {
+                        ...el.content,
+                        people: el.content.people.map((person, i) =>
+                          i === newContent.index
+                            ? {
+                              ...person,
+                              images: [...person.images, image],
+                            }
+                            : person
+                        ),
+                      },
+                    }
+                    : el
+                )
+              );
+            }
+          } else if(newContent.deletePerson) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      people: el.content.people.filter((_, i) => i !== newContent.index)
+                    },
+                  }
+                  : el
+              )
+            );
+          } else {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      people: el.content.people.map((person, i) =>
+                        i === newContent.index
+                          ? {
+                            ...person,
+                            nameBg: newContent.nameBg || person.nameBg,
+                            nameEn: newContent.nameEn || person.nameEn,
+                            textBg: newContent.textBg || person.textBg,
+                            textEn: newContent.textEn || person.textEn,
+                          }
+                          : person
+                      ),
+                    },
+                  }
+                  : el
+              )
+            );
+          }
+        }
+        break;
+      case "peopleList-new":
+        if(newContent.index || newContent.index === 0) {
+          console.log("Hello");
+          if(newContent.delete) {
+            return setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      newPerson: {
+                        ...el.content.newPerson,
+                        images: el.content.newPerson.images.filter((_, i) => i !== newContent.index)
+                      }
+                    },
+                  }
+                  : el
+              )
+            );
+          }
+          const image = await uploadImage(newContent.image);
+          if(image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    newPerson: {
+                      ...el.content.newPerson,
+                      images: el.content.newPerson.images.map((img, i) =>
+                        i === newContent.index ? image : img
+                      ),
+                    },
+                  },
+                }
+                : el
+              )
+            );
+          }
+        } else if(newContent.image) {
+          console.log("World");
+          const image = await uploadImage(newContent.image);
+          if (image) {
+            setSchema(
+              schema.map((el) =>
+                el.id === id
+                  ? {
+                    ...el,
+                    content: {
+                      ...el.content,
+                      newPerson: {
+                        ...el.content.newPerson,
+                        images: [...el.content.newPerson.images, image],
+                      }
+                    },
+                  }
+                  : el
+              )
+            );
+          }
+        } else if(newContent.add) {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    people: [...el.content.people, el.content.newPerson],
+                    newPerson: {
+                      id: uuidv4(),
+                      images: [],
+                      nameBg: "Име на български",
+                      nameEn: "Name in English",
+                      textBg: "Въведи текст на български",
+                      textEn: "Enter your text"
+                    }
+                  },
+                }
+                : el
+            )
+          );
+        } else {
+          setSchema(
+            schema.map((el) =>
+              el.id === id
+                ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    newPerson: {
+                      ...el.content.newPerson,
+                      nameBg: newContent.nameBg || el.content.newPerson.nameBg,
+                      nameEn: newContent.nameEn || el.content.newPerson.nameEn,
+                      textBg: newContent.textBg || el.content.newPerson.textBg,
+                      textEn: newContent.textEn || el.content.newPerson.textEn,
+                    }
+                  },
+                }
+                : el
+            )
+          );
+        }
+        break;
       default:
         if (type === "two_images" || type === "four_images") {
           const image = await uploadImage(newContent.file);
@@ -1189,6 +1427,29 @@ function Editor({ structure }) {
             <h2 class="en">${element.content.quoteEn}</h2>
           </div>
         `;
+      } else if (element.type === "peopleList") {
+        htmlContent += `
+          <div id="pagePeopleList">
+            ${element.content.people.map((person) => `
+              <div class="pagePeopleListItem">
+                <div class="pagePeopleListImgs">
+                  ${person.images.map((img) => `
+                    <img src="/server/files/images/${img}" alt="image" />
+                  `).join("")}
+                </div>
+              </div>
+              <div class="pagePeopleListName">
+                <h3 class="bg">${person.nameBg}</h3>
+                <h3 class="en">${person.nameEn}</h3>
+              </div>
+              <div class="pagePeopleListSeparation"></div>
+              <div class="pagePeopleListText">
+                <p class="bg">${person.textBg}</p>
+                <p class="en">${person.textEn}</p>
+              </div>
+            `).join("")}
+          </div>
+        `;
       }
     });
 
@@ -1349,6 +1610,7 @@ function Editor({ structure }) {
           <button onClick={() => addElement("titleImage")}>Title Image</button>
           <button onClick={() => addElement("twoTitlesText")}>Two Titles and Text</button>
           <button onClick={() => addElement("quote")}>Quote</button>
+          <button onClick={() => addElement("peopleList")}>People List</button>
         </div>
         <button id="Save_button" onClick={savePage} title="Save">
           <FaSave />
@@ -2576,6 +2838,208 @@ function Editor({ structure }) {
                   tagName="p"
                   id="Added_Text"
                 />
+              </div>
+            )}
+            {element.type === "peopleList" && (
+              <div>
+                <label className="labelElement">People List:</label>
+
+                {element.content.people.map((person, index) => (
+                  <div style={{ marginBottom: "12px" }} key={index}>
+                    <div style={{ display: "flex", justifyContent: "start", flexDirection: "row", gap: "12px", overflowX: "auto", paddingBottom: "12px" }}>
+                      {person.images.map((image, imgIndex) => (
+                        <div style={{ width: "fit-content" }} key={imgIndex}>
+                          <img
+                            id="Added_One_Image_img"
+                            src={URL + "/image?name=" + image}
+                            alt=""
+                          />
+                          <br></br>
+                          <input
+                            id=""
+                            type="file"
+                            onChange={(e) =>
+                              updateElement(
+                                element.id,
+                                { image: e.target.files[0], index, imgIndex },
+                                element.type
+                              )
+                            }
+                            placeholder="Choose Image"
+                          />
+                          <button
+                            style={{ display: "block", marginTop: "0" }}
+                            onClick={() =>
+                              updateElement(
+                                element.id,
+                                { index, imgIndex, deleteImg: true },
+                                element.type
+                              )
+                            }
+                          >Delete</button>
+                        </div>
+                      ))}
+                    </div>
+                    <label style={{ marginLeft: "0", fontSize: "24px" }}>
+                      Add:
+                      <input
+                        type="file"
+                        onChange={(e) =>
+                          updateElement(
+                            element.id,
+                            { image: e.target.files[0], index },
+                            element.type
+                          )
+                        }
+                        style={{ marginLeft: "8px", marginTop: "32px" }}
+                        placeholder="Choose Image"
+                      />
+                    </label>
+                    <ContentEditable
+                      html={person.nameBg}
+                      onChange={(e) =>
+                        updateElement(element.id, { nameBg: e.target.value, index }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <ContentEditable
+                      html={person.nameEn}
+                      onChange={(e) =>
+                        updateElement(element.id, { nameEn: e.target.value, index }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <ContentEditable
+                      html={person.textBg}
+                      onChange={(e) =>
+                        updateElement(element.id, { textBg: e.target.value, index }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <ContentEditable
+                      html={person.textEn}
+                      onChange={(e) =>
+                        updateElement(element.id, { textEn: e.target.value, index }, element.type)
+                      }
+                      onPaste={handlePaste}
+                      tagName="p"
+                      id="Added_Text"
+                    />
+                    <button
+                      style={{ display: "block", marginTop: "0" }}
+                      onClick={() =>
+                        updateElement(
+                          element.id,
+                          { index, deletePerson: true },
+                          element.type
+                        )
+                      }
+                    >Delete Person</button>
+                  </div>
+                ))}
+
+                <label style={{ display: "block", fontWeight: "bold", marginTop: "36px", fontSize: "1.5rem" }}>New:</label>
+                <div style={{ display: "flex", justifyContent: "start", flexDirection: "row", gap: "12px", overflowX: "auto", paddingBottom: "12px" }}>
+                {element.content.newPerson.images.map((image, index) => (
+                  <div style={{ width: "fit-content" }} key={index}>
+                    <img
+                      id="Added_One_Image_img"
+                      src={URL + "/image?name=" + image}
+                      alt=""
+                    />
+                    <br></br>
+                    <input
+                      id=""
+                      type="file"
+                      onChange={(e) =>
+                        updateElement(
+                          element.id,
+                          { image: e.target.files[0], index },
+                          element.type + "-new"
+                        )
+                      }
+                      placeholder="Choose Image"
+                    />
+                    <button
+                      style={{ display: "block", marginTop: "0" }}
+                      onClick={() =>
+                        updateElement(
+                          element.id,
+                          { index, delete: true },
+                          element.type + "-new"
+                        )
+                      }
+                    >Delete</button>
+                  </div>
+                ))}
+                </div>
+                <label style={{ marginLeft: "0", fontSize: "24px" }}>
+                  Add: 
+                  <input
+                    type="file"
+                    onChange={(e) =>
+                      updateElement(
+                        element.id,
+                        { image: e.target.files[0] },
+                        element.type + "-new"
+                      )
+                    }
+                    style={{ marginLeft: "8px", marginTop: "32px" }}
+                    placeholder="Choose Image"
+                  />
+                </label>
+                <ContentEditable
+                  html={element.content.newPerson.nameBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { nameBg: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.newPerson.nameEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { nameEn: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.newPerson.textBg}
+                  onChange={(e) =>
+                    updateElement(element.id, { textBg: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <ContentEditable
+                  html={element.content.newPerson.textEn}
+                  onChange={(e) =>
+                    updateElement(element.id, { textEn: e.target.value }, element.type + "-new")
+                  }
+                  onPaste={handlePaste}
+                  tagName="p"
+                  id="Added_Text"
+                />
+                <button
+                  style={{ display: "block", marginTop: "0" }}
+                  onClick={() =>
+                    updateElement(
+                      element.id,
+                      { add: true },
+                      element.type + "-new"
+                    )
+                  }
+                >Add</button>
               </div>
             )}
             {element.type === "separation" && <div className="line"></div>}

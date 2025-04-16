@@ -1163,14 +1163,19 @@ font-size: 0.8em;
 /* Container styles */
 #pageImageLinkList {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto; /* Keep scrollbars */
   gap: 15px;
-  padding: 20px 0;
+  padding: 20px 48px;
   position: relative;
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-  max-width: 100%;
-  justify-content: center;
+  max-width: 100%; /* Use full width of the container */
+  width: fit-content;
+  margin: 0 auto;
+  box-sizing: border-box; /* Include padding in width calculation */
+  justify-content: start;
+  margin: 0 auto;
+  max-width: calc(100vw - 16px); /* Adjust for viewport width */
 }
 
 /* Hide scrollbar for Chrome/Safari/Opera */

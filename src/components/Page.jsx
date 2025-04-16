@@ -529,8 +529,78 @@ function Page() {
       });
     };
 
+    const setupPeopleListImgs = () => {
+      const containers = document.querySelectorAll('.pagePeopleListImgs');
+  
+      containers.forEach(container => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        // Mouse events
+        container.addEventListener('mousedown', (e) => {
+          isDown = true;
+          container.classList.add('active');
+          startX = e.pageX - container.offsetLeft;
+          scrollLeft = container.scrollLeft;
+          e.preventDefault(); // Prevent text selection during drag
+        });
+        
+        container.addEventListener('mouseleave', () => {
+          isDown = false;
+          container.classList.remove('active');
+        });
+        
+        container.addEventListener('mouseup', () => {
+          isDown = false;
+          container.classList.remove('active');
+        });
+        
+        container.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - container.offsetLeft;
+          const walk = (x - startX) * 1.5;
+          
+          // Calculate the maximum scroll position
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          
+          // Constrain the scroll position to be within bounds
+          const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
+          container.scrollLeft = newScrollLeft;
+        });
+        
+        // Touch events for mobile
+        container.addEventListener('touchstart', (e) => {
+          isDown = true;
+          container.classList.add('active');
+          startX = e.touches[0].pageX - container.offsetLeft;
+          scrollLeft = container.scrollLeft;
+        }, { passive: true });
+        
+        container.addEventListener('touchend', () => {
+          isDown = false;
+          container.classList.remove('active');
+        });
+        
+        container.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - container.offsetLeft;
+          const walk = (x - startX);
+          
+          // Calculate the maximum scroll position
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          
+          // Constrain the scroll position to be within bounds
+          const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
+          container.scrollLeft = newScrollLeft;
+        }, { passive: true });
+      });
+    };
+
     GetSections();
     GetGalleries();
+    setupPeopleListImgs();
   }, [pageContent]);
 
   const handleImageClick = (galleryId, images, index) => {

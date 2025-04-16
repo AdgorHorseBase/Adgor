@@ -1098,6 +1098,22 @@ font-size: 0.8em;
   font-size: 4em;
   font-weight: lighter;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%; /* Adjust as needed */
+}
+
+@media screen and (max-width: 768px) {
+  #pageTitleImage h2 {
+    font-size: 3em; /* Smaller size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #pageTitleImage h2 {
+    font-size: 2em; /* Further reduce size for very small screens */
+  }
 }
 
 #pageTwoTitlesText {
@@ -1313,10 +1329,30 @@ font-size: 0.8em;
   display: flex;
   justify-content: start;
   flex-direction: row;
-  overflow: auto;
   border-radius: 12px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  
+  /* Add these scroll snap properties */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  overflow-x: auto;
+  overflow-y: hidden;
+  touch-action: pan-x;
+
+  cursor: grab;
+}
+
+.pagePeopleListImgs:active {
+  cursor: grabbing;
+}
+
+.pagePeopleListImgs img:active {
+  user-select: none;
+  pointer-events: none;
 }
 
 .pagePeopleListImgs::-webkit-scrollbar {
@@ -1324,10 +1360,14 @@ font-size: 0.8em;
 }
 
 .pagePeopleListImgs img {
-  width: 400px;
-  min-width: 400px;
+  flex-shrink: 0;
+  min-width: 100%;
+  max-width: 100%;
   height: 350px;
   object-fit: cover;
+  
+  /* Add this to make each image a snap point */
+  scroll-snap-align: start;
 }
 
 .pagePeopleListDots {

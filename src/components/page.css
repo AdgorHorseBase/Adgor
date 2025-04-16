@@ -1282,11 +1282,12 @@ font-size: 0.8em;
   justify-content: center;
   gap: 36px;
   margin: 124px auto;
-  max-width: 100%;
+  max-width: min(1272px, 80%);
 }
 
 .pagePeopleListItem {
   width: 400px;
+  max-width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;

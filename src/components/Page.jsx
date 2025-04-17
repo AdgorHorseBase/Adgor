@@ -538,38 +538,22 @@ function Page() {
           container.id = `peopleImgs-${idx}`;
         }
         
-        // Apply hardware acceleration to improve performance
-        container.style.transform = 'translateZ(0)';
-        container.style.backfaceVisibility = 'hidden';
-        container.style.perspective = '1000px';
-        
         let isDown = false;
         let startX;
         let scrollLeft;
-        let startTime;
-        let lastX;
-        let velocity = 0;
-        let rafId = null;
         
-        // Mouse events with improved performance
+        // Mouse events
         container.addEventListener('mousedown', (e) => {
           isDown = true;
           container.classList.add('active');
           startX = e.pageX - container.offsetLeft;
           scrollLeft = container.scrollLeft;
-          cancelAnimationFrame(rafId);
-          e.preventDefault();
-          
-          // Track for momentum scrolling
-          startTime = Date.now();
-          lastX = e.pageX;
+          e.preventDefault(); // Prevent text selection during drag
         });
         
         container.addEventListener('mouseleave', () => {
-          if (isDown) {
-            isDown = false;
-            container.classList.remove('active');
-          }
+          isDown = false;
+          container.classList.remove('active');
         });
         
         container.addEventListener('mouseup', () => {
@@ -583,95 +567,41 @@ function Page() {
           const x = e.pageX - container.offsetLeft;
           const walk = (x - startX) * 1.5;
           
-          // Track velocity for momentum scrolling
-          const now = Date.now();
-          const elapsed = now - startTime;
-          if (elapsed > 0) {
-            velocity = (lastX - e.pageX) / elapsed;
-            startTime = now;
-            lastX = e.pageX;
-          }
+          // Calculate the maximum scroll position
+          const maxScroll = container.scrollWidth - container.clientWidth;
           
-          // Use requestAnimationFrame for smoother scrolling
-          cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(() => {
-            const newScrollLeft = Math.max(0, Math.min(container.scrollWidth - container.clientWidth, scrollLeft - walk));
-            container.scrollLeft = newScrollLeft;
-          });
+          // Constrain the scroll position to be within bounds
+          const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
+          container.scrollLeft = newScrollLeft;
         });
         
-        // Touch events with optimized handling for mobile
+        // Touch events for mobile
         container.addEventListener('touchstart', (e) => {
           isDown = true;
           container.classList.add('active');
           startX = e.touches[0].pageX - container.offsetLeft;
           scrollLeft = container.scrollLeft;
-          cancelAnimationFrame(rafId);
-          
-          // Track for momentum scrolling
-          startTime = Date.now();
-          lastX = e.touches[0].pageX;
-          
-          // Prevent other handlers but keep passive for performance
         }, { passive: true });
         
         container.addEventListener('touchend', () => {
-          if (isDown) {
-            isDown = false;
-            container.classList.remove('active');
-            
-            // Apply momentum scrolling on touch end
-            let momentum = velocity * 120;
-            
-            // Snap to nearest image after momentum
-            const applyMomentum = () => {
-              if (Math.abs(momentum) > 0.1) {
-                container.scrollLeft += momentum;
-                momentum *= 0.95; // Decay factor
-                rafId = requestAnimationFrame(applyMomentum);
-              } else {
-                // After momentum, snap to nearest image
-                const imageWidth = container.clientWidth;
-                const currentPosition = container.scrollLeft;
-                const targetImage = Math.round(currentPosition / imageWidth);
-                
-                container.scrollTo({
-                  left: targetImage * imageWidth,
-                  behavior: 'smooth'
-                });
-              }
-            };
-            
-            cancelAnimationFrame(rafId);
-            rafId = requestAnimationFrame(applyMomentum);
-          }
+          isDown = false;
+          container.classList.remove('active');
         });
         
         container.addEventListener('touchmove', (e) => {
           if (!isDown) return;
+          const x = e.touches[0].pageX - container.offsetLeft;
+          const walk = (x - startX);
           
-          // Use requestAnimationFrame for smoother scrolling
-          cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(() => {
-            const x = e.touches[0].pageX - container.offsetLeft;
-            const walk = (x - startX);
-            
-            // Track velocity for momentum scrolling
-            const now = Date.now();
-            const elapsed = now - startTime;
-            if (elapsed > 0) {
-              velocity = (lastX - e.touches[0].pageX) / elapsed;
-              startTime = now;
-              lastX = e.touches[0].pageX;
-            }
-            
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
-            container.scrollLeft = newScrollLeft;
-          });
+          // Calculate the maximum scroll position
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          
+          // Constrain the scroll position to be within bounds
+          const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
+          container.scrollLeft = newScrollLeft;
         }, { passive: true });
-        
-        // Set dots container ID and add functionality (optimized version)
+    
+        // Set dots container ID and add functionality
         const dotsContainer = container.nextElementSibling;
         if (!dotsContainer.id) {
           dotsContainer.id = `peopleDots-${idx}`;
@@ -679,12 +609,12 @@ function Page() {
         
         const dots = dotsContainer.querySelectorAll('.pagePeopleListDot');
         
-        // Optimize dot functionality
+        // Make sure dataset attributes are set correctly
         dots.forEach((dot, dotIdx) => {
           dot.setAttribute('data-index', dotIdx.toString());
           dot.setAttribute('data-container', idx.toString());
           
-          // Add click handler with better performance
+          // Add click handler directly to make sure it works
           dot.addEventListener('click', function() {
             // Get image width for scrolling
             const imageWidth = container.clientWidth;
@@ -697,8 +627,9 @@ function Page() {
             
             // Update active dot state
             for (let i = 0; i < dots.length; i++) {
-              dots[i].classList.toggle('active', i === dotIdx);
+              dots[i].classList.remove('active');
             }
+            this.classList.add('active');
           });
         });
         
@@ -707,26 +638,16 @@ function Page() {
           dots[0].classList.add('active');
         }
         
-        // Update dots on scroll using a throttled approach
-        let scrollTimeout = null;
+        // Update dots on scroll
         container.addEventListener('scroll', function() {
-          if (!isDown && !scrollTimeout) {
-            scrollTimeout = setTimeout(function() {
-              const imageWidth = container.clientWidth;
-              const currentIndex = Math.round(container.scrollLeft / imageWidth);
-              
-              // Update active dot only if needed
-              dots.forEach((dot, idx) => {
-                const isActive = idx === currentIndex;
-                if (isActive && !dot.classList.contains('active')) {
-                  dot.classList.add('active');
-                } else if (!isActive && dot.classList.contains('active')) {
-                  dot.classList.remove('active');
-                }
-              });
-              
-              scrollTimeout = null;
-            }, 100); // Throttle to reduce performance impact
+          if (!isDown) {
+            const imageWidth = container.clientWidth;
+            const currentIndex = Math.round(container.scrollLeft / imageWidth);
+            
+            // Update active dot
+            dots.forEach((dot, idx) => {
+              dot.classList.toggle('active', idx === currentIndex);
+            });
           }
         });
       });

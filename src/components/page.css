@@ -1340,6 +1340,12 @@ font-size: 0.8em;
   overflow-y: hidden;
   touch-action: pan-x;
   cursor: grab;
+  
+  /* Performance optimizations */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  transform: translateZ(0); /* Hardware acceleration */
+  backface-visibility: hidden; /* Prevent flickering */
+  will-change: scroll-position; /* Hint for browser optimization */
 }
 
 .pagePeopleListImgs img {
@@ -1353,19 +1359,10 @@ font-size: 0.8em;
   /* Make each image a strong snap point */
   scroll-snap-align: center;
   scroll-snap-stop: always;
-}
-
-.pagePeopleListImgs:active {
-  cursor: grabbing;
-}
-
-.pagePeopleListImgs img:active {
-  user-select: none;
-  pointer-events: none;
-}
-
-.pagePeopleListImgs::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  
+  /* Performance optimizations for images */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .pagePeopleListDots {

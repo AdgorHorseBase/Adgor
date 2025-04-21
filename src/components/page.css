@@ -685,17 +685,26 @@ h1 {
   color: white;
 }
 
-.menuEndContainer button {
-  font-family: "Forum", serif;
-  letter-spacing: 2px;
-  text-shadow: 0px 2px 6px rgba(0, 0, 0, .8);
+.menuEndContainer .linkButton {
+  font-size: 1rem;
+  padding: 3px 12px;
+  background-color: transparent;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid white;
+  transition: all 0.3s ease-in-out;
 }
 
-.menuItemsContainer > button, .menuEndContainer > button {
+.menuEndContainer .linkButton:hover {
+  background-color: black;
+  color: white;
+}
+
+.menuItemsContainer > button {
   position: relative;
 }
 
-.menuItemsContainer > button::after, .menuEndContainer > button::after {
+.menuItemsContainer > button::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -706,7 +715,7 @@ h1 {
   transition: width 0.3s ease;
 }
 
-.menuItemsContainer > button:hover::after, .menuEndContainer > button:hover::after {
+.menuItemsContainer > button:hover::after {
   width: 100%;
 }
 

@@ -96,7 +96,7 @@
         }
         const menuItems = [
           ...menu.querySelector('.menuItemsContainer')?.children || [],
-          ...menu.querySelector('.menuEndContainer')?.children || []
+          menu.querySelector('.linkButton') || []
         ];
         const mobileMenuItems = menuItems.length === 0 && [
           menu.querySelector('.expand-button') || [],
@@ -140,9 +140,27 @@
 
           } else {
             for(let i = 0; i < menuItems.length; i++) {
+              if(!menuItems[i].style) {
+                return;
+              }
+
               menuItems[i].style.transition = "all 0.3s ease-in-out";
               menuItems[i].style.color = 'black';
               menuItems[i].style.textShadow = 'none';
+
+              if(menuItems[i].className == 'linkButton') {
+                menuItems[i].style.borderColor = 'black';
+                menuItems[i].addEventListener('mouseover', function() {
+                  this.style.backgroundColor = 'black';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'white'
+                });
+                menuItems[i].addEventListener('mouseout', function() {
+                  this.style.backgroundColor = 'transparent';
+                  this.style.color = 'black';
+                  this.style.borderColor = 'black';
+                });
+              }
             }
           }
         } else {
@@ -179,9 +197,28 @@
 
           } else {
             for(let i = 0; i < menuItems.length; i++) {
+              if(!menuItems[i].style) {
+                return;
+              }
+              
               menuItems[i].style.transition = "all 0.3s ease-in-out";
               menuItems[i].style.color = 'white';
               menuItems[i].style.textShadow = '0px 2px 6px rgba(0, 0, 0, .8)';
+
+              if(menuItems[i].className == 'linkButton') {
+                menuItems[i].style.boxShadow = 'none';
+                menuItems[i].style.borderColor = 'white';
+                menuItems[i].addEventListener('mouseover', function() {
+                  this.style.backgroundColor = 'black';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'black'
+                });
+                menuItems[i].addEventListener('mouseout', function() {
+                  this.style.backgroundColor = 'transparent';
+                  this.style.color = 'white';
+                  this.style.borderColor = 'white';
+                });
+              }
             }
           }
         }

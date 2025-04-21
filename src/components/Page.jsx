@@ -136,27 +136,16 @@ const MenuSections = () => {
         </div>
       
         <div className="menuEndContainer">
-          {lang === "bg" ? (
+        {/* <div className="menuEndContainerMobile" style={{ marginRight: "10px" }}> */}
             <button
-              id="menuButton"
+              className="linkButton"
               onClick={() => {
-                localStorage.setItem("lang", "en");
+                localStorage.setItem("lang", lang === "bg" ? "en" : "bg");
                 window.location.reload();
               }}
             >
-              BG/EN
+              { lang === "bg" ? "EN" : "BG" }
             </button>
-          ) : (
-            <button
-              id="menuButton"
-              onClick={() => {
-                localStorage.setItem("lang", "bg");
-                window.location.reload();
-              }}
-            >
-              BG/EN
-            </button>
-          )}
         </div>
       </div>
   ) : (

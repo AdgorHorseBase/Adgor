@@ -136,15 +136,6 @@ const MenuSections = () => {
         </div>
       
         <div className="menuEndContainer">
-          {/* Button for contact us */}
-          <button
-            id="menuButton"
-            onClick={() => {
-              document.location.href = "/page/contact-us";
-            }}
-          >
-            {lang === "bg" ? "Контакти" : "Contacts"}
-          </button><br></br>
           {lang === "bg" ? (
             <button
               id="menuButton"

@@ -87,7 +87,7 @@ li {
 }
 
 /* socials */
-.socials {
+/* .socials {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +96,7 @@ li {
   margin-top: 5px;
   margin-bottom: 5px;
   border-bottom: 2px solid #29160f;
-}
+} */
 
 #contactsSmall {
   display: flex;

@@ -54,7 +54,8 @@
     font-family: inherit;
     font-size: 24px;
     cursor: pointer;
-    color: #e2d9c6;
+    color: white;
+    letter-spacing: 0;
     padding-left: 12px;
     border-radius: 30px;
     padding-right: 12px;
@@ -78,7 +79,8 @@
 
 .page-list-mobile a {
     text-decoration: none;
-    color: #e2d9c6;
+    color: white;
+    letter-spacing: 0;
     font-size: 22px;
 }
 
@@ -115,13 +117,13 @@
 .file-button {
     display: block;
     font-family: 'Forum', serif;
-    color: #e2d9c6;
+    color: white;
     letter-spacing: normal;
 }
 
 .file-button:hover {
     background-color: transparent;
-    color: #e2d9c6;
+    color: white;
     cursor: pointer;
 }
 

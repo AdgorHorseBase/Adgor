@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./footer.css";
 import axios from "axios";
-import instagram from "./images/instagram.webp";
-import facebook from "./images/facebook.svg";
+// import instagram from "./images/instagram.webp";
+// import facebook from "./images/facebook.svg";
 
 const Footer = () => {
   const [imageEnable, setImageEnable] = useState(true);

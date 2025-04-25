@@ -213,7 +213,7 @@
 }
   
 .page-list li a:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
 }
   
 .directory-menu:hover .page-list {

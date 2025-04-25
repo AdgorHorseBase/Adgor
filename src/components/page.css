@@ -700,11 +700,11 @@ h1 {
   color: white;
 }
 
-.menuItemsContainer > button {
+.menuItemsContainer > button, .page-list a {
   position: relative;
 }
 
-.menuItemsContainer > button::after {
+.menuItemsContainer > button::after, .page-list a::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -715,7 +715,7 @@ h1 {
   transition: width 0.3s ease;
 }
 
-.menuItemsContainer > button:hover::after {
+.menuItemsContainer > button:hover::after, .page-list a:hover::after {
   width: 100%;
 }
 

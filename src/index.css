@@ -212,10 +212,6 @@
     color: black;
 }
   
-.page-list li a:hover {
-    /* background-color: #ddd; */
-}
-  
 .directory-menu:hover .page-list {
     display: block;
 }

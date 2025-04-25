@@ -42,7 +42,7 @@ h1 {
   width: 70vw;
   font-size: 1.3em;
   text-align: center;
-  font-style: italic;
+  /* font-style: italic; */
   margin-top: 0;
   padding-top: 2vw;
   padding-bottom: 2vw;
@@ -129,18 +129,19 @@ h1 {
 }
 
 #pageVideo {
-  width: 70vw;
-  margin-left: 15vw;
-  margin-right: 15vw;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   height: auto;
   border-radius: 10px;
   margin-bottom: 2vw;
 }
 
 #pageYouTube {
-  margin-left: 15vw;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   margin-top: 2vw;
-  width: 70vw;
   height: calc(80vw * 0.5625);
   border-radius: 10px;
   border: none;
@@ -149,8 +150,8 @@ h1 {
 
 #pageImageText {
   position: relative;
-  width: 70vw;
-  margin-left: 15vw;
+  width: 70%;
+  margin: 0 auto;
 }
 
 #pageImageText img {
@@ -184,9 +185,8 @@ h1 {
 }
 
 .pageFormated {
-  margin-left: 15vw;
-  margin-right: 15vw;
-  width: 70vw;
+  width: 70%;
+  margin: 0 auto;
   padding-top: 36px;
   padding-bottom: 36px;
 }
@@ -207,7 +207,8 @@ h1 {
 
 @media screen and (min-width: 750px) {
   #pageTextImageLeft {
-    margin-left: 15vw;
+    margin-left: 15%;
+    margin-right: 15%;
     overflow: hidden;
     margin-top: 2vw;
   }
@@ -216,7 +217,7 @@ h1 {
     float: left;
     margin-top: 2vw;
     width: 35vw;
-
+    margin-right: 2%;
   }
 
   #pageTextImageLeft  span{
@@ -234,13 +235,16 @@ h1 {
   }
   
   #pageTextImageRight {
-    margin-right: 15vw;
+    margin-right: 15%;
+    margin-left: 15%;
     overflow: hidden;
+    margin-top: 24px;
   }
   
   #pageTextImageRight .imageContainer {
     float: right;
     width: 35vw;
+    margin-left: 2%;
   }
   
   #pageTextImageRight .imageContainer img {
@@ -289,6 +293,8 @@ h1 {
 #pageTextImageBehind img {
   width: 100%;
   padding-bottom: 2vw;
+  height: 700px;
+  object-fit: cover;
 }
 
 #pageTextImageBehind .content {
@@ -349,7 +355,7 @@ h1 {
 }
 
 #pageStartingFrontImg {
-  display: none;
+  /* display: none; */
   width: 50%;
   max-width: 600px;
   max-height: 400px;
@@ -371,9 +377,9 @@ h1 {
 }
 
 .pagePersonImages img:first-of-type {
-  width: 30vw;
+  width: 60%;
   position: absolute;
-  margin-left: 10vw;
+  /* margin-left: 10%; */
   z-index: 1;
 }
 
@@ -383,13 +389,13 @@ h1 {
   right: 0;
   z-index: 2;
   margin: auto;
-  margin-right: 0;
+  margin-right: 24px;
   margin-top: 60px;
   display: block;
 }
 
 .pagePersonText {
-  width: 30vw;
+  width: 50%;
   z-index: 3;
   position: relative;
 }
@@ -749,7 +755,7 @@ h1 {
 
 @media screen and (max-width: 1000px) {
   .gallery-container {
-    min-height: 33.33vw;
+    min-height: 33.33%;
   }
 
   .gallery-item {
@@ -914,177 +920,170 @@ h1 {
 }
 
 @media (max-width: 768px) {
-#pageTitle{
-  font-size: 2.5em;
-}
+  #pageTitle{
+    font-size: 2.5em;
+  }
 
-.pageFormated p{
-  font-size: 1.1em !important;
-}
+  .pageFormated p{
+    font-size: 1.1em !important;
+  }
 
-#pageTwoImgFirst{
+  #pageTwoImgFirst{
+    width: 75vw;
+
+  }
+
+  #pageTwoImgSecond{
+    width: 75vw;
+  }
+
+  #pageTwoImg{
+    margin-left: 12.5vw;
+  }
+  #pageText{
   width: 75vw;
+  font-size: 0.8em;
 
+  }
+
+  #pageOneImg{
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  #sections{
+    display: none;
+    margin-right: 0vw;
+    width: 20vw;
+
+    filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+  }
+
+  #sections div{
+    font-size: 0.7em;
+    margin-right: 5vw;
+  }
+
+  #pageLine{
+    width: 78vw;
+  }
+
+  #pageVideo{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #pageOneImg{
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .pageTwoImg{
+    margin: 0 12.5%;
+  }
+
+  .pageFourImg{
+    margin: 0 12.5%;
+  }
+
+
+  #pageFourImgSecond{
+    border-radius: 10px;
+    height: auto;
+    max-height: calc(70vw*3);
+    object-fit: contain;
+  }
+
+  #pageImageText{
+    padding-top: 2vw;
+    margin-left: 12.5vw;
+
+  }
+
+  #pageImageText img{
+    width: 75%;
+  }
+
+  #pageImageText p {
+    font-size: 1.5em;
+    width: 80%;
+
+  }
+
+  #pageYouTube{
+    width: 75%;
+    margin: 0 auto;
+  }
+
+
+  #pageTextImageLeft  span{
+    float: left;
+    margin-top: 3.5vw;
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5vw;
+  }
+
+  #pageTextImageRight  span{
+    float: left;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 3.5vw;
+    text-align: center;
+    padding-bottom: 5vw;
+  }
+
+
+
+  #pageTextImageBehind p {
+    font-size: 26px;
+  }
+
+  /* #pagePerson{
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .pagePersonImages img:first-of-type {
+    width: 60%;
+    position: absolute;
+    z-index: 1;
+    margin-left: 0vw;
+  }
+
+  .pagePersonImages img:last-of-type {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 10vw;
+  }
+
+  .pagePersonText{
+    margin-top: -4vw;
+    margin-bottom: 5vw;
+  } */
+
+  .slideshow{
+    margin: 0;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 5vw;
+  }
+
+  .slide img{
+    width: 78vw;
+  }
+
+  .donation{
+    margin: 0;
+    margin: 0 auto;
+    margin-top: 4vw;
+    width: 72%;
+    padding: 3vw;
+  }
 }
 
-#pageTwoImgSecond{
-  width: 75vw;
-}
-
-#pageTwoImg{
-  margin-left: 12.5vw;
-}
-#pageText{
-width: 75vw;
-font-size: 0.8em;
-
-}
-
-#pageOneImg{
-  width: 75vw;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-}
-
-#sections{
-  display: none;
-  margin-right: 0vw;
-  width: 20vw;
-
-  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
-}
-
-#sections div{
-  font-size: 0.7em;
-  margin-right: 5vw;
-}
-
-#pageLine{
-  width: 78vw;
-}
-
-#pageVideo{
-  width: 75vw;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-}
-
-#pageOneImg{
-  width: 75vw;
-  margin-left: 12.5vw;
-}
-
-.pageTwoImg{
-  margin: 0 12.5%;
-}
-
-.pageFourImg{
-  margin: 0 12.5%;
-}
-
-
-#pageFourImgSecond{
-  border-radius: 10px;
-  height: auto;
-  max-height: calc(70vw*3);
-  object-fit: contain;
-}
-
-#pageImageText{
-  padding-top: 2vw;
-  margin-left: 12.5vw;
-
-}
-
-#pageImageText img{
-  width: 75vw;
-}
-
-#pageImageText p {
-  font-size: 1.5em;
-  width: 80%;
-
-}
-
-#pageYouTube{
-  width: 75vw;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-}
-
-
-#pageTextImageLeft  span{
-  float: left;
-  margin-top: 3.5vw;
-  width: 85vw;
-  margin-left: 7.5vw;
-  margin-right: 7.5vw;
-  text-align: center;
-  padding-bottom: 5vw;
-}
-
-#pageTextImageRight  span{
-  float: left;
-  margin-top: 3.5vw;
-  width: 85vw;
-  margin-left: 7.5vw;
-  margin-right: 7.5vw;
-  text-align: center;
-  padding-bottom: 5vw;
-}
-
-
-
-#pageTextImageBehind p {
-  font-size: 26px;
-}
-
-#pagePerson{
-  width: 75vw;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-}
-
-.pagePersonImages img:first-of-type {
-  width: 60vw;
-  position: absolute;
-  z-index: 1;
-  margin-left: 0vw;
-}
-
-.pagePersonImages img:last-of-type {
-  width: 30vw;
-  margin-left: 45vw;
-  margin-top: 10vw;
-}
-
-.pagePersonText{
-  margin-top: -4vw;
-  margin-bottom: 5vw;
-}
-
-.slideshow{
-  margin: 0;
-  margin-top: 5vw;
-  width: 75vw;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-}
-
-.slide img{
-  width: 78vw;
-}
-
-.donation{
-
-  margin: 0;
-  margin-left: 12.5vw;
-  margin-right: 12.5vw;
-  margin-top: 4vw;
-  width: 72vw;
-  padding: 3vw;
-}
-}
 
 #pageTitleImage {
   margin-top: -100px;

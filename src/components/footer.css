@@ -80,6 +80,7 @@
   align-items: center;
   gap: 24px;
   margin-top: 24px;
+  fill: #E6DED1;
 }
 
 @media (min-width: 1400px) {

@@ -8,8 +8,10 @@ const app = express();
 const PORT = 8080;
 
 let structure, products, vouchers;
-const productsFilePath = path.join(__dirname, 'files', 'products.json');
-const vouchersFilePath = path.join(__dirname, 'files', 'vouchers.json');
+const productsFilePath = path.join(__dirname, 'files', 'config', 'products.json');
+const vouchersFilePath = path.join(__dirname, 'files', 'config', 'vouchers.json');
+const structureFilePath = path.join(__dirname, 'files', 'config', 'structure.json');
+
 
 // Middleware for parsing JSON requests and incoming form-data requests
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +24,7 @@ app.use(cors({
 }));
 
 // Directory for storing pages
-const UPLOADS_DIR = path.join(__dirname, "uploads");
+const UPLOADS_DIR = path.join(__dirname, "files/uploads");
 
 // Ensure the uploads directory exists
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -149,8 +151,6 @@ function GetStructure() {
         }
     });
 
-    // Load the existing structure from the structure.json file
-    const structureFilePath = path.join(__dirname, 'files', 'structure.json');
     if (fs.existsSync(structureFilePath)) {
         try {
             const existingStructure = JSON.parse(fs.readFileSync(structureFilePath, 'utf-8'));
@@ -298,6 +298,9 @@ app.use("/image", Image);
 const Video = require("./routes/Video");
 app.use("/video", Video);
 
+const ListFiles = require("./routes/ListFiles");
+app.use("/config", ListFiles);
+
 
 // Products
 app.get("/products", (req, res) => {
@@ -357,7 +360,6 @@ app.post("/set-places", async (req, res) => {
     });
     
     try {
-        const structureFilePath = path.join(__dirname, 'files', 'structure.json');
         fs.writeFileSync(structureFilePath, JSON.stringify(structure), 'utf-8');
         structure = GetStructure();
     
@@ -427,7 +429,6 @@ app.post("/place-change", async (req, res) => {
             });
         }
 
-        const structureFilePath = path.join(__dirname, 'files', 'structure.json');
         fs.writeFileSync(structureFilePath, JSON.stringify(structure, null, 2), 'utf-8');
         structure = GetStructure();
     
@@ -443,9 +444,6 @@ app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 
     GetStructure();
-    
-    // Load Structure
-    const structureFilePath = path.join(__dirname, 'files', 'structure.json');
 
     if (!fs.existsSync(structureFilePath)) {
         // File doesn't exist, create it with an empty object

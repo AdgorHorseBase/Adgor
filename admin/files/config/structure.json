@@ -1,0 +1,26 @@
+{
+  "\\Horse boarding": {
+    "type": "file",
+    "titleBg": "Пансион за коне",
+    "titleEn": "Horse boarding",
+    "place": 3
+  },
+  "\\blog": {
+    "type": "file",
+    "titleBg": "Блог",
+    "titleEn": "BLOG",
+    "place": 5
+  },
+  "\\contact-us": {
+    "type": "file",
+    "titleBg": "Свържете се с нас",
+    "titleEn": "Contact us",
+    "place": 7
+  },
+  "\\foundation": {
+    "type": "file",
+    "titleBg": "Фондацията",
+    "titleEn": "Foundation",
+    "place": 6
+  }
+}

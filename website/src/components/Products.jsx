@@ -1,8 +1,9 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 import Cart from './Cart';
 import './Products.css';
+import { getContent } from '../config';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -11,8 +12,8 @@ const Products = () => {
 
     useEffect(() => {
         const GetProducts = async () => {
-            const response = await axios.get("/server/files/products.json");
-            setProducts(response.data);
+            const response = await getContent("config/products.json");
+            setProducts(response);
         };
         
         GetProducts();

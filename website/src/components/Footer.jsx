@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./footer.css";
-import axios from "axios";
+// import axios from "axios";
+import { getContent } from "../config";
 // import instagram from "./images/instagram.webp";
 // import facebook from "./images/facebook.svg";
 
@@ -19,14 +20,12 @@ const Footer = () => {
       }
       const pagePath = window.location.pathname.replace("/page/", "");
       try {
-        const schema = await axios.get(
-          "/server/uploads/" + pagePath + "/schema.json"
-        );
-        if(schema.data.footerImageEnable !== undefined) {
-          setImageEnable(schema.data.footerImageEnable);
+        const schema = await getContent("uploads/" + pagePath + "/schema.json");
+        if(schema.footerImageEnable !== undefined) {
+          setImageEnable(schema.footerImageEnable);
         }
-        if (schema && schema.data && schema.data.footerImage) {
-          setImageSrc("/server/files/images/" + schema.data.footerImage);
+        if (schema && schema && schema.footerImage) {
+          setImageSrc("/server/files/images/" + schema.footerImage);
         }
       } catch (err) {
         console.error(err);
@@ -35,10 +34,10 @@ const Footer = () => {
 
     const GetStructure = async () => {
       try {
-        const schema = await axios.get(`/server/files/structure.json`);
-        setStruct(schema.data);
+        const schema = await getContent(`config/structure.json`);
+        setStruct(schema);
       } catch (err) {
-        console.log("Error:", err);
+        console.error(err);
       }
     };
 

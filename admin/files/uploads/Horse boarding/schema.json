@@ -2,12 +2,14 @@
   "titleBg": "Пансион за коне",
   "titleEn": "Horse boarding",
   "directoryBg": "",
+  "footerImageEnable": true,
+  "footerImage": "",
   "schema": [
     {
       "id": "b8077bd7-a357-4344-b40c-1b3c9620b4e3",
       "type": "title",
       "content": {
-        "textBg": "Пансион за коне",
+        "textBg": "Пансион за конеee",
         "textEn": "Horse boarding<!-- notionvc: d20398e8-cb41-4a51-8cfb-91c65b1ccaee -->"
       }
     },

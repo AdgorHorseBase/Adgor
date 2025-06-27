@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AdminPanel from './components/Admin/AdminPanel';
+import AdminPanel from './components/Admin/AdminPanel.jsx';
 import { Page } from './components/Page.jsx';
-import Products from './components/Products';
+import Products from './components/Products.jsx';
 import Success from './components/Success.jsx';
 import { Vouchers } from './components/Vouchers.jsx';
 import WelcomePage from './components/WelcomePage.jsx';

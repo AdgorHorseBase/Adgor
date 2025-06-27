@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import { MenuSections } from './Page';
 import "./productPage.css";
 import Cart from './Cart';
+import { getContent } from '../config';
 // import planeImg from './images/plane.svg'
 
 const ProductPage = () => {
@@ -24,8 +25,8 @@ const ProductPage = () => {
 
     useEffect(() => {
         const GetProducts = async () => {
-            const response = await axios.get("/server/files/products.json");
-            setProducts(response.data);
+            const response = await getContent("config/products.json");
+            setProducts(response);
         };
         
         GetProducts();

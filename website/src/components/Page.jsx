@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import "./page.css";
 import logo from "./images/AdgorLogo.webp";
 import { IoClose } from "react-icons/io5";
@@ -8,7 +8,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { TbMenu2 } from "react-icons/tb";
 import useMediaQuery from "@mui/material/useMediaQuery";
-// const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+
+import { getContent } from "../config.js";
 
 const MenuSections = () => {
   const [loadingMenu, setLoadingMenu] = useState(true);
@@ -20,10 +21,11 @@ const MenuSections = () => {
   useEffect(() => {
     const getStruct = async () => {
       try {
-        const schema = await axios.get(`/server/files/structure.json`);
-        setStruct(schema.data);
+        const schema = await getContent("config/structure.json");
+        setStruct(schema);
       } catch (err) {
-        console.log("Error:", err);
+        console.error(err);
+        console.log(await getContent("config/structure.json"))
       }
     };
 
@@ -53,101 +55,101 @@ const MenuSections = () => {
   ) : desktopMenu ? (
     <div className="Menu">
       <div className="menuLogoContainer">
-          <button
-            id="menuButton"
-            className="menuLogoButton"
-            onClick={() => {
-                document.location.href = "/";
-            }}
-          >
-            <img id="menuLogo" alt="" src={logo} />  
-          </button>
+        <button
+          id="menuButton"
+          className="menuLogoButton"
+          onClick={() => {
+            document.location.href = "/";
+          }}
+        >
+          <img id="menuLogo" alt="" src={logo} />
+        </button>
       </div>
-      
-        <div className="menuItemsContainer">
-          {titlesFetched.current &&
-            Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
-              <React.Fragment key={dir}>
-                {structure[dir].type === "directory"
-                  ? structure[dir].contents && (
-                    <div className="directory-menu">
-                      <p id="menuButton" className="directory-name">
-                        {lang === "bg"
-                          ? structure[dir].directoryBg
-                          : dir.slice(1, dir.length)}
-                        <BiSolidDownArrow />
-                      </p>
-                      <ul className="page-list">
-                        {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
-                          <li key={`${dir}-${page.page}-${index}`}>
-                            <a href={`/page${dir}/${page.page}`}>
-                              {lang === "bg" ? page.titleBg : page.titleEn}
-                            </a>
-                          </li>
-                        ) : (page.directory && page.contents && page.contents.length > 0 && (
-                          <div id="subDirectory" key={`${dir}-${page.directory}-${index}`}>
-                            <p id="menuSubButton" className="subDirectory-name">
-                              {lang === "bg" ? page.directoryBg : page.directory}
-                            </p>
-                            <ul className="subPage-list">
-                              {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
-                                <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
-                                  <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
-                                    {lang === "bg" ? subPage.titleBg : subPage.titleEn}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )))}
-                      </ul>
-                    </div>
-                  )
-                  : structure[dir].type === "file" && (
-                    <button
-                      onClick={() => {
-                        document.location.href = `/page${dir}`;
-                      }}
-                    >
+
+      <div className="menuItemsContainer">
+        {titlesFetched.current &&
+          Object.keys(structure).sort((a, b) => structure[a].place - structure[b].place).map((dir) => dir !== "\\contact-us" && (
+            <React.Fragment key={dir}>
+              {structure[dir].type === "directory"
+                ? structure[dir].contents && (
+                  <div className="directory-menu">
+                    <p id="menuButton" className="directory-name">
                       {lang === "bg"
-                        ? structure[dir].titleBg
-                        : structure[dir].titleEn}
-                    </button>
-                  )}
-              </React.Fragment>
-            ))}
-          <button
-            id="menuButton"
-            onClick={() => {
-              document.location.href = "/vouchers";
-            }}
-          >
-            {lang === "bg" ? "Ваучери" : "Vouchers"}
-          </button>
-          <button
-            id="menuButton"
-            className="dot"
-            onClick={() => {
-              document.location.href = "/products";
-            }}
-          >
-            {lang === "bg" ? "Подаръци" : "Gifts"}
-          </button>
-        </div>
-      
-        <div className="menuEndContainer">
-        {/* <div className="menuEndContainerMobile" style={{ marginRight: "10px" }}> */}
-            <button
-              className="linkButton"
-              onClick={() => {
-                localStorage.setItem("lang", lang === "bg" ? "en" : "bg");
-                window.location.reload();
-              }}
-            >
-              { lang === "bg" ? "EN" : "BG" }
-            </button>
-        </div>
+                        ? structure[dir].directoryBg
+                        : dir.slice(1, dir.length)}
+                      <BiSolidDownArrow />
+                    </p>
+                    <ul className="page-list">
+                      {structure[dir].contents.sort((a, b) => a.place - b.place).map((page, index) => page.page ? (
+                        <li key={`${dir}-${page.page}-${index}`}>
+                          <a href={`/page${dir}/${page.page}`}>
+                            {lang === "bg" ? page.titleBg : page.titleEn}
+                          </a>
+                        </li>
+                      ) : (page.directory && page.contents && page.contents.length > 0 && (
+                        <div id="subDirectory" key={`${dir}-${page.directory}-${index}`}>
+                          <p id="menuSubButton" className="subDirectory-name">
+                            {lang === "bg" ? page.directoryBg : page.directory}
+                          </p>
+                          <ul className="subPage-list">
+                            {page.contents.sort((a, b) => a.place - b.place).map((subPage, subIndex) => (
+                              <li key={`${dir}-${page.directory}-${subPage.page}-${subIndex}`}>
+                                <a href={`/page${dir}/${page.directory}/${subPage.page}`}>
+                                  {lang === "bg" ? subPage.titleBg : subPage.titleEn}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )))}
+                    </ul>
+                  </div>
+                )
+                : structure[dir].type === "file" && (
+                  <button
+                    onClick={() => {
+                      document.location.href = `/page${dir}`;
+                    }}
+                  >
+                    {lang === "bg"
+                      ? structure[dir].titleBg
+                      : structure[dir].titleEn}
+                  </button>
+                )}
+            </React.Fragment>
+          ))}
+        <button
+          id="menuButton"
+          onClick={() => {
+            document.location.href = "/vouchers";
+          }}
+        >
+          {lang === "bg" ? "Ваучери" : "Vouchers"}
+        </button>
+        <button
+          id="menuButton"
+          className="dot"
+          onClick={() => {
+            document.location.href = "/products";
+          }}
+        >
+          {lang === "bg" ? "Подаръци" : "Gifts"}
+        </button>
       </div>
+
+      <div className="menuEndContainer">
+        {/* <div className="menuEndContainerMobile" style={{ marginRight: "10px" }}> */}
+        <button
+          className="linkButton"
+          onClick={() => {
+            localStorage.setItem("lang", lang === "bg" ? "en" : "bg");
+            window.location.reload();
+          }}
+        >
+          {lang === "bg" ? "EN" : "BG"}
+        </button>
+      </div>
+    </div>
   ) : (
     <MenuMobile
       lang={lang}
@@ -200,10 +202,10 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           id="menuButton"
           className="menuLogoButtonMobile"
           onClick={() => {
-              document.location.href = "/";
+            document.location.href = "/";
           }}
         >
-          <img id="menuLogo" alt="" src={logo} />  
+          <img id="menuLogo" alt="" src={logo} />
         </button>
 
         <div className="menuEndContainerMobile">
@@ -214,7 +216,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
               window.location.reload();
             }}
           >
-            { lang === "bg" ? "EN" : "BG" }
+            {lang === "bg" ? "EN" : "BG"}
           </button>
         </div>
       </div>
@@ -227,8 +229,8 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
             onClick={() => setMenuExpanded(!menuExpanded)}
           >
             <svg width="20" height="21" viewBox="0 0 40 41" fill="none">
-            <rect x="3.2832" y="-1" width="53" height="5.98387" rx="2.99193" transform="rotate(45 3.2832 -1)" fill="#E6DED1"/>
-            <rect x="-1" y="37.4895" width="53" height="5.12903" rx="2.56452" transform="rotate(-45 -1 37.4895)" fill="#E6DED1"/>
+              <rect x="3.2832" y="-1" width="53" height="5.98387" rx="2.99193" transform="rotate(45 3.2832 -1)" fill="#E6DED1" />
+              <rect x="-1" y="37.4895" width="53" height="5.12903" rx="2.56452" transform="rotate(-45 -1 37.4895)" fill="#E6DED1" />
             </svg>
           </button>
 
@@ -240,7 +242,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                 window.location.reload();
               }}
             >
-              { lang === "bg" ? "EN" : "BG" }
+              {lang === "bg" ? "EN" : "BG"}
             </button>
           </div>
         </div>
@@ -274,7 +276,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
                               {lang === "bg"
                                 ? page.directoryBg
                                 : page.directory}
-                                <BiSolidDownArrow />
+                              <BiSolidDownArrow />
                             </p>
                             {expandedDirectories[`${dir}-${page.directory}`] && (
                               <ul>
@@ -325,7 +327,7 @@ const MenuMobile = ({ lang, structure, titlesFetched }) => {
           {lang === "bg" ? "Ваучери" : "Vouchers"}
         </button>
 
-        <div style={{height: "25%"}}></div>
+        <div style={{ height: "25%" }}></div>
       </div>
     </div>
   );
@@ -337,7 +339,7 @@ const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) =
   return (
     <div className="modal-overlay"
       onClick={(e) => {
-        if(!e.target.closest(".modal-next") && !e.target.closest(".modal-prev") && !e.target.closest(".modal-close")) {
+        if (!e.target.closest(".modal-next") && !e.target.closest(".modal-prev") && !e.target.closest(".modal-close")) {
           onClose();
         }
       }}
@@ -366,13 +368,13 @@ function Page() {
         // Extracting the dynamic part of the path after "/page/"
         const pagePath = location.pathname.replace("/page/", "");
 
-        const response = await axios.get(
-          "/server/uploads/" + pagePath + "/page.html"
+        const response = await getContent(
+          "/server//" + pagePath + "/page.html"
         );
-        const content = response.data;
+        const content = response;
 
-        // const title = await axios.get(
-        //   "/server/uploads/" + pagePath + "/schema.json"
+        // const title = await getContent(
+        //   "/server//" + pagePath + "/schema.json"
         // );
 
         // Set the response data (HTML) to state
@@ -459,7 +461,7 @@ function Page() {
             isAppending = false;
           } else if (gallery.scrollLeft <= 0 && !isAppending) {
             isPrepending = true;
-            if(isDown) {
+            if (isDown) {
               isDown = false;
             }
             prependImages(gallery);
@@ -485,7 +487,7 @@ function Page() {
         const clone = image.cloneNode(true);
         gallery.appendChild(clone);
       });
-  
+
       const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
       gallery.querySelectorAll("img").forEach((img, index) => {
         img.parentElement.addEventListener("click", () => {
@@ -493,14 +495,14 @@ function Page() {
         });
       });
     };
-  
+
     const prependImages = (gallery) => {
       const images = gallery.querySelectorAll('.gallery-item');
       Array.from(images).reverse().forEach((image) => {
         const clone = image.cloneNode(true);
         gallery.prepend(clone);
       });
-  
+
       const allImages = Array.from(gallery.querySelectorAll("img")).map((img) => img.src);
       gallery.querySelectorAll("img").forEach((img, index) => {
         img.parentElement.addEventListener("click", () => {
@@ -511,17 +513,17 @@ function Page() {
 
     const setupPeopleListImgs = () => {
       const containers = document.querySelectorAll('.pagePeopleListImgs');
-    
+
       containers.forEach((container, idx) => {
         // Set container ID if not already set
         if (!container.id) {
           container.id = `peopleImgs-${idx}`;
         }
-        
+
         let isDown = false;
         let startX;
         let scrollLeft;
-        
+
         // Mouse events
         container.addEventListener('mousedown', (e) => {
           isDown = true;
@@ -530,31 +532,31 @@ function Page() {
           scrollLeft = container.scrollLeft;
           e.preventDefault(); // Prevent text selection during drag
         });
-        
+
         container.addEventListener('mouseleave', () => {
           isDown = false;
           container.classList.remove('active');
         });
-        
+
         container.addEventListener('mouseup', () => {
           isDown = false;
           container.classList.remove('active');
         });
-        
+
         container.addEventListener('mousemove', (e) => {
           if (!isDown) return;
           e.preventDefault();
           const x = e.pageX - container.offsetLeft;
           const walk = (x - startX) * 1.5;
-          
+
           // Calculate the maximum scroll position
           const maxScroll = container.scrollWidth - container.clientWidth;
-          
+
           // Constrain the scroll position to be within bounds
           const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
           container.scrollLeft = newScrollLeft;
         });
-        
+
         // Touch events for mobile
         container.addEventListener('touchstart', (e) => {
           isDown = true;
@@ -562,49 +564,49 @@ function Page() {
           startX = e.touches[0].pageX - container.offsetLeft;
           scrollLeft = container.scrollLeft;
         }, { passive: true });
-        
+
         container.addEventListener('touchend', () => {
           isDown = false;
           container.classList.remove('active');
         });
-        
+
         container.addEventListener('touchmove', (e) => {
           if (!isDown) return;
           const x = e.touches[0].pageX - container.offsetLeft;
           const walk = (x - startX);
-          
+
           // Calculate the maximum scroll position
           const maxScroll = container.scrollWidth - container.clientWidth;
-          
+
           // Constrain the scroll position to be within bounds
           const newScrollLeft = Math.max(0, Math.min(maxScroll, scrollLeft - walk));
           container.scrollLeft = newScrollLeft;
         }, { passive: true });
-    
+
         // Set dots container ID and add functionality
         const dotsContainer = container.nextElementSibling;
         if (!dotsContainer.id) {
           dotsContainer.id = `peopleDots-${idx}`;
         }
-        
+
         const dots = dotsContainer.querySelectorAll('.pagePeopleListDot');
-        
+
         // Make sure dataset attributes are set correctly
         dots.forEach((dot, dotIdx) => {
           dot.setAttribute('data-index', dotIdx.toString());
           dot.setAttribute('data-container', idx.toString());
-          
+
           // Add click handler directly to make sure it works
-          dot.addEventListener('click', function() {
+          dot.addEventListener('click', function () {
             // Get image width for scrolling
             const imageWidth = container.clientWidth;
-            
+
             // Scroll to the selected image smoothly
             container.scrollTo({
               left: dotIdx * imageWidth,
               behavior: 'smooth'
             });
-            
+
             // Update active dot state
             for (let i = 0; i < dots.length; i++) {
               dots[i].classList.remove('active');
@@ -612,18 +614,18 @@ function Page() {
             this.classList.add('active');
           });
         });
-        
+
         // Set first dot as active initially
         if (dots.length > 0) {
           dots[0].classList.add('active');
         }
-        
+
         // Update dots on scroll
-        container.addEventListener('scroll', function() {
+        container.addEventListener('scroll', function () {
           if (!isDown) {
             const imageWidth = container.clientWidth;
             const currentIndex = Math.round(container.scrollLeft / imageWidth);
-            
+
             // Update active dot
             dots.forEach((dot, idx) => {
               dot.classList.toggle('active', idx === currentIndex);
@@ -662,7 +664,7 @@ function Page() {
 
   const debounce = (func, wait) => {
     let timeout;
-    return function(...args) {
+    return function (...args) {
       const later = () => {
         clearTimeout(timeout);
         func(...args);
@@ -723,20 +725,20 @@ function Page() {
       {/* <h1 className="bg">{titleBg}</h1>
       <h1 className="en">{titleEn}</h1> */}
 
-      <div style={{marginTop: "100px", marginBottom: "0"}} dangerouslySetInnerHTML={{ __html: pageContent }} />
+      <div style={{ marginTop: "100px", marginBottom: "0" }} dangerouslySetInnerHTML={{ __html: pageContent }} />
 
       {sections && sections.length > 0 && (
         <div id="sections">
           {Array.from(sections).map((section) => (
             <>
               <React.Fragment key={section.id}>
-                <div className="bg" style={{display: lang === "bg" ? "block" : "none"}} onClick={() => {scrollToElement(section.id)}}>
+                <div className="bg" style={{ display: lang === "bg" ? "block" : "none" }} onClick={() => { scrollToElement(section.id) }}>
                   {section.getAttribute("data-title-bg")}
                   <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
                     <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />
                   </svg>
                 </div>
-                <div className="en" style={{display: lang === "bg" ? "none" : "block"}} onClick={() => {scrollToElement(section.id)}}>
+                <div className="en" style={{ display: lang === "bg" ? "none" : "block" }} onClick={() => { scrollToElement(section.id) }}>
                   {section.getAttribute("data-title-en")}
                   <svg height="24" width="20" xmlns="http://www.w3.org/2000/svg">
                     <circle r="4" cx="10" cy="16" fill="transparent" stroke="black" stroke-width="1" />

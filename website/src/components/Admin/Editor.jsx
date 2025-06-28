@@ -11,8 +11,7 @@ import { IoClose } from "react-icons/io5";
 import { FaChevronDown, FaChevronUp, FaExchangeAlt, FaHome, FaSave } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
-
-const URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+import { BACKEND_URL, getUrlForFile } from "../../config";
 
 // Register fonts
 const Font = Quill.import("formats/font");
@@ -83,7 +82,7 @@ function Editor({ structure }) {
       const fetchPage = async () => {
         try {
           const response = await axios.get(
-            `${URL}/page-get-schema?pagePath=${editPath}`
+            `${BACKEND_URL}/page-get-schema?pagePath=${editPath}`
           );
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
@@ -333,7 +332,7 @@ function Editor({ structure }) {
     formData.append("image", imageFile);
     
     try {
-      const response = await axios.post(URL + "/image", formData, {
+      const response = await axios.post(BACKEND_URL + "/image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -366,7 +365,7 @@ function Editor({ structure }) {
           formData.append("video", newContent.url);
 
           try {
-            const response = await axios.post(URL + "/video", formData, {
+            const response = await axios.post(BACKEND_URL + "/video", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -1251,14 +1250,21 @@ function Editor({ structure }) {
           element.content
         )}</div><br />`;
       } else if (element.type === "image") {
-        htmlContent += `<img id="pageOneImg" src="/server/files/images/${element.content}" alt="image" />`;
+        htmlContent += `<img id="pageOneImg" src="/images/${element.content}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content}';" />`;
       } else if (element.type === "two_images") {
-        htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageTwoImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /></div>`;
+        htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[0]}';" /><img id="pageTwoImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[1]}';" /></div>`;
       } else if (element.type === "four_images") {
-        htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/server/files/images/${element.content[0]}" alt="image" /><img id="pageFourImgSecond" src="/server/files/images/${element.content[1]}" alt="image" /><img id="pageFourImgThird" src="/server/files/images/${element.content[2]}" alt="image" /><img id="pageFourImgFourth" src="/server/files/images/${element.content[3]}" alt="image" /></div>`;
+        htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[0]}';" /><img id="pageFourImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[1]}';" /><img id="pageFourImgThird" src="/images/${element.content[2]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[2]}';" /><img id="pageFourImgFourth" src="/images/${element.content[3]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[3]}';" /></div>`;
       } else if (element.type === "video") {
-        htmlContent += `<video id="pageVideo" ${element.content.autoplay ? "class='autoplay-video' muted" : ""} src="/server/files/videos/${element.content.url
-          }" ${element.content.autoplay ? "autoplay" : ""} controls></video>`;
+        htmlContent += `
+        <video id="pageVideo" 
+          ${element.content.autoplay ? "class='autoplay-video' muted autoplay" : ""} 
+          src="/videos/${element.content.url}" 
+          controls
+          onerror="this.onerror=null; this.src='${BACKEND_URL}/videos?name=${element.content.url}'; this.load(); this.play?.();">
+          Your browser does not support the video tag.
+        </video>
+        `;
       } else if (element.type === "formated") {
         htmlContent += `<div class="pageFormated bg">${element.content.textBg}</div>`;
         htmlContent += `<div class="pageFormated en">${element.content.textEn}</div>`;
@@ -1269,24 +1275,24 @@ function Editor({ structure }) {
       } else if (element.type === "separation") {
         htmlContent += "<div id='pageLine' ></div>";
       } else if (element.type === "image_text") {
-        htmlContent += `<div id="pageImageText"><img src="/server/files/images/${element.content.url}" alt="image" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
+        htmlContent += `<div id="pageImageText"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
       } else if (element.type === "textImageLeft") {
-        htmlContent += `<div id="pageTextImageLeft"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+        htmlContent += `<div id="pageTextImageLeft"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       } else if (element.type === "textImageBehind") {
-        htmlContent += `<div id="pageTextImageBehind"><img src="/server/files/images/${element.content.url}" alt="image" /><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
+        htmlContent += `<div id="pageTextImageBehind"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" />><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
       } else if (element.type === "textImageRight") {
-        htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/server/files/images/${element.content.url}" alt="image" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+        htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       } else if (element.type === "starting") {
         htmlContent += `
         <div id="pageStarting">
-          <img id="pageStartingBackImg" src="/server/files/images/${element.content.imageBackUrl}" alt="image" />
+          <img id="pageStartingBackImg" src="/images/${element.content.imageBackUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageBackUrl}';" />
           <div id="pageStartingContent">
             <h2 class="bg">${element.content.titleBg}</h2>
             <h2 class="en">${element.content.titleEn}</h2>
             <div id="pageStartingQuote">
               <p class="bg">${element.content.quoteBg}</p>
               <p class="en">${element.content.quoteEn}</p>
-              <img id="pageStartingFrontImg" src="/server/files/images/${element.content.imageFrontUrl}" alt="image" />
+              <img id="pageStartingFrontImg" src="/images/${element.content.imageFrontUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageFrontUrl}';" />
             </div>
           </div>
         </div>`;
@@ -1294,8 +1300,8 @@ function Editor({ structure }) {
         htmlContent += `
         <div id="pagePerson">
           <div class="pagePersonImages">
-            <img  src="/server/files/images/${element.content.imageBack}" alt="image" />
-            <img src="/server/files/images/${element.content.imageFront}" alt="image" />
+            <img src="/images/${element.content.imageBack}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageBack}';" />
+            <img src="/images/${element.content.imageFront}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageFront}';" />
           </div>
           <div class="pagePersonText">
             <p class="bg">${element.content.textBg}</p>
@@ -1309,7 +1315,7 @@ function Editor({ structure }) {
         <div id="${slideshowId}" class="slideshow">
           ${element.content.map((image, index) => `
             <div class="slide" style="display: ${index === 0 ? 'block' : 'none'};">
-              <img src="/server/files/images/${image}" alt="slide image" />
+              <img src="/images/${image}" alt="slide image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
             </div>
           `).join('')}
           <a class="prev" onclick="plusSlides(-1, '${slideshowId}')">&#10094;</a>
@@ -1322,7 +1328,7 @@ function Editor({ structure }) {
         <div id="${galleryId}" class="gallery-container">
           ${element.content.map(image => `
             <div class="gallery-item" key={index}>
-              <img src="/server/files/images/${image}" alt="gallery image" />
+              <img src="/images/${image}" alt="gallery image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
             </div>
           `).join('')}
         </div>`;
@@ -1371,8 +1377,8 @@ function Editor({ structure }) {
               </div>
             </div>
             <div id="overlayFrontImages" style="width: 100%;">
-              <img id="overlayImageLeft" src="/server/files/images/${element.content.imageLeft}" alt="">
-              <img id="overlayImageRight" src="/server/files/images/${element.content.imageRight}" alt="">
+              <img id="overlayImageLeft" src="/images/${element.content.imageLeft}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageLeft}';" />
+              <img id="overlayImageRight" src="/images/${element.content.imageRight}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageRight}';" />
             </div>
           </div>
         `;
@@ -1384,7 +1390,7 @@ function Editor({ structure }) {
       } else if (element.type === "titleImage") {
         htmlContent += `
           <div id="pageTitleImage">
-            <img src="/server/files/images/${element.content.url}" alt="image" />
+            <img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" />
             <h2 class="bg">${element.content.titleBg}</h2>
             <h2 class="en">${element.content.titleEn}</h2>
           </div>
@@ -1412,7 +1418,7 @@ function Editor({ structure }) {
                 const linkUrl = link.url.startsWith("http") ? link.url : (link.url.startsWith("/") ? link.url : `/${link.url}`);
               return `
               <a href="${linkUrl}" class="pageImageLinkListItem">
-                <img src="/server/files/images/${link.image}" alt="image" />
+                <img src="/images/${link.image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${link.image}';" />
                 <h3 class="bg">${link.titleBg}</h3>
                 <h3 class="en">${link.titleEn}</h3>
               </a>
@@ -1433,8 +1439,8 @@ function Editor({ structure }) {
             ${element.content.people.map((person, personIndex) => `
               <div class="pagePeopleListItem">
                 <div class="pagePeopleListImgs" id="peopleImgs-${personIndex}">
-                  ${person.images.map((img) => `
-                    <img src="/server/files/images/${img}" alt="image" />
+                  ${person.images.map((image) => `
+                    <img src="/images/${image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
                   `).join("")}
                 </div>
                 <div class="pagePeopleListDots" id="peopleDots-${personIndex}">
@@ -1477,7 +1483,7 @@ function Editor({ structure }) {
     // Send request to the backend to save the page
     try {
       const editUrl =
-        editPath === "create" ? `${URL}/page` : `${URL}/page/edit`;
+        editPath === "create" ? `${BACKEND_URL}/page` : `${BACKEND_URL}/page/edit`;
       let path = `/${directory}/${page}`;
       if (directory) {
         path = `/${directory}/${page}`;
@@ -1502,9 +1508,9 @@ function Editor({ structure }) {
     if (showPreview) {
       let previewRawHtml = memoizedConvertSchemaToHtml(schema);
       previewRawHtml = previewRawHtml
-      .replace(/src="\/server\/files\/images\//g, `src="http://localhost:8080/image?name=`)
-      .replace(/src="\/server\/files\/videos\//g, `src="http://localhost:8080/video?name=`)
-      .replace(/url\('\/server\/files\/images\//g, `url('http://localhost:8080/image?name=`);
+      .replace(/src="\/server\/files\/images\//g, `src="http://localhost:8080/images?name=`)
+      .replace(/src="\/server\/files\/videos\//g, `src="http://localhost:8080/videos?name=`)
+      .replace(/url\('\/server\/files\/images\//g, `url('http://localhost:8080/images?name=`);
       setPreviewContent(previewRawHtml);
     }
   }, [showPreview, schema, memoizedConvertSchemaToHtml]);
@@ -1722,7 +1728,7 @@ function Editor({ structure }) {
                 <label className="labelElement">One Image:</label>
                 <img
                   id="Added_One_Image_img"
-                  src={URL + "/image?name=" + element.content}
+                  src={BACKEND_URL + "/images?name=" + element.content}
                   alt=""
                 />
                 <br></br>
@@ -1741,12 +1747,12 @@ function Editor({ structure }) {
                 <label className="labelElement">Two Images:</label>
                 <img
                   id="Added_Two_Images_img_one"
-                  src={URL + "/image?name=" + element.content[0]}
+                  src={BACKEND_URL + "/images?name=" + element.content[0]}
                   alt=""
                 />
                 <img
                   id="Added_Two_Images_img_two"
-                  src={URL + "/image?name=" + element.content[1]}
+                  src={BACKEND_URL + "/images?name=" + element.content[1]}
                   alt=""
                 />
 
@@ -1783,23 +1789,23 @@ function Editor({ structure }) {
                 <label className="labelElement">Four Images:</label>
                 <img
                   id="Added_Four_Images_img_one"
-                  src={URL + "/image?name=" + element.content[0]}
+                  src={BACKEND_URL + "/images?name=" + element.content[0]}
                   alt=""
                 />
                 <img
                   id="Added_Four_Images_img_two"
-                  src={URL + "/image?name=" + element.content[1]}
+                  src={BACKEND_URL + "/images?name=" + element.content[1]}
                   alt=""
                 />
                 <br></br>
                 <img
                   id="Added_Four_Images_img_three"
-                  src={URL + "/image?name=" + element.content[2]}
+                  src={BACKEND_URL + "/images?name=" + element.content[2]}
                   alt=""
                 />
                 <img
                   id="Added_Four_Images_img_four"
-                  src={URL + "/image?name=" + element.content[3]}
+                  src={BACKEND_URL + "/images?name=" + element.content[3]}
                   alt=""
                 />
                 <br></br>
@@ -1861,7 +1867,7 @@ function Editor({ structure }) {
                 {element.content.url && (
                   <video
                     id="Added_Video_vid"
-                    src={URL + "/video?name=" + element.content.url}
+                    src={BACKEND_URL + "/videos?name=" + element.content.url}
                     controls
                   />
                 )}
@@ -1940,7 +1946,7 @@ function Editor({ structure }) {
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
-                    src={URL + "/image?name=" + element.content.url}
+                    src={BACKEND_URL + "/images?name=" + element.content.url}
                     alt=""
                   />
                   <br></br>
@@ -2060,7 +2066,7 @@ function Editor({ structure }) {
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
-                    src={URL + "/image?name=" + element.content.url}
+                    src={BACKEND_URL + "/images?name=" + element.content.url}
                     alt=""
                   />
                   <br></br>
@@ -2122,7 +2128,7 @@ function Editor({ structure }) {
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + element.content.imageBackUrl}
+                      src={BACKEND_URL + "/images?name=" + element.content.imageBackUrl}
                       alt=""
                     />
                     {/* <br></br> */}
@@ -2144,7 +2150,7 @@ function Editor({ structure }) {
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + element.content.imageFrontUrl}
+                      src={BACKEND_URL + "/images?name=" + element.content.imageFrontUrl}
                       alt=""
                     />
                     <input
@@ -2240,7 +2246,7 @@ function Editor({ structure }) {
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
-                    src={URL + "/image?name=" + element.content.imageBack}
+                    src={BACKEND_URL + "/images?name=" + element.content.imageBack}
                     alt=""
                   />
                   <input
@@ -2260,7 +2266,7 @@ function Editor({ structure }) {
                 <div id="Added_One_Image">
                   <img
                     id="Added_One_Image_img"
-                    src={URL + "/image?name=" + element.content.imageFront}
+                    src={BACKEND_URL + "/images?name=" + element.content.imageFront}
                     alt=""
                   />
                   <input
@@ -2318,7 +2324,7 @@ function Editor({ structure }) {
                     <div style={{ width: "fit-content" }} key={index}>
                       <img
                         id="Added_One_Image_img"
-                        src={URL + "/image?name=" + image}
+                        src={BACKEND_URL + "/images?name=" + image}
                         alt=""
                       />
                       <br></br>
@@ -2391,7 +2397,7 @@ function Editor({ structure }) {
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + element.content.imageBack}
+                      src={BACKEND_URL + "/images?name=" + element.content.imageBack}
                       alt=""
                     />
                     <br></br>
@@ -2411,7 +2417,7 @@ function Editor({ structure }) {
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + element.content.imageLeft}
+                      src={BACKEND_URL + "/images?name=" + element.content.imageLeft}
                       alt=""
                     />
                     <br></br>
@@ -2431,7 +2437,7 @@ function Editor({ structure }) {
                   <div id="Added_One_Image">
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + element.content.imageRight}
+                      src={BACKEND_URL + "/images?name=" + element.content.imageRight}
                       alt=""
                     />
                     <br></br>
@@ -2522,7 +2528,7 @@ function Editor({ structure }) {
                     <div style={{ width: "fit-content" }} key={index}>
                       <img
                         id="Added_One_Image_img"
-                        src={URL + "/image?name=" + image}
+                        src={BACKEND_URL + "/images?name=" + image}
                         alt=""
                       />
                       <br></br>
@@ -2576,7 +2582,7 @@ function Editor({ structure }) {
                   <div key={index} style={{ marginBottom: "18px" }}>
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + link.image}
+                      src={BACKEND_URL + "/images?name=" + link.image}
                       alt=""
                     />
                     <br></br>
@@ -2635,7 +2641,7 @@ function Editor({ structure }) {
                 <label style={{ display: "block", fontWeight: "bold", marginTop: "36px", fontSize: "1.5rem" }}>New:</label>
                 <img
                   id="Added_One_Image_img"
-                  src={URL + "/image?name=" + element.content.newLink.image}
+                  src={BACKEND_URL + "/images?name=" + element.content.newLink.image}
                   alt=""
                 />
                 <input
@@ -2694,7 +2700,7 @@ function Editor({ structure }) {
                 <label className="labelElement">Title with Image:</label>
                 <img
                   id="Added_One_Image_img"
-                  src={URL + "/image?name=" + element.content.url}
+                  src={BACKEND_URL + "/images?name=" + element.content.url}
                   alt=""
                 />
                 <br></br>
@@ -2859,7 +2865,7 @@ function Editor({ structure }) {
                         <div style={{ width: "fit-content" }} key={imgIndex}>
                           <img
                             id="Added_One_Image_img"
-                            src={URL + "/image?name=" + image}
+                            src={BACKEND_URL + "/images?name=" + image}
                             alt=""
                           />
                           <br></br>
@@ -2958,7 +2964,7 @@ function Editor({ structure }) {
                   <div style={{ width: "fit-content" }} key={index}>
                     <img
                       id="Added_One_Image_img"
-                      src={URL + "/image?name=" + image}
+                      src={BACKEND_URL + "/images?name=" + image}
                       alt=""
                     />
                     <br></br>
@@ -3094,7 +3100,7 @@ function Editor({ structure }) {
           {footerImageEnable && footerImage && (
             <img
               id="Added_One_Image_img"
-              src={URL + "/image?name=" + footerImage}
+              src={BACKEND_URL + "/images?name=" + footerImage}
               style={{width: "100%"}}
               alt=""
             />

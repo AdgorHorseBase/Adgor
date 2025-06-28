@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaShoppingCart, FaTimes } from 'react-icons/fa';
 import './Cart.css';
+import { getUrlForFile } from '../config';
 
 const Cart = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +63,7 @@ const Cart = () => {
                         {!Array.isArray(cartItems) ? (Object.keys(cartItems).map(key => cartItems[key]).map((item) => {
                             return (
                                 <div key={item.id} className="cartItem">
-                                    <img id='cartProductImg' src={`/server/files/images/${item.imagePath}`} alt={item.name} />
+                                    <img id='cartProductImg' src={getUrlForFile(`images/${item.imagePath}`)} alt={item.name} />
                                     <div id='cartItemDesc'>
                                         <h4 id='cartProductName'>{lang === "bg" ? item.parentNameBg ? item.parentNameBg + " - " + item.nameBg : item.nameBg : item.parentNameEn ? item.parentNameEn + " - " + item.nameEn : item.nameEn}</h4>
                                         <p id='cartProductPrice'>{item.price} лв</p>

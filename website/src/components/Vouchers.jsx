@@ -4,7 +4,7 @@ import { MenuSections } from './Page';
 import Cart from './Cart';
 import voucherFormImage from './images/forUsBack.webp';
 import './Vouchers.css'
-import { getContent } from '../config';
+import { getContent, getUrlForFile } from '../config';
 
 const VoucherForm = ({lang}) => {
     return (
@@ -106,7 +106,7 @@ const Vouchers = () => {
             {products.map((product) => (
                 <div key={product.id} className='item cursorPointer' id="productVoucher" onClick={() => document.location.href = `/product/${product.id}`}>
                     {product.imagePath && (
-                        <img id='youMayImg' alt="" src={`/server/files/images/${product.imagePath}`} width="100%" />
+                        <img id='youMayImg' alt="" src={getUrlForFile(`images/${product.imagePath}`)} width="100%" />
                     )}
                 </div>
             ))}

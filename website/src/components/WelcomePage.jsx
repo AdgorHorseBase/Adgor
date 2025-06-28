@@ -36,6 +36,7 @@ import { VoucherForm } from "./Vouchers";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useMediaQuery } from "@mui/material";
+import { getUrlForFile } from "../config";
 
 const ImageModal = ({ isOpen, images, currentIndex, onClose, onNext, onPrev }) => {
   if (!isOpen) return null;
@@ -377,27 +378,27 @@ const WelcomePage = () => {
 
         <div id="gallery-0db2c50e-f29e-4c25-b87a-4d6ee8e391b8" className="gallery-container">
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367835180.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367835180.webp")} alt="" />
             </div>
           
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367837482.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367837482.webp")} alt="" />
             </div>
           
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367853805.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367853805.webp")} alt="" />
             </div>
           
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367859904.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367859904.webp")} alt="" />
             </div>
           
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367867777.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367867777.webp")} alt="" />
             </div>
           
             <div className="gallery-item">
-              <img src="/server/files/images/image-1739367878779.webp" alt="" />
+              <img src={getUrlForFile("images/image-1739367878779.webp")} alt="" />
             </div>
         </div>
       </div>

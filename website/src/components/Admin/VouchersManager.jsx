@@ -133,7 +133,7 @@ const VouchersManager = () => {
                 {vouchers.length > 0 ? vouchers.map((item, index) => (
                     <div key={index} style={{width: "300px"}}>
                         {item.imagePath && (
-                            <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                            <img alt={item.nameEn} src={URL + "/images?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
                         )}
                         <br />
                         <label>

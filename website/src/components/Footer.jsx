@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./footer.css";
 // import axios from "axios";
-import { getContent } from "../config";
+import { getContent, getUrlForFile } from "../config";
 // import instagram from "./images/instagram.webp";
 // import facebook from "./images/facebook.svg";
 
@@ -25,7 +25,7 @@ const Footer = () => {
           setImageEnable(schema.footerImageEnable);
         }
         if (schema && schema && schema.footerImage) {
-          setImageSrc("/server/files/images/" + schema.footerImage);
+          setImageSrc(getUrlForFile("images/" + schema.footerImage));
         }
       } catch (err) {
         console.error(err);

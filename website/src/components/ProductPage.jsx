@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { MenuSections } from './Page';
 import "./productPage.css";
 import Cart from './Cart';
-import { getContent } from '../config';
+import { getContent, getUrlForFile } from '../config';
 // import planeImg from './images/plane.svg'
 
 const ProductPage = () => {
@@ -80,7 +80,7 @@ const ProductPage = () => {
 
             <div className='product' style={{marginTop: "100px"}}>
                 <div className='productDetails'>
-                    <img id="productImgPage" src={`/server/files/images/${selectedType ? currProduct.products.find(type => type.id === selectedType).imagePath : currProduct.imagePath}`} alt='' />
+                    <img id="productImgPage" src={getUrlForFile(`images/${selectedType ? currProduct.products.find(type => type.id === selectedType).imagePath : currProduct.imagePath}`)} alt='' />
                     <div>
                         <h1 className='productTitle'>{lang === "bg" ? currProduct.nameBg : currProduct.nameEn}</h1>
                         <div className='productDescription' dangerouslySetInnerHTML={{ __html: lang === "bg" ? currProduct.descriptionBg : currProduct.descriptionEn }} />
@@ -124,7 +124,7 @@ const ProductPage = () => {
                         {products.map((product) => (
                             <div key={product.id} onClick={() => document.location.href = `/product/${product.id}`} className='item cursorPointer' id="productVoucher">
                                 {product.imagePath && (
-                                    <img id="youMayImg" alt="" style={{paddingBottom: "20px"}} src={`/server/files/images/${product.imagePath}`} width="100%" />
+                                    <img id="youMayImg" alt="" style={{paddingBottom: "20px"}} src={getUrlForFile(`images/${product.imagePath}`)} width="100%" />
                                 )}
                               
                             </div>

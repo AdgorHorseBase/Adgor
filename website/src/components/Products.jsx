@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MenuSections } from './Page';
 import Cart from './Cart';
 import './Products.css';
-import { getContent } from '../config';
+import { getContent, getUrlForFile } from '../config';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -48,7 +48,7 @@ const Products = () => {
                 {products.length === 0 ? <div>{lang === "bg" ? "Подаръците идват скоро" : "Gifts coming soon"}</div> : products.map((item) => (
                     <div id='productVoucher' key={item.id} className='item cursorPointer' onClick={() => document.location.href = `/product/${item.id}`}>
                         {item.imagePath && (
-                            <img id='productImg' alt=""  src={"/server/files/images/"+item.imagePath}  />
+                            <img id='productImg' alt=""  src={getUrlForFile("images/"+item.imagePath)}  />
                         )}
                         <div className="productBottom">
                         {(item.nameBg || item.nameEn) && (

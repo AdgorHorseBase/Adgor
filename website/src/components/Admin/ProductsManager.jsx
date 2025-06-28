@@ -335,7 +335,7 @@ const ProductsManager = () => {
                     item.type !== 'group' ? (
                         <div key={index} style={{width: "300px"}}>
                             {item.imagePath && (
-                                <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                                <img alt={item.nameEn} src={URL + "/images?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
                             )}
                             <br />
                             <label>
@@ -478,7 +478,7 @@ const ProductsManager = () => {
                             <div style={{display: "flex", flexDirection: "column", width: "300px", padding: "12px", borderRadius: "30px", backgroundColor: "rgba(148, 133, 108, 0.7)"}}>
                                 <h2 style={{marginBottom: "6px", marginTop: "0", textAlign: "center"}}>Group Parent</h2>
                                 {item.imagePath && (
-                                    <img alt={item.nameEn} src={URL + "/image?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
+                                    <img alt={item.nameEn} src={URL + "/images?name=" + item.imagePath} style={{width: "300px", height: "400px"}} />
                                 )}
                                 <label>
                                     Change Image:
@@ -615,7 +615,7 @@ const ProductsManager = () => {
                             {item.products.map((product, productIndex) => (
                                 <div key={productIndex} style={{marginLeft: "20px", width: "300px"}}>
                                     {product.imagePath && (
-                                        <img alt={product.nameEn} src={URL + "/image?name=" + product.imagePath} style={{width: "300px", height: "400px"}} />
+                                        <img alt={product.nameEn} src={URL + "/images?name=" + product.imagePath} style={{width: "300px", height: "400px"}} />
                                     )}
                                     <br />
                                     <label>

@@ -293,10 +293,10 @@ app.use("/delete/page", (req, res, next) => {
 });
 
 const Image = require("./routes/Image");
-app.use("/image", Image);
+app.use("/images", Image);
 
 const Video = require("./routes/Video");
-app.use("/video", Video);
+app.use("/videos", Video);
 
 const ListFiles = require("./routes/ListFiles");
 app.use("/config", ListFiles);

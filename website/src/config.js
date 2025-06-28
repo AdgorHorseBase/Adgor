@@ -34,6 +34,27 @@ export const getContent = async (filePath) => {
     return content_output;
 }
 
+export const getUrlForFile = (filePath) => {
+    if (!filePath || typeof filePath !== "string") {
+        throw new Error("Invalid file path");
+    }
+
+    const { category, fileName } = splitFilePathToCategoryAndFileName(filePath);
+    
+    checkValidFileWithcategory(category, fileName);
+
+    if (process.env.ActiveAdmin) {
+        console.log("Using admin backend URL for file access");
+        return `${BACKEND_URL}${category}/${fileName}`;
+    } else {
+        //TODO: Remove
+        console.log("Using public backend URL for file access");
+        // return `/${category}/${fileName}`;
+        // return `${GITHUB_URL}${category}/${fileName}`;
+        return `${BACKEND_URL}${category}?name=${fileName}`;
+    }
+}
+
 
 const splitFilePathToCategoryAndFileName = (filePath) => {
     while (filePath.startsWith("/")) {

@@ -74,10 +74,10 @@ const splitFilePathToCategoryAndFileName = (filePath) => {
 
 const checkValidFileWithcategory = (category, filePath) => {
     if (!category || typeof category !== "string") {
-        throw new Error("Invalid category name");
+        throw new Error("Invalid category name. Not correct category type");
     }
     if (!VALID_CONFIG_CATEGORY_NAMES.includes(category)) {
-        throw new Error("Invalid category name");
+        throw new Error("Invalid category name. Category name not included");
     }
 
     if (!filePath || typeof filePath !== "string") {

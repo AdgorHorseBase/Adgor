@@ -1356,7 +1356,7 @@ function Editor({ structure }) {
         htmlContent += `
           <div id="overlay">
             <div
-              style="background-image: url('/server/files/images/${element.content.imageBack}')"
+              style="background-image: url('/images/${element.content.imageBack}'), url('localhost:8080/images?name=${element.content.imageBack}')"
               id="overlayImage"
             >
               <div id="overlayTextContainer">

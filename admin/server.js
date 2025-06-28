@@ -24,7 +24,7 @@ app.use(cors({
 }));
 
 // Directory for storing pages
-const UPLOADS_DIR = path.join(__dirname, "files/uploads");
+const UPLOADS_DIR = path.join(__dirname, "files", "uploads");
 
 // Ensure the uploads directory exists
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -298,8 +298,11 @@ app.use("/images", Image);
 const Video = require("./routes/Video");
 app.use("/videos", Video);
 
-const ListFiles = require("./routes/ListFiles");
-app.use("/config", ListFiles);
+const Config = require("./routes/Config");
+app.use("/config", Config);
+
+const Uploads = require("./routes/Uploads");
+app.use("/uploads", Uploads);
 
 
 // Products

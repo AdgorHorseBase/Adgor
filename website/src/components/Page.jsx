@@ -369,12 +369,12 @@ function Page() {
         const pagePath = location.pathname.replace("/page/", "");
 
         const response = await getContent(
-          "/server//" + pagePath + "/page.html"
+          "uploads", pagePath + "/page.html"
         );
         const content = response;
 
         // const title = await getContent(
-        //   "/server//" + pagePath + "/schema.json"
+        //   "uploads", pagePath + "/page.html"
         // );
 
         // Set the response data (HTML) to state

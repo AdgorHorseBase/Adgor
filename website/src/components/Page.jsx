@@ -367,14 +367,17 @@ function Page() {
       try {
         // Extracting the dynamic part of the path after "/page/"
         const pagePath = location.pathname.replace("/page/", "");
-
         const response = await getContent(
-          "uploads", pagePath + "/page.html"
+          `uploads/${pagePath}/page.html`
         );
+
+        if (!response) {
+          console.log("Error: No response!")
+        }
         const content = response;
 
         // const title = await getContent(
-        //   "uploads", pagePath + "/page.html"
+        //   `uploads/${pagePath}/page.html`
         // );
 
         // Set the response data (HTML) to state

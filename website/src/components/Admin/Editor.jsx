@@ -82,7 +82,7 @@ function Editor({ structure }) {
       const fetchPage = async () => {
         try {
           const response = await axios.get(
-            `${BACKEND_URL}/page-get-schema?pagePath=${editPath}`
+            `${BACKEND_URL}page-get-schema?pagePath=${editPath}`
           );
           setSchema(response.data.schema.schema);
           setTitleBg(response.data.schema.titleBg);
@@ -1250,18 +1250,18 @@ function Editor({ structure }) {
           element.content
         )}</div><br />`;
       } else if (element.type === "image") {
-        htmlContent += `<img id="pageOneImg" src="/images/${element.content}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content}';" />`;
+        htmlContent += `<img id="pageOneImg" src="/images/${element.content}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content}';" />`;
       } else if (element.type === "two_images") {
-        htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[0]}';" /><img id="pageTwoImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[1]}';" /></div>`;
+        htmlContent += `<div class="pageTwoImg"><img id="pageTwoImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[0]}';" /><img id="pageTwoImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[1]}';" /></div>`;
       } else if (element.type === "four_images") {
-        htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[0]}';" /><img id="pageFourImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[1]}';" /><img id="pageFourImgThird" src="/images/${element.content[2]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[2]}';" /><img id="pageFourImgFourth" src="/images/${element.content[3]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content[3]}';" /></div>`;
+        htmlContent += `<div class="pageFourImg"><img id="pageFourImgFirst" src="/images/${element.content[0]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[0]}';" /><img id="pageFourImgSecond" src="/images/${element.content[1]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[1]}';" /><img id="pageFourImgThird" src="/images/${element.content[2]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[2]}';" /><img id="pageFourImgFourth" src="/images/${element.content[3]}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content[3]}';" /></div>`;
       } else if (element.type === "video") {
         htmlContent += `
         <video id="pageVideo" 
           ${element.content.autoplay ? "class='autoplay-video' muted autoplay" : ""} 
           src="/videos/${element.content.url}" 
           controls
-          onerror="this.onerror=null; this.src='${BACKEND_URL}/videos?name=${element.content.url}'; this.load(); this.play?.();">
+          onerror="this.onerror=null; this.src='${BACKEND_URL}videos?name=${element.content.url}'; this.load(); this.play?.();">
           Your browser does not support the video tag.
         </video>
         `;
@@ -1275,24 +1275,24 @@ function Editor({ structure }) {
       } else if (element.type === "separation") {
         htmlContent += "<div id='pageLine' ></div>";
       } else if (element.type === "image_text") {
-        htmlContent += `<div id="pageImageText"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
+        htmlContent += `<div id="pageImageText"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.url}';" /><p class="bg">${element.content.textBg}</p><p class="en">${element.content.textEn}</p></div>`;
       } else if (element.type === "textImageLeft") {
-        htmlContent += `<div id="pageTextImageLeft"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+        htmlContent += `<div id="pageTextImageLeft"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       } else if (element.type === "textImageBehind") {
-        htmlContent += `<div id="pageTextImageBehind"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" />><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
+        htmlContent += `<div id="pageTextImageBehind"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.url}';" />><div class="content"><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div></div>`;
       } else if (element.type === "textImageRight") {
-        htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
+        htmlContent += `<div id="pageTextImageRight"><div class="imageContainer"><img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.url}';" /></div><div class="bg">${element.content.textBg}</div><div class="en">${element.content.textEn}</div></div>`;
       } else if (element.type === "starting") {
         htmlContent += `
         <div id="pageStarting">
-          <img id="pageStartingBackImg" src="/images/${element.content.imageBackUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageBackUrl}';" />
+          <img id="pageStartingBackImg" src="/images/${element.content.imageBackUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageBackUrl}';" />
           <div id="pageStartingContent">
             <h2 class="bg">${element.content.titleBg}</h2>
             <h2 class="en">${element.content.titleEn}</h2>
             <div id="pageStartingQuote">
               <p class="bg">${element.content.quoteBg}</p>
               <p class="en">${element.content.quoteEn}</p>
-              <img id="pageStartingFrontImg" src="/images/${element.content.imageFrontUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageFrontUrl}';" />
+              <img id="pageStartingFrontImg" src="/images/${element.content.imageFrontUrl}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageFrontUrl}';" />
             </div>
           </div>
         </div>`;
@@ -1300,8 +1300,8 @@ function Editor({ structure }) {
         htmlContent += `
         <div id="pagePerson">
           <div class="pagePersonImages">
-            <img src="/images/${element.content.imageBack}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageBack}';" />
-            <img src="/images/${element.content.imageFront}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageFront}';" />
+            <img src="/images/${element.content.imageBack}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageBack}';" />
+            <img src="/images/${element.content.imageFront}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageFront}';" />
           </div>
           <div class="pagePersonText">
             <p class="bg">${element.content.textBg}</p>
@@ -1315,7 +1315,7 @@ function Editor({ structure }) {
         <div id="${slideshowId}" class="slideshow">
           ${element.content.map((image, index) => `
             <div class="slide" style="display: ${index === 0 ? 'block' : 'none'};">
-              <img src="/images/${image}" alt="slide image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
+              <img src="/images/${image}" alt="slide image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${image}';" />
             </div>
           `).join('')}
           <a class="prev" onclick="plusSlides(-1, '${slideshowId}')">&#10094;</a>
@@ -1328,7 +1328,7 @@ function Editor({ structure }) {
         <div id="${galleryId}" class="gallery-container">
           ${element.content.map(image => `
             <div class="gallery-item" key={index}>
-              <img src="/images/${image}" alt="gallery image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
+              <img src="/images/${image}" alt="gallery image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${image}';" />
             </div>
           `).join('')}
         </div>`;
@@ -1377,8 +1377,8 @@ function Editor({ structure }) {
               </div>
             </div>
             <div id="overlayFrontImages" style="width: 100%;">
-              <img id="overlayImageLeft" src="/images/${element.content.imageLeft}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageLeft}';" />
-              <img id="overlayImageRight" src="/images/${element.content.imageRight}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.imageRight}';" />
+              <img id="overlayImageLeft" src="/images/${element.content.imageLeft}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageLeft}';" />
+              <img id="overlayImageRight" src="/images/${element.content.imageRight}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.imageRight}';" />
             </div>
           </div>
         `;
@@ -1390,7 +1390,7 @@ function Editor({ structure }) {
       } else if (element.type === "titleImage") {
         htmlContent += `
           <div id="pageTitleImage">
-            <img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${element.content.url}';" />
+            <img src="/images/${element.content.url}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${element.content.url}';" />
             <h2 class="bg">${element.content.titleBg}</h2>
             <h2 class="en">${element.content.titleEn}</h2>
           </div>
@@ -1418,7 +1418,7 @@ function Editor({ structure }) {
                 const linkUrl = link.url.startsWith("http") ? link.url : (link.url.startsWith("/") ? link.url : `/${link.url}`);
               return `
               <a href="${linkUrl}" class="pageImageLinkListItem">
-                <img src="/images/${link.image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${link.image}';" />
+                <img src="/images/${link.image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${link.image}';" />
                 <h3 class="bg">${link.titleBg}</h3>
                 <h3 class="en">${link.titleEn}</h3>
               </a>
@@ -1440,7 +1440,7 @@ function Editor({ structure }) {
               <div class="pagePeopleListItem">
                 <div class="pagePeopleListImgs" id="peopleImgs-${personIndex}">
                   ${person.images.map((image) => `
-                    <img src="/images/${image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}/images?name=${image}';" />
+                    <img src="/images/${image}" alt="image" onerror="this.onerror=null; this.src='${BACKEND_URL}images?name=${image}';" />
                   `).join("")}
                 </div>
                 <div class="pagePeopleListDots" id="peopleDots-${personIndex}">
@@ -1483,7 +1483,7 @@ function Editor({ structure }) {
     // Send request to the backend to save the page
     try {
       const editUrl =
-        editPath === "create" ? `${BACKEND_URL}/page` : `${BACKEND_URL}/page/edit`;
+        editPath === "create" ? `${BACKEND_URL}page` : `${BACKEND_URL}page/edit`;
       let path = `/${directory}/${page}`;
       if (directory) {
         path = `/${directory}/${page}`;

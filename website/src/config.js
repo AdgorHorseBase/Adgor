@@ -24,10 +24,14 @@ export const getContent = async (filePath) => {
         // TODO: TESTING
         // content_output = await getPublicFile(category, fileName);
         // content_output = await requestFileFromGithub(category, fileName); // Remove category prefix
+        console.log("getContent requesting item")
         content_output = await requestFileFromAdmin(category, fileName); // Remove category prefix
     }
     
     if (!content_output) {
+        console.log("getContent Error: No content found for the given file path");
+        console.log(`Category: ${category}, File Name: ${fileName}`);
+        console.log(`File Path: ${filePath}`);
         throw new Error("Invalid file path or file not found");
     }
 
@@ -36,6 +40,7 @@ export const getContent = async (filePath) => {
 
 export const getUrlForFile = (filePath) => {
     if (!filePath || typeof filePath !== "string") {
+        console.log(`getUrlForFile Error: Invalid file path provided: ${filePath}`);
         throw new Error("Invalid file path");
     }
 
@@ -81,6 +86,8 @@ const checkValidFileWithcategory = (category, filePath) => {
     }
 
     if (!filePath || typeof filePath !== "string") {
+        console.log(`checkValidFileWithcategory Error: Invalid category provided: ${category}`);
+        console.log(`checkValidFileWithcategory Error: Invalid file path provided: ${filePath}`);
         throw new Error("Invalid file path");
     }
 
@@ -99,7 +106,13 @@ const requestFileFromAdmin = async (category, fileName) => {
     if (!response.ok) {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
     }
-    return await response.json();
+
+    let content = await response.text();
+    try {
+        return JSON.parse(content); 
+    } catch (error) {
+        return content; // Fallback to text if JSON parsing fails
+    }
 }
 
 
@@ -112,7 +125,12 @@ const requestFileFromGithub = async (category, fileName) => {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
     }
 
-    return await response.json();
+    let content = await response.text();
+    try {
+        return JSON.parse(content); 
+    } catch (error) {
+        return content; // Fallback to text if JSON parsing fails
+    }
 }
 
 
@@ -124,5 +142,10 @@ const getPublicFile = async (category, fileName) => {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
     }
 
-    return await response.json();
+    let content = await response.text();
+    try {
+        return JSON.parse(content); 
+    } catch (error) {
+        return content; // Fallback to text if JSON parsing fails
+    }
 }

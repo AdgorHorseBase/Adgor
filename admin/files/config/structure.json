@@ -1,26 +1,233 @@
-{
-  "\\Horse boarding": {
-    "type": "file",
+[
+  {
+    "directory": "About",
+    "directoryBg": "За нас",
+    "contents": [
+      {
+        "page": "careers",
+        "titleBg": "Кариери",
+        "titleEn": "Careers",
+        "directoryBg": "За нас",
+        "place": 1
+      },
+      {
+        "page": "our-achievements",
+        "titleBg": "Постижения",
+        "titleEn": "Achievements",
+        "directoryBg": "За нас",
+        "place": 1
+      },
+      {
+        "page": "our-team",
+        "titleBg": "Нашият екип",
+        "titleEn": "Our team",
+        "directoryBg": "За нас",
+        "place": 1
+      },
+      {
+        "page": "volunteers",
+        "titleBg": "Доброволци",
+        "titleEn": "Volunteers",
+        "directoryBg": "За нас",
+        "place": 1
+      }
+    ],
+    "place": 1
+  },
+  {
+    "page": "Horse boarding",
     "titleBg": "Пансион за коне",
     "titleEn": "Horse boarding",
-    "place": 3
+    "directoryBg": "",
+    "place": 1
   },
-  "\\blog": {
-    "type": "file",
+  {
+    "directory": "Services",
+    "directoryBg": "Услуги",
+    "contents": [
+      {
+        "page": "Photoshoot",
+        "titleBg": "Фотосесия",
+        "titleEn": "Photoshoot",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "Vouchers and gifts",
+        "titleBg": "Ваучери и подаръци",
+        "titleEn": "Vouchers and gifts",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "children-birthday",
+        "titleBg": "Детски рожден ден",
+        "titleEn": "Children’s birthday",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "children-groups",
+        "titleBg": "Детски групи",
+        "titleEn": "Children’s groups",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "clinics-and-demonstrations",
+        "titleBg": "Клиники и демонстрации",
+        "titleEn": "Clinics and demonstrations",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "films-and-tv-productions",
+        "titleBg": "Филмове и ТВ продукции",
+        "titleEn": "Films and TV productions",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "long-riding-trips",
+        "titleBg": "Преходи с коне ",
+        "titleEn": "Long riding trips",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "miniature-horses-falabella",
+        "titleBg": "Мини коне Фалабела",
+        "titleEn": "Mini horses Falabella",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "team-building",
+        "titleBg": "Тийм билдинг",
+        "titleEn": "Team Building",
+        "directoryBg": "Услуги",
+        "place": 1
+      },
+      {
+        "page": "trail-riding",
+        "titleBg": "Разходка с кон ",
+        "titleEn": "Trail riding",
+        "directoryBg": "Услуги",
+        "place": 1
+      }
+    ],
+    "place": 1
+  },
+  {
+    "directory": "Training",
+    "directoryBg": "Обучение",
+    "contents": [
+      {
+        "directory": "Rider training",
+        "directoryBg": "Обучение на ездача",
+        "contents": [
+          {
+            "page": "bareback-and-bridle-less",
+            "titleBg": "Езда без седло",
+            "titleEn": "Bareback riding",
+            "directoryBg": "Обучение на ездача",
+            "place": 1
+          },
+          {
+            "page": "certificate-program",
+            "titleBg": "Oбучителна програма",
+            "titleEn": "Certificate Program",
+            "directoryBg": "Обучение на ездача",
+            "place": 1
+          },
+          {
+            "page": "riding-for-children",
+            "titleBg": "Езда за деца",
+            "titleEn": "Kids riding",
+            "directoryBg": "Обучение на ездача",
+            "place": 1
+          },
+          {
+            "page": "riding-levels",
+            "titleBg": "Ездови нива",
+            "titleEn": "Riding levels",
+            "directoryBg": "Обучение на ездача",
+            "place": 1
+          },
+          {
+            "page": "western-riding",
+            "titleBg": "Western езда",
+            "titleEn": "Western riding",
+            "directoryBg": "Обучение на ездача",
+            "place": 1
+          }
+        ],
+        "place": 1
+      },
+      {
+        "directory": "Training the horse",
+        "directoryBg": "Обучение на коня",
+        "contents": [
+          {
+            "page": "groundwork",
+            "titleBg": "Работа от земя",
+            "titleEn": "Ground work",
+            "directoryBg": "Обучение на коня",
+            "place": 1
+          },
+          {
+            "page": "horse-care",
+            "titleBg": "Грижа за коня",
+            "titleEn": "Horse care",
+            "directoryBg": "Обучение на коня",
+            "place": 1
+          },
+          {
+            "page": "training",
+            "titleBg": "Тренировки",
+            "titleEn": "Horse Training",
+            "directoryBg": "Обучение на коня",
+            "place": 1
+          }
+        ],
+        "place": 1
+      },
+      {
+        "page": "natural-horsemanship",
+        "titleBg": "Естествени взаимоотношения с конете",
+        "titleEn": "Natural horsemanship",
+        "directoryBg": "Обучение",
+        "place": 1
+      },
+      {
+        "page": "training-the-horse",
+        "titleBg": "Често задавани въпроси",
+        "titleEn": "FAQs",
+        "directoryBg": "Обучение",
+        "place": 1
+      }
+    ],
+    "place": 1
+  },
+  {
+    "page": "blog",
     "titleBg": "Блог",
     "titleEn": "BLOG",
-    "place": 5
+    "directoryBg": "",
+    "place": 1
   },
-  "\\contact-us": {
-    "type": "file",
+  {
+    "page": "contact-us",
     "titleBg": "Свържете се с нас",
     "titleEn": "Contact us",
-    "place": 7
+    "directoryBg": "",
+    "place": 1
   },
-  "\\foundation": {
-    "type": "file",
+  {
+    "page": "foundation",
     "titleBg": "Фондацията",
     "titleEn": "Foundation",
-    "place": 6
+    "directoryBg": "",
+    "place": 1
   }
-}
+]

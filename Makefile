@@ -9,7 +9,7 @@ admin:
 	@cd admin && npm start
 
 website:
-	cd website && npm start
+	@cd website && npm start
 
 prod-build:
 	cd admin && npm run build

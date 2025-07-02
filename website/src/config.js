@@ -2,8 +2,9 @@
 
 // URL for the automatically starded backend server with admin panel OR link to the github hosted url
 //TODO: Fix raw CONFIG_URL after the new file structure is implemented
-export const GITHUB_LOCATION = "AdgorHorseBase/Adgor"
 export const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080/"; // URL for the automatically started backend server with admin panel OR link to the github hosted url
+
+export const GITHUB_LOCATION = "AdgorHorseBase/Adgor"
 export const GITHUB_URL = `https://raw.githubusercontent.com/${GITHUB_LOCATION}/refs/heads/main/public/server/files/`;
 
 export const VALID_CONFIG_CATEGORY_NAMES = ["images", "uploads", "videos", "config"];
@@ -15,17 +16,16 @@ export const getContent = async (filePath) => {
 
     const { category, fileName } = splitFilePathToCategoryAndFileName(filePath);
     
-    checkValidFileWithcategory(category, fileName);
+    checkValidFileWithCategory(category, fileName);
     
     if (process.env.ActiveAdmin) {
         content_output = await requestFileFromAdmin(category, fileName); // Remove category prefix
-
     } else {
         // TODO: TESTING
         // content_output = await getPublicFile(category, fileName);
         // content_output = await requestFileFromGithub(category, fileName); // Remove category prefix
         console.log("getContent requesting item")
-        content_output = await requestFileFromAdmin(category, fileName); // Remove category prefix
+        content_output = await requestFileFromAdmin(category, fileName);
     }
     
     if (!content_output) {
@@ -46,15 +46,15 @@ export const getUrlForFile = (filePath) => {
 
     const { category, fileName } = splitFilePathToCategoryAndFileName(filePath);
     
-    checkValidFileWithcategory(category, fileName);
+    checkValidFileWithCategory(category, fileName);
 
     if (process.env.ActiveAdmin) {
         console.log("Using admin backend URL for file access");
-        return `${BACKEND_URL}${category}/${fileName}`;
+        return `${BACKEND_URL}${category}?name=${fileName}`;
     } else {
         //TODO: Remove
         console.log("Using public backend URL for file access");
-        // return `/${category}/${fileName}`;
+        // return `/files/${category}/${fileName}`;
         // return `${GITHUB_URL}${category}/${fileName}`;
         return `${BACKEND_URL}${category}?name=${fileName}`;
     }
@@ -77,7 +77,7 @@ const splitFilePathToCategoryAndFileName = (filePath) => {
 }
 
 
-const checkValidFileWithcategory = (category, filePath) => {
+const checkValidFileWithCategory = (category, filePath) => {
     if (!category || typeof category !== "string") {
         throw new Error("Invalid category name. Not correct category type");
     }
@@ -100,7 +100,7 @@ const checkValidFileWithcategory = (category, filePath) => {
 
 
 const requestFileFromAdmin = async (category, fileName) => {
-    checkValidFileWithcategory(category, fileName);
+    checkValidFileWithCategory(category, fileName);
 
     const response = await fetch(`${BACKEND_URL}${category}?name=${fileName}`);
     if (!response.ok) {
@@ -118,7 +118,7 @@ const requestFileFromAdmin = async (category, fileName) => {
 
 // TODO: UNUSED FOR NOW && NOT TESTED
 const requestFileFromGithub = async (category, fileName) => {
-    checkValidFileWithcategory(category, fileName);
+    checkValidFileWithCategory(category, fileName);
 
     const response = await fetch(`${GITHUB_LOCATION}${category}/${fileName}`);
     if (!response.ok) {
@@ -135,9 +135,9 @@ const requestFileFromGithub = async (category, fileName) => {
 
 
 const getPublicFile = async (category, fileName) => {
-    checkValidFileWithcategory(category, fileName);
+    checkValidFileWithCategory(category, fileName);
 
-    const response = fetch(`${BACKEND_URL}${category}/${fileName}`);
+    const response = fetch(`/files/${category}/${fileName}`);
     if (!response.ok) {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
     }

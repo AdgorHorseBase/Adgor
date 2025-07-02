@@ -19,14 +19,16 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+    "serve": "^14.2.4",
     "uuid": "^10.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cp ../admin/files ./public && react-scripts build",
+    "build": "cp -r ../admin/files ./public && react-scripts build && rm -rf ./public/files",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
